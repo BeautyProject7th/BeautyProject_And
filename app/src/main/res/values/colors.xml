@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FC5052</color>
+
+    <!--Seula-->
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#393939</color>
+    <color name="colorGrayBackGround">#F4F4F4</color>
+    <color name="colorGrayLine">#AAAAAA</color>
+    <color name="colorGrayLineLight">#DDDDDD</color>
+    <color name="colorBottomTabBackGround">#393939</color>
+
+
+
+
+    <!--Juwon-->
+
+
+
+
+
+    <!-- Mijung-->
+    <color name="colorGrayText">#7f7f7f</color>
+    <color name="ratingStar">#f1c40f</color>
+    <color name="theme">#ff00bfff</color>
+
+
+</resources>

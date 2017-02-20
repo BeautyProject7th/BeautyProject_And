@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">BeautyProject</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!--DEFAULT-->
+    <string name="exit_app">"\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다."</string>
+
+    <!--Seula-->
+
+
+    <!--Juwon-->
+
+
+    <!-- Mijung-->
+</resources>
+
+
