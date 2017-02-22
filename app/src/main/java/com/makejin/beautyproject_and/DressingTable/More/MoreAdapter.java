@@ -1,4 +1,4 @@
-package com.makejin.beautyproject_and.DressingTable;
+package com.makejin.beautyproject_and.DressingTable.More;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.Model.Cosmetic;
@@ -15,15 +14,16 @@ import com.makejin.beautyproject_and.R;
 
 import java.util.ArrayList;
 
+import static com.makejin.beautyproject_and.Utils.Constants.Constants.IMAGE_BASE_URL;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
-public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdapter.ViewHolder> {
+public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
     private static final int TYPE_ITEM = 0;
 
     public Context context;
-    public DressingTableFragment fragment;
+    public MoreFragment fragment;
     private OnItemClickListener mOnItemClickListener;
     public ArrayList<Cosmetic> mDataset = new ArrayList<>();
 
@@ -31,7 +31,7 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
         void onItemClick(View view, int position);
     }
 
-    public DressingTableAdapter(OnItemClickListener onItemClickListener, Context mContext, DressingTableFragment mFragment) {
+    public MoreAdapter(OnItemClickListener onItemClickListener, Context mContext, MoreFragment mFragment) {
         mOnItemClickListener = onItemClickListener;
         context = mContext;
         fragment = mFragment;
@@ -40,7 +40,6 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
 
     public void addData(Cosmetic cosmetic) {
         mDataset.add(cosmetic);
-        //Toast.makeText(context, "[addData]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
     }
 
     public Cosmetic getItem(int position) {
@@ -52,10 +51,8 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
     }
 
     @Override
-     public DressingTableAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Toast.makeText(context, "[onCreateViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
+     public MoreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_dressing_table, parent, false);
             return new ItemViewHolder(v);
         }
@@ -64,7 +61,6 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Toast.makeText(context, "[onBindViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
         if (holder instanceof ItemViewHolder) {
             holder.container.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,9 +73,7 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
 
             itemViewHolder.TV_cosmetic_name.setText(cosmetic.product_name);
 
-            String image_url = cosmetic.img_src;
-
-
+            String image_url = IMAGE_BASE_URL + cosmetic.img_src;
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
@@ -105,7 +99,6 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
         public View container;
         public ViewHolder(View itemView) {
             super(itemView);
-            Toast.makeText(context, "[ViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
             container = itemView;
         }
     }
@@ -115,7 +108,6 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
 
         public ItemViewHolder(View v) {
             super(v);
-            Toast.makeText(context, "[ItemViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
             TV_cosmetic_name = (TextView) v.findViewById(R.id.TV_cosmetic_name);
             IV_cosmetic = (ImageView) v.findViewById(R.id.IV_cosmetic);
 

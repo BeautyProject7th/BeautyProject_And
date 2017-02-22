@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,9 +15,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity;
+import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_;
+import com.makejin.beautyproject_and.DressingTable.Setting.SettingActivity_;
+import com.makejin.beautyproject_and.DressingTable.More.MoreActivity_;
+import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
+
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
@@ -55,17 +63,6 @@ public class DressingTableFragment extends ParentFragment {
 
     TextView TV_name, TV_id, TV_skin_trouble, TV_skin_type;
 
-    /**
-     * Create a new instance of the fragment
-     */
-    public static DressingTableFragment newInstance(int index) {
-        DressingTableFragment fragment = new DressingTableFragment();
-        Bundle b = new Bundle();
-        b.putInt("index", index);
-        fragment.setArguments(b);
-        return fragment;
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,8 +72,8 @@ public class DressingTableFragment extends ParentFragment {
     }
 
     private void initViewSetting(View view) {
-        final DressingTableActivity tabActivity = (DressingTableActivity) getActivity();
-        this.activity = tabActivity;
+        final DressingTableActivity dressingTableActivity = (DressingTableActivity) getActivity();
+        this.activity = dressingTableActivity;
 
         BT_setting = (Button)view.findViewById(R.id.BT_setting);
         BT_cosmetic_upload = (Button) view.findViewById(R.id.BT_cosmetic_upload);
@@ -94,6 +91,8 @@ public class DressingTableFragment extends ParentFragment {
         TV_skin_trouble = (TextView) view.findViewById(R.id.TV_skin_trouble);
         TV_skin_type = (TextView) view.findViewById(R.id.TV_skin_type);
 
+
+
         //connectTestCall();
         //connectTestCall_UserInfo();
 
@@ -107,7 +106,9 @@ public class DressingTableFragment extends ParentFragment {
         if (recyclerView_skin_care == null) {
             recyclerView_skin_care = (RecyclerView) view.findViewById(R.id.recycler_view_skin_care);
             recyclerView_skin_care.setHasFixedSize(true);
-            recyclerView_skin_care.setLayoutManager(new GridLayoutManager(activity, 4));
+            layoutManager = new LinearLayoutManager(activity);
+            recyclerView_skin_care.setLayoutManager(layoutManager);
+            //recyclerView_skin_care.setLayoutManager(new GridLayoutManager(activity, 4));
         }
         if (adapter_skin_care == null) {
             adapter_skin_care = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
@@ -119,6 +120,11 @@ public class DressingTableFragment extends ParentFragment {
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 }
             }, activity, this);
+            Cosmetic cosmetic = new Cosmetic();
+            adapter_skin_care.clear();
+            adapter_skin_care.addData(cosmetic);
+            adapter_skin_care.notifyDataSetChanged();
+
         }
         recyclerView_skin_care.setAdapter(adapter_skin_care);
 
@@ -222,16 +228,32 @@ public class DressingTableFragment extends ParentFragment {
 //            }
 //        });
 
+
+//        Cosmetic cosmetic = new Cosmetic();
+//        adapter_skin_care.addData(cosmetic);
+//        cosmetic.id = "id";
+//        cosmetic.product_name = "product_name";
+//        cosmetic.main_category = "main_category";
+//        cosmetic.sub_category = "sub_category";
+//        cosmetic.brand = "brand";
+//        cosmetic.img_src = "http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif";
+        //Toast.makeText(getActivity(), cosmetic.product_name + " / " + cosmetic.img_src, Toast.LENGTH_SHORT).show();
+
+
+        //recyclerView_skin_care.setAdapter(adapter_skin_care);
+        //adapter_skin_care.notifyDataSetChanged();
+
+
         BT_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SettingActivity.class));
+                startActivity(new Intent(getActivity(), SettingActivity_.class));
             }
         });
         BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CosmeticUploadActivity.class));
+                startActivity(new Intent(getActivity(), CosmeticUploadActivity_.class));
                 activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
             }
         });
@@ -245,6 +267,65 @@ public class DressingTableFragment extends ParentFragment {
             }
         });
 
+        BT_more_skin_care.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //이미지 사진 바꿀수 있는 페이지
+                Intent intent = new Intent(getActivity(), MoreActivity_.class);
+                intent.putExtra("category", 1);
+                startActivity(intent);
+            }
+        });
+
+        BT_more_cleansing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //이미지 사진 바꿀수 있는 페이지
+                Intent intent = new Intent(getActivity(), MoreActivity_.class);
+                intent.putExtra("category", 2);
+                startActivity(intent);
+            }
+        });
+
+        BT_more_base_makeup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //이미지 사진 바꿀수 있는 페이지
+                Intent intent = new Intent(getActivity(), MoreActivity_.class);
+                intent.putExtra("category", 3);
+                startActivity(intent);
+            }
+        });
+
+        BT_more_color_makeup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //이미지 사진 바꿀수 있는 페이지
+                Intent intent = new Intent(getActivity(), MoreActivity_.class);
+                intent.putExtra("category", 4);
+                startActivity(intent);
+            }
+        });
+
+        BT_more_mask_pack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //이미지 사진 바꿀수 있는 페이지
+                Intent intent = new Intent(getActivity(), MoreActivity_.class);
+                intent.putExtra("category", 5);
+                startActivity(intent);
+            }
+        });
+
+        BT_more_perfume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //이미지 사진 바꿀수 있는 페이지
+                Intent intent = new Intent(getActivity(), MoreActivity_.class);
+                intent.putExtra("category", 6);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

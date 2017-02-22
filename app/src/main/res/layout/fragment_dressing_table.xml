@@ -114,42 +114,41 @@
                             android:background="@drawable/setting"
                             android:layout_alignParentRight="true"/>
                     </RelativeLayout>
-                    <RelativeLayout
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:id="@+id/TV_skin_care"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Skin/Care"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:textColor="#FF0000"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true" />
+                    <Button
+                        android:id="@+id/BT_more_skin_care"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:text="more"
+                        android:textSize="10dp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/btn_circle"/>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_skin_care"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_height="100dp"
+                        android:background="#F3F3F3"
+                        android:scrollbars="vertical"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true" />
+                </RelativeLayout>
 
-                        <Button
-                            android:id="@+id/BT_more_skin_care"
-                            android:layout_width="60dp"
-                            android:layout_height="30dp"
-                            android:text="more"
-                            android:textSize="10dp"
-                            android:layout_alignParentRight="true"
-                            android:background="@drawable/btn_circle"/>
-
-                        <TextView
-                            android:id="@+id/TV_skin_care"
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:text="Skin/Care"
-                            android:textSize="25dp"
-                            android:textStyle="bold"
-                            android:textColor="#FF0000"
-                            android:layout_marginLeft="5dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentStart="true" />
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_view_skin_care"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#F3F3F3"
-                            android:scrollbars="vertical"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentStart="true" />
-                    </RelativeLayout>
-                    <RelativeLayout
+                <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_marginTop="10dp">
@@ -277,7 +276,7 @@
                             android:id="@+id/TV_perfume"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
-                            android:text="perfume"
+                            android:text="Perfume"
                             android:textSize="25dp"
                             android:textStyle="bold"
                             android:textColor="#FF0000"

@@ -1,4 +1,4 @@
-package com.makejin.beautyproject_and.DressingTable;
+package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,43 +7,45 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.makejin.beautyproject_and.DressingTable.More.MoreFragment;
+import com.makejin.beautyproject_and.Model.Brand;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.R;
+import com.makejin.beautyproject_and.Utils.Constants.Constants;
 
 import java.util.ArrayList;
 
+import static com.makejin.beautyproject_and.Utils.Constants.Constants.IMAGE_BASE_URL;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
-public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdapter.ViewHolder> {
+public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAdapter.ViewHolder> {
     private static final int TYPE_ITEM = 0;
 
     public Context context;
-    public DressingTableFragment fragment;
+    public CosmeticUploadFragment fragment;
     private OnItemClickListener mOnItemClickListener;
-    public ArrayList<Cosmetic> mDataset = new ArrayList<>();
+    public ArrayList<Brand> mDataset = new ArrayList<>();
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
 
-    public DressingTableAdapter(OnItemClickListener onItemClickListener, Context mContext, DressingTableFragment mFragment) {
+    public CosmeticUploadAdapter(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadFragment mFragment) {
         mOnItemClickListener = onItemClickListener;
         context = mContext;
         fragment = mFragment;
         mDataset.clear();
     }
 
-    public void addData(Cosmetic cosmetic) {
-        mDataset.add(cosmetic);
-        //Toast.makeText(context, "[addData]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
+    public void addData(Brand brand) {
+        mDataset.add(brand);
     }
 
-    public Cosmetic getItem(int position) {
+    public Brand getItem(int position) {
         return mDataset.get(position);
     }
 
@@ -52,11 +54,9 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
     }
 
     @Override
-     public DressingTableAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Toast.makeText(context, "[onCreateViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
+     public CosmeticUploadAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_dressing_table, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_cosmetic_upload, parent, false);
             return new ItemViewHolder(v);
         }
         return null;
@@ -64,7 +64,6 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Toast.makeText(context, "[onBindViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
         if (holder instanceof ItemViewHolder) {
             holder.container.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,17 +72,13 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
                 }
             });
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            Cosmetic cosmetic = mDataset.get(position);
+            Brand brand = mDataset.get(position);
 
-            itemViewHolder.TV_cosmetic_name.setText(cosmetic.product_name);
-
-            String image_url = cosmetic.img_src;
-
-
+            String image_url = IMAGE_BASE_URL + brand.logo;
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
-                    into(itemViewHolder.IV_cosmetic);
+                    into(itemViewHolder.IV_brand);
         }
     }
 
@@ -105,19 +100,15 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
         public View container;
         public ViewHolder(View itemView) {
             super(itemView);
-            Toast.makeText(context, "[ViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
             container = itemView;
         }
     }
     public class ItemViewHolder extends ViewHolder {
-        public TextView TV_cosmetic_name;
-        public ImageView IV_cosmetic;
+        public ImageView IV_brand;
 
         public ItemViewHolder(View v) {
             super(v);
-            Toast.makeText(context, "[ItemViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
-            TV_cosmetic_name = (TextView) v.findViewById(R.id.TV_cosmetic_name);
-            IV_cosmetic = (ImageView) v.findViewById(R.id.IV_cosmetic);
+            IV_brand = (ImageView) v.findViewById(R.id.IV_brand);
 
         }
     }

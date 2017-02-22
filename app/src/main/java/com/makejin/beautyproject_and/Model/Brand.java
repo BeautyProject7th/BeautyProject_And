@@ -7,4 +7,5 @@ package com.makejin.beautyproject_and.Model;
 public class Brand {
     public String name;
     public String site;
+    public String logo;
 }
