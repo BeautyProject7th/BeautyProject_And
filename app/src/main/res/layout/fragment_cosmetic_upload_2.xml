@@ -19,8 +19,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="#FFFFFF">
+        android:layout_marginTop="?attr/actionBarSize">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,7 +28,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="등록하시려는 화장품의 브랜드를 선택하세요"
+                android:text="등록하시려는 화장품의 카테고리를 선택하세요"
                 android:textColor="#FFFFFF"
                 android:gravity="center"
                 android:layout_centerVertical="true"
@@ -45,7 +44,7 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="#FFFFFF"
+                android:background="#F3F3F3"
                 android:scrollbars="vertical"/>
         </ScrollView>
 

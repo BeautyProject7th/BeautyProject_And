@@ -2,11 +2,13 @@ package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.DressingTable.More.MoreFragment;
@@ -17,7 +19,6 @@ import com.makejin.beautyproject_and.Utils.Constants.Constants;
 
 import java.util.ArrayList;
 
-import static com.makejin.beautyproject_and.Utils.Constants.Constants.IMAGE_BASE_URL;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -74,7 +75,8 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             Brand brand = mDataset.get(position);
 
-            String image_url = IMAGE_BASE_URL + brand.logo;
+            String image_url = Constants.IMAGE_BASE_URL_brand + brand.logo;
+
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).

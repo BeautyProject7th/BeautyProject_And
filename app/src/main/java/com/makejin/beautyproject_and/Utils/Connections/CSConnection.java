@@ -19,6 +19,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -56,19 +57,19 @@ public interface CSConnection{
     @PUT("/users/{user_id}/cosmetics/{cosmetic-id}")
     Observable<Cosmetic> myOneCosmetic_put(@Body Cosmetic cosmetic,
                                          @Path("user_id") String user_id,
-                                         @Path("cosmetic_id") String cosmetic_id);
+                                         @Path("cosmetic-id") String cosmetic_id);
     @DELETE("/users/{user_id}/cosmetics/{cosmetic-id}")
     Observable<GlobalResponse> myOneCosmetic_delete(@Path("user_id") String user_id,
-                                                    @Path("cosmetic_id") String cosmetic_id);
+                                                    @Path("cosmetic-id") String cosmetic_id);
 
 
 
 
 
 
-    @GET("/users/{user_id}/cosmetics?main={main-category}")
+    @GET("/users/{user_id}/cosmetics")
     Observable<List<Cosmetic>> myMainCategoryCosmetic(@Path("user_id") String user_id,
-                                         @Path("main-category") String main_category);
+                                         @Query("main") String main_category);
 
 
 

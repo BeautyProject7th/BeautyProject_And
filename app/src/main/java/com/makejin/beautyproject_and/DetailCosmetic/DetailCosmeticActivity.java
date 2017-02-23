@@ -1,5 +1,7 @@
 package com.makejin.beautyproject_and.DetailCosmetic;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
@@ -28,6 +30,11 @@ public class DetailCosmeticActivity extends AppCompatActivity {
         this.activity = this;
 
         cosmetic = (Cosmetic) getIntent().getSerializableExtra("cosmetic");
+        Fragment fragment = new DetailCosmeticFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.activity_detail_cosmetic, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
 
     }
 

@@ -11,10 +11,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.R;
+import com.makejin.beautyproject_and.Utils.Constants.Constants;
 
 import java.util.ArrayList;
-
-import static com.makejin.beautyproject_and.Utils.Constants.Constants.IMAGE_BASE_URL;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -73,7 +72,7 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
 
             itemViewHolder.TV_cosmetic_name.setText(cosmetic.product_name);
 
-            String image_url = IMAGE_BASE_URL + cosmetic.img_src;
+            String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).

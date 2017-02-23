@@ -7,7 +7,9 @@ import android.support.v7.widget.Toolbar;
 
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
+import com.makejin.beautyproject_and.Model.User;
 import com.makejin.beautyproject_and.R;
+import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -27,6 +29,11 @@ public class SplashActivity extends AppCompatActivity {
 
 //        setSupportActionBar(cs_toolbar);
 //        getSupportActionBar().setTitle("스플래쉬");
+
+        User user = new User();
+        user.id = "1";
+
+        SharedManager.getInstance().setMe(user);
 
         // 로그인 성공 후 시작
         final Handler handler = new Handler();

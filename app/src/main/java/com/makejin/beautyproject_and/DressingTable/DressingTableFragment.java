@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity;
+import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_;
 import com.makejin.beautyproject_and.DressingTable.Setting.SettingActivity_;
 import com.makejin.beautyproject_and.DressingTable.More.MoreActivity_;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
+import com.makejin.beautyproject_and.Utils.Connections.CSConnection;
+import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
+import com.makejin.beautyproject_and.Utils.Constants.Constants;
+import com.makejin.beautyproject_and.Utils.Loadings.LoadingUtil;
+import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
+
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -31,33 +44,28 @@ import com.makejin.beautyproject_and.R;
 public class DressingTableFragment extends ParentFragment {
     public static DressingTableActivity activity;
 
-    public DressingTableAdapter adapter_skin_care;
-    public DressingTableAdapter adapter_cleansing;
-    public DressingTableAdapter adapter_base_makeup;
-    public DressingTableAdapter adapter_color_makeup;
-    public DressingTableAdapter adapter_mask_pack;
-    public DressingTableAdapter adapter_perfume;
 
-    private RecyclerView recyclerView_skin_care;
-    private RecyclerView recyclerView_cleansing;
-    private RecyclerView recyclerView_base_makeup;
-    private RecyclerView recyclerView_color_makeup;
-    private RecyclerView recyclerView_mask_pack;
-    private RecyclerView recyclerView_perfume;
+    //index - main_category
+    //0-스킨케어
+    //1-클렌징
+    //2-베이스메이크업
+    //3-색조메이크업
+    //4-마스크팩
+    //5-향수
 
-    private RecyclerView.LayoutManager layoutManager;
+    public DressingTableAdapter adapter[] = new DressingTableAdapter[6];
+
+    private RecyclerView recyclerView [] = new RecyclerView[6];
+
+    private int recyclerView_id [] = new int[6];
+
     public LinearLayout indicator;
-    SwipeRefreshLayout pullToRefresh;
     Button BT_setting;
     Button BT_cosmetic_upload;
 
-    Button BT_more_skin_care;
-    Button BT_more_cleansing;
-    Button BT_more_base_makeup;
-    Button BT_more_color_makeup;
-    Button BT_more_mask_pack;
-    Button BT_more_perfume;
+    Button BT_more [] = new Button[6];
 
+    String main_category [] = new String[6];
 
     ImageView IV_user;
 
@@ -77,12 +85,26 @@ public class DressingTableFragment extends ParentFragment {
 
         BT_setting = (Button)view.findViewById(R.id.BT_setting);
         BT_cosmetic_upload = (Button) view.findViewById(R.id.BT_cosmetic_upload);
-        BT_more_skin_care = (Button) view.findViewById(R.id.BT_more_skin_care);
-        BT_more_cleansing = (Button) view.findViewById(R.id.BT_more_cleansing);
-        BT_more_base_makeup = (Button) view.findViewById(R.id.BT_more_base_makeup);
-        BT_more_color_makeup = (Button) view.findViewById(R.id.BT_more_color_makeup);
-        BT_more_mask_pack = (Button) view.findViewById(R.id.BT_more_mask_pack);
-        BT_more_perfume = (Button) view.findViewById(R.id.BT_more_perfume);
+        BT_more[0] = (Button) view.findViewById(R.id.BT_more_skin_care);
+        BT_more[1] = (Button) view.findViewById(R.id.BT_more_cleansing);
+        BT_more[2] = (Button) view.findViewById(R.id.BT_more_base_makeup);
+        BT_more[3] = (Button) view.findViewById(R.id.BT_more_color_makeup);
+        BT_more[4] = (Button) view.findViewById(R.id.BT_more_mask_pack);
+        BT_more[5] = (Button) view.findViewById(R.id.BT_more_perfume);
+
+        main_category[0] = "스킨케어";
+        main_category[1] = "클렌징";
+        main_category[2] = "베이스메이크업";
+        main_category[3] = "색조메이크업";
+        main_category[4] = "마스크팩";
+        main_category[5] = "향수";
+
+        recyclerView_id[0] = R.id.recycler_view_skin_care;
+        recyclerView_id[1] = R.id.recycler_view_cleansing;
+        recyclerView_id[2] = R.id.recycler_view_base_makeup;
+        recyclerView_id[3] = R.id.recycler_view_color_makeup;
+        recyclerView_id[4] = R.id.recycler_view_mask_pack;
+        recyclerView_id[5] = R.id.recycler_view_perfume;
 
         IV_user = (ImageView) view.findViewById(R.id.IV_user);
 
@@ -91,10 +113,8 @@ public class DressingTableFragment extends ParentFragment {
         TV_skin_trouble = (TextView) view.findViewById(R.id.TV_skin_trouble);
         TV_skin_type = (TextView) view.findViewById(R.id.TV_skin_type);
 
-
-
-        //connectTestCall();
-        //connectTestCall_UserInfo();
+        for(int i=0;i<6;i++)
+            connectTestCall(i);
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
@@ -103,145 +123,29 @@ public class DressingTableFragment extends ParentFragment {
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        if (recyclerView_skin_care == null) {
-            recyclerView_skin_care = (RecyclerView) view.findViewById(R.id.recycler_view_skin_care);
-            recyclerView_skin_care.setHasFixedSize(true);
-            layoutManager = new LinearLayoutManager(activity);
-            recyclerView_skin_care.setLayoutManager(layoutManager);
-            //recyclerView_skin_care.setLayoutManager(new GridLayoutManager(activity, 4));
-        }
-        if (adapter_skin_care == null) {
-            adapter_skin_care = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, DetailCosmeticActivity.class);
-                    intent.putExtra("cosmetic", adapter_skin_care.mDataset.get(position));
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-                }
-            }, activity, this);
-            Cosmetic cosmetic = new Cosmetic();
-            adapter_skin_care.clear();
-            adapter_skin_care.addData(cosmetic);
-            adapter_skin_care.notifyDataSetChanged();
+        for(int i=0;i<6;i++){
+            final int temp_i = i;
+            if (recyclerView[temp_i]== null) {
+                recyclerView[temp_i] = (RecyclerView) view.findViewById(recyclerView_id[temp_i]);
+                recyclerView[temp_i].setHasFixedSize(true);
+                recyclerView[temp_i].setLayoutManager(new GridLayoutManager(activity, 4));
+            }
+
+            if (adapter[temp_i] == null) {
+                adapter[temp_i] = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
+                        intent.putExtra("cosmetic", adapter[temp_i].mDataset.get(position));
+                        startActivity(intent);
+                        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                    }
+                }, activity, this);
+            }
+            recyclerView[temp_i].setAdapter(adapter[i]);
 
         }
-        recyclerView_skin_care.setAdapter(adapter_skin_care);
-
-        if (recyclerView_cleansing == null) {
-            recyclerView_cleansing = (RecyclerView) view.findViewById(R.id.recycler_view_cleansing);
-            recyclerView_cleansing.setHasFixedSize(true);
-            recyclerView_cleansing.setLayoutManager(new GridLayoutManager(activity, 4));
-        }
-        if (adapter_cleansing == null) {
-            adapter_cleansing = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, DetailCosmeticActivity.class);
-                    intent.putExtra("cosmetic", adapter_cleansing.mDataset.get(position));
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-                }
-            }, activity, this);
-        }
-        recyclerView_cleansing.setAdapter(adapter_cleansing);
-
-        if (recyclerView_base_makeup == null) {
-            recyclerView_base_makeup = (RecyclerView) view.findViewById(R.id.recycler_view_base_makeup);
-            recyclerView_base_makeup.setHasFixedSize(true);
-            recyclerView_base_makeup.setLayoutManager(new GridLayoutManager(activity, 4));
-        }
-        if (adapter_base_makeup== null) {
-            adapter_base_makeup = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, DetailCosmeticActivity.class);
-                    intent.putExtra("cosmetic", adapter_base_makeup.mDataset.get(position));
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-                }
-            }, activity, this);
-        }
-        recyclerView_base_makeup.setAdapter(adapter_base_makeup);
-
-        if (recyclerView_color_makeup == null) {
-            recyclerView_color_makeup = (RecyclerView) view.findViewById(R.id.recycler_view_color_makeup);
-            recyclerView_color_makeup.setHasFixedSize(true);
-            recyclerView_color_makeup.setLayoutManager(new GridLayoutManager(activity, 4));
-        }
-        if (adapter_color_makeup== null) {
-            adapter_color_makeup = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, DetailCosmeticActivity.class);
-                    intent.putExtra("cosmetic", adapter_color_makeup.mDataset.get(position));
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-                }
-            }, activity, this);
-        }
-        recyclerView_color_makeup.setAdapter(adapter_color_makeup);
-
-        if (recyclerView_mask_pack == null) {
-            recyclerView_mask_pack = (RecyclerView) view.findViewById(R.id.recycler_view_mask_pack);
-            recyclerView_mask_pack.setHasFixedSize(true);
-            recyclerView_mask_pack.setLayoutManager(new GridLayoutManager(activity, 4));
-        }
-        if (adapter_mask_pack == null) {
-            adapter_mask_pack = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, DetailCosmeticActivity.class);
-                    intent.putExtra("cosmetic", adapter_mask_pack.mDataset.get(position));
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-                }
-            }, activity, this);
-        }
-        recyclerView_mask_pack.setAdapter(adapter_mask_pack);
-
-        if (recyclerView_perfume == null) {
-            recyclerView_perfume = (RecyclerView) view.findViewById(R.id.recycler_view_perfume);
-            recyclerView_perfume.setHasFixedSize(true);
-            recyclerView_perfume.setLayoutManager(new GridLayoutManager(activity, 4));
-        }
-        if (adapter_perfume == null) {
-            adapter_perfume = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, DetailCosmeticActivity.class);
-                    intent.putExtra("cosmetic", adapter_perfume.mDataset.get(position));
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-                }
-            }, activity, this);
-        }
-        recyclerView_perfume.setAdapter(adapter_perfume);
-
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
-//        pullToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.pull_to_refresh);
-//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                pullToRefresh.setRefreshing(false);
-//                refresh();
-//            }
-//        });
-
-
-//        Cosmetic cosmetic = new Cosmetic();
-//        adapter_skin_care.addData(cosmetic);
-//        cosmetic.id = "id";
-//        cosmetic.product_name = "product_name";
-//        cosmetic.main_category = "main_category";
-//        cosmetic.sub_category = "sub_category";
-//        cosmetic.brand = "brand";
-//        cosmetic.img_src = "http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif";
-        //Toast.makeText(getActivity(), cosmetic.product_name + " / " + cosmetic.img_src, Toast.LENGTH_SHORT).show();
-
-
-        //recyclerView_skin_care.setAdapter(adapter_skin_care);
-        //adapter_skin_care.notifyDataSetChanged();
 
 
         BT_setting.setOnClickListener(new View.OnClickListener() {
@@ -267,166 +171,76 @@ public class DressingTableFragment extends ParentFragment {
             }
         });
 
-        BT_more_skin_care.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //이미지 사진 바꿀수 있는 페이지
-                Intent intent = new Intent(getActivity(), MoreActivity_.class);
-                intent.putExtra("category", 1);
-                startActivity(intent);
-            }
-        });
+        for(int i=0; i<6; i++){
+            final int temp_i = i;
+            BT_more[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //이미지 사진 바꿀수 있는 페이지
+                    Intent intent = new Intent(getActivity(), MoreActivity_.class);
+                    intent.putExtra("main_category_num", temp_i);
+                    startActivity(intent);
+                }
+            });
+        }
 
-        BT_more_cleansing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //이미지 사진 바꿀수 있는 페이지
-                Intent intent = new Intent(getActivity(), MoreActivity_.class);
-                intent.putExtra("category", 2);
-                startActivity(intent);
-            }
-        });
-
-        BT_more_base_makeup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //이미지 사진 바꿀수 있는 페이지
-                Intent intent = new Intent(getActivity(), MoreActivity_.class);
-                intent.putExtra("category", 3);
-                startActivity(intent);
-            }
-        });
-
-        BT_more_color_makeup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //이미지 사진 바꿀수 있는 페이지
-                Intent intent = new Intent(getActivity(), MoreActivity_.class);
-                intent.putExtra("category", 4);
-                startActivity(intent);
-            }
-        });
-
-        BT_more_mask_pack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //이미지 사진 바꿀수 있는 페이지
-                Intent intent = new Intent(getActivity(), MoreActivity_.class);
-                intent.putExtra("category", 5);
-                startActivity(intent);
-            }
-        });
-
-        BT_more_perfume.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //이미지 사진 바꿀수 있는 페이지
-                Intent intent = new Intent(getActivity(), MoreActivity_.class);
-                intent.putExtra("category", 6);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
     public void refresh() {
-        adapter_skin_care.clear();
-        adapter_cleansing.clear();
-        adapter_base_makeup.clear();
-        adapter_color_makeup.clear();
-        adapter_mask_pack.clear();
-        adapter_perfume.clear();
+        adapter[0].clear();
+        adapter[1].clear();
+        adapter[2].clear();
+        adapter[3].clear();
+        adapter[4].clear();
+        adapter[5].clear();
 
-        adapter_skin_care.notifyDataSetChanged();
-        adapter_cleansing.notifyDataSetChanged();
-        adapter_base_makeup.notifyDataSetChanged();
-        adapter_color_makeup.notifyDataSetChanged();
-        adapter_mask_pack.notifyDataSetChanged();
-        adapter_perfume.notifyDataSetChanged();
-//        connectTestCall();
-//        connectTestCall_UserInfo();
-
+        adapter[0].notifyDataSetChanged();
+        adapter[1].notifyDataSetChanged();
+        adapter[2].notifyDataSetChanged();
+        adapter[3].notifyDataSetChanged();
+        adapter[4].notifyDataSetChanged();
+        adapter[5].notifyDataSetChanged();
     }
 
     @Override
     public void reload() {
         refresh();
     }
-//
-//    void connectTestCall() {
-//        LoadingUtil.startLoading(indicator);
-//        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-//        conn.getLikedFood(SharedManager.getInstance().getMe()._id)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<List<Food>>() {
-//                    @Override
-//                    public final void onCompleted() {
-//                        LoadingUtil.stopLoading(indicator);
-//                    }
-//                    @Override
-//                    public final void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public final void onNext(List<Food> response) {
-//                        if (response != null) {
-//                            for (Food food : response) {
-//                                adapter.addData(food);
-//                            }
-//                            adapter.notifyDataSetChanged();
-//
-//                        } else {
-//                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
-//    void connectTestCall_UserInfo() {
-//        LoadingUtil.startLoading(indicator);
-//        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-//        conn.getUserInfo(SharedManager.getInstance().getMe()._id)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<User>() {
-//                    @Override
-//                    public final void onCompleted() {
-//                        LoadingUtil.stopLoading(indicator);
-//                        TV_user_name.setText(SharedManager.getInstance().getMe().nickname);
-//                        TV_about_me.setText(SharedManager.getInstance().getMe().about_me);
-//                    }
-//                    @Override
-//                    public final void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public final void onNext(User response) {
-//                        if (response != null) {
-//                            SharedManager.getInstance().setMe(response);
-//                            image_url = SharedManager.getInstance().getMe().thumbnail_url;
-//                            if(image_url.contains("facebook")){
-//                                Glide.with(getActivity()).
-//                                        load(image_url).
-//                                        thumbnail(0.1f).
-//                                        bitmapTransform(new CropCircleTransformation(getActivity())).into(IV_profile);
-//                            }else{
-//                                Glide.with(getActivity()).
-//                                        load(Constants.IMAGE_BASE_URL + image_url).
-//                                        thumbnail(0.1f).
-//                                        bitmapTransform(new CropCircleTransformation(getActivity())).into(IV_profile);
-//                            }
-//                        } else {
-//                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
 
+    void connectTestCall(int main_category_num) {
+        final int temp_main_category_num = main_category_num;
+        LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category[temp_main_category_num])
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Cosmetic>>() {
+                    @Override
+                    public final void onCompleted() {
+                        LoadingUtil.stopLoading(indicator);
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<Cosmetic> response) {
+                        if (response.size() != 0) {
+                            for (Cosmetic cosmetic : response) {
+                                adapter[temp_main_category_num].addData(cosmetic);
+                            }
+                            adapter[temp_main_category_num].notifyDataSetChanged();
+                        } else {
+                            //Toast.makeText(getActivity(), "데이터 없", Toast.LENGTH_SHORT).show();\
+                        }
+                    }
+                });
+    }
     @Override
     public void onResume() {
         super.onResume();
-        refresh();
+        //refresh();
     }
 }

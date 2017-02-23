@@ -12,10 +12,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity;
+import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
+import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
+import com.makejin.beautyproject_and.Utils.Connections.CSConnection;
+import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
+import com.makejin.beautyproject_and.Utils.Constants.Constants;
+import com.makejin.beautyproject_and.Utils.Loadings.LoadingUtil;
+import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
+
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -33,6 +47,8 @@ public class MoreFragment extends ParentFragment {
 
     TextView TV_category;
 
+    String main_category [] = new String[6];
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,35 +61,38 @@ public class MoreFragment extends ParentFragment {
         final MoreActivity moreActivity = (MoreActivity) getActivity();
         this.activity = moreActivity;
 
-        recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
         TV_category = (TextView) view.findViewById(R.id.TV_category);
 
-        switch(activity.category_num){
-            case 1:
+        main_category[0] = "스킨케어";
+        main_category[1] = "클렌징";
+        main_category[2] = "베이스메이크업";
+        main_category[3] = "색조메이크업";
+        main_category[4] = "마스크팩";
+        main_category[5] = "향수";
+
+        switch(activity.main_category_num){
+            case 0:
                 TV_category.setText("Skin/Care");
                 break;
-            case 2:
+            case 1:
                 TV_category.setText("Cleansing");
                 break;
-            case 3:
+            case 2:
                 TV_category.setText("Base Makeup");
                 break;
-            case 4:
+            case 3:
                 TV_category.setText("Color Makeup");
                 break;
-            case 5:
+            case 4:
                 TV_category.setText("Mask/Pack");
                 break;
-            case 6:
+            case 5:
                 TV_category.setText("Perfume");
                 break;
             default:
                 TV_category.setText("error");
         }
 
-
-        //connectTestCall();
-        //connectTestCall_UserInfo();
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
@@ -82,8 +101,10 @@ public class MoreFragment extends ParentFragment {
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        connectTestCall(moreActivity.main_category_num);
+
         if (recycler_view == null) {
-            recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view_skin_care);
+            recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
             recycler_view.setHasFixedSize(true);
             recycler_view.setLayoutManager(new GridLayoutManager(activity, 4));
         }
@@ -91,7 +112,7 @@ public class MoreFragment extends ParentFragment {
             adapter = new MoreAdapter(new MoreAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, DetailCosmeticActivity.class);
+                    Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic", adapter.mDataset.get(position));
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
@@ -102,21 +123,11 @@ public class MoreFragment extends ParentFragment {
 
 
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
-//        pullToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.pull_to_refresh);
-//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                pullToRefresh.setRefreshing(false);
-//                refresh();
-//            }
-//        });
 
     }
 
     @Override
     public void refresh() {
-//        connectTestCall();
-//        connectTestCall_UserInfo();
 
     }
 
@@ -124,77 +135,38 @@ public class MoreFragment extends ParentFragment {
     public void reload() {
         refresh();
     }
-//
-//    void connectTestCall() {
-//        LoadingUtil.startLoading(indicator);
-//        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-//        conn.getLikedFood(SharedManager.getInstance().getMe()._id)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<List<Food>>() {
-//                    @Override
-//                    public final void onCompleted() {
-//                        LoadingUtil.stopLoading(indicator);
-//                    }
-//                    @Override
-//                    public final void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public final void onNext(List<Food> response) {
-//                        if (response != null) {
-//                            for (Food food : response) {
-//                                adapter.addData(food);
-//                            }
-//                            adapter.notifyDataSetChanged();
-//
-//                        } else {
-//                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
-//    void connectTestCall_UserInfo() {
-//        LoadingUtil.startLoading(indicator);
-//        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-//        conn.getUserInfo(SharedManager.getInstance().getMe()._id)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<User>() {
-//                    @Override
-//                    public final void onCompleted() {
-//                        LoadingUtil.stopLoading(indicator);
-//                        TV_user_name.setText(SharedManager.getInstance().getMe().nickname);
-//                        TV_about_me.setText(SharedManager.getInstance().getMe().about_me);
-//                    }
-//                    @Override
-//                    public final void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public final void onNext(User response) {
-//                        if (response != null) {
-//                            SharedManager.getInstance().setMe(response);
-//                            image_url = SharedManager.getInstance().getMe().thumbnail_url;
-//                            if(image_url.contains("facebook")){
-//                                Glide.with(getActivity()).
-//                                        load(image_url).
-//                                        thumbnail(0.1f).
-//                                        bitmapTransform(new CropCircleTransformation(getActivity())).into(IV_profile);
-//                            }else{
-//                                Glide.with(getActivity()).
-//                                        load(Constants.IMAGE_BASE_URL + image_url).
-//                                        thumbnail(0.1f).
-//                                        bitmapTransform(new CropCircleTransformation(getActivity())).into(IV_profile);
-//                            }
-//                        } else {
-//                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
+
+    void connectTestCall(int main_category_num) {
+        LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category[main_category_num])
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Cosmetic>>() {
+                    @Override
+                    public final void onCompleted() {
+                        LoadingUtil.stopLoading(indicator);
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<Cosmetic> response) {
+                        if (response != null) {
+                            for (Cosmetic cosmetic : response) {
+                                adapter.addData(cosmetic);
+                            }
+                            adapter.notifyDataSetChanged();
+
+                        } else {
+                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 
     @Override
     public void onResume() {

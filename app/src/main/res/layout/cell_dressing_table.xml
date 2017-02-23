@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="#00FFFFFF" >
+    android:background="@null" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
                     android:id="@+id/IV_cosmetic"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:background="#777777"
+                    android:background="#FFFFFF"
                     android:layout_centerHorizontal="true"/>
                 <TextView
                     android:id="@+id/TV_cosmetic_name"

@@ -2,6 +2,7 @@ package com.makejin.beautyproject_and.DressingTable;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.R;
+import com.makejin.beautyproject_and.Utils.Constants.Constants;
 
 import java.util.ArrayList;
 
@@ -53,7 +55,7 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
 
     @Override
      public DressingTableAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Toast.makeText(context, "[onCreateViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "[onCreateViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
         if (viewType == TYPE_ITEM) {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_dressing_table, parent, false);
@@ -64,7 +66,7 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Toast.makeText(context, "[onBindViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "[onBindViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
         if (holder instanceof ItemViewHolder) {
             holder.container.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,7 +79,9 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
 
             itemViewHolder.TV_cosmetic_name.setText(cosmetic.product_name);
 
-            String image_url = cosmetic.img_src;
+            String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
+
+            Log.i("makejin", "image_url : " + image_url);
 
 
             Glide.with(context).
@@ -105,7 +109,7 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
         public View container;
         public ViewHolder(View itemView) {
             super(itemView);
-            Toast.makeText(context, "[ViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "[ViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
             container = itemView;
         }
     }
@@ -115,7 +119,7 @@ public class DressingTableAdapter extends RecyclerView.Adapter<DressingTableAdap
 
         public ItemViewHolder(View v) {
             super(v);
-            Toast.makeText(context, "[ItemViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "[ItemViewHolder]" + "size : " + mDataset.size() + " / " + getItemCount(), Toast.LENGTH_SHORT).show();
             TV_cosmetic_name = (TextView) v.findViewById(R.id.TV_cosmetic_name);
             IV_cosmetic = (ImageView) v.findViewById(R.id.IV_cosmetic);
 
