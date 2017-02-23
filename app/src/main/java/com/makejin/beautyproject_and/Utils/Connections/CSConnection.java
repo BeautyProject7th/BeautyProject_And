@@ -33,7 +33,7 @@ public interface CSConnection{
 
 
     @GET("/users/{user_id}")
-    Observable<User> oneUser_get(@Path("user_id") String user_id);
+    Observable<List<User>> oneUser_get(@Path("user_id") int user_id);
 
 
 

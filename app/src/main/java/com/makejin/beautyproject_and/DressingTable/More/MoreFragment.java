@@ -45,9 +45,9 @@ public class MoreFragment extends ParentFragment {
     public LinearLayout indicator;
     SwipeRefreshLayout pullToRefresh;
 
-    TextView TV_category;
+    TextView TV_top_desc, TV_category;
 
-    String main_category [] = new String[6];
+    String main_category [] = new String[7];
 
     @Nullable
     @Override
@@ -63,36 +63,47 @@ public class MoreFragment extends ParentFragment {
 
         TV_category = (TextView) view.findViewById(R.id.TV_category);
 
+        TV_top_desc = (TextView) view.findViewById(R.id.TV_top_desc);
+
+        String category = "";
+
         main_category[0] = "스킨케어";
         main_category[1] = "클렌징";
         main_category[2] = "베이스메이크업";
         main_category[3] = "색조메이크업";
         main_category[4] = "마스크팩";
         main_category[5] = "향수";
+        main_category[6] = "기타";
+
 
         switch(activity.main_category_num){
             case 0:
-                TV_category.setText("Skin/Care");
+                category = "Skin/Care";
                 break;
             case 1:
-                TV_category.setText("Cleansing");
+                category = "Cleansing";
                 break;
             case 2:
-                TV_category.setText("Base Makeup");
+                category = "Base Makeup";
                 break;
             case 3:
-                TV_category.setText("Color Makeup");
+                category = "Color Makeup";
                 break;
             case 4:
-                TV_category.setText("Mask/Pack");
+                category = "Mask/Pack";
                 break;
             case 5:
-                TV_category.setText("Perfume");
+                category = "Perfume";
+                break;
+            case 6:
+                category = "Etc";
                 break;
             default:
-                TV_category.setText("error");
+                category = "error";
         }
 
+        TV_category.setText(category);
+        TV_top_desc.setText(SharedManager.getInstance().getMe().name + "님의 " + category + "목록");
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
@@ -102,6 +113,9 @@ public class MoreFragment extends ParentFragment {
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         connectTestCall(moreActivity.main_category_num);
+
+
+
 
         if (recycler_view == null) {
             recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);

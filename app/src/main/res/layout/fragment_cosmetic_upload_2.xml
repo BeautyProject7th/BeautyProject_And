@@ -21,31 +21,189 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="#777777">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="15dp"
                 android:text="등록하시려는 화장품의 카테고리를 선택하세요"
                 android:textColor="#FFFFFF"
                 android:gravity="center"
                 android:layout_centerVertical="true"
                 android:textSize="10dp"/>
-        </RelativeLayout>
+            <ImageView
+                android:id="@+id/IV_brand"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#FFFFFF"/>
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            android:layout_marginTop="65dp">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#F3F3F3"
-                android:scrollbars="vertical"/>
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Skin/Care"
+                            android:textSize="30dp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold" />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_skin_care"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F3F3F3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Base"
+                            android:textSize="30dp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold" />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_base_makeup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F3F3F3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mask/Pack"
+                            android:textSize="30dp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold" />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_mask_pack"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F3F3F3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Cleansing"
+                            android:textSize="30dp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold" />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_cleansing"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F3F3F3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Color"
+                            android:textSize="30dp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold" />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_color_makeup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F3F3F3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Perfume"
+                            android:textSize="30dp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold" />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_perfume"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F3F3F3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Etc"
+                            android:textSize="30dp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold" />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_etc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F3F3F3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
         </ScrollView>
 
 

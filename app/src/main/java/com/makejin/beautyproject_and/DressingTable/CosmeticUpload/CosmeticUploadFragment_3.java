@@ -1,8 +1,5 @@
 package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,12 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
-import com.makejin.beautyproject_and.DressingTable.DressingTableAdapter;
 import com.makejin.beautyproject_and.Model.Brand;
 import com.makejin.beautyproject_and.Model.Category;
 import com.makejin.beautyproject_and.ParentFragment;
@@ -39,14 +33,12 @@ import rx.schedulers.Schedulers;
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
-public class CosmeticUploadFragment_2 extends ParentFragment {
+public class CosmeticUploadFragment_3 extends ParentFragment {
     public static CosmeticUploadActivity activity;
 
-    private RecyclerView recyclerView [] = new RecyclerView[7];
+    private RecyclerView recyclerView;
 
-    int recyclerView_id [] = new int[7];
-
-    public CosmeticUploadAdapter_2 adapter[] = new CosmeticUploadAdapter_2[7];
+    public CosmeticUploadAdapter_3 adapter;
 
     private RecyclerView.LayoutManager layoutManager;
     public LinearLayout indicator;
@@ -54,14 +46,11 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
 
     ImageView IV_brand;
 
-    String brand [] = new String[5];
-    String main_category [] = new String[7];
-
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cosmetic_upload_2, container, false);
+        View view = inflater.inflate(R.layout.fragment_cosmetic_upload_3, container, false);
         initViewSetting(view);
         return view;
     }
@@ -77,42 +66,14 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        recyclerView_id[0] = R.id.recycler_view_skin_care;
-        recyclerView_id[1] = R.id.recycler_view_cleansing;
-        recyclerView_id[2] = R.id.recycler_view_base_makeup;
-        recyclerView_id[3] = R.id.recycler_view_color_makeup;
-        recyclerView_id[4] = R.id.recycler_view_mask_pack;
-        recyclerView_id[5] = R.id.recycler_view_perfume;
-        recyclerView_id[6] = R.id.recycler_view_etc;
-
-
-        brand[0] = "더샘";
-        brand[1] = "더페이스샵";
-        brand[2] = "에뛰드하우스";
-        brand[3] = "이니스프리";
-        brand[4] = "토니모리";
-
-        main_category[0] = "스킨케어";
-        main_category[1] = "클렌징";
-        main_category[2] = "베이스메이크업";
-        main_category[3] = "색조메이크업";
-        main_category[4] = "마스크팩";
-        main_category[5] = "향수";
-        main_category[6] = "기타";
-
-
-//        main_category[0]_eng = "Skin/Care";
-//        main_category[1] = "클렌징";
-//        main_category[2] = "베이스메이크업";
-//        main_category[3] = "색조메이크업";
-//        main_category[4] = "마스크팩";
-//        main_category[5] = "향수";
-//        main_category[6] = "기타";
-
 
         IV_brand = (ImageView) view.findViewById(R.id.IV_brand);
 
-        final Brand brand = (Brand) getArguments().getSerializable("brand");
+        Brand brand = (Brand) getArguments().getSerializable("brand");
+        final String main_category = (String) getArguments().getString("main_category");
+        final String sub_category = (String) getArguments().getString("sub_category");
+
+        Log.i("ads", "a : " + brand.name + " " + main_category + " " + sub_category);
 
         String image_url = Constants.IMAGE_BASE_URL_brand + brand.logo;
 
@@ -123,40 +84,28 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                 thumbnail(0.1f).
                 into(IV_brand);
 
-        for(int i=0;i<7;i++){
-            final int temp_i = i;
-            if (recyclerView[temp_i]== null) {
-                recyclerView[temp_i] = (RecyclerView) view.findViewById(recyclerView_id[temp_i]);
-                recyclerView[temp_i].setHasFixedSize(true);
-                recyclerView[temp_i].setLayoutManager(new GridLayoutManager(activity, 2));
-            }
-
-            if (adapter[temp_i] == null) {
-                adapter[temp_i] = new CosmeticUploadAdapter_2(new CosmeticUploadAdapter_2.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Bundle bundle = new Bundle(3);
-                        bundle.putSerializable("brand", brand);
-                        bundle.putString("main_category", main_category[temp_i]);
-                        bundle.putString("sub_category", adapter[temp_i].getItem(position));
-
-
-                        Fragment fragment = new CosmeticUploadFragment_3();
-                        fragment.setArguments(bundle);
-
-                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                        ft.replace(R.id.activity_cosmetic_upload, fragment);
-                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                        ft.commit();
-                    }
-                }, activity, this);
-            }
-            recyclerView[temp_i].setAdapter(adapter[i]);
+        if (recyclerView== null) {
+            recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
         }
+
+        if (adapter == null) {
+            adapter = new CosmeticUploadAdapter_3(new CosmeticUploadAdapter_3.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+//                        Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
+//                        intent.putExtra("cosmetic", adapter[temp_i].mDataset.get(position));
+//                        startActivity(intent);
+//                        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                }
+            }, activity, this);
+        }
+        recyclerView.setAdapter(adapter);
 
         connectTestCall();
 
-        indicator = (LinearLayout)view.findViewById(R.id.indicator);
+        indicator = (LinearLayout) view.findViewById(R.id.indicator);
 
     }
 
@@ -190,8 +139,8 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                     public final void onNext(List<Category> response) {
                         if (response != null) {
                             for(int i=0;i<response.size();i++){
-                                adapter[i].addData(response.get(i));
-                                adapter[i].notifyDataSetChanged();
+                                adapter.addData(response.get(i));
+                                adapter.notifyDataSetChanged();
                             }
                         } else {
                             Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();

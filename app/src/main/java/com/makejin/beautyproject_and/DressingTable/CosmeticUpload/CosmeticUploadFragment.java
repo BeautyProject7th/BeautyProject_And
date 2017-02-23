@@ -51,6 +51,8 @@ public class CosmeticUploadFragment extends ParentFragment {
 
     TextView TV_category;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,7 +83,12 @@ public class CosmeticUploadFragment extends ParentFragment {
             adapter = new CosmeticUploadAdapter(new CosmeticUploadAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("brand", adapter.getItem(position));
+
                     Fragment fragment = new CosmeticUploadFragment_2();
+                    fragment.setArguments(bundle);
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.activity_cosmetic_upload, fragment);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -93,14 +100,6 @@ public class CosmeticUploadFragment extends ParentFragment {
 
 
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
-//        pullToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.pull_to_refresh);
-//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                pullToRefresh.setRefreshing(false);
-//                refresh();
-//            }
-//        });
 
     }
 
@@ -149,46 +148,7 @@ public class CosmeticUploadFragment extends ParentFragment {
                     }
                 });
     }
-//    void connectTestCall_UserInfo() {
-//        LoadingUtil.startLoading(indicator);
-//        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-//        conn.getUserInfo(SharedManager.getInstance().getMe()._id)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<User>() {
-//                    @Override
-//                    public final void onCompleted() {
-//                        LoadingUtil.stopLoading(indicator);
-//                        TV_user_name.setText(SharedManager.getInstance().getMe().nickname);
-//                        TV_about_me.setText(SharedManager.getInstance().getMe().about_me);
-//                    }
-//                    @Override
-//                    public final void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public final void onNext(User response) {
-//                        if (response != null) {
-//                            SharedManager.getInstance().setMe(response);
-//                            image_url = SharedManager.getInstance().getMe().thumbnail_url;
-//                            if(image_url.contains("facebook")){
-//                                Glide.with(getActivity()).
-//                                        load(image_url).
-//                                        thumbnail(0.1f).
-//                                        bitmapTransform(new CropCircleTransformation(getActivity())).into(IV_profile);
-//                            }else{
-//                                Glide.with(getActivity()).
-//                                        load(Constants.IMAGE_BASE_URL + image_url).
-//                                        thumbnail(0.1f).
-//                                        bitmapTransform(new CropCircleTransformation(getActivity())).into(IV_profile);
-//                            }
-//                        } else {
-//                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
+
 
     @Override
     public void onResume() {

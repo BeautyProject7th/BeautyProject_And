@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity;
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_;
@@ -53,23 +54,23 @@ public class DressingTableFragment extends ParentFragment {
     //4-마스크팩
     //5-향수
 
-    public DressingTableAdapter adapter[] = new DressingTableAdapter[6];
+    public DressingTableAdapter adapter[] = new DressingTableAdapter[7];
 
-    private RecyclerView recyclerView [] = new RecyclerView[6];
+    private RecyclerView recyclerView [] = new RecyclerView[7];
 
-    private int recyclerView_id [] = new int[6];
+    private int recyclerView_id [] = new int[7];
 
     public LinearLayout indicator;
     Button BT_setting;
     Button BT_cosmetic_upload;
 
-    Button BT_more [] = new Button[6];
+    Button BT_more [] = new Button[7];
 
-    String main_category [] = new String[6];
+    String main_category [] = new String[7];
 
     ImageView IV_user;
 
-    TextView TV_name, TV_id, TV_skin_trouble, TV_skin_type;
+    TextView TV_top_desc, TV_name, TV_id, TV_skin_trouble, TV_skin_type;
 
     @Nullable
     @Override
@@ -91,6 +92,8 @@ public class DressingTableFragment extends ParentFragment {
         BT_more[3] = (Button) view.findViewById(R.id.BT_more_color_makeup);
         BT_more[4] = (Button) view.findViewById(R.id.BT_more_mask_pack);
         BT_more[5] = (Button) view.findViewById(R.id.BT_more_perfume);
+        BT_more[6] = (Button) view.findViewById(R.id.BT_more_etc);
+
 
         main_category[0] = "스킨케어";
         main_category[1] = "클렌징";
@@ -98,6 +101,8 @@ public class DressingTableFragment extends ParentFragment {
         main_category[3] = "색조메이크업";
         main_category[4] = "마스크팩";
         main_category[5] = "향수";
+        main_category[6] = "기타";
+
 
         recyclerView_id[0] = R.id.recycler_view_skin_care;
         recyclerView_id[1] = R.id.recycler_view_cleansing;
@@ -105,15 +110,33 @@ public class DressingTableFragment extends ParentFragment {
         recyclerView_id[3] = R.id.recycler_view_color_makeup;
         recyclerView_id[4] = R.id.recycler_view_mask_pack;
         recyclerView_id[5] = R.id.recycler_view_perfume;
+        recyclerView_id[6] = R.id.recycler_view_etc;
+
 
         IV_user = (ImageView) view.findViewById(R.id.IV_user);
 
+        TV_top_desc = (TextView) view.findViewById(R.id.TV_top_desc);
         TV_name = (TextView) view.findViewById(R.id.TV_name);
         TV_id = (TextView) view.findViewById(R.id.TV_id);
         TV_skin_trouble = (TextView) view.findViewById(R.id.TV_skin_trouble);
         TV_skin_type = (TextView) view.findViewById(R.id.TV_skin_type);
 
-        for(int i=0;i<6;i++)
+        String image_url = Constants.IMAGE_BASE_URL_users + SharedManager.getInstance().getMe().thumbnail_url;
+
+        Glide.with(getActivity()).
+                load(image_url).
+                thumbnail(0.1f).
+                into(IV_user);
+
+
+        TV_top_desc.setText(SharedManager.getInstance().getMe().name + "님이 사용하고 있는 화장품 목록");
+        TV_name.setText(SharedManager.getInstance().getMe().name);
+        TV_id.setText(SharedManager.getInstance().getMe().id);
+        //TV_skin_trouble.setText(SharedManager.getInstance().getMe().name);
+        //TV_skin_type.setText(SharedManager.getInstance().getMe().name);
+
+
+        for(int i=0;i<7;i++)
             connectTestCall(i);
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
@@ -123,7 +146,7 @@ public class DressingTableFragment extends ParentFragment {
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        for(int i=0;i<6;i++){
+        for(int i=0;i<7;i++){
             final int temp_i = i;
             if (recyclerView[temp_i]== null) {
                 recyclerView[temp_i] = (RecyclerView) view.findViewById(recyclerView_id[temp_i]);
@@ -171,7 +194,7 @@ public class DressingTableFragment extends ParentFragment {
             }
         });
 
-        for(int i=0; i<6; i++){
+        for(int i=0; i<7; i++){
             final int temp_i = i;
             BT_more[i].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -188,19 +211,7 @@ public class DressingTableFragment extends ParentFragment {
 
     @Override
     public void refresh() {
-        adapter[0].clear();
-        adapter[1].clear();
-        adapter[2].clear();
-        adapter[3].clear();
-        adapter[4].clear();
-        adapter[5].clear();
 
-        adapter[0].notifyDataSetChanged();
-        adapter[1].notifyDataSetChanged();
-        adapter[2].notifyDataSetChanged();
-        adapter[3].notifyDataSetChanged();
-        adapter[4].notifyDataSetChanged();
-        adapter[5].notifyDataSetChanged();
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
+import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -30,7 +31,7 @@ public class DetailCosmeticFragment extends ParentFragment {
 
     ImageView IV_product;
 
-    TextView TV_product_name, TV_main_category, TV_sub_category, TV_brand;
+    TextView TV_top_desc, TV_product_name, TV_main_category, TV_sub_category, TV_brand;
 
     @Nullable
     @Override
@@ -48,13 +49,11 @@ public class DetailCosmeticFragment extends ParentFragment {
 
         IV_product = (ImageView) view.findViewById(R.id.IV_product);
 
+        TV_top_desc = (TextView) view.findViewById(R.id.TV_top_desc);
         TV_product_name = (TextView) view.findViewById(R.id.TV_product_name);
         TV_main_category = (TextView) view.findViewById(R.id.TV_main_category);
         TV_sub_category = (TextView) view.findViewById(R.id.TV_sub_category);
         TV_brand = (TextView) view.findViewById(R.id.TV_brand);
-
-        //connectTestCall();
-        //connectTestCall_UserInfo();
 
         String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
 
@@ -63,6 +62,7 @@ public class DetailCosmeticFragment extends ParentFragment {
                 thumbnail(0.1f).
                 into(IV_product);
 
+        TV_top_desc.setText("\""+cosmetic.product_name + "\"의 상세정보");
         TV_product_name.setText(cosmetic.product_name);
         TV_main_category.setText(cosmetic.main_category);
         TV_sub_category.setText(cosmetic.sub_category);
@@ -77,14 +77,6 @@ public class DetailCosmeticFragment extends ParentFragment {
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
-//        pullToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.pull_to_refresh);
-//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                pullToRefresh.setRefreshing(false);
-//                refresh();
-//            }
-//        });
 
         IV_product.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,8 +92,6 @@ public class DetailCosmeticFragment extends ParentFragment {
 
     @Override
     public void refresh() {
-//        connectTestCall();
-//        connectTestCall_UserInfo();
 
     }
 
@@ -109,77 +99,6 @@ public class DetailCosmeticFragment extends ParentFragment {
     public void reload() {
         refresh();
     }
-//
-//    void connectTestCall() {
-//        LoadingUtil.startLoading(indicator);
-//        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-//        conn.getLikedFood(SharedManager.getInstance().getMe()._id)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<List<Food>>() {
-//                    @Override
-//                    public final void onCompleted() {
-//                        LoadingUtil.stopLoading(indicator);
-//                    }
-//                    @Override
-//                    public final void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public final void onNext(List<Food> response) {
-//                        if (response != null) {
-//                            for (Food food : response) {
-//                                adapter.addData(food);
-//                            }
-//                            adapter.notifyDataSetChanged();
-//
-//                        } else {
-//                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
-//    void connectTestCall_UserInfo() {
-//        LoadingUtil.startLoading(indicator);
-//        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-//        conn.getUserInfo(SharedManager.getInstance().getMe()._id)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<User>() {
-//                    @Override
-//                    public final void onCompleted() {
-//                        LoadingUtil.stopLoading(indicator);
-//                        TV_user_name.setText(SharedManager.getInstance().getMe().nickname);
-//                        TV_about_me.setText(SharedManager.getInstance().getMe().about_me);
-//                    }
-//                    @Override
-//                    public final void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public final void onNext(User response) {
-//                        if (response != null) {
-//                            SharedManager.getInstance().setMe(response);
-//                            image_url = SharedManager.getInstance().getMe().thumbnail_url;
-//                            if(image_url.contains("facebook")){
-//                                Glide.with(getActivity()).
-//                                        load(image_url).
-//                                        thumbnail(0.1f).
-//                                        bitmapTransform(new CropCircleTransformation(getActivity())).into(IV_profile);
-//                            }else{
-//                                Glide.with(getActivity()).
-//                                        load(Constants.IMAGE_BASE_URL + image_url).
-//                                        thumbnail(0.1f).
-//                                        bitmapTransform(new CropCircleTransformation(getActivity())).into(IV_profile);
-//                            }
-//                        } else {
-//                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
 
     @Override
     public void onResume() {
