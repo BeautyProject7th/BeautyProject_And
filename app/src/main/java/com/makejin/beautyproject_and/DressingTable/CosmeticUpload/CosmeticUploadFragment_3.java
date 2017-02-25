@@ -1,8 +1,10 @@
 package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -10,19 +12,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.Model.Brand;
 import com.makejin.beautyproject_and.Model.Category;
+import com.makejin.beautyproject_and.Model.Cosmetic;
+import com.makejin.beautyproject_and.Model.GlobalResponse;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
 import com.makejin.beautyproject_and.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
 import com.makejin.beautyproject_and.Utils.Loadings.LoadingUtil;
+import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
 
 import java.util.List;
 
@@ -46,6 +53,8 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
 
     ImageView IV_brand;
 
+    TextView TV_main_category, TV_sub_category;
+    Button BT_cosmetic_upload;
 
     @Nullable
     @Override
@@ -69,15 +78,23 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
 
         IV_brand = (ImageView) view.findViewById(R.id.IV_brand);
 
+        TV_main_category = (TextView) view.findViewById(R.id.TV_main_category);
+        TV_sub_category = (TextView) view.findViewById(R.id.TV_sub_category);
+
+        BT_cosmetic_upload = (Button) view.findViewById(R.id.BT_cosmetic_upload);
+
+
         Brand brand = (Brand) getArguments().getSerializable("brand");
         final String main_category = (String) getArguments().getString("main_category");
         final String sub_category = (String) getArguments().getString("sub_category");
 
-        Log.i("ads", "a : " + brand.name + " " + main_category + " " + sub_category);
+
+        TV_main_category.setText(main_category);
+        TV_sub_category.setText(sub_category);
+
+
 
         String image_url = Constants.IMAGE_BASE_URL_brand + brand.logo;
-
-        Log.i("zxc", image_url);
 
         Glide.with(getActivity()).
                 load(image_url).
@@ -87,7 +104,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
         if (recyclerView== null) {
             recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
             recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
+            recyclerView.setLayoutManager(new GridLayoutManager(activity, 4));
         }
 
         if (adapter == null) {
@@ -103,7 +120,19 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
         }
         recyclerView.setAdapter(adapter);
 
-        connectTestCall();
+
+
+        BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(Cosmetic cosmetic : adapter.checkedList){
+                    Log.i("zxc", cosmetic.product_name);
+                    connectTestCall_myCosmetic_post(cosmetic);
+                }
+            }
+        });
+
+        connectTestCall(brand.name, main_category, sub_category);
 
         indicator = (LinearLayout) view.findViewById(R.id.indicator);
 
@@ -119,13 +148,14 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
         refresh();
     }
 
-    void connectTestCall() {
+    void connectTestCall(String brand, String main_category, String sub_category) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-        conn.category()
+        Log.i("makejin3201", "zxc : " + brand + "  " +  main_category + " " + sub_category);
+        conn.cosmetic(brand, main_category, sub_category)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Category>>() {
+                .subscribe(new Subscriber<List<Cosmetic>>() {
                     @Override
                     public final void onCompleted() {
                         LoadingUtil.stopLoading(indicator);
@@ -136,18 +166,51 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
                         Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public final void onNext(List<Category> response) {
-                        if (response != null) {
+                    public final void onNext(List<Cosmetic> response) {
+                        if (response.size() != 0) {
                             for(int i=0;i<response.size();i++){
+                                Log.i("zxc", response.get(i).product_name);
                                 adapter.addData(response.get(i));
                                 adapter.notifyDataSetChanged();
                             }
                         } else {
-                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "찾고자하는 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
+
+    void connectTestCall_myCosmetic_post(Cosmetic cosmetic) {
+        LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        conn.myCosmetic_post(cosmetic, SharedManager.getInstance().getMe().id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        LoadingUtil.stopLoading(indicator);
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response != null) {
+                            if(response.equals(""))
+                                Toast.makeText(getActivity(), "정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
     @Override
     public void onResume() {
         super.onResume();

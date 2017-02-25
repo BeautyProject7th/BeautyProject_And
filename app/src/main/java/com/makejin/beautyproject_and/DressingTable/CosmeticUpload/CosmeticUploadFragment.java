@@ -1,6 +1,7 @@
 package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -64,15 +65,12 @@ public class CosmeticUploadFragment extends ParentFragment {
     private void initViewSetting(View view) {
         final CosmeticUploadActivity cosmeticUploadActivity = (CosmeticUploadActivity) getActivity();
         this.activity = cosmeticUploadActivity;
-
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        connectTestCall();
 
         if (recycler_view == null) {
             recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -98,8 +96,10 @@ public class CosmeticUploadFragment extends ParentFragment {
         }
         recycler_view.setAdapter(adapter);
 
-
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
+
+
+
 
     }
 
@@ -109,7 +109,6 @@ public class CosmeticUploadFragment extends ParentFragment {
         adapter.notifyDataSetChanged();
 
         connectTestCall();
-//        connectTestCall_UserInfo();
 
     }
 
@@ -153,6 +152,8 @@ public class CosmeticUploadFragment extends ParentFragment {
     @Override
     public void onResume() {
         super.onResume();
-        //refresh();
+        refresh();
     }
+
+
 }

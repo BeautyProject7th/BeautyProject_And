@@ -55,23 +55,29 @@
                     android:orientation="horizontal"
                     android:padding="10dp">
                     <TextView
+                        android:id="@+id/TV_main_category"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="Skin/care"
+                        android:layout_height="50dp"
+                        android:text="main_category"
                         android:textSize="30dp"
                         android:textColor="#FF0000"
                         android:textStyle="bold" />
                     <TextView
+                        android:id="@+id/TV_sub_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15dp"
                         android:text="sub_category"
                         android:layout_marginLeft="5dp"/>
+                    <Space
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
                     <Button
+                        android:id="@+id/BT_cosmetic_upload"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="등록"
-                        android:layout_marginLeft="80dp" />
+                        android:text="등록"/>
                 </LinearLayout>
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view"

@@ -41,10 +41,10 @@ public interface CSConnection{
 
 
     @POST("/users/{user_id}/cosmetics")
-    Observable<List<User>> myCosmetic_post(@Body Cosmetic cosmetic,
+    Observable<GlobalResponse> myCosmetic_post(@Body Cosmetic cosmetic,
                                            @Path("user_id") String user_id);
     @GET("/users/{user_id}/cosmetics")
-    Observable<List<User>> myCosmetic_get(@Path("user_id") String user_id);
+    Observable<List<Cosmetic>> myCosmetic_get(@Path("user_id") String user_id);
 
 
 
@@ -101,7 +101,9 @@ public interface CSConnection{
 
 
     @GET("/cosmetics")
-    Observable<List<Cosmetic>> cosmetic();
+    Observable<List<Cosmetic>> cosmetic(@Query("brand") String brand,
+                                        @Query("main") String main_category,
+                                        @Query("sub") String sub_category);
 
 
 

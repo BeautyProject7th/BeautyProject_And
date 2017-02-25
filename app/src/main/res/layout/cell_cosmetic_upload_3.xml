@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_width="110dp"
+    android:layout_height="wrap_content"
+    android:minHeight="100dp"
     android:background="#00FFFFFF"
-    android:padding="10dp">
-
-    <CheckBox
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp">
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+        <ImageView
+            android:id="@+id/IV_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#AAAAAA"/>
+        <CheckBox
+            android:id="@+id/CB_product"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/TV_product"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20px"
-        android:layout_width="wrap_content"
-        android:id="@+id/autologinflag"
-        android:layout_span="2"
-        android:textStyle="bold"
-        android:button="@drawable/check_box"
-        android:paddingLeft="20px" />
-
+        android:minHeight="20dp"
+        android:text="product_name"
+        android:textColor="#AAAAAA"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

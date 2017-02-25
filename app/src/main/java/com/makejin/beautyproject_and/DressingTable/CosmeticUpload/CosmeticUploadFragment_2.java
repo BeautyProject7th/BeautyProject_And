@@ -1,6 +1,7 @@
 package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,6 +57,8 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
 
     String brand [] = new String[5];
     String main_category [] = new String[7];
+    String main_category_eng [] = new String[7];
+
 
 
     @Nullable
@@ -69,6 +72,7 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
     private void initViewSetting(View view) {
         final CosmeticUploadActivity cosmeticUploadActivity = (CosmeticUploadActivity) getActivity();
         this.activity = cosmeticUploadActivity;
+
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
@@ -101,14 +105,13 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
         main_category[6] = "기타";
 
 
-//        main_category[0]_eng = "Skin/Care";
-//        main_category[1] = "클렌징";
-//        main_category[2] = "베이스메이크업";
-//        main_category[3] = "색조메이크업";
-//        main_category[4] = "마스크팩";
-//        main_category[5] = "향수";
-//        main_category[6] = "기타";
-
+        main_category_eng[0] = "Skin/Care";
+        main_category_eng[1] = "Cleansing";
+        main_category_eng[2] = "Base Makeup";
+        main_category_eng[3] = "Color Makeup";
+        main_category_eng[4] = "Mask/Pack";
+        main_category_eng[5] = "Perfume";
+        main_category_eng[6] = "Etc";
 
         IV_brand = (ImageView) view.findViewById(R.id.IV_brand);
 
@@ -116,12 +119,12 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
 
         String image_url = Constants.IMAGE_BASE_URL_brand + brand.logo;
 
-        Log.i("zxc", image_url);
-
         Glide.with(getActivity()).
                 load(image_url).
                 thumbnail(0.1f).
                 into(IV_brand);
+
+        int cnt = 0;
 
         for(int i=0;i<7;i++){
             final int temp_i = i;
@@ -131,15 +134,18 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                 recyclerView[temp_i].setLayoutManager(new GridLayoutManager(activity, 2));
             }
 
+
+
             if (adapter[temp_i] == null) {
                 adapter[temp_i] = new CosmeticUploadAdapter_2(new CosmeticUploadAdapter_2.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        Log.i("zxc", "z : " + temp_i + " " + adapter[temp_i].getItem(position));
+
                         Bundle bundle = new Bundle(3);
                         bundle.putSerializable("brand", brand);
                         bundle.putString("main_category", main_category[temp_i]);
                         bundle.putString("sub_category", adapter[temp_i].getItem(position));
-
 
                         Fragment fragment = new CosmeticUploadFragment_3();
                         fragment.setArguments(bundle);
@@ -151,19 +157,21 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                     }
                 }, activity, this);
             }
-            recyclerView[temp_i].setAdapter(adapter[i]);
+            recyclerView[temp_i].setAdapter(adapter[temp_i]);
         }
 
-        connectTestCall();
-
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
-
     }
 
     @Override
     public void refresh() {
-
+        for(int i=0;i<7;i++) {
+            adapter[i].clear();
+            adapter[i].notifyDataSetChanged();
+        }
+        connectTestCall();
     }
+
 
     @Override
     public void reload() {
@@ -190,7 +198,31 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                     public final void onNext(List<Category> response) {
                         if (response != null) {
                             for(int i=0;i<response.size();i++){
-                                adapter[i].addData(response.get(i));
+                                switch(response.get(i).main_category){
+                                    case "스킨케어":
+                                        adapter[0].addData(response.get(i));
+                                        break;
+                                    case "클렌징":
+                                        adapter[1].addData(response.get(i));
+                                        break;
+                                    case "베이스메이크업":
+                                        adapter[2].addData(response.get(i));
+                                        break;
+                                    case "색조메이크업":
+                                        adapter[3].addData(response.get(i));
+                                        break;
+                                    case "마스크팩":
+                                        adapter[4].addData(response.get(i));
+                                        break;
+                                    case "향수":
+                                        adapter[5].addData(response.get(i));
+                                        break;
+                                    case "기타":
+                                        adapter[6].addData(response.get(i));
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 adapter[i].notifyDataSetChanged();
                             }
                         } else {
@@ -204,7 +236,5 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
         super.onResume();
         refresh();
     }
-
-
 
 }

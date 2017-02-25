@@ -8,13 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.Model.Brand;
 import com.makejin.beautyproject_and.Model.Category;
+import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.R;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +58,7 @@ public class CosmeticUploadAdapter_2 extends RecyclerView.Adapter<CosmeticUpload
         mDataset.clear();
     }
 
+
     @Override
      public CosmeticUploadAdapter_2.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
@@ -76,7 +80,9 @@ public class CosmeticUploadAdapter_2 extends RecyclerView.Adapter<CosmeticUpload
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             String sub_category = mDataset.get(position);
 
-            itemViewHolder.BT_category.setText(sub_category);
+            Log.i("zxc", "position : " + position + " " + sub_category);
+
+            itemViewHolder.TV_category.setText(sub_category);
 
         }
     }
@@ -103,11 +109,11 @@ public class CosmeticUploadAdapter_2 extends RecyclerView.Adapter<CosmeticUpload
         }
     }
     public class ItemViewHolder extends ViewHolder {
-        public Button BT_category;
+        public TextView TV_category;
 
         public ItemViewHolder(View v) {
             super(v);
-            BT_category = (Button) v.findViewById(R.id.BT_category);
+            TV_category = (TextView) v.findViewById(R.id.TV_category);
 
         }
     }
