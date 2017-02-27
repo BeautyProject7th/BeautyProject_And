@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
+import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_and.Model.Brand;
 import com.makejin.beautyproject_and.Model.Category;
 import com.makejin.beautyproject_and.Model.Cosmetic;
@@ -55,6 +57,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
 
     TextView TV_main_category, TV_sub_category;
     Button BT_cosmetic_upload;
+    Button BT_home;
 
     @Nullable
     @Override
@@ -70,10 +73,18 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
+        BT_home = (Button) cs_toolbar.findViewById(R.id.BT_home);
+        BT_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(getActivity(), DressingTableActivity_.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+            }
+        });
+
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
         IV_brand = (ImageView) view.findViewById(R.id.IV_brand);
@@ -111,10 +122,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
             adapter = new CosmeticUploadAdapter_3(new CosmeticUploadAdapter_3.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-//                        Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
-//                        intent.putExtra("cosmetic", adapter[temp_i].mDataset.get(position));
-//                        startActivity(intent);
-//                        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+
                 }
             }, activity, this);
         }
@@ -191,6 +199,11 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
                     @Override
                     public final void onCompleted() {
                         LoadingUtil.stopLoading(indicator);
+//                        Intent intent = new Intent(getActivity(), DressingTableActivity_.class);
+//                        startActivity(intent);
+                        getActivity().setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
+                        getActivity().finish();
+
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -199,12 +212,11 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {
-                        if (response != null) {
-                            if(response.equals(""))
+                        if (response.code == 0) {
+                            if(response.message.equals("success"))
                                 Toast.makeText(getActivity(), "정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getActivity(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -12,16 +12,21 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity;
+import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
+import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_and.DressingTable.More.MoreActivity;
 import com.makejin.beautyproject_and.DressingTable.More.MoreAdapter;
 import com.makejin.beautyproject_and.Model.Brand;
+import com.makejin.beautyproject_and.Model.DressingTable;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
 import com.makejin.beautyproject_and.Utils.Connections.CSConnection;
@@ -52,7 +57,7 @@ public class CosmeticUploadFragment extends ParentFragment {
 
     TextView TV_category;
 
-
+    Button BT_home;
 
     @Nullable
     @Override
@@ -67,10 +72,19 @@ public class CosmeticUploadFragment extends ParentFragment {
         this.activity = cosmeticUploadActivity;
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
+        BT_home = (Button) cs_toolbar.findViewById(R.id.BT_home);
+        BT_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(getActivity(), DressingTableActivity_.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+            }
+        });
+
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         if (recycler_view == null) {
             recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -154,6 +168,5 @@ public class CosmeticUploadFragment extends ParentFragment {
         super.onResume();
         refresh();
     }
-
 
 }

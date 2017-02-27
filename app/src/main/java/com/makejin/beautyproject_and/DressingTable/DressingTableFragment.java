@@ -136,15 +136,13 @@ public class DressingTableFragment extends ParentFragment {
         //TV_skin_type.setText(SharedManager.getInstance().getMe().name);
 
 
-        for(int i=0;i<7;i++)
-            connectTestCall(i);
+//        for(int i=0;i<7;i++)
+//            connectTestCall(i);
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         for(int i=0;i<7;i++){
             final int temp_i = i;
@@ -180,8 +178,10 @@ public class DressingTableFragment extends ParentFragment {
         BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CosmeticUploadActivity_.class));
+                Intent intent = new Intent(getActivity(), CosmeticUploadActivity_.class);
+                startActivityForResult(intent, Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST);
                 activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+
             }
         });
         IV_user.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +211,8 @@ public class DressingTableFragment extends ParentFragment {
 
     @Override
     public void refresh() {
-
+        for(int i=0;i<7;i++)
+            connectTestCall(i);
     }
 
     @Override
@@ -252,6 +253,19 @@ public class DressingTableFragment extends ParentFragment {
     @Override
     public void onResume() {
         super.onResume();
-        //refresh();
+        refresh();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d("makejin", "onActivityResult");
+        if (requestCode == Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST) {
+            if (resultCode == Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT) {
+                Log.d("makejin", "refresh");
+                refresh();
+            }
+        }
     }
 }

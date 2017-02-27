@@ -110,6 +110,7 @@
                             android:background="@drawable/btn_circle"/>
 
                         <Button
+                            android:id="@+id/BT_setting"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:background="@drawable/setting"

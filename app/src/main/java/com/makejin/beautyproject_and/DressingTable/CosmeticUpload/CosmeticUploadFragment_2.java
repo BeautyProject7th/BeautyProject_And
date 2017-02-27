@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
+import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_and.DressingTable.DressingTableAdapter;
 import com.makejin.beautyproject_and.Model.Brand;
 import com.makejin.beautyproject_and.Model.Category;
@@ -59,6 +61,7 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
     String main_category [] = new String[7];
     String main_category_eng [] = new String[7];
 
+    Button BT_home;
 
 
     @Nullable
@@ -76,10 +79,18 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
+        BT_home = (Button) cs_toolbar.findViewById(R.id.BT_home);
+        BT_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(getActivity(), DressingTableActivity_.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+            }
+        });
+
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         recyclerView_id[0] = R.id.recycler_view_skin_care;
         recyclerView_id[1] = R.id.recycler_view_cleansing;

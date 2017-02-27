@@ -18,7 +18,8 @@
             android:id="@+id/CB_product"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:clickable="false"/>
     </RelativeLayout>
     <TextView
         android:id="@+id/TV_product"

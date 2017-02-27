@@ -1,5 +1,6 @@
 package com.makejin.beautyproject_and.DetailCosmetic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -8,16 +9,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
 import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
+
+import static com.makejin.beautyproject_and.R.id.BT_home;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -32,6 +37,7 @@ public class DetailCosmeticFragment extends ParentFragment {
     ImageView IV_product;
 
     TextView TV_top_desc, TV_product_name, TV_main_category, TV_sub_category, TV_brand;
+    Button BT_home;
 
     @Nullable
     @Override
@@ -44,6 +50,18 @@ public class DetailCosmeticFragment extends ParentFragment {
     private void initViewSetting(View view) {
         final DetailCosmeticActivity detailCosmeticActivity = (DetailCosmeticActivity) getActivity();
         this.activity = detailCosmeticActivity;
+
+        Toolbar cs_toolbar = (Toolbar) view.findViewById(R.id.cs_toolbar);
+
+        BT_home = (Button) cs_toolbar.findViewById(R.id.BT_home);
+        BT_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(getActivity(), DressingTableActivity_.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+            }
+        });
 
         Cosmetic cosmetic = activity.cosmetic;
 
@@ -68,13 +86,8 @@ public class DetailCosmeticFragment extends ParentFragment {
         TV_sub_category.setText(cosmetic.sub_category);
         TV_brand.setText(cosmetic.brand);
 
-
-        Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
-
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
 
