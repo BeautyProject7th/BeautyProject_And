@@ -103,6 +103,9 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
                     }
                 }
             });
+
+            if (position == mDataset.size()-1 && !fragment.endOfPage)
+                fragment.connectTestCall(fragment.brand.name, fragment.main_category, fragment.sub_category, ++fragment.page_num);
         }
     }
 

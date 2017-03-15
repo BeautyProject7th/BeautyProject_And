@@ -1,28 +1,29 @@
-package com.makejin.beautyproject_and.DressingTable.More;
+package com.makejin.beautyproject_and.Video.VideoList;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.makejin.beautyproject_and.R;
+import com.makejin.beautyproject_and.Video.Video.VideoContentsFragment;
+import com.makejin.beautyproject_and.Video.Video.YouTubeFailureRecoveryActivity;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-@EActivity(R.layout.activity_more)
-public class MoreActivity extends AppCompatActivity {
+@EActivity(R.layout.activity_video_list)
+public class VideoListActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
 
-    public static int main_category_num;
-
-
-    MoreActivity activity;
+    VideoListActivity activity;
 
     @ViewById
     Toolbar cs_toolbar;
@@ -31,12 +32,9 @@ public class MoreActivity extends AppCompatActivity {
     void afterBindingView() {
         this.activity = this;
 
-        main_category_num = getIntent().getIntExtra("main_category_num", -1);
-        Log.i("vxcvx", main_category_num+"");
-
-        Fragment fragment = new MoreFragment();
+        Fragment fragment = new VideoListFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.activity_more, fragment);
+        ft.replace(R.id.activity_video_list, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }

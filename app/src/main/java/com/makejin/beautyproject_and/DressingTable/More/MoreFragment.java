@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +50,12 @@ public class MoreFragment extends ParentFragment {
 
     TextView TV_top_desc, TV_category;
 
-    String main_category [] = new String[7];
+    public String main_category [] = new String[7];
 
     Button BT_home;
+
+    public int page_num = 1;
+    public boolean endOfPage = false;
 
 
     @Nullable
@@ -155,7 +159,8 @@ public class MoreFragment extends ParentFragment {
 
     @Override
     public void refresh() {
-
+        page_num=1;
+        endOfPage=false;
     }
 
     @Override
@@ -166,7 +171,7 @@ public class MoreFragment extends ParentFragment {
     void connectTestCall(int main_category_num) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category[main_category_num])
+        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category[main_category_num], page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Cosmetic>>() {
@@ -182,13 +187,14 @@ public class MoreFragment extends ParentFragment {
                     @Override
                     public final void onNext(List<Cosmetic> response) {
                         if (response != null) {
+
                             for (Cosmetic cosmetic : response) {
                                 adapter.addData(cosmetic);
                             }
                             adapter.notifyDataSetChanged();
 
                         } else {
-                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                            endOfPage = true;
                         }
                     }
                 });

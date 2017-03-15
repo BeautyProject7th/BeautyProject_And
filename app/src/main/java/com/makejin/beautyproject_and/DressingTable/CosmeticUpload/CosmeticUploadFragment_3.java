@@ -58,6 +58,12 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
     TextView TV_main_category, TV_sub_category;
     Button BT_cosmetic_upload;
     Button BT_home;
+    public int page_num = 1;
+    public boolean endOfPage = false;
+    public Brand brand;
+    public String main_category;
+    public String sub_category;
+
 
     @Nullable
     @Override
@@ -95,9 +101,9 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
         BT_cosmetic_upload = (Button) view.findViewById(R.id.BT_cosmetic_upload);
 
 
-        Brand brand = (Brand) getArguments().getSerializable("brand");
-        final String main_category = (String) getArguments().getString("main_category");
-        final String sub_category = (String) getArguments().getString("sub_category");
+        brand = (Brand) getArguments().getSerializable("brand");
+        main_category = (String) getArguments().getString("main_category");
+        sub_category = (String) getArguments().getString("sub_category");
 
 
         TV_main_category.setText(main_category);
@@ -140,7 +146,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
             }
         });
 
-        connectTestCall(brand.name, main_category, sub_category);
+        connectTestCall(brand.name, main_category, sub_category, page_num);
 
         indicator = (LinearLayout) view.findViewById(R.id.indicator);
 
@@ -156,11 +162,11 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
         refresh();
     }
 
-    void connectTestCall(String brand, String main_category, String sub_category) {
+    void connectTestCall(String brand, String main_category, String sub_category, final int page_num) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(CSConnection.class);
         Log.i("makejin3201", "zxc : " + brand + "  " +  main_category + " " + sub_category);
-        conn.cosmetic(brand, main_category, sub_category)
+        conn.cosmetic(brand, main_category, sub_category, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Cosmetic>>() {
@@ -182,6 +188,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
                                 adapter.notifyDataSetChanged();
                             }
                         } else {
+                            endOfPage = true;
                             Toast.makeText(getActivity(), "찾고자하는 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
                             //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }

@@ -33,7 +33,7 @@ public interface CSConnection{
 
 
     @GET("/users/{user_id}")
-    Observable<List<User>> oneUser_get(@Path("user_id") int user_id);
+    Observable<User> oneUser_get(@Path("user_id") int user_id);
 
 
 
@@ -64,23 +64,18 @@ public interface CSConnection{
 
 
 
-
+    @GET("/users/{user_id}/cosmetics")
+    Observable<List<Cosmetic>> myCosmetic(@Path("user_id") String user_id);
 
 
     @GET("/users/{user_id}/cosmetics")
     Observable<List<Cosmetic>> myMainCategoryCosmetic(@Path("user_id") String user_id,
-                                         @Query("main") String main_category);
-
-
-
-
-
+                                         @Query("main") String main_category,
+                                         @Query("page") int page_num);
 
     @GET("/users/{user_id}/cosmetics?main={sub-category}")
     Observable<List<Cosmetic>> mySubCategoryCosmetic(@Path("user_id") String user_id,
                                                       @Path("sub-category") String sub_category);
-
-
 
 
 
@@ -103,7 +98,8 @@ public interface CSConnection{
     @GET("/cosmetics")
     Observable<List<Cosmetic>> cosmetic(@Query("brand") String brand,
                                         @Query("main") String main_category,
-                                        @Query("sub") String sub_category);
+                                        @Query("sub") String sub_category,
+                                        @Query("page") int page_num);
 
 
 

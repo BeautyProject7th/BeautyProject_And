@@ -1,11 +1,9 @@
-package com.makejin.beautyproject_and.DressingTable;
+package com.makejin.beautyproject_and.SkinType;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,10 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity;
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_;
-import com.makejin.beautyproject_and.DressingTable.Setting.SettingActivity_;
+import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
+import com.makejin.beautyproject_and.DressingTable.DressingTableAdapter;
 import com.makejin.beautyproject_and.DressingTable.More.MoreActivity_;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.ParentFragment;
@@ -32,8 +30,7 @@ import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
 import com.makejin.beautyproject_and.Utils.Loadings.LoadingUtil;
 import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
-import com.makejin.beautyproject_and.Video.VideoList.VideoListActivity;
-import com.makejin.beautyproject_and.Video.VideoList.VideoListActivity_;
+import com.makejin.beautyproject_and.Video.Video.PlayerViewDemoActivity;
 
 import java.util.List;
 
@@ -44,7 +41,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
-public class DressingTableFragment extends ParentFragment {
+public class SkinTypeFragment extends ParentFragment {
     public static DressingTableActivity activity;
 
 
@@ -148,28 +145,28 @@ public class DressingTableFragment extends ParentFragment {
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
-        for(int i=0;i<7;i++){
-            final int temp_i = i;
-            if (recyclerView[temp_i]== null) {
-                recyclerView[temp_i] = (RecyclerView) view.findViewById(recyclerView_id[temp_i]);
-                recyclerView[temp_i].setHasFixedSize(true);
-                recyclerView[temp_i].setLayoutManager(new GridLayoutManager(activity, 4));
-            }
-
-            if (adapter[temp_i] == null) {
-                adapter[temp_i] = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
-                        intent.putExtra("cosmetic", adapter[temp_i].mDataset.get(position));
-                        startActivity(intent);
-                        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-                    }
-                }, activity, this);
-            }
-            recyclerView[temp_i].setAdapter(adapter[i]);
-
-        }
+//        for(int i=0;i<7;i++){
+//            final int temp_i = i;
+//            if (recyclerView[temp_i]== null) {
+//                recyclerView[temp_i] = (RecyclerView) view.findViewById(recyclerView_id[temp_i]);
+//                recyclerView[temp_i].setHasFixedSize(true);
+//                recyclerView[temp_i].setLayoutManager(new GridLayoutManager(activity, 4));
+//            }
+//
+//            if (adapter[temp_i] == null) {
+//                adapter[temp_i] = new DressingTableAdapter(new DressingTableAdapter.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//                        Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
+//                        intent.putExtra("cosmetic", adapter[temp_i].mDataset.get(position));
+//                        startActivity(intent);
+//                        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+//                    }
+//                }, activity, this);
+//            }
+//            recyclerView[temp_i].setAdapter(adapter[i]);
+//
+//        }
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
 
 
@@ -177,8 +174,7 @@ public class DressingTableFragment extends ParentFragment {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(getActivity(), SettingActivity_.class));
-                //startActivity(new Intent(getActivity(), PlayerViewDemoActivity.class));
-                startActivity(new Intent(getActivity(), VideoListActivity_.class));
+                startActivity(new Intent(getActivity(), PlayerViewDemoActivity.class));
             }
         });
         BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
@@ -217,8 +213,8 @@ public class DressingTableFragment extends ParentFragment {
 
     @Override
     public void refresh() {
-        //for(int i=0;i<7;i++)
-            connectTestCall();
+//        for(int i=0;i<7;i++)
+//            connectTestCall(i);
     }
 
     @Override
@@ -230,7 +226,7 @@ public class DressingTableFragment extends ParentFragment {
 //        final int temp_main_category_num = main_category_num;
 //        LoadingUtil.startLoading(indicator);
 //        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-//        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category[temp_main_category_num], page_num)
+//        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category[temp_main_category_num])
 //                .subscribeOn(Schedulers.newThread())
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe(new Subscriber<List<Cosmetic>>() {
@@ -256,69 +252,6 @@ public class DressingTableFragment extends ParentFragment {
 //                    }
 //                });
 //    }
-
-    void connectTestCall() {
-        LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-        conn.myCosmetic(SharedManager.getInstance().getMe().id)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Cosmetic>>() {
-                    @Override
-                    public final void onCompleted() {
-                        LoadingUtil.stopLoading(indicator);
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        Log.i("ZXc", "1");
-                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public final void onNext(List<Cosmetic> response) {
-                        if (response.size() != 0) {
-                            int temp_main_category_num = 0;
-                            Log.i("ZXC", response.size()+"");
-                            for(int i=0;i<7;i++){
-                                adapter[i].clear();
-                                adapter[i].notifyDataSetChanged();
-                            }
-
-                            for (Cosmetic cosmetic : response) {
-                                switch (cosmetic.main_category){
-                                    case "스킨케어":
-                                        temp_main_category_num = 0;
-                                        break;
-                                    case "클렌징":
-                                        temp_main_category_num = 1;
-                                        break;
-                                    case "베이스메이크업":
-                                        temp_main_category_num = 2;
-                                        break;
-                                    case "색조메이크업":
-                                        temp_main_category_num = 3;
-                                        break;
-                                    case "마스크팩":
-                                        temp_main_category_num = 4;
-                                        break;
-                                    case "향수":
-                                        temp_main_category_num = 5;
-                                        break;
-                                    case "기타":
-                                        temp_main_category_num = 6;
-                                        break;
-
-                                }
-                                adapter[temp_main_category_num].addData(cosmetic);
-                                adapter[temp_main_category_num].notifyDataSetChanged();
-                            }
-                        } else {
-                            //Toast.makeText(getActivity(), "데이터 없", Toast.LENGTH_SHORT).show();\
-                        }
-                    }
-                });
-    }
-
     @Override
     public void onResume() {
         super.onResume();

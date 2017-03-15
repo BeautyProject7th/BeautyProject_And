@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
+import com.makejin.beautyproject_and.Login.LoginActivity_;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.Model.User;
 import com.makejin.beautyproject_and.R;
@@ -52,7 +53,9 @@ public class SplashActivity extends AppCompatActivity {
 
         //SharedManager.getInstance().setMe(user);
 
-        connectTestCall();
+        startActivity(new Intent(this, LoginActivity_.class));
+
+        //connectTestCall();
 
 
 
@@ -73,7 +76,7 @@ public class SplashActivity extends AppCompatActivity {
         conn.oneUser_get(4)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<User>>() {
+                .subscribe(new Subscriber<User>() {
                     @Override
                     public final void onCompleted() {
                         //LoadingUtil.stopLoading(indicator);
@@ -95,10 +98,9 @@ public class SplashActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public final void onNext(List<User> response) {
-                        Log.i("zxc", "z : " + response.get(0).id);
+                    public final void onNext(User response) {
                         if (response != null) {
-                            SharedManager.getInstance().setMe(response.get(0));
+                            SharedManager.getInstance().setMe(response);
                         } else {
                             Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
