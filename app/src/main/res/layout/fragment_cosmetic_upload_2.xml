@@ -23,17 +23,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="90dp"
             android:orientation="vertical"
             android:background="#777777">
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:text="등록하시려는 화장품의 카테고리를 선택하세요"
-                android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:layout_centerVertical="true"
-                android:textSize="10dp"/>
+                android:layout_height="40dp"
+                android:background="#FFFFFF">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="등록하시려는 화장품의 카테고리를 선택하세요"
+                    android:textColor="#4a4a4a"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:textSize="12.5sp"/>
+            </RelativeLayout>
             <ImageView
                 android:id="@+id/IV_brand"
                 android:layout_width="match_parent"
@@ -44,7 +49,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="65dp">
+            android:layout_marginTop="90dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

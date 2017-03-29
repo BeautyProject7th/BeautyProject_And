@@ -19,11 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.login.LoginManager;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity;
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_;
 import com.makejin.beautyproject_and.DressingTable.Setting.SettingActivity_;
 import com.makejin.beautyproject_and.DressingTable.More.MoreActivity_;
+import com.makejin.beautyproject_and.Login.LoginActivity;
+import com.makejin.beautyproject_and.Login.LoginActivity_;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
@@ -37,6 +42,7 @@ import com.makejin.beautyproject_and.Video.VideoList.VideoListActivity_;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -65,7 +71,7 @@ public class DressingTableFragment extends ParentFragment {
     private int recyclerView_id [] = new int[7];
 
     public LinearLayout indicator;
-    Button BT_setting;
+    Button BT_logout;
     Button BT_cosmetic_upload;
 
     Button BT_more [] = new Button[7];
@@ -79,7 +85,7 @@ public class DressingTableFragment extends ParentFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dressing_table, container, false);
+        View view = inflater.inflate(R.layout.fragment_dressing_table_2, container, false);
         initViewSetting(view);
         return view;
     }
@@ -88,7 +94,7 @@ public class DressingTableFragment extends ParentFragment {
         final DressingTableActivity dressingTableActivity = (DressingTableActivity) getActivity();
         this.activity = dressingTableActivity;
 
-        BT_setting = (Button)view.findViewById(R.id.BT_setting);
+        BT_logout = (Button)view.findViewById(R.id.BT_logout);
         BT_cosmetic_upload = (Button) view.findViewById(R.id.BT_cosmetic_upload);
         BT_more[0] = (Button) view.findViewById(R.id.BT_more_skin_care);
         BT_more[1] = (Button) view.findViewById(R.id.BT_more_cleansing);
@@ -119,29 +125,18 @@ public class DressingTableFragment extends ParentFragment {
 
         IV_user = (ImageView) view.findViewById(R.id.IV_user);
 
-        TV_top_desc = (TextView) view.findViewById(R.id.TV_top_desc);
         TV_name = (TextView) view.findViewById(R.id.TV_name);
-        TV_id = (TextView) view.findViewById(R.id.TV_id);
-        TV_skin_trouble = (TextView) view.findViewById(R.id.TV_skin_trouble);
-        TV_skin_type = (TextView) view.findViewById(R.id.TV_skin_type);
 
-        String image_url = Constants.IMAGE_BASE_URL_users + SharedManager.getInstance().getMe().thumbnail_url;
+        String image_url = SharedManager.getInstance().getMe().profile_url;
 
         Glide.with(getActivity()).
                 load(image_url).
                 thumbnail(0.1f).
-                into(IV_user);
+                bitmapTransform(new CropCircleTransformation(getActivity())).into(IV_user);
 
 
-        TV_top_desc.setText(SharedManager.getInstance().getMe().name + "님이 사용하고 있는 화장품 목록");
         TV_name.setText(SharedManager.getInstance().getMe().name);
-        //TV_id.setText(SharedManager.getInstance().getMe().id);
-        //TV_skin_trouble.setText(SharedManager.getInstance().getMe().name);
-        //TV_skin_type.setText(SharedManager.getInstance().getMe().name);
 
-
-//        for(int i=0;i<7;i++)
-//            connectTestCall(i);
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
 
@@ -161,7 +156,7 @@ public class DressingTableFragment extends ParentFragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
-                        intent.putExtra("cosmetic", adapter[temp_i].mDataset.get(position));
+                        intent.putExtra("cosmetic_id", adapter[temp_i].mDataset.get(position).id);
                         startActivity(intent);
                         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                     }
@@ -173,14 +168,25 @@ public class DressingTableFragment extends ParentFragment {
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
 
 
-        BT_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //startActivity(new Intent(getActivity(), SettingActivity_.class));
-                //startActivity(new Intent(getActivity(), PlayerViewDemoActivity.class));
-                startActivity(new Intent(getActivity(), VideoListActivity_.class));
-            }
-        });
+//        BT_logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                startActivity(new Intent(getActivity(), VideoListActivity_.class));
+//                Log.i("zxc", "SharedManager.getInstance().getMe().social_type : " + SharedManager.getInstance().getMe().social_type);
+//                if(SharedManager.getInstance().getMe().social_type.equals("페이스북")){
+//                    LoginManager.getInstance().logOut();
+//                    //
+//                    Log.i("zxc","zxc2");
+//                    //activity.finish();
+//                    startActivity(new Intent(getActivity(), LoginActivity_.class));
+//                }
+//                else if(SharedManager.getInstance().getMe().social_type.equals("카카오톡")){
+//                    Log.i("zxc","zxc1");
+//                    onClickLogout();
+//
+//                }
+//            }
+//        });
         BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,39 +229,8 @@ public class DressingTableFragment extends ParentFragment {
 
     @Override
     public void reload() {
-        refresh();
+        //refresh();
     }
-
-//    void connectTestCall(int main_category_num) {
-//        final int temp_main_category_num = main_category_num;
-//        LoadingUtil.startLoading(indicator);
-//        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-//        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category[temp_main_category_num], page_num)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<List<Cosmetic>>() {
-//                    @Override
-//                    public final void onCompleted() {
-//                        LoadingUtil.stopLoading(indicator);
-//                    }
-//                    @Override
-//                    public final void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public final void onNext(List<Cosmetic> response) {
-//                        if (response.size() != 0) {
-//                            for (Cosmetic cosmetic : response) {
-//                                adapter[temp_main_category_num].addData(cosmetic);
-//                            }
-//                            adapter[temp_main_category_num].notifyDataSetChanged();
-//                        } else {
-//                            //Toast.makeText(getActivity(), "데이터 없", Toast.LENGTH_SHORT).show();\
-//                        }
-//                    }
-//                });
-//    }
 
     void connectTestCall() {
         LoadingUtil.startLoading(indicator);
@@ -271,8 +246,8 @@ public class DressingTableFragment extends ParentFragment {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        Log.i("ZXc", "1");
-                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        LoadingUtil.stopLoading(indicator);
+                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(List<Cosmetic> response) {
@@ -325,16 +300,26 @@ public class DressingTableFragment extends ParentFragment {
         refresh();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        Log.d("makejin", "onActivityResult");
+//        if (requestCode == Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST) {
+//            if (resultCode == Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT) {
+//                Log.d("makejin", "refresh");
+//                refresh();
+//            }
+//        }
+//    }
 
-        Log.d("makejin", "onActivityResult");
-        if (requestCode == Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST) {
-            if (resultCode == Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT) {
-                Log.d("makejin", "refresh");
-                refresh();
+    private void onClickLogout() {
+        UserManagement.requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                startActivity(new Intent(getActivity(), LoginActivity_.class));
             }
-        }
+        });
     }
+
 }

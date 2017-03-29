@@ -55,7 +55,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
 
     ImageView IV_brand;
 
-    TextView TV_main_category, TV_sub_category;
+    TextView TV_main_category, TV_sub_category, TV_brand;
     Button BT_cosmetic_upload;
     Button BT_home;
     public int page_num = 1;
@@ -97,6 +97,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
 
         TV_main_category = (TextView) view.findViewById(R.id.TV_main_category);
         TV_sub_category = (TextView) view.findViewById(R.id.TV_sub_category);
+        TV_brand = (TextView) view.findViewById(R.id.TV_brand);
 
         BT_cosmetic_upload = (Button) view.findViewById(R.id.BT_cosmetic_upload);
 
@@ -109,7 +110,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
         TV_main_category.setText(main_category);
         TV_sub_category.setText(sub_category);
 
-
+        TV_brand.setText(brand.name);
 
         String image_url = Constants.IMAGE_BASE_URL_brand + brand.logo;
 
@@ -139,6 +140,11 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
         BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save_press);
+                if(adapter.checkedList.size()==0){
+                    Toast.makeText(getActivity(), "등록할 화장품을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save);
+                }
                 for(Cosmetic cosmetic : adapter.checkedList){
                     Log.i("zxc", cosmetic.product_name);
                     connectTestCall_myCosmetic_post(cosmetic);
@@ -177,7 +183,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(List<Cosmetic> response) {
@@ -214,16 +220,20 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
                     }
                     @Override
                     public final void onError(Throwable e) {
+                        LoadingUtil.stopLoading(indicator);
                         e.printStackTrace();
-                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "이미 등록한 화장품입니다.", Toast.LENGTH_SHORT).show();
+                        BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save);
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {
-                        if (response.code == 0) {
+                        Log.i("Zxc", "response code : " + response.code);
+                        if (response.code == 201) {
                             if(response.message.equals("success"))
                                 Toast.makeText(getActivity(), "정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getActivity(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                            BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save);
                         }
                     }
                 });

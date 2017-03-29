@@ -6,6 +6,7 @@
     android:background="#00FFFFFF"
     android:orientation="vertical"
     android:layout_marginLeft="10dp">
+
     <RelativeLayout
         android:layout_width="100dp"
         android:layout_height="100dp">
@@ -16,18 +17,20 @@
             android:background="#AAAAAA"/>
         <CheckBox
             android:id="@+id/CB_product"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:clickable="false"/>
+            android:layout_width="28dp"
+            android:layout_height="27dp"
+            android:layout_margin="6dp"
+            android:button="@drawable/btn_uncheck"/>
     </RelativeLayout>
+
     <TextView
         android:id="@+id/TV_product"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="20dp"
         android:text="product_name"
         android:textColor="#AAAAAA"
+        android:textSize="9sp"
         android:layout_gravity="center"/>
 
 </LinearLayout>

@@ -27,15 +27,19 @@ import rx.Observable;
  */
 public interface CSConnection{
 
+    @POST("/users/login")
+    Observable<User> user_login(@Body User user);
+
+    @POST("/users/access")
+    Observable<User> user_access(@Body Map<String, Object> fields);
 
 
-
+    @GET("/users/logout")
+    Observable<GlobalResponse> user_logout();
 
 
     @GET("/users/{user_id}")
     Observable<User> oneUser_get(@Path("user_id") int user_id);
-
-
 
 
 
@@ -50,14 +54,15 @@ public interface CSConnection{
 
 
 
-
     @GET("/users/{user_id}/cosmetics/{cosmetic-id}")
     Observable<Cosmetic> myOneCosmetic_get(@Path("user_id") String user_id,
                                          @Path("cosmetic-id") String cosmetic_id);
+
     @PUT("/users/{user_id}/cosmetics/{cosmetic-id}")
-    Observable<Cosmetic> myOneCosmetic_put(@Body Cosmetic cosmetic,
+    Observable<GlobalResponse> myOneCosmetic_put(@Body Cosmetic cosmetic,
                                          @Path("user_id") String user_id,
                                          @Path("cosmetic-id") String cosmetic_id);
+
     @DELETE("/users/{user_id}/cosmetics/{cosmetic-id}")
     Observable<GlobalResponse> myOneCosmetic_delete(@Path("user_id") String user_id,
                                                     @Path("cosmetic-id") String cosmetic_id);

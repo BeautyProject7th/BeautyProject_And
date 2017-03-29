@@ -62,7 +62,6 @@ public class SkinTypeFragment extends ParentFragment {
     private int recyclerView_id [] = new int[7];
 
     public LinearLayout indicator;
-    Button BT_setting;
     Button BT_cosmetic_upload;
 
     Button BT_more [] = new Button[7];
@@ -85,7 +84,6 @@ public class SkinTypeFragment extends ParentFragment {
         final DressingTableActivity dressingTableActivity = (DressingTableActivity) getActivity();
         this.activity = dressingTableActivity;
 
-        BT_setting = (Button)view.findViewById(R.id.BT_setting);
         BT_cosmetic_upload = (Button) view.findViewById(R.id.BT_cosmetic_upload);
         BT_more[0] = (Button) view.findViewById(R.id.BT_more_skin_care);
         BT_more[1] = (Button) view.findViewById(R.id.BT_more_cleansing);
@@ -118,11 +116,10 @@ public class SkinTypeFragment extends ParentFragment {
 
         TV_top_desc = (TextView) view.findViewById(R.id.TV_top_desc);
         TV_name = (TextView) view.findViewById(R.id.TV_name);
-        TV_id = (TextView) view.findViewById(R.id.TV_id);
         TV_skin_trouble = (TextView) view.findViewById(R.id.TV_skin_trouble);
         TV_skin_type = (TextView) view.findViewById(R.id.TV_skin_type);
 
-        String image_url = Constants.IMAGE_BASE_URL_users + SharedManager.getInstance().getMe().thumbnail_url;
+        String image_url = Constants.IMAGE_BASE_URL_users + SharedManager.getInstance().getMe().profile_url;
 
         Glide.with(getActivity()).
                 load(image_url).
@@ -169,14 +166,6 @@ public class SkinTypeFragment extends ParentFragment {
 //        }
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
 
-
-        BT_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //startActivity(new Intent(getActivity(), SettingActivity_.class));
-                startActivity(new Intent(getActivity(), PlayerViewDemoActivity.class));
-            }
-        });
         BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

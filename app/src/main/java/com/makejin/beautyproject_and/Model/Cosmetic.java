@@ -13,6 +13,12 @@ public class Cosmetic implements Serializable{
     public String sub_category;
     public String product_name;
     public String img_src;
+    public String review;
+    public float rate_num ;
+    public String expiration_date ;
+    public int status = 0;
+
+
 
     public Cosmetic(){
         this.id = "id";
@@ -21,5 +27,9 @@ public class Cosmetic implements Serializable{
         this.sub_category = "sub_category";
         this.brand = "brand";
         this.img_src = "http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif";
+        this.review = "review";
+        this.rate_num = 0;
+        this.expiration_date = "1997-02-22";
+
     }
 }

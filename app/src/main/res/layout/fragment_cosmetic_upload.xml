@@ -24,28 +24,29 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:background="#777777">
+            android:layout_height="40dp"
+            android:background="#FFFFFF">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="등록하시려는 화장품의 브랜드를 선택하세요"
-                android:textColor="#FFFFFF"
+                android:textColor="#4a4a4a"
                 android:gravity="center"
                 android:layout_centerVertical="true"
-                android:textSize="10dp"/>
+                android:textSize="12.5sp"/>
         </RelativeLayout>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:background="#f3f3f3">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#FFFFFF"
+                android:layout_height="match_parent"
+                android:background="#f3f3f3"
                 android:scrollbars="vertical"/>
         </ScrollView>
 

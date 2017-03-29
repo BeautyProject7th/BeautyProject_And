@@ -18,7 +18,7 @@ import org.androidannotations.annotations.ViewById;
 public class DetailCosmeticActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
-    public Cosmetic cosmetic;
+    public String cosmetic_id;
 
     DetailCosmeticActivity activity;
 
@@ -29,7 +29,7 @@ public class DetailCosmeticActivity extends AppCompatActivity {
     void afterBindingView() {
         this.activity = this;
 
-        cosmetic = (Cosmetic) getIntent().getSerializableExtra("cosmetic");
+        cosmetic_id = (String) getIntent().getStringExtra("cosmetic_id");
         Fragment fragment = new DetailCosmeticFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.activity_detail_cosmetic, fragment);

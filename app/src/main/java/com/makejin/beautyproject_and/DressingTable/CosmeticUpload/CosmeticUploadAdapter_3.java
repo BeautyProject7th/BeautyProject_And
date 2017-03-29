@@ -97,9 +97,11 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
                     if(itemViewHolder.CB_product.isChecked()) { //체크되있는 상태
                         itemViewHolder.CB_product.setChecked(false);
                         checkedList.remove(cosmetic);
+                        itemViewHolder.CB_product.setButtonDrawable(R.drawable.btn_uncheck);
                     }else {
                         itemViewHolder.CB_product.setChecked(true);
                         checkedList.add(cosmetic);
+                        itemViewHolder.CB_product.setButtonDrawable(R.drawable.btn_check);
                     }
                 }
             });

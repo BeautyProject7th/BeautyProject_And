@@ -14,8 +14,9 @@ public class User {
     //**->가입시 반드시 입력받아야하는 정보
     public String id;
     public String name;
-    public String thumbnail_url;
-    public String birthday;
-    public String gender;
+    public String profile_url;
+    public String birthday = "";
+    public String gender = "";
+    public String social_type;
 
 }

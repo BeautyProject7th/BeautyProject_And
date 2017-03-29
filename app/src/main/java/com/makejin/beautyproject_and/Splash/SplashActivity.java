@@ -2,11 +2,14 @@ package com.makejin.beautyproject_and.Splash;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_and.Login.LoginActivity_;
@@ -17,14 +20,21 @@ import com.makejin.beautyproject_and.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
 import com.makejin.beautyproject_and.Utils.Loadings.LoadingUtil;
+import com.makejin.beautyproject_and.Utils.SharedManager.PreferenceManager;
 import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
+import com.facebook.internal.Utility;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -34,32 +44,44 @@ import rx.schedulers.Schedulers;
 public class SplashActivity extends AppCompatActivity {
     SplashActivity activity;
 
-    //@ViewById
-    //Toolbar cs_toolbar;
-
     @AfterViews
     void afterBindingView() {
         this.activity = this;
 
-//        setSupportActionBar(cs_toolbar);
-//        getSupportActionBar().setTitle("스플래쉬");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
-//        User user = new User();
-//        user.id = "temp_id";
-//        user.name = "000";
-//        user.thumbnail_url = "";
+            }
+        }, 1500);
+
+        Log.i("ZXc", "Utility.getMetadataApplicationId(getApplicationContext() : "+Utility.getMetadataApplicationId(getApplicationContext()));
 
 
-
-        //SharedManager.getInstance().setMe(user);
-
-        startActivity(new Intent(this, LoginActivity_.class));
-
-        //connectTestCall();
-
+        Timer timer = new Timer();
+        timer.schedule(this.spashScreenFinished, 1500);
 
 
     }
+
+    private final TimerTask spashScreenFinished = new TimerTask() {
+        @Override
+        public void run() {
+            String temp_id = PreferenceManager.getInstance(getApplicationContext()).get_id();
+            Log.i("zxc", "temp_id : " + temp_id);
+            if(temp_id.equals("")){
+                Intent login = new Intent(activity, LoginActivity_.class);
+                login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(login);
+            }else{
+                Map fields = new HashMap();
+                fields.put("id", temp_id);
+                connectTestCall_access(fields);
+            }
+            finish();
+
+        }
+    };
 
     void refresh() {
 
@@ -70,41 +92,32 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    void connectTestCall() {
+    void connectTestCall_access(Map fields) {
         //LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-        conn.oneUser_get(4)
+        conn.user_access(fields)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<User>() {
                     @Override
                     public final void onCompleted() {
-                        //LoadingUtil.stopLoading(indicator);
-                        // 로그인 성공 후 시작
-                        final Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(activity, DressingTableActivity_.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }, 1000);
+                        startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
                     }
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
                         Log.i("zxc", "zzz : ");
-                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(User response) {
                         if (response != null) {
                             SharedManager.getInstance().setMe(response);
                         } else {
-                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
+
 }

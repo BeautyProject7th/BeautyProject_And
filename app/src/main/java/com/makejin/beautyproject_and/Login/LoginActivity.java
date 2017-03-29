@@ -9,6 +9,7 @@ import com.makejin.beautyproject_and.R;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+
 import org.androidannotations.annotations.UiThread;
 
 @EActivity(R.layout.activity_login)
@@ -26,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
         ft.commit();
 
     }
-
     void refresh() {
 
     }

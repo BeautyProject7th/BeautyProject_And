@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Base application theme. -->
@@ -37,20 +38,20 @@
     </style>
 
     <!-- iOS7 Style (Action Sheet) -->
-    <style name="ActionSheetStyleiOS7">
-        <item name="actionSheetBackground">@android:color/transparent</item>
-        <item name="cancelButtonBackground">@drawable/slt_as_ios7_cancel_bt</item>
-        <item name="otherButtonTopBackground">@drawable/slt_as_ios7_other_bt_top</item>
-        <item name="otherButtonMiddleBackground">@drawable/slt_as_ios7_other_bt_middle</item>
-        <item name="otherButtonBottomBackground">@drawable/slt_as_ios7_other_bt_bottom</item>
-        <item name="otherButtonSingleBackground">@drawable/slt_as_ios7_other_bt_single</item>
-        <item name="cancelButtonTextColor">#1E82FF</item>
-        <item name="otherButtonTextColor">#1E82FF</item>
-        <item name="actionSheetPadding">10dp</item>
-        <item name="otherButtonSpacing">0dp</item>
-        <item name="cancelButtonMarginTop">10dp</item>
-        <item name="actionSheetTextSize">14sp</item>
-    </style>
+    <!--<style name="ActionSheetStyleiOS7">-->
+        <!--<item name="actionSheetBackground">@android:color/transparent</item>-->
+        <!--<item name="cancelButtonBackground">@drawable/slt_as_ios7_cancel_bt</item>-->
+        <!--<item name="otherButtonTopBackground">@drawable/slt_as_ios7_other_bt_top</item>-->
+        <!--<item name="otherButtonMiddleBackground">@drawable/slt_as_ios7_other_bt_middle</item>-->
+        <!--<item name="otherButtonBottomBackground">@drawable/slt_as_ios7_other_bt_bottom</item>-->
+        <!--<item name="otherButtonSingleBackground">@drawable/slt_as_ios7_other_bt_single</item>-->
+        <!--<item name="cancelButtonTextColor">#1E82FF</item>-->
+        <!--<item name="otherButtonTextColor">#1E82FF</item>-->
+        <!--<item name="actionSheetPadding">10dp</item>-->
+        <!--<item name="otherButtonSpacing">0dp</item>-->
+        <!--<item name="cancelButtonMarginTop">10dp</item>-->
+        <!--<item name="actionSheetTextSize">14sp</item>-->
+    <!--</style>-->
 
     <!-- LOADING INDICATOR -->
     <style name="CircularProgress" parent="Theme.AppCompat.Light">
@@ -58,5 +59,14 @@
         <item name="android:color">@color/colorGrayBackGround</item>
     </style>
 
-
+    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingstars</item>
+        <item name="android:minHeight">22dip</item>
+        <item name="android:maxHeight">22dip</item>
+    </style>
+    <style name="cosmeticRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingstars_2</item>
+        <item name="android:minHeight">22dip</item>
+        <item name="android:maxHeight">22dip</item>
+    </style>
 </resources>

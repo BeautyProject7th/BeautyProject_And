@@ -137,14 +137,14 @@ public class MoreFragment extends ParentFragment {
         if (recycler_view == null) {
             recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
             recycler_view.setHasFixedSize(true);
-            recycler_view.setLayoutManager(new GridLayoutManager(activity, 4));
+            recycler_view.setLayoutManager(new GridLayoutManager(activity, 3));
         }
         if (adapter == null) {
             adapter = new MoreAdapter(new MoreAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
                     Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
-                    intent.putExtra("cosmetic", adapter.mDataset.get(position));
+                    intent.putExtra("cosmetic_id", adapter.mDataset.get(position).id);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 }
@@ -182,7 +182,8 @@ public class MoreFragment extends ParentFragment {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        endOfPage = true;
                     }
                     @Override
                     public final void onNext(List<Cosmetic> response) {

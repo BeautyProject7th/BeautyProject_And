@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -54,7 +55,7 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
     @Override
      public MoreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_dressing_table, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_more_cosmetic, parent, false);
             return new ItemViewHolder(v);
         }
         return null;
@@ -73,6 +74,8 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
             Cosmetic cosmetic = mDataset.get(position);
 
             itemViewHolder.TV_cosmetic_name.setText(cosmetic.product_name);
+            itemViewHolder.TV_sub_category.setText(cosmetic.sub_category);
+            itemViewHolder.RB_rate.setRating(cosmetic.rate_num);
 
             String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
             Glide.with(context).
@@ -110,12 +113,15 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
         }
     }
     public class ItemViewHolder extends ViewHolder {
-        public TextView TV_cosmetic_name;
+        public TextView TV_cosmetic_name, TV_sub_category;
+        public RatingBar RB_rate;
         public ImageView IV_cosmetic;
 
         public ItemViewHolder(View v) {
             super(v);
             TV_cosmetic_name = (TextView) v.findViewById(R.id.TV_cosmetic_name);
+            TV_sub_category = (TextView) v.findViewById(R.id.TV_sub_category);
+            RB_rate = (RatingBar) v.findViewById(R.id.RB_rate);
             IV_cosmetic = (ImageView) v.findViewById(R.id.IV_cosmetic);
 
         }

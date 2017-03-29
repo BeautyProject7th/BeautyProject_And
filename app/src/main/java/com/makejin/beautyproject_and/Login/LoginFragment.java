@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -32,6 +33,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.kakao.auth.AuthType;
@@ -42,12 +44,14 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_and.DressingTable.DressingTableAdapter;
+import com.makejin.beautyproject_and.Model.GlobalResponse;
 import com.makejin.beautyproject_and.Model.User;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
 import com.makejin.beautyproject_and.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
+import com.makejin.beautyproject_and.Utils.SharedManager.PreferenceManager;
 import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
 
 import rx.Subscriber;
@@ -65,6 +69,7 @@ import java.io.BufferedInputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
+import java.util.Arrays;
 
 
 /**
@@ -75,8 +80,6 @@ public class LoginFragment extends ParentFragment {
     public DressingTableAdapter adapter[] = new DressingTableAdapter[7];
 
     public LinearLayout indicator;
-
-    public Button BT_login, BT_register;
 
     private SessionCallback callback_kakao;      //콜백 선언
 
@@ -135,10 +138,86 @@ public class LoginFragment extends ParentFragment {
             }
         };
 
-        LoginButton loginButton = (LoginButton)view.findViewById(R.id.login_button);
-        loginButton.setReadPermissions("public_profile", "user_friends", "email", "user_birthday");
-        loginButton.setFragment(this);
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+//
+//        Button login_button_facebook = (Button) view.findViewById(R.id.login_button_facebook);
+//        login_button_facebook.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i("result", "makejina1");
+//                //LoginManager - 요청된 읽기 또는 게시 권한으로 로그인 절차를 시작합니다.
+//                LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList("public_profile", "user_friends", "email", "user_birthday"));
+//                Log.i("result", "makejina2");
+//                LoginManager.getInstance().registerCallback(callbackManager,
+//                        new FacebookCallback<LoginResult>() {
+//                            @Override
+//                            public void onSuccess(LoginResult loginResult) {
+//                                Log.i("result", "makejina4");
+//                                Log.e("onSuccess", "onSuccess");
+//                                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+//                                    @Override
+//                                    public void onCompleted(JSONObject object, GraphResponse response) {
+//                                        Log.v("result", object.toString());
+//
+//                                        Log.i("result", "makejina5");
+//                                        try {
+//                                            String email = object.getString("email");       // 이메일
+//                                            String name = object.getString("name");         // 이름
+//                                            //String gender = object.getString("gender");     // 성별
+//                                            String userId = object.getString("id");         //id
+//                                            //String birthday = object.getString("birthday");         // 이름
+//
+//                                            URL url = new URL("https://graph.facebook.com/" + userId + "/picture?type=normal");
+//
+//                                            Log.i("TAG", "페이스북 아이디 -> " + userId);
+//                                            Log.i("TAG", "페이스북 이메일 -> " + email);
+//                                            Log.i("TAG", "페이스북 이름 -> " + name);
+//                                            //Log.i("TAG", "페이스북 성별 -> " + gender);
+//                                            Log.i("TAG", "페이스북 프로필 -> " + url);
+//                                            //
+//                                            // Log.i("TAG", "페이스북 생일 -> " + birthday);
+//
+//                                            User tempUser = new User();
+//                                            tempUser.name = name;
+//                                            tempUser.profile_url = url.toString();
+//                                            tempUser.social_type = "페이스북";
+//                                            tempUser.id = userId;
+//
+//
+//                                            //SharedManager.getInstance().setMe(tempUser);
+//
+//                                            connectTestCall_login(tempUser);
+//
+//                                        } catch (Exception e) {
+//                                            e.printStackTrace();
+//                                        }
+//                                    }
+//                                });
+//                                Bundle parameters = new Bundle();
+//                                parameters.putString("fields", "id,name,email,gender,birthday");
+//                                graphRequest.setParameters(parameters);
+//                                graphRequest.executeAsync();
+//                            }
+//
+//                            @Override
+//                            public void onCancel() {
+//                                Log.e("onCancel", "onCancel");
+//                            }
+//
+//                            @Override
+//                            public void onError(FacebookException exception) {
+//                                Log.e("onError", "onError " + exception.getLocalizedMessage());
+//                            }
+//                        });
+//                Log.i("result", "makejina3");
+//            }
+//
+//        });
+
+        LoginButton login_button_facebook = (LoginButton)view.findViewById(R.id.login_button_facebook);
+        login_button_facebook.setReadPermissions("public_profile", "user_friends", "email", "user_birthday");
+        login_button_facebook.setFragment(this);
+        login_button_facebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
@@ -149,19 +228,30 @@ public class LoginFragment extends ParentFragment {
                                 try {
                                     String email = object.getString("email");       // 이메일
                                     String name = object.getString("name");         // 이름
-                                    String gender = object.getString("gender");     // 성별
+                                    //String gender = object.getString("gender");     // 성별
                                     String userId = object.getString("id");         //id
-                                    String birthday = object.getString("birthday");         // 이름
+                                    //String birthday = object.getString("birthday");         // 이름
 
-                                    URL url = new URL("https://graph.facebook.com/" + userId + "/picture");
+                                    URL url = new URL("https://graph.facebook.com/" + userId + "/picture?type=normal");
 
                                     Log.i("TAG", "페이스북 아이디 -> " + userId);
                                     Log.i("TAG", "페이스북 이메일 -> " + email);
                                     Log.i("TAG", "페이스북 이름 -> " + name);
-                                    Log.i("TAG", "페이스북 성별 -> " + gender);
+                                    //Log.i("TAG", "페이스북 성별 -> " + gender);
                                     Log.i("TAG", "페이스북 프로필 -> " + url);
-                                    Log.i("TAG", "페이스북 생일 -> " + birthday);
+                                    //
+                                    // Log.i("TAG", "페이스북 생일 -> " + birthday);
 
+                                    User tempUser = new User();
+                                    tempUser.name = name;
+                                    tempUser.profile_url = url.toString();
+                                    tempUser.social_type = "페이스북";
+                                    tempUser.id = userId;
+
+
+                                    //SharedManager.getInstance().setMe(tempUser);
+
+                                    connectTestCall_login(tempUser);
 
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -191,19 +281,24 @@ public class LoginFragment extends ParentFragment {
         Session.getCurrentSession().addCallback(callback_kakao);
 
 
-        Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
+//        Button login_button_kakaotalk = (Button) view.findViewById(R.id.login_button_kakaotalk);
+//        login_button_kakaotalk.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                isKakaoLogin();
+//            }
+//        });
+
+        com.kakao.usermgmt.LoginButton login_button_kakao = (com.kakao.usermgmt.LoginButton) view.findViewById(R.id.login_button_kakao);
+        login_button_kakao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isKakaoLogin();
+            }
+        });
 
 
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
-
-        BT_login = (Button) view.findViewById(R.id.BT_login);
-
-        BT_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                connectTestCall();
-            }
-        });
 
         // 헤쉬키를 가져온다
         //getAppKeyHash();
@@ -219,7 +314,7 @@ public class LoginFragment extends ParentFragment {
         refresh();
     }
 
-    void connectTestCall() {
+    void connectTestCall_temp() {
         //LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(CSConnection.class);
         conn.oneUser_get(4)
@@ -257,12 +352,12 @@ public class LoginFragment extends ParentFragment {
                 });
     }
 
-
     private class SessionCallback implements ISessionCallback {
         @Override
         public void onSessionOpened() {
             Log.d("TAG" , "세션 오픈됨");
             // 사용자 정보를 가져옴, 회원가입 미가입시 자동가입 시킴
+
             KakaorequestMe();
         }
 
@@ -270,7 +365,9 @@ public class LoginFragment extends ParentFragment {
         public void onSessionOpenFailed(KakaoException exception) {
             if(exception != null) {
                 Log.d("TAG" , exception.getMessage());
+                Log.i("ZXc","QWeqweqwe");
             }
+            Log.i("ZXc","QWeqweqwe2");
         }
     }
     /**
@@ -301,7 +398,13 @@ public class LoginFragment extends ParentFragment {
                 userId = String.valueOf(userProfile.getId());
                 userName = userProfile.getNickname();
 
-                //setLayoutText();
+                User tempUser = new User();
+                tempUser.name = userName;
+                tempUser.profile_url = profileUrl;
+                tempUser.social_type = "카카오톡";
+                tempUser.id = userId;
+
+                connectTestCall_login(tempUser);
 
             }
 
@@ -312,17 +415,6 @@ public class LoginFragment extends ParentFragment {
         });
     }
 
-    private void setLayoutText(){
-        Log.i("zxc", "userID : " + userId + " " + "userName : " + userName);
-        Log.i("xzc","iv_user_profile : " + profileUrl);
-//        tv_user_id.setText(userId);
-//        tv_user_name.setText(userName);
-//
-//        Glide.with(this)
-//                .load(profileUrl)
-//                .thumbnail(0.1f)
-//                .into(iv_user_profile);
-    }
 
     private void getAppKeyHash() {
         try {
@@ -364,8 +456,66 @@ public class LoginFragment extends ParentFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-
     }
+
+
+    void connectTestCall_login(User user) {
+        //LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        conn.user_login(user)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<User>() {
+                    @Override
+                    public final void onCompleted() {
+                        startActivity(new Intent(activity, DressingTableActivity_.class));
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.i("zxc", "zzz : ");
+                        Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(User response) {
+                        if (response != null) {
+                            PreferenceManager.getInstance(getActivity()).set_id(response.id);
+                            SharedManager.getInstance().setMe(response);
+                        } else {
+                            Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    void connectTestCall_logout() {
+        //LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        conn.user_logout()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.i("zxc", "zzz : ");
+                        Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response != null) {
+                            Toast.makeText(activity, "Logout Success", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 
 
 }

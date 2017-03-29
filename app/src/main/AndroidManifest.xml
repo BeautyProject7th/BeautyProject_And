@@ -4,6 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
+    <uses-permission android:name="com.samsung.permission.SSENSOR" />
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-permission android:name="com.samsung.permission.HRM_EXT" />
+
+
+
 
     <application
         android:name=".Login.GlobalApplication"
@@ -69,7 +76,7 @@
             android:name=".Login.LoginActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -84,8 +91,6 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-
-
     </application>
 
 

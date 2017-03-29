@@ -203,7 +203,7 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(List<Category> response) {
@@ -237,7 +237,7 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                                 adapter[i].notifyDataSetChanged();
                             }
                         } else {
-                            Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

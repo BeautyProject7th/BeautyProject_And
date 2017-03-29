@@ -39,7 +39,7 @@ public class PreferenceManager {
     }
 
     public PreferenceManager(Context ctx){
-        prefs = ctx.getSharedPreferences("mukja", ctx.MODE_PRIVATE);
+        prefs = ctx.getSharedPreferences("beauty", ctx.MODE_PRIVATE);
         editor = prefs.edit();
     }
 
