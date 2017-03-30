@@ -36,6 +36,7 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import io.userhabit.service.Userhabit;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -47,6 +48,8 @@ public class SplashActivity extends AppCompatActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+        Userhabit.start(this);
+        Userhabit.setSessionEndTime(10);
 
         new Handler().postDelayed(new Runnable() {
             @Override
