@@ -21,10 +21,10 @@
 
 
 
-    <!-- Mijung-->
-    <color name="colorGrayText">#7f7f7f</color>
-    <color name="ratingStar">#f1c40f</color>
-    <color name="theme">#ff00bfff</color>
-
-
+    <!-- Mijeong-->
+    <color name="colorGrayLight">#F2F2F2</color>
+    <color name="colorGrayDark">#EAEAEA</color>
+    <color name="colorGrayText">#8c8c8c</color>
+    <color name="colorPinkLight">#ffa8a8</color>
+    <color name="colorPinkMain">#f95c5c</color>
 </resources>

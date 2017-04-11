@@ -21,6 +21,8 @@
 
         <Button
             android:id="@+id/BT_home"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/home"

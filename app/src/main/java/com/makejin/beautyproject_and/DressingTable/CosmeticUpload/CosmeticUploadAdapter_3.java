@@ -9,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.Model.Category;
@@ -20,6 +24,9 @@ import com.makejin.beautyproject_and.Utils.Constants.Constants;
 import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
 
 import java.util.ArrayList;
+
+import static com.makejin.beautyproject_and.R.id.BT_cosmetic_upload;
+import static com.makejin.beautyproject_and.R.id.CB_product;
 
 
 /**
@@ -69,14 +76,46 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         if (holder instanceof ItemViewHolder) {
+            final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
+            final Cosmetic cosmetic = mDataset.get(position);
             holder.container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mOnItemClickListener.onItemClick(v, position);
+
+                    if(itemViewHolder.CB_product.isChecked()) { //체크되있는 상태
+                        Log.i("asdf","체크되어 있음 해제하겠따");
+                        itemViewHolder.CB_product.setChecked(false);
+                    }else {
+                        Log.i("asdf","체크되어 있지 않음 체크하겠다");
+                        itemViewHolder.CB_product.setChecked(true);
+                    }
                 }
             });
-            final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            final Cosmetic cosmetic = mDataset.get(position);
+
+            itemViewHolder.CB_product.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked) { //추가한 상태
+                        itemViewHolder.CB_product.setChecked(true);
+                        checkedList.add(cosmetic);
+                        itemViewHolder.CB_product.setButtonDrawable(R.drawable.btn_check);
+                    }else { //없앤 상태
+                        itemViewHolder.CB_product.setChecked(false);
+                        checkedList.remove(cosmetic);
+                        itemViewHolder.CB_product.setButtonDrawable(R.drawable.btn_uncheck);
+                    }
+
+                    Log.i("asdf","a 개수 : "+checkedList.size()+"개");
+                    Toast.makeText(context, "gg개수 "+checkedList.size()+"개", Toast.LENGTH_SHORT).show();
+                    if(checkedList.size()==0){
+                        fragment.BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save);
+                    }else{
+                        fragment.BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save_press);
+                    }
+                }
+            });
+
 
             String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
 
@@ -86,25 +125,6 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
                     into(itemViewHolder.IV_product);
 
             itemViewHolder.TV_product.setText(cosmetic.product_name);
-
-            //체크박스 초기화(나의 화장품 목록에 있는 거면 체크되있어야함
-            //if()
-            //itemViewHolder.CB_product.setChecked(true);
-
-            itemViewHolder.IV_product.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(itemViewHolder.CB_product.isChecked()) { //체크되있는 상태
-                        itemViewHolder.CB_product.setChecked(false);
-                        checkedList.remove(cosmetic);
-                        itemViewHolder.CB_product.setButtonDrawable(R.drawable.btn_uncheck);
-                    }else {
-                        itemViewHolder.CB_product.setChecked(true);
-                        checkedList.add(cosmetic);
-                        itemViewHolder.CB_product.setButtonDrawable(R.drawable.btn_check);
-                    }
-                }
-            });
 
             if (position == mDataset.size()-1 && !fragment.endOfPage)
                 fragment.connectTestCall(fragment.brand.name, fragment.main_category, fragment.sub_category, ++fragment.page_num);
@@ -133,6 +153,7 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
         }
     }
     public class ItemViewHolder extends ViewHolder {
+        public LinearLayout Cell_upload3;
         public CheckBox CB_product;
         public ImageView IV_product;
         public TextView TV_product;
@@ -140,6 +161,7 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
 
         public ItemViewHolder(View v) {
             super(v);
+            Cell_upload3 = (LinearLayout) v.findViewById(R.id.LL_product);
             CB_product = (CheckBox) v.findViewById(R.id.CB_product);
             IV_product = (ImageView) v.findViewById(R.id.IV_product);
             TV_product = (TextView) v.findViewById(R.id.TV_product);

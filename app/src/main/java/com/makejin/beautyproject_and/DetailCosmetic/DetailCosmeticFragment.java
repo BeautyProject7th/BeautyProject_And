@@ -1,7 +1,9 @@
 package com.makejin.beautyproject_and.DetailCosmetic;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -42,6 +44,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static android.R.attr.country;
 import static com.makejin.beautyproject_and.R.id.BT_home;
 import static com.makejin.beautyproject_and.R.id.TV_expiration_date;
 import static com.makejin.beautyproject_and.R.id.activity_detail_cosmetic;
@@ -104,6 +107,9 @@ public class DetailCosmeticFragment extends ParentFragment {
         TV_brand = (TextView) view.findViewById(R.id.TV_brand);
         TV_expiration_date = (TextView) view.findViewById(R.id.TV_expiration_date);
         wheelDatePicker = (WheelDatePicker) view.findViewById(R.id.wheel_date_picker);
+        wheelDatePicker.setVisibleItemCount(3);
+        wheelDatePicker.setCurtainColor(R.color.colorPinkLight);
+        wheelDatePicker.setSelectedItemTextColor(Color.rgb(0,0,0));
 
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");

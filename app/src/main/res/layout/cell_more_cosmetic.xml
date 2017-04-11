@@ -55,12 +55,12 @@
                     <RatingBar
                         android:id="@+id/RB_rate"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="19dp"
                         android:numStars="5"
                         android:rating="3.5"
                         android:isIndicator="true"
                         android:layout_gravity="center"
-                        style="@style/foodRatingBar" />
+                        style="@style/cosmeticRatingBar"/>
                 </LinearLayout>
 
             </RelativeLayout>

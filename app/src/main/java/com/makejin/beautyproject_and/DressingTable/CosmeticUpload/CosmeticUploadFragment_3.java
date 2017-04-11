@@ -39,6 +39,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static android.R.attr.fragment;
+
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
@@ -129,7 +131,6 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
             adapter = new CosmeticUploadAdapter_3(new CosmeticUploadAdapter_3.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-
                 }
             }, activity, this);
         }
@@ -140,10 +141,10 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
         BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save_press);
+                //BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save_press);
                 if(adapter.checkedList.size()==0){
                     Toast.makeText(getActivity(), "등록할 화장품을 선택해주세요.", Toast.LENGTH_SHORT).show();
-                    BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save);
+                    //BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save);
                 }
                 for(Cosmetic cosmetic : adapter.checkedList){
                     Log.i("zxc", cosmetic.product_name);

@@ -5,7 +5,8 @@
     android:minHeight="100dp"
     android:background="#00FFFFFF"
     android:orientation="vertical"
-    android:layout_marginLeft="10dp">
+    android:layout_marginLeft="10dp"
+    android:id="@+id/LL_product">
 
     <RelativeLayout
         android:layout_width="100dp"
@@ -20,6 +21,7 @@
             android:layout_width="28dp"
             android:layout_height="27dp"
             android:layout_margin="6dp"
+            android:clickable="true"
             android:button="@drawable/btn_uncheck"/>
     </RelativeLayout>
 
@@ -29,7 +31,7 @@
         android:layout_height="wrap_content"
         android:minHeight="20dp"
         android:text="product_name"
-        android:textColor="#AAAAAA"
+        android:textColor="#000000"
         android:textSize="9sp"
         android:layout_gravity="center"/>
 
