@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
+import com.makejin.beautyproject_and.DressingTable.RegistrationRequest.RegistrationRequestActivity_;
 import com.makejin.beautyproject_and.Model.Brand;
 import com.makejin.beautyproject_and.Model.Category;
 import com.makejin.beautyproject_and.Model.Cosmetic;
@@ -57,6 +58,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
 
     ImageView IV_brand;
 
+    LinearLayout LL_registration_request;
     TextView TV_main_category, TV_sub_category, TV_brand;
     Button BT_cosmetic_upload;
     Button BT_home;
@@ -94,6 +96,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
+        LL_registration_request = (LinearLayout) view.findViewById(R.id.LL_registration_request);
 
         IV_brand = (ImageView) view.findViewById(R.id.IV_brand);
 
@@ -150,6 +153,15 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
                     Log.i("zxc", cosmetic.product_name);
                     connectTestCall_myCosmetic_post(cosmetic);
                 }
+            }
+        });
+
+        LL_registration_request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent requestintent = new Intent(getActivity(), RegistrationRequestActivity_.class);
+                requestintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(requestintent);
             }
         });
 
