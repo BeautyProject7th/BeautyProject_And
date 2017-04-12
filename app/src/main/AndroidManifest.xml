@@ -95,6 +95,9 @@
             android:name="userhabitApiKey"
             android:value="@string/userhabit_api_key"/>
         <service android:name="io.userhabit.service.main.service.UserhabitService"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="09ee142c27b4c4383b2de767468c4536de9d0feb" />
     </application>
 
 
