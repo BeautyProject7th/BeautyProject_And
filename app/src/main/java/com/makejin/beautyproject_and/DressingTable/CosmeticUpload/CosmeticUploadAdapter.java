@@ -27,7 +27,7 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
     private static final int TYPE_ITEM = 0;
 
     public Context context;
-    public CosmeticUploadFragment fragment;
+    public CosmeticUploadActivity_1 activity;
     private OnItemClickListener mOnItemClickListener;
     public ArrayList<Brand> mDataset = new ArrayList<>();
 
@@ -35,14 +35,15 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
         void onItemClick(View view, int position);
     }
 
-    public CosmeticUploadAdapter(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadFragment mFragment) {
+    public CosmeticUploadAdapter(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadActivity_1 mActivity) {
         mOnItemClickListener = onItemClickListener;
         context = mContext;
-        fragment = mFragment;
+        activity = mActivity;
         mDataset.clear();
     }
 
     public void addData(Brand brand) {
+        Log.i("zxc","addData()");
         mDataset.add(brand);
     }
 
@@ -57,6 +58,7 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
     @Override
      public CosmeticUploadAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
+            Log.i("zxc","onCreateViewholder()");
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_cosmetic_upload, parent, false);
             return new ItemViewHolder(v);
         }
@@ -81,6 +83,8 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
                     load(image_url).
                     thumbnail(0.1f).
                     into(itemViewHolder.IV_brand);
+
+            Log.i("zxc","onBindViewHolder()");
         }
     }
 

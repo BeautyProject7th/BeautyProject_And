@@ -2,44 +2,32 @@ package com.makejin.beautyproject_and.Splash;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.makejin.beautyproject_and.AnalyticsApplication;
-import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_and.Login.LoginActivity_;
-import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.Model.User;
 import com.makejin.beautyproject_and.R;
 import com.makejin.beautyproject_and.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
-import com.makejin.beautyproject_and.Utils.Loadings.LoadingUtil;
 import com.makejin.beautyproject_and.Utils.SharedManager.PreferenceManager;
 import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
 import com.facebook.internal.Utility;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.ViewById;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,12 +40,17 @@ import rx.schedulers.Schedulers;
 @EActivity(R.layout.activity_splash)
 public class SplashActivity extends AppCompatActivity {
     SplashActivity activity;
-    AnalyticsApplication application = (AnalyticsApplication) getApplication();
-    Tracker mTracker = application.getDefaultTracker();
+
+    private Tracker mTracker;
 
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+
+
+//        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+//        mTracker = application.getDefaultTracker();
+
         Userhabit.start(this);
 
 
@@ -166,15 +159,15 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        String name = "google analytics";
-        Log.i(name, "Setting screen name: " + name);
-        mTracker.setScreenName("Image~" + name);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-
-        mTracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Action")
-                .setAction("Share")
-                .build());
+//
+//        String name = "google analytics";
+//        Log.i(name, "Setting screen name: " + name);
+//        mTracker.setScreenName("Image~" + name);
+//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+//
+//        mTracker.send(new HitBuilders.EventBuilder()
+//                .setCategory("Action")
+//                .setAction("Share")
+//                .build());
     }
 }

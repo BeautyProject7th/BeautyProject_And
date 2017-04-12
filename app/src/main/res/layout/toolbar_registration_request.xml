@@ -9,14 +9,32 @@
     app:titleTextAppearance="@style/Toolbar.TitleText"
     android:background="#f95c5c">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="나의 화장대"
+            android:text="화장품 등록요청"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="25dp"
             android:layout_gravity="center"
             android:id="@+id/textView" />
+
+        <Button
+            android:id="@+id/BT_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_back"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginRight="10dp"/>
+
+
+        <Button
+            android:id="@+id/BT_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/home"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"/>
 
 </android.support.v7.widget.Toolbar>

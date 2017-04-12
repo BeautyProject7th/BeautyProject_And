@@ -16,16 +16,19 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorGrayDark"
         android:layout_marginTop="?attr/actionBarSize">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="100dp"
             android:orientation="vertical"
-            android:background="#777777">
+            android:background="#FFFFFF"
+            android:paddingBottom="10dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -49,49 +52,51 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp">
+            android:layout_marginTop="10dp"
+            android:background="@color/colorGrayLight">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="10dp">
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                     <LinearLayout
                         android:layout_marginRight="10dp"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Skin/Care"
-                            android:textSize="30dp"
-                            android:textColor="#FF0000"
-                            android:textStyle="bold" />
+                            android:textSize="25sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/colorPinkMain"/>
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recycler_view_skin_care"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#F3F3F3"
                             android:scrollbars="vertical"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_marginRight="10dp"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="10dp">
+                        android:orientation="vertical">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Base"
-                            android:textSize="30dp"
-                            android:textColor="#FF0000"
-                            android:textStyle="bold" />
+                            android:textSize="25sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/colorPinkMain"/>
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recycler_view_base_makeup"
                             android:layout_width="match_parent"
@@ -99,54 +104,15 @@
                             android:background="#F3F3F3"
                             android:scrollbars="vertical"/>
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="10dp">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Mask/Pack"
-                            android:textSize="30dp"
-                            android:textColor="#FF0000"
-                            android:textStyle="bold" />
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_view_mask_pack"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#F3F3F3"
-                            android:scrollbars="vertical"/>
-                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                     <LinearLayout
                         android:layout_marginRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Cleansing"
-                            android:textSize="30dp"
-                            android:textColor="#FF0000"
-                            android:textStyle="bold" />
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_view_cleansing"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#F3F3F3"
-                            android:scrollbars="vertical"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginRight="10dp"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="10dp">
@@ -154,9 +120,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Color"
-                            android:textSize="30dp"
-                            android:textColor="#FF0000"
-                            android:textStyle="bold" />
+                            android:textSize="25sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/colorPinkMain"
+                            android:id="@+id/textView2" />
+
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recycler_view_color_makeup"
                             android:layout_width="match_parent"
@@ -166,7 +135,35 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_marginRight="10dp"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Cleansing"
+                            android:textSize="25sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/colorPinkMain"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_cleansing"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F3F3F3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="10dp">
@@ -174,9 +171,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Perfume"
-                            android:textSize="30dp"
-                            android:textColor="#FF0000"
-                            android:textStyle="bold" />
+                            android:textSize="25sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/colorPinkMain"/>
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recycler_view_perfume"
                             android:layout_width="match_parent"
@@ -186,7 +184,35 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_marginRight="10dp"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mask/Pack"
+                            android:textSize="25sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/colorPinkMain"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_mask_pack"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F3F3F3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="10dp">
@@ -194,9 +220,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Etc"
-                            android:textSize="30dp"
-                            android:textColor="#FF0000"
-                            android:textStyle="bold" />
+                            android:textSize="25sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/colorPinkMain"/>
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recycler_view_etc"
                             android:layout_width="match_parent"
@@ -204,6 +231,10 @@
                             android:background="#F3F3F3"
                             android:scrollbars="vertical"/>
                     </LinearLayout>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -215,6 +246,6 @@
 
         <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

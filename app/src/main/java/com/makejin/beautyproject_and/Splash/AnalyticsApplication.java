@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.makejin.beautyproject_and;
+package com.makejin.beautyproject_and.Splash;
 import android.app.Application;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
+import com.makejin.beautyproject_and.R;
 
 /**
  * This is a subclass of {@link Application} used to provide shared objects for this app, such as

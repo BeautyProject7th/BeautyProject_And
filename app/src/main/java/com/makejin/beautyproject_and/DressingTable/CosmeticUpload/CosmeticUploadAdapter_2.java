@@ -29,7 +29,7 @@ public class CosmeticUploadAdapter_2 extends RecyclerView.Adapter<CosmeticUpload
     private static final int TYPE_ITEM = 0;
 
     public Context context;
-    public CosmeticUploadFragment_2 fragment;
+    public CosmeticUploadActivity_2 activity;
     private OnItemClickListener mOnItemClickListener;
     public ArrayList<String> mDataset = new ArrayList<>();
 
@@ -37,10 +37,10 @@ public class CosmeticUploadAdapter_2 extends RecyclerView.Adapter<CosmeticUpload
         void onItemClick(View view, int position);
     }
 
-    public CosmeticUploadAdapter_2(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadFragment_2 mFragment) {
+    public CosmeticUploadAdapter_2(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadActivity_2 mActivity) {
         mOnItemClickListener = onItemClickListener;
         context = mContext;
-        fragment = mFragment;
+        activity = mActivity;
         mDataset.clear();
     }
 

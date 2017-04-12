@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout2">
+
+        <include layout="@layout/toolbar_registration_request" android:id="@+id/cs_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorGrayLight"
+        android:gravity="center"
+        android:layout_marginTop="?attr/actionBarSize">
+        <TextView
+            android:layout_above="@+id/input_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="#FFFFFF"
+            android:text="죄송합니다. 찾으시는 화장품이 없으셨군요 ㅠㅠ\n찾으시는 제품의 정보를 작성해주시면\n확인 후 바로 등록해드리겠습니다!"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:gravity="center"/>
+        <LinearLayout
+            android:id="@+id/input_area"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/colorPinkMain"
+                android:text="브랜드 명"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_margin="10dp"
+                android:singleLine="true"
+                android:padding="10dp"
+                android:gravity="center"
+                android:background="@drawable/edittext_review"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/colorPinkMain"
+                android:text="화장품 명"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_margin="10dp"
+                android:singleLine="true"
+                android:padding="10dp"
+                android:gravity="center"
+                android:background="@drawable/edittext_review"/>
+        </LinearLayout>
+        <Button
+            android:layout_below="@+id/input_area"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:text="등록 요청 전송"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:background="@drawable/btn_mypage"/>
+    </RelativeLayout>
+</RelativeLayout>

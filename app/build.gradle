@@ -75,8 +75,10 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.0'
     compile 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+
     // facebook sdk
     compile 'com.facebook.android:facebook-android-sdk:4.8.2'
+
     // kakao sdk
     //    compile group: project.KAKAO_SDK_GROUP, name: 'kakaolink', version: project.KAKAO_SDK_VERSION
     //    compile group: project.KAKAO_SDK_GROUP, name: 'kakaotalk', version: project.KAKAO_SDK_VERSION

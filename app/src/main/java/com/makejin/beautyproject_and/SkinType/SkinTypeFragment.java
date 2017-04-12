@@ -17,8 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
-import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_;
+import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
 import com.makejin.beautyproject_and.DressingTable.DressingTableAdapter;
 import com.makejin.beautyproject_and.DressingTable.More.MoreActivity_;
@@ -169,7 +168,7 @@ public class SkinTypeFragment extends ParentFragment {
         BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CosmeticUploadActivity_.class);
+                Intent intent = new Intent(getActivity(), CosmeticUploadActivity_1.class);
                 startActivityForResult(intent, Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST);
                 activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
 

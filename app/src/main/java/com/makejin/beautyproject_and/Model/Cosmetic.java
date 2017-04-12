@@ -27,7 +27,7 @@ public class Cosmetic implements Serializable{
         this.sub_category = "sub_category";
         this.brand = "brand";
         this.img_src = "http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif";
-        this.review = "review";
+        this.review = null;
         this.rate_num = 0;
         this.expiration_date = "1997-02-22";
 

@@ -24,7 +24,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity;
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
-import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_;
+import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.makejin.beautyproject_and.DressingTable.Setting.SettingActivity_;
 import com.makejin.beautyproject_and.DressingTable.More.MoreActivity_;
 import com.makejin.beautyproject_and.Login.LoginActivity;
@@ -190,7 +190,7 @@ public class DressingTableFragment extends ParentFragment {
         BT_cosmetic_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CosmeticUploadActivity_.class);
+                Intent intent = new Intent(getActivity(), CosmeticUploadActivity_1.class);
                 startActivityForResult(intent, Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST);
                 activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
 
