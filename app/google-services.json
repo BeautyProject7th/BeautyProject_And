@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "289613671869",
+    "project_id": "maehwa-164204"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289613671869:android:ce40e66dc726e650",
+        "android_client_info": {
+          "package_name": "com.makejin.beautyproject_and"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEipZ1Vvyir0T2dzDiBJINuSEY1evY-90"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-97076644-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
