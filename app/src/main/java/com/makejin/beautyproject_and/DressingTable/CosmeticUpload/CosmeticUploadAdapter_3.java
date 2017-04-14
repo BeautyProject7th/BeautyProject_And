@@ -36,7 +36,7 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
     private static final int TYPE_ITEM = 0;
 
     public Context context;
-    public CosmeticUploadFragment_3 fragment;
+    public CosmeticUploadActivity_3 activity;
     private OnItemClickListener mOnItemClickListener;
     public ArrayList<Cosmetic> mDataset = new ArrayList<>();
     public ArrayList<Cosmetic> checkedList = new ArrayList<>();
@@ -45,10 +45,10 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
         void onItemClick(View view, int position);
     }
 
-    public CosmeticUploadAdapter_3(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadFragment_3 mFragment) {
+    public CosmeticUploadAdapter_3(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadActivity_3 mActivity) {
         mOnItemClickListener = onItemClickListener;
         context = mContext;
-        fragment = mFragment;
+        activity = mActivity;
         mDataset.clear();
     }
 
@@ -109,9 +109,9 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
                     Log.i("asdf","a 개수 : "+checkedList.size()+"개");
                     Toast.makeText(context, "gg개수 "+checkedList.size()+"개", Toast.LENGTH_SHORT).show();
                     if(checkedList.size()==0){
-                        fragment.BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save);
+                        activity.BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save);
                     }else{
-                        fragment.BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save_press);
+                        activity.BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save_press);
                     }
                 }
             });
@@ -126,8 +126,8 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
 
             itemViewHolder.TV_product.setText(cosmetic.product_name);
 
-            if (position == mDataset.size()-1 && !fragment.endOfPage)
-                fragment.connectTestCall(fragment.brand.name, fragment.main_category, fragment.sub_category, ++fragment.page_num);
+            if (position == mDataset.size()-1 && !activity.endOfPage)
+                activity.connectTestCall(activity.brand.name, activity.main_category, activity.sub_category, ++activity.page_num);
         }
     }
 

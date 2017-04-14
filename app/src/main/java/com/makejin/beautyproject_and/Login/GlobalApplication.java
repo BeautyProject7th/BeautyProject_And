@@ -5,6 +5,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.kakao.auth.KakaoSDK;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class GlobalApplication extends Application {
     private static GlobalApplication mInstance;
@@ -32,6 +34,7 @@ public class GlobalApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         mInstance = this;
         KakaoSDK.init(new KakaoSDKAdapter());
 

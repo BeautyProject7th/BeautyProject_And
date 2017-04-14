@@ -21,6 +21,14 @@
         android:id="@+id/textView" />
 
     <Button
+        android:id="@+id/BT_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_back"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginRight="10dp"/>
+
+    <Button
         android:id="@+id/BT_update"
         android:layout_width="70dp"
         android:layout_height="wrap_content"

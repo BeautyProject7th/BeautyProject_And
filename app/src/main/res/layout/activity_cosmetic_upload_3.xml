@@ -116,6 +116,7 @@
                         android:text="찾으시는 제품이 없다면 화장품 등록요청을 해주세요"/>
                 </RelativeLayout>
                 <Button
+                    android:id="@+id/BT_registration_request"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

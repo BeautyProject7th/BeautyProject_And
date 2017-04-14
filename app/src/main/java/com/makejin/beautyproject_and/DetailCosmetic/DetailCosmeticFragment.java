@@ -66,7 +66,7 @@ public class DetailCosmeticFragment extends ParentFragment {
     EditText ET_review;
     RatingBar RB_rate;
     DatePicker DP_expiration_date;
-    Button BT_update;
+    Button BT_update, BT_back;
     Switch S_status;
     WheelDatePicker wheelDatePicker;
 
@@ -86,15 +86,13 @@ public class DetailCosmeticFragment extends ParentFragment {
 
         Toolbar cs_toolbar = (Toolbar) view.findViewById(R.id.cs_toolbar);
 
-//        BT_home = (Button) cs_toolbar.findViewById(R.id.BT_home);
-//        BT_home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent homeIntent = new Intent(getActivity(), DressingTableActivity_.class);
-//                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(homeIntent);
-//            }
-//        });
+        BT_back = (Button) cs_toolbar.findViewById(R.id.BT_back);
+        BT_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
 
         ET_review = (EditText) view.findViewById(R.id.ET_review);

@@ -1,19 +1,16 @@
 package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,12 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
-import com.makejin.beautyproject_and.DressingTable.DressingTableAdapter;
 import com.makejin.beautyproject_and.Model.Brand;
 import com.makejin.beautyproject_and.Model.Category;
-import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
 import com.makejin.beautyproject_and.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
@@ -39,11 +33,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-/**
- * Created by kksd0900 on 16. 10. 11..
- */
-public class CosmeticUploadFragment_2 extends ParentFragment {
-    public static CosmeticUploadActivity activity;
+public class CosmeticUploadActivity_2 extends AppCompatActivity {
+    public static CosmeticUploadActivity_2 activity;
 
     private RecyclerView recyclerView [] = new RecyclerView[7];
 
@@ -61,29 +52,30 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
     String main_category [] = new String[7];
     String main_category_eng [] = new String[7];
 
-    Button BT_home;
+    Button BT_back, BT_home;
 
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cosmetic_upload_2, container, false);
-        initViewSetting(view);
-        return view;
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cosmetic_upload_2);
+        activity = this;
+        Log.i("zxc", "getFragmentManager().getBackStackEntryCount() 2: " + getFragmentManager().getBackStackEntryCount());
 
-    private void initViewSetting(View view) {
-        final CosmeticUploadActivity cosmeticUploadActivity = (CosmeticUploadActivity) getActivity();
-        this.activity = cosmeticUploadActivity;
+        Toolbar cs_toolbar = (Toolbar)findViewById(R.id.cs_toolbar);
 
-
-        Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
+        BT_back = (Button) cs_toolbar.findViewById(R.id.BT_back);
+        BT_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         BT_home = (Button) cs_toolbar.findViewById(R.id.BT_home);
         BT_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homeIntent = new Intent(getActivity(), DressingTableActivity_.class);
+                Intent homeIntent = new Intent(getApplicationContext(), DressingTableActivity_.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
             }
@@ -124,13 +116,13 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
         main_category_eng[5] = "Perfume";
         main_category_eng[6] = "Etc";
 
-        IV_brand = (ImageView) view.findViewById(R.id.IV_brand);
+        IV_brand = (ImageView) findViewById(R.id.IV_brand);
 
-        final Brand brand = (Brand) getArguments().getSerializable("brand");
+        final Brand brand = (Brand) getIntent().getSerializableExtra("brand");
 
         String image_url = Constants.IMAGE_BASE_URL_brand + brand.logo;
 
-        Glide.with(getActivity()).
+        Glide.with(getApplicationContext()).
                 load(image_url).
                 thumbnail(0.1f).
                 into(IV_brand);
@@ -140,7 +132,7 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
         for(int i=0;i<7;i++){
             final int temp_i = i;
             if (recyclerView[temp_i]== null) {
-                recyclerView[temp_i] = (RecyclerView) view.findViewById(recyclerView_id[temp_i]);
+                recyclerView[temp_i] = (RecyclerView) findViewById(recyclerView_id[temp_i]);
                 recyclerView[temp_i].setHasFixedSize(true);
                 recyclerView[temp_i].setLayoutManager(new GridLayoutManager(activity, 2));
             }
@@ -151,30 +143,21 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                 adapter[temp_i] = new CosmeticUploadAdapter_2(new CosmeticUploadAdapter_2.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Log.i("zxc", "z : " + temp_i + " " + adapter[temp_i].getItem(position));
+                        Intent intent = new Intent(getApplicationContext(), CosmeticUploadActivity_3.class);
+                        intent.putExtra("brand", brand);
+                        intent.putExtra("main_category", main_category[temp_i]);
+                        intent.putExtra("sub_category", adapter[temp_i].getItem(position));
 
-                        Bundle bundle = new Bundle(3);
-                        bundle.putSerializable("brand", brand);
-                        bundle.putString("main_category", main_category[temp_i]);
-                        bundle.putString("sub_category", adapter[temp_i].getItem(position));
-
-                        Fragment fragment = new CosmeticUploadFragment_3();
-                        fragment.setArguments(bundle);
-
-                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                        ft.replace(R.id.activity_cosmetic_upload, fragment);
-                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                        ft.commit();
+                        startActivity(intent);
                     }
                 }, activity, this);
             }
             recyclerView[temp_i].setAdapter(adapter[temp_i]);
         }
 
-        indicator = (LinearLayout)view.findViewById(R.id.indicator);
-    }
+        indicator = (LinearLayout)findViewById(R.id.indicator);
 
-    @Override
+    }
     public void refresh() {
         for(int i=0;i<7;i++) {
             adapter[i].clear();
@@ -183,15 +166,9 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
         connectTestCall();
     }
 
-
-    @Override
-    public void reload() {
-        refresh();
-    }
-
     void connectTestCall() {
         LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.category()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -203,7 +180,7 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(List<Category> response) {
@@ -237,7 +214,7 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
                                 adapter[i].notifyDataSetChanged();
                             }
                         } else {
-                            //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -247,5 +224,4 @@ public class CosmeticUploadFragment_2 extends ParentFragment {
         super.onResume();
         refresh();
     }
-
 }

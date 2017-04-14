@@ -1,5 +1,16 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'android-apt'
+apply plugin: 'com.google.gms.google-services'
 
 def AAVersion = '4.1.0'
 
@@ -42,6 +53,8 @@ apt {
 
 repositories {
     mavenCentral()
+    jcenter()
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 dependencies {
@@ -65,11 +78,30 @@ dependencies {
     compile 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'
 
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+
     // facebook sdk
     compile 'com.facebook.android:facebook-android-sdk:4.8.2'
+
     // kakao sdk
     //    compile group: project.KAKAO_SDK_GROUP, name: 'kakaolink', version: project.KAKAO_SDK_VERSION
     //    compile group: project.KAKAO_SDK_GROUP, name: 'kakaotalk', version: project.KAKAO_SDK_VERSION
     compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+
+
+    //userhabit
     compile files('libs/userhabitsdk_1.0.15.jar')
+
+
+    //flurry
+    // Required for Flurry Analytics integration
+    compile 'com.flurry.android:analytics:7.0.0@aar'
+    // Optional - If you want to use the Ads SDK
+    compile 'com.flurry.android:ads:7.0.0@aar'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
+        transitive = true;
+    }
+
+
+    //google analytics
+    compile 'com.google.android.gms:play-services-analytics:9.0.0'
 }
