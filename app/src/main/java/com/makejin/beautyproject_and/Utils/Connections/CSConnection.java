@@ -30,10 +30,6 @@ public interface CSConnection{
     @POST("/users/login")
     Observable<User> user_login(@Body User user);
 
-    @POST("/users/access")
-    Observable<User> user_access(@Body Map<String, Object> fields);
-
-
     @GET("/users/logout")
     Observable<GlobalResponse> user_logout();
 
