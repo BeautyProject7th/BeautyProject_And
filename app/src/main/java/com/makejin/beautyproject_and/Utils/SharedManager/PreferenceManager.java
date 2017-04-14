@@ -2,6 +2,9 @@ package com.makejin.beautyproject_and.Utils.SharedManager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import java.util.HashSet;
 
 /**
  * Created by mijeong on 2016. 11. 22..
@@ -56,5 +59,31 @@ public class PreferenceManager {
             return false;
         }
         return true;
+    }
+
+    /**
+     * SharedPreferences에 값을 추가하는 메소드
+     *
+     * @param hashSet
+     */
+    public void putHashSet(HashSet<String> hashSet){
+        editor.putStringSet("cookie", hashSet);
+        Log.i("cookie", String.valueOf(hashSet));
+        editor.commit();
+    }
+
+    /**
+     * SharedPreferences에서 값을 가져오는 메소드
+     *
+     * @param cookie
+     * @return
+     */
+    public HashSet<String> getHashSet(HashSet<String> cookie){
+        try {
+            Log.i("cookie", String.valueOf(prefs.getStringSet("cookie", cookie)));
+            return (HashSet<String>) prefs.getStringSet("cookie", cookie);
+        } catch (Exception e) {
+            return cookie;
+        }
     }
 }

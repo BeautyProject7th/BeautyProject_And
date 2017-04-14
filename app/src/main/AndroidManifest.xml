@@ -78,7 +78,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name=".DressingTable.RegistrationRequest.RegistrationRequestActivity_"
+            android:name=".DressingTable.CosmeticInfoRequest.RegistrationRequestActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>

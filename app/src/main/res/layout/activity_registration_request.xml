@@ -48,6 +48,7 @@
                 android:textColor="@color/colorPinkMain"
                 android:text="브랜드 명"/>
             <EditText
+                android:id="@+id/ET_brand"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="20dp"
@@ -64,6 +65,7 @@
                 android:textColor="@color/colorPinkMain"
                 android:text="화장품 명"/>
             <EditText
+                android:id="@+id/ET_cosmetic"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="20dp"
@@ -74,6 +76,7 @@
                 android:background="@drawable/edittext_review"/>
         </LinearLayout>
         <Button
+            android:id="@+id/BT_request"
             android:layout_below="@+id/input_area"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"

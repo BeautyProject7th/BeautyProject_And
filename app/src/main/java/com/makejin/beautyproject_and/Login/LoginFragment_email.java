@@ -62,12 +62,14 @@ public class LoginFragment_email extends ParentFragment {
         BT_login = (Button) view.findViewById(R.id.BT_login);
         BT_register = (Button) view.findViewById(R.id.BT_register);
 
+        /*
         BT_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 connectTestCall();
             }
         });
+        */
 
         BT_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +91,8 @@ public class LoginFragment_email extends ParentFragment {
 
     void connectTestCall() {
         //LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-        conn.oneUser_get(4)
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.oneUser_get("4")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<User>() {

@@ -133,7 +133,7 @@ public class CosmeticUploadFragment extends ParentFragment {
 
     void connectTestCall() {
         LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.brand()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

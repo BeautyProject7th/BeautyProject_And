@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,11 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
-import com.makejin.beautyproject_and.DressingTable.RegistrationRequest.RegistrationRequestActivity_;
+import com.makejin.beautyproject_and.DressingTable.CosmeticInfoRequest.RegistrationRequestActivity_;
 import com.makejin.beautyproject_and.Model.Brand;
-import com.makejin.beautyproject_and.Model.Category;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.Model.GlobalResponse;
 import com.makejin.beautyproject_and.ParentFragment;
@@ -39,8 +36,6 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static android.R.attr.fragment;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -183,7 +178,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
 
     void connectTestCall(String brand, String main_category, String sub_category, final int page_num) {
         LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         Log.i("makejin3201", "zxc : " + brand + "  " +  main_category + " " + sub_category);
         conn.cosmetic(brand, main_category, sub_category, page_num)
                 .subscribeOn(Schedulers.newThread())
@@ -217,7 +212,7 @@ public class CosmeticUploadFragment_3 extends ParentFragment {
 
     void connectTestCall_myCosmetic_post(Cosmetic cosmetic) {
         LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.myCosmetic_post(cosmetic, SharedManager.getInstance().getMe().id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

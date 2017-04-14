@@ -77,9 +77,7 @@ public class SplashActivity extends AppCompatActivity {
                 login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(login);
             }else{
-                Map fields = new HashMap();
-                fields.put("id", temp_id);
-                connectTestCall_access(fields);
+                connectTestCall_access(temp_id);
             }
             finish();
 
@@ -94,11 +92,39 @@ public class SplashActivity extends AppCompatActivity {
     void uiThread() {
 
     }
-
+/*
     void connectTestCall_access(Map fields) {
         //LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.user_access(fields)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<User>() {
+                    @Override
+                    public final void onCompleted() {
+                        startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.i("zxc", "zzz : ");
+                        Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(User response) {
+                        if (response != null) {
+                            SharedManager.getInstance().setMe(response);
+                        } else {
+                            Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+*/
+    void connectTestCall_access(String id) {
+        //LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.oneUser_get(id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<User>() {

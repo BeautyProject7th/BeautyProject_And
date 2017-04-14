@@ -44,10 +44,12 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static android.R.attr.content;
 import static android.R.attr.country;
 import static com.makejin.beautyproject_and.R.id.BT_home;
 import static com.makejin.beautyproject_and.R.id.TV_expiration_date;
 import static com.makejin.beautyproject_and.R.id.activity_detail_cosmetic;
+import static java.lang.System.load;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -169,7 +171,7 @@ public class DetailCosmeticFragment extends ParentFragment {
 
     void connectTestCall_get() {
         LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.myOneCosmetic_get(SharedManager.getInstance().getMe().id, activity.cosmetic_id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -247,7 +249,7 @@ public class DetailCosmeticFragment extends ParentFragment {
 
     void connectTestCall_post(Cosmetic cosmetic) {
         LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.myOneCosmetic_put(cosmetic, SharedManager.getInstance().getMe().id, cosmetic.id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

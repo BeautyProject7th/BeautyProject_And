@@ -170,7 +170,7 @@ public class MoreFragment extends ParentFragment {
 
     void connectTestCall(int main_category_num) {
         LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category[main_category_num], page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -316,8 +316,8 @@ public class LoginFragment extends ParentFragment {
 
     void connectTestCall_temp() {
         //LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-        conn.oneUser_get(4)
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.oneUser_get("4")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<User>() {
@@ -424,7 +424,7 @@ public class LoginFragment extends ParentFragment {
                 md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 String something = new String(Base64.encode(md.digest(), 0));
-                Log.d("Hash key", something);
+                Log.i("hash", something);
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -461,7 +461,7 @@ public class LoginFragment extends ParentFragment {
 
     void connectTestCall_login(User user) {
         //LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.user_login(user)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -487,7 +487,7 @@ public class LoginFragment extends ParentFragment {
                     }
                 });
     }
-
+/*
     void connectTestCall_logout() {
         //LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(CSConnection.class);
@@ -515,7 +515,5 @@ public class LoginFragment extends ParentFragment {
                     }
                 });
     }
-
-
-
+*/
 }

@@ -234,7 +234,7 @@ public class DressingTableFragment extends ParentFragment {
 
     void connectTestCall() {
         LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.myCosmetic(SharedManager.getInstance().getMe().id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
