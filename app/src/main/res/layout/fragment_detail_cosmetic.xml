@@ -201,6 +201,7 @@
                         android:focusable="false"/>
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/TV_report"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="화장품 정보가 틀린가요?"

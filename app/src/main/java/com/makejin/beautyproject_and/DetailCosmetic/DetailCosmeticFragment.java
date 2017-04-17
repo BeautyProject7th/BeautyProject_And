@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
 import com.bumptech.glide.Glide;
+import com.makejin.beautyproject_and.DressingTable.CosmeticInfoRequest.CosmeticReport_;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_and.Model.Category;
 import com.makejin.beautyproject_and.Model.Cosmetic;
@@ -62,7 +63,7 @@ public class DetailCosmeticFragment extends ParentFragment {
 
     ImageView IV_product;
 
-    TextView TV_top_desc, TV_product_name, TV_main_category, TV_sub_category, TV_brand, TV_expiration_date;
+    TextView TV_top_desc, TV_product_name, TV_main_category, TV_sub_category, TV_brand, TV_expiration_date, TV_report;
     EditText ET_review;
     RatingBar RB_rate;
     DatePicker DP_expiration_date;
@@ -106,6 +107,7 @@ public class DetailCosmeticFragment extends ParentFragment {
         TV_sub_category = (TextView) view.findViewById(R.id.TV_sub_category);
         TV_brand = (TextView) view.findViewById(R.id.TV_brand);
         TV_expiration_date = (TextView) view.findViewById(R.id.TV_expiration_date);
+        TV_report = (TextView) view.findViewById(R.id.TV_report);
         wheelDatePicker = (WheelDatePicker) view.findViewById(R.id.wheel_date_picker);
         wheelDatePicker.setVisibleItemCount(3);
         wheelDatePicker.setCurtainColor(R.color.colorPinkLight);
@@ -148,7 +150,6 @@ public class DetailCosmeticFragment extends ParentFragment {
         });
 
         S_status = (Switch) view.findViewById(R.id.S_status);
-
     }
 
     @Override
@@ -227,7 +228,14 @@ public class DetailCosmeticFragment extends ParentFragment {
                             wheelDatePicker.setSelectedDay(Integer.parseInt(cosmetic.expiration_date.substring(8,10)));
                         }
 
-
+                        TV_report.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getActivity(), CosmeticReport_.class);
+                                intent.putExtra("cosmetic", cosmetic);
+                                startActivity(intent);
+                            }
+                        });
                     }
                     @Override
                     public final void onError(Throwable e) {

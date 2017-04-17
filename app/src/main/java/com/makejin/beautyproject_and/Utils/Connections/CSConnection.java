@@ -137,6 +137,9 @@ public interface CSConnection{
 
     @POST("/cosmetics/request")
     Observable<GlobalResponse> cosmetic_request(@Body Map<String, Object> fields);
+
+    @POST("/cosmetics/report")
+    Observable<GlobalResponse> cosmetic_report(@Body Map<String, Object> fields);
 }
 
 
