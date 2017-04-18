@@ -25,6 +25,7 @@ import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
 
 import java.util.ArrayList;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.makejin.beautyproject_and.R.id.BT_cosmetic_upload;
 import static com.makejin.beautyproject_and.R.id.CB_product;
 
@@ -107,7 +108,6 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
                     }
 
                     Log.i("asdf","a 개수 : "+checkedList.size()+"개");
-                    Toast.makeText(context, "gg개수 "+checkedList.size()+"개", Toast.LENGTH_SHORT).show();
                     if(checkedList.size()==0){
                         activity.BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_save);
                     }else{
@@ -167,5 +167,4 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
             TV_product = (TextView) v.findViewById(R.id.TV_product);
         }
     }
-
 }

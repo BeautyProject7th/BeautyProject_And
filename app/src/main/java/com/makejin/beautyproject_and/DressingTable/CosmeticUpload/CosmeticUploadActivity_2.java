@@ -48,9 +48,10 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
 
     ImageView IV_brand;
 
-    String brand [] = new String[5];
+    String brandlist [] = new String[5];
     String main_category [] = new String[7];
     String main_category_eng [] = new String[7];
+    Brand brand;
 
     Button BT_back, BT_home;
 
@@ -78,6 +79,7 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
                 Intent homeIntent = new Intent(getApplicationContext(), DressingTableActivity_.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
+                finish();
             }
         });
 
@@ -93,11 +95,11 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
         recyclerView_id[6] = R.id.recycler_view_etc;
 
 
-        brand[0] = "더샘";
-        brand[1] = "더페이스샵";
-        brand[2] = "에뛰드하우스";
-        brand[3] = "이니스프리";
-        brand[4] = "토니모리";
+        brandlist[0] = "더샘";
+        brandlist[1] = "더페이스샵";
+        brandlist[2] = "에뛰드하우스";
+        brandlist[3] = "이니스프리";
+        brandlist[4] = "토니모리";
 
         main_category[0] = "스킨케어";
         main_category[1] = "클렌징";
@@ -118,7 +120,7 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
 
         IV_brand = (ImageView) findViewById(R.id.IV_brand);
 
-        final Brand brand = (Brand) getIntent().getSerializableExtra("brand");
+        brand = (Brand) getIntent().getSerializableExtra("brand");
 
         String image_url = Constants.IMAGE_BASE_URL_brand + brand.logo;
 
@@ -137,8 +139,6 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
                 recyclerView[temp_i].setLayoutManager(new GridLayoutManager(activity, 2));
             }
 
-
-
             if (adapter[temp_i] == null) {
                 adapter[temp_i] = new CosmeticUploadAdapter_2(new CosmeticUploadAdapter_2.OnItemClickListener() {
                     @Override
@@ -149,6 +149,7 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
                         intent.putExtra("sub_category", adapter[temp_i].getItem(position));
 
                         startActivity(intent);
+                        finish();
                     }
                 }, activity, this);
             }
@@ -223,5 +224,15 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         refresh();
+    }
+
+    /// EXIT
+    @Override
+    public void onBackPressed() {
+        Intent beforeintent = new Intent(getApplicationContext(), CosmeticUploadActivity_1.class);
+        beforeintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        beforeintent.putExtra("brand", brand);
+        startActivity(beforeintent);
+        finish();
     }
 }

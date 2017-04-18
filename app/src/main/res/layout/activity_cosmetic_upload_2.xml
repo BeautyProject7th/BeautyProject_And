@@ -76,7 +76,7 @@
                             android:textSize="25sp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginBottom="10dp"
-                            android:textColor="@color/colorPinkMain"/>
+                            android:textColor="@color/colorAccent"/>
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recycler_view_skin_care"
                             android:layout_width="match_parent"

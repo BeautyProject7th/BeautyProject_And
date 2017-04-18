@@ -57,7 +57,7 @@
                             android:layout_height="35dp"
                             android:text="화장품 추가"
                             android:textColor="#FFFFFF"
-                            android:background="@drawable/btn_mypage"
+                            android:background="@drawable/btn_ver2"
                             android:layout_alignParentBottom="true"
                             android:layout_centerHorizontal="true"/>
                     </RelativeLayout>
@@ -75,22 +75,22 @@
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="wrap_content">
                         <Button
                             android:id="@+id/BT_more_skin_care"
                             android:layout_width="55dp"
-                            android:layout_height="35dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:text="더보기"
                             android:textColor="#FFFFFF"
-                            android:textSize="10dp"
-                            android:background="@drawable/btn_circle"
+                            android:textSize="12sp"
+                            android:background="@drawable/btn_ver2"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true"/>
                         <TextView
                             android:id="@+id/TV_skin_care"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             android:text="Skincare"
                             android:textSize="25dp"
                             android:textColor="#000000"
@@ -118,22 +118,22 @@
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="wrap_content">
                         <Button
                             android:id="@+id/BT_more_cleansing"
                             android:layout_width="55dp"
-                            android:layout_height="35dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:text="더보기"
                             android:textColor="#FFFFFF"
-                            android:textSize="10dp"
-                            android:background="@drawable/btn_circle"
+                            android:textSize="12sp"
+                            android:background="@drawable/btn_ver2"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true" />
                         <TextView
                             android:id="@+id/TV_cleansing"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             android:text="Cleansing"
                             android:textSize="25dp"
                             android:textColor="#000000"
@@ -160,22 +160,22 @@
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="wrap_content">
                         <Button
                             android:id="@+id/BT_more_base_makeup"
                             android:layout_width="55dp"
-                            android:layout_height="35dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:text="더보기"
                             android:textColor="#FFFFFF"
-                            android:textSize="10dp"
-                            android:background="@drawable/btn_circle"
+                            android:textSize="12sp"
+                            android:background="@drawable/btn_ver2"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true" />
                         <TextView
                             android:id="@+id/TV_base_makeup"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             android:text="Base Makeup"
                             android:textSize="25dp"
                             android:textColor="#000000"
@@ -202,22 +202,22 @@
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="wrap_content">
                         <Button
                             android:id="@+id/BT_more_color_makeup"
                             android:layout_width="55dp"
-                            android:layout_height="35dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:text="더보기"
                             android:textColor="#FFFFFF"
-                            android:textSize="10dp"
-                            android:background="@drawable/btn_circle"
+                            android:textSize="12sp"
+                            android:background="@drawable/btn_ver2"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true" />
                         <TextView
                             android:id="@+id/TV_color_makeup"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             android:text="Color Makeup"
                             android:textSize="25dp"
                             android:textColor="#000000"
@@ -243,22 +243,22 @@
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="wrap_content">
                         <Button
                             android:id="@+id/BT_more_mask_pack"
                             android:layout_width="55dp"
-                            android:layout_height="35dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:text="더보기"
                             android:textColor="#FFFFFF"
-                            android:textSize="10dp"
-                            android:background="@drawable/btn_circle"
+                            android:textSize="12sp"
+                            android:background="@drawable/btn_ver2"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true" />
                         <TextView
                             android:id="@+id/TV_mask_pack"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             android:text="Mask/Pack"
                             android:textSize="25dp"
                             android:textColor="#000000"
@@ -284,22 +284,22 @@
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="wrap_content">
                         <Button
                             android:id="@+id/BT_more_perfume"
                             android:layout_width="55dp"
-                            android:layout_height="35dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:text="더보기"
                             android:textColor="#FFFFFF"
-                            android:textSize="10dp"
-                            android:background="@drawable/btn_circle"
+                            android:textSize="12sp"
+                            android:background="@drawable/btn_ver2"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true" />
                         <TextView
                             android:id="@+id/TV_perfume"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             android:text="Perfume"
                             android:textSize="25dp"
                             android:textColor="#000000"
@@ -325,22 +325,22 @@
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="wrap_content">
                         <Button
                             android:id="@+id/BT_more_etc"
                             android:layout_width="55dp"
-                            android:layout_height="35dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:text="더보기"
                             android:textColor="#FFFFFF"
-                            android:textSize="10dp"
-                            android:background="@drawable/btn_circle"
+                            android:textSize="12sp"
+                            android:background="@drawable/btn_ver2"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true" />
                         <TextView
                             android:id="@+id/TV_etc"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             android:text="Etc"
                             android:textSize="25dp"
                             android:textColor="#000000"

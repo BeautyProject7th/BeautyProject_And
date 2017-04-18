@@ -110,7 +110,7 @@ public class DetailCosmeticFragment extends ParentFragment {
         TV_report = (TextView) view.findViewById(R.id.TV_report);
         wheelDatePicker = (WheelDatePicker) view.findViewById(R.id.wheel_date_picker);
         wheelDatePicker.setVisibleItemCount(3);
-        wheelDatePicker.setCurtainColor(R.color.colorPinkLight);
+        wheelDatePicker.setCurtainColor(R.color.colorPurpleLight);
         wheelDatePicker.setSelectedItemTextColor(Color.rgb(0,0,0));
 
         activity.setSupportActionBar(cs_toolbar);

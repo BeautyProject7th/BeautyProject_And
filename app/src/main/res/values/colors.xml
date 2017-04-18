@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FC5052</color>
+    <color name="colorAccent">#C1A4E9</color>
 
     <!--Seula-->
     <color name="colorWhite">#FFFFFF</color>
@@ -25,6 +25,6 @@
     <color name="colorGrayLight">#F2F2F2</color>
     <color name="colorGrayDark">#EAEAEA</color>
     <color name="colorGrayText">#8c8c8c</color>
-    <color name="colorPinkLight">#ffa8a8</color>
+    <color name="colorPurpleLight">#e2c0acdc</color>
     <color name="colorPinkMain">#f95c5c</color>
 </resources>

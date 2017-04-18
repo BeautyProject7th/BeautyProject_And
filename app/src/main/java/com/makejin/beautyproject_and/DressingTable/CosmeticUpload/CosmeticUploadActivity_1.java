@@ -67,6 +67,7 @@ public class CosmeticUploadActivity_1 extends AppCompatActivity {
                 Intent homeIntent = new Intent(getApplicationContext(), DressingTableActivity_.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
+                finish();
             }
         });
 
@@ -85,6 +86,7 @@ public class CosmeticUploadActivity_1 extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), CosmeticUploadActivity_2.class);
                     intent.putExtra("brand", adapter.getItem(position));
                     startActivity(intent);
+                    finish();
 
 //                    Bundle bundle = new Bundle();
 //                    bundle.putSerializable("brand", adapter.getItem(position));

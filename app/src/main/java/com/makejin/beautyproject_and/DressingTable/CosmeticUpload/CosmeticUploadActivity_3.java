@@ -1,6 +1,8 @@
 package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +36,10 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class CosmeticUploadActivity_3 extends AppCompatActivity {
+
     public static CosmeticUploadActivity_3 activity;
 
     private RecyclerView recyclerView;
@@ -82,6 +87,7 @@ public class CosmeticUploadActivity_3 extends AppCompatActivity {
                 Intent homeIntent = new Intent(getApplicationContext(), DressingTableActivity_.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
+                finish();
             }
         });
 
@@ -120,8 +126,17 @@ public class CosmeticUploadActivity_3 extends AppCompatActivity {
 
         if (recyclerView== null) {
             recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            //item 사이 간격
+            recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                @Override
+                public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                    super.getItemOffsets(outRect, view, parent, state);
+
+                    outRect.right = 10;
+                }
+            });
             recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new GridLayoutManager(activity, 4));
+            recyclerView.setLayoutManager(new GridLayoutManager(activity, 3));
         }
 
         if (adapter == null) {
@@ -219,7 +234,6 @@ public class CosmeticUploadActivity_3 extends AppCompatActivity {
 //                        startActivity(intent);
                         setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
                         finish();
-
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -247,5 +261,17 @@ public class CosmeticUploadActivity_3 extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         refresh();
+    }
+
+    /// EXIT
+    @Override
+    public void onBackPressed() {
+        Intent beforeintent = new Intent(getApplicationContext(), CosmeticUploadActivity_2.class);
+        beforeintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        beforeintent.putExtra("brand", brand);
+        beforeintent.putExtra("main_category", main_category);
+        beforeintent.putExtra("sub_category", sub_category);
+        startActivity(beforeintent);
+        finish();
     }
 }

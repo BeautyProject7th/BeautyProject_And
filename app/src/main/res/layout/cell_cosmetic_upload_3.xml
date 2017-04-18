@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--cell은 가로를 match_parent로 해야 아이템이 서로 겹치지 않고 딱 맞게 됩니다-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="110dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="100dp"
     android:background="#00FFFFFF"
     android:orientation="vertical"
-    android:layout_marginLeft="10dp"
     android:id="@+id/LL_product">
 
     <RelativeLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/IV_product"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#AAAAAA"/>
         <CheckBox
             android:id="@+id/CB_product"
-            android:layout_width="28dp"
-            android:layout_height="27dp"
+            android:layout_width="20dp"
+            android:layout_height="19dp"
             android:layout_margin="6dp"
             android:clickable="true"
             android:button="@drawable/btn_uncheck"/>
@@ -32,7 +32,7 @@
         android:minHeight="20dp"
         android:text="product_name"
         android:textColor="#000000"
-        android:textSize="9sp"
+        android:textSize="12sp"
         android:layout_gravity="center"/>
 
 </LinearLayout>

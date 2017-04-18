@@ -34,11 +34,17 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+import static com.makejin.beautyproject_and.R.id.BT_back;
+
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
 public class MoreFragment extends ParentFragment {
     public static MoreActivity activity;
+
+    private long backKeyPressedTime = 0;
+    private Toast toast;
 
     public MoreAdapter adapter;
 
@@ -52,7 +58,7 @@ public class MoreFragment extends ParentFragment {
 
     public String main_category [] = new String[7];
 
-    Button BT_home;
+    Button BT_home,BT_back;
 
     public int page_num = 1;
     public boolean endOfPage = false;
@@ -71,6 +77,14 @@ public class MoreFragment extends ParentFragment {
         this.activity = moreActivity;
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
+
+        BT_back = (Button) cs_toolbar.findViewById(R.id.BT_back);
+        BT_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.finish();
+            }
+        });
 
         BT_home = (Button) cs_toolbar.findViewById(R.id.BT_home);
         BT_home.setOnClickListener(new View.OnClickListener() {
