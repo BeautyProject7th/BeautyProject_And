@@ -69,23 +69,14 @@ public class RegistrationRequestActivity extends AppCompatActivity {
         }
     }
 
+    @Click
+    void BT_back(){
+        onBackPressed();
+    }
+
     @UiThread
     void uiThread() {
 
-    }
-
-    /// EXIT
-    @Override
-    public void onBackPressed() {
-        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
-            backKeyPressedTime = System.currentTimeMillis();
-            showGuide();
-            return;
-        }
-        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
-            finish();
-            toast.cancel();
-        }
     }
 
     public void showGuide() {

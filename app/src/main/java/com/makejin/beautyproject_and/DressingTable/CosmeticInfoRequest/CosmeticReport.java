@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static android.R.id.list;
+import static com.makejin.beautyproject_and.R.id.whole;
 
 @EActivity(R.layout.activity_cosmetic_report)
 public class CosmeticReport extends AppCompatActivity {
@@ -76,7 +78,7 @@ public class CosmeticReport extends AppCompatActivity {
     Button BT_send;
 
     @ViewById
-    LinearLayout whole;
+    RelativeLayout whole;
 
     @ViewById
     EditText ET_detail;
@@ -96,13 +98,6 @@ public class CosmeticReport extends AppCompatActivity {
     @Click
     void BT_back() {
         onBackPressed();
-    }
-
-    @Click
-    void BT_home() {
-        Intent homeIntent = new Intent(getApplicationContext(), DressingTableActivity_.class);
-        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(homeIntent);
     }
 
     @Click
@@ -128,10 +123,10 @@ public class CosmeticReport extends AppCompatActivity {
         Intent intent = getIntent();
         cosmetic = (Cosmetic) intent.getSerializableExtra("cosmetic");
 
-        TV_main_category.setText(" : "+cosmetic.main_category);
-        TV_sub_category.setText(" : "+cosmetic.sub_category);
-        TV_brand.setText(" : "+cosmetic.brand);
-        TV_product_name.setText(" : "+cosmetic.product_name);
+        TV_main_category.setText("("+cosmetic.main_category);
+        TV_sub_category.setText(cosmetic.sub_category+")");
+        TV_brand.setText(cosmetic.brand);
+        TV_product_name.setText(cosmetic.product_name);
         String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
 
         Glide.with(activity).
