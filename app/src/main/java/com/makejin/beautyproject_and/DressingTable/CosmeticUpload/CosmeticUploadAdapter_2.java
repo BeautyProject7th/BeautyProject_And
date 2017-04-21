@@ -1,121 +1,145 @@
 package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.makejin.beautyproject_and.Model.Brand;
-import com.makejin.beautyproject_and.Model.Category;
-import com.makejin.beautyproject_and.Model.Cosmetic;
+import com.bumptech.glide.load.engine.Resource;
 import com.makejin.beautyproject_and.R;
-import com.makejin.beautyproject_and.Utils.Constants.Constants;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 
 /**
- * Created by kksd0900 on 16. 10. 11..
+ * Created by mijeong on 2017. 4. 21..
  */
-public class CosmeticUploadAdapter_2 extends RecyclerView.Adapter<CosmeticUploadAdapter_2.ViewHolder> {
-    private static final int TYPE_ITEM = 0;
 
-    public Context context;
-    public CosmeticUploadActivity_2 activity;
-    private OnItemClickListener mOnItemClickListener;
-    public ArrayList<String> mDataset = new ArrayList<>();
+public class CosmeticUploadAdapter_2 extends BaseExpandableListAdapter {
 
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+    private Context context = null;
+    private LayoutInflater inflater = null;
+    private ViewHolder viewHolder = null;
+
+    private Map<String,List<String>> categorylist = null;
+    private ArrayList<String> mainCategoryList = null;
+
+    public CosmeticUploadAdapter_2(Context c, Map<String,List<String>> categorylist){
+        super();
+
+        this.context = c;
+        this.inflater = LayoutInflater.from(c);
+        this.categorylist = categorylist;
+        ArrayList<String> keys = new ArrayList<>(categorylist.keySet());
+        this.mainCategoryList = keys;
     }
 
-    public CosmeticUploadAdapter_2(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadActivity_2 mActivity) {
-        mOnItemClickListener = onItemClickListener;
-        context = mContext;
-        activity = mActivity;
-        mDataset.clear();
+    // 그룹 포지션을 반환한다.
+    @Override
+    public String getGroup(int groupPosition) {
+        return mainCategoryList.get(groupPosition);
     }
 
-    public void addData(Category category) {
-        for(String sub : category.sub_category){
-            mDataset.add(sub);
+    // 그룹 사이즈를 반환한다.
+    @Override
+    public int getGroupCount() {
+        return mainCategoryList.size();
+    }
+
+    // 그룹 ID를 반환한다.
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    // 그룹뷰 각각의 ROW
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded,
+                             View convertView, ViewGroup parent) {
+
+        View v = convertView;
+
+        if(v == null){
+            viewHolder = new ViewHolder();
+            v = inflater.inflate(R.layout.cell_cosmetic_upload2_parent, parent, false);
+            viewHolder.tv_groupName = (TextView) v.findViewById(R.id.TV_main_category);
+            viewHolder.iv_image = (ImageView) v.findViewById(R.id.IV_category);
+            v.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder)v.getTag();
         }
+
+        // 그룹을 펼칠때와 닫을때 아이콘을 변경해 준다.
+        if(isExpanded){
+            Drawable drawable = context.getResources().getDrawable(R.drawable.back_bt_copy_2);
+            viewHolder.iv_image.setImageDrawable(drawable);
+        }else{
+            Drawable drawable = context.getResources().getDrawable(R.drawable.back_bt_copy);
+            viewHolder.iv_image.setImageDrawable(drawable);
+        }
+
+        viewHolder.tv_groupName.setText(getGroup(groupPosition));
+
+        return v;
     }
 
-    public String getItem(int position) {
-        return mDataset.get(position);
+    // 차일드뷰를 반환한다.
+    @Override
+    public String getChild(int groupPosition, int childPosition) {
+        String key = mainCategoryList.get(groupPosition);
+        return categorylist.get(key).get(childPosition);
     }
 
-    public void clear() {
-        mDataset.clear();
+    // 차일드뷰 사이즈를 반환한다.
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        String key = mainCategoryList.get(groupPosition);
+        return categorylist.get(key).size();
     }
 
+    // 차일드뷰 ID를 반환한다.
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
+    }
+
+    // 차일드뷰 각각의 ROW
+    @Override
+    public View getChildView(int groupPosition, int childPosition,
+                             boolean isLastChild, View convertView, ViewGroup parent) {
+
+        View v = convertView;
+
+        if(v == null){
+            viewHolder = new ViewHolder();
+            v = inflater.inflate(R.layout.cell_cosmetic_upload2_child, null);
+            viewHolder.tv_childName = (TextView) v.findViewById(R.id.TV_sub_category);
+            v.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder)v.getTag();
+        }
+
+        viewHolder.tv_childName.setText(getChild(groupPosition, childPosition));
+
+        return v;
+    }
 
     @Override
-     public CosmeticUploadAdapter_2.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_cosmetic_upload_2, parent, false);
-            return new ItemViewHolder(v);
-        }
-        return null;
-    }
+    public boolean hasStableIds() { return true; }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        if (holder instanceof ItemViewHolder) {
-            holder.container.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onItemClick(v, position);
-                }
-            });
-            ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            String sub_category = mDataset.get(position);
+    public boolean isChildSelectable(int groupPosition, int childPosition) { return true; }
 
-            Log.i("zxc", "position : " + position + " " + sub_category);
-
-            itemViewHolder.TV_category.setText(sub_category);
-
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return TYPE_ITEM;
-    }
-
-    @Override
-    public int getItemCount() {
-        return mDataset.size();
-    }
-
-
-    /*
-        ViewHolder
-     */
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public View container;
-        public ViewHolder(View itemView) {
-            super(itemView);
-            container = itemView;
-        }
-    }
-    public class ItemViewHolder extends ViewHolder {
-        public TextView TV_category;
-
-        public ItemViewHolder(View v) {
-            super(v);
-            TV_category = (TextView) v.findViewById(R.id.TV_category);
-
-        }
+    class ViewHolder {
+        public ImageView iv_image;
+        public TextView tv_groupName;
+        public TextView tv_childName;
     }
 
 }

@@ -1,7 +1,6 @@
 package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -35,8 +34,6 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class CosmeticUploadActivity_3 extends AppCompatActivity {
 

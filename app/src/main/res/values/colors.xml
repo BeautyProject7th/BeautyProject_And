@@ -7,7 +7,7 @@
     <!--Seula-->
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorGrayBackGround">#F4F4F4</color>
+    <color name="colorGrayBackGround">#F3F3F3</color>
     <color name="colorGrayLine">#AAAAAA</color>
     <color name="colorGrayLineLight">#DDDDDD</color>
     <color name="colorBottomTabBackGround">#393939</color>
@@ -25,6 +25,7 @@
     <color name="colorGrayLight">#F2F2F2</color>
     <color name="colorGrayDark">#EAEAEA</color>
     <color name="colorGrayText">#ababab</color>
+    <color name="colorBlackText">#4a4a4a</color>
     <color name="colorPurpleLight">#e2c0acdc</color>
     <color name="colorPinkMain">#f95c5c</color>
 </resources>

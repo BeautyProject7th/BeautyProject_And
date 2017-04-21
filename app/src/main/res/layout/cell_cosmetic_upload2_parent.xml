@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorWhite">
+    <TextView
+        android:id="@+id/TV_main_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="대분류"
+        android:layout_marginLeft="30dp"
+        android:layout_centerVertical="true"
+        android:textColor="@color/colorBlackText"/>
+    <ImageView
+        android:id="@+id/IV_category"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:src="@drawable/back_bt_copy"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+</RelativeLayout>

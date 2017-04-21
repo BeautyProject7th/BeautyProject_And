@@ -1,20 +1,14 @@
 package com.makejin.beautyproject_and.DressingTable.CosmeticUpload;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -27,40 +21,39 @@ import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
 import com.makejin.beautyproject_and.Utils.Loadings.LoadingUtil;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * Created by mijeong on 2017. 4. 21..
+ */
 public class CosmeticUploadActivity_2 extends AppCompatActivity {
-    public static CosmeticUploadActivity_2 activity;
 
-    private RecyclerView recyclerView [] = new RecyclerView[7];
+    //새로 시도
+    private Map<String, List<String>> categorylist = new HashMap<String, List<String>>();
 
-    int recyclerView_id [] = new int[7];
-
-    public CosmeticUploadAdapter_2 adapter[] = new CosmeticUploadAdapter_2[7];
-
-    private RecyclerView.LayoutManager layoutManager;
     public LinearLayout indicator;
-    SwipeRefreshLayout pullToRefresh;
+    public static CosmeticUploadActivity_2 activity;
+    public static CosmeticUploadAdapter_2 adapter = null;
 
     ImageView IV_brand;
-
-    String brandlist [] = new String[5];
-    String main_category [] = new String[7];
-    String main_category_eng [] = new String[7];
     Brand brand;
-
     Button BT_back, BT_home;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cosmetic_upload_2);
+        setContentView(R.layout.activity_cosmetic_upload2_2);
+
         activity = this;
-        Log.i("zxc", "getFragmentManager().getBackStackEntryCount() 2: " + getFragmentManager().getBackStackEntryCount());
+
+        setLayout();
+        connectCategoryCall();
 
         Toolbar cs_toolbar = (Toolbar)findViewById(R.id.cs_toolbar);
 
@@ -86,39 +79,6 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
-        recyclerView_id[0] = R.id.recycler_view_skin_care;
-        recyclerView_id[1] = R.id.recycler_view_cleansing;
-        recyclerView_id[2] = R.id.recycler_view_base_makeup;
-        recyclerView_id[3] = R.id.recycler_view_color_makeup;
-        recyclerView_id[4] = R.id.recycler_view_mask_pack;
-        recyclerView_id[5] = R.id.recycler_view_perfume;
-        recyclerView_id[6] = R.id.recycler_view_etc;
-
-
-        brandlist[0] = "더샘";
-        brandlist[1] = "더페이스샵";
-        brandlist[2] = "에뛰드하우스";
-        brandlist[3] = "이니스프리";
-        brandlist[4] = "토니모리";
-
-        main_category[0] = "스킨케어";
-        main_category[1] = "클렌징";
-        main_category[2] = "베이스메이크업";
-        main_category[3] = "색조메이크업";
-        main_category[4] = "마스크팩";
-        main_category[5] = "향수";
-        main_category[6] = "기타";
-
-
-        main_category_eng[0] = "Skin/Care";
-        main_category_eng[1] = "Cleansing";
-        main_category_eng[2] = "Base Makeup";
-        main_category_eng[3] = "Color Makeup";
-        main_category_eng[4] = "Mask/Pack";
-        main_category_eng[5] = "Perfume";
-        main_category_eng[6] = "Etc";
-
-        IV_brand = (ImageView) findViewById(R.id.IV_brand);
 
         brand = (Brand) getIntent().getSerializableExtra("brand");
 
@@ -129,45 +89,61 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
                 thumbnail(0.1f).
                 into(IV_brand);
 
-        int cnt = 0;
+        //mListView.setAdapter(new CosmeticUploadAdapter_2(this, categorylist));
 
-        for(int i=0;i<7;i++){
-            final int temp_i = i;
-            if (recyclerView[temp_i]== null) {
-                recyclerView[temp_i] = (RecyclerView) findViewById(recyclerView_id[temp_i]);
-                recyclerView[temp_i].setHasFixedSize(true);
-                recyclerView[temp_i].setLayoutManager(new GridLayoutManager(activity, 2));
+        // 그룹 클릭 했을 경우 이벤트
+        mListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v,
+                                        int groupPosition, long id) {
+                return false;
             }
+        });
 
-            if (adapter[temp_i] == null) {
-                adapter[temp_i] = new CosmeticUploadAdapter_2(new CosmeticUploadAdapter_2.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getApplicationContext(), CosmeticUploadActivity_3.class);
-                        intent.putExtra("brand", brand);
-                        intent.putExtra("main_category", main_category[temp_i]);
-                        intent.putExtra("sub_category", adapter[temp_i].getItem(position));
+        // 차일드 클릭 했을 경우 이벤트
+        mListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                v.setBackgroundColor(getResources().getColor(R.color.colorGrayDark));
+                Intent intent = new Intent(getApplicationContext(), CosmeticUploadActivity_3.class);
+                intent.putExtra("brand", brand);
+                intent.putExtra("main_category", adapter.getGroup(groupPosition));
+                intent.putExtra("sub_category", adapter.getChild(groupPosition,childPosition));
 
-                        startActivity(intent);
-                        finish();
-                    }
-                }, activity, this);
+                startActivity(intent);
+                finish();
+                return false;
             }
-            recyclerView[temp_i].setAdapter(adapter[temp_i]);
-        }
+        });
 
-        indicator = (LinearLayout)findViewById(R.id.indicator);
+        // 그룹이 닫힐 경우 이벤트
+        mListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+            }
+        });
 
+        // 그룹이 열릴 경우 이벤트
+        mListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+            }
+        });
     }
-    public void refresh() {
-        for(int i=0;i<7;i++) {
-            adapter[i].clear();
-            adapter[i].notifyDataSetChanged();
-        }
-        connectTestCall();
+
+    /*
+     * Layout
+     */
+    private ExpandableListView mListView;
+
+    private void setLayout(){
+        mListView = (ExpandableListView) findViewById(R.id.ExpandableListView);
+        IV_brand = (ImageView) findViewById(R.id.IV_brand);
     }
 
-    void connectTestCall() {
+    void connectCategoryCall() {
+        //TODO: 서버 호출 횟수를 줄이기 위해 카테고리 불러오는 작업은 어플을 처음 실행한 경우에만 불러오도록 한다.
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.category()
@@ -181,49 +157,21 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        //Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(List<Category> response) {
                         if (response != null) {
                             for(int i=0;i<response.size();i++){
-                                switch(response.get(i).main_category){
-                                    case "스킨케어":
-                                        adapter[0].addData(response.get(i));
-                                        break;
-                                    case "클렌징":
-                                        adapter[1].addData(response.get(i));
-                                        break;
-                                    case "베이스메이크업":
-                                        adapter[2].addData(response.get(i));
-                                        break;
-                                    case "색조메이크업":
-                                        adapter[3].addData(response.get(i));
-                                        break;
-                                    case "마스크팩":
-                                        adapter[4].addData(response.get(i));
-                                        break;
-                                    case "향수":
-                                        adapter[5].addData(response.get(i));
-                                        break;
-                                    case "기타":
-                                        adapter[6].addData(response.get(i));
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                adapter[i].notifyDataSetChanged();
+                                categorylist.put(response.get(i).main_category, response.get(i).sub_category);
                             }
+                            adapter = new CosmeticUploadAdapter_2(activity, categorylist);
+                            mListView.setAdapter(adapter);
                         } else {
-                            //Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        refresh();
     }
 
     /// EXIT
