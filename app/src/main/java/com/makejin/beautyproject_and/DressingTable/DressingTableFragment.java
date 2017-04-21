@@ -3,9 +3,7 @@ package com.makejin.beautyproject_and.DressingTable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,18 +14,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.facebook.login.LoginManager;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
-import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity;
 import com.makejin.beautyproject_and.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
-import com.makejin.beautyproject_and.DressingTable.Setting.SettingActivity_;
 import com.makejin.beautyproject_and.DressingTable.More.MoreActivity_;
-import com.makejin.beautyproject_and.Login.LoginActivity;
 import com.makejin.beautyproject_and.Login.LoginActivity_;
 import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.ParentFragment;
@@ -37,8 +30,6 @@ import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
 import com.makejin.beautyproject_and.Utils.Loadings.LoadingUtil;
 import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
-import com.makejin.beautyproject_and.Video.VideoList.VideoListActivity;
-import com.makejin.beautyproject_and.Video.VideoList.VideoListActivity_;
 
 import java.util.List;
 
@@ -163,7 +154,6 @@ public class DressingTableFragment extends ParentFragment {
                 }, activity, this);
             }
             recyclerView[temp_i].setAdapter(adapter[i]);
-
         }
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
 

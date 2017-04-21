@@ -59,7 +59,8 @@
                             android:textColor="#FFFFFF"
                             android:background="@drawable/btn_ver2"
                             android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"/>
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="15dp"/>
                     </RelativeLayout>
 
                 <View
@@ -71,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="#FFFFFF"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="1dp"
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -114,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="#FFFFFF"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="1dp"
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -156,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="#FFFFFF"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="1dp"
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -198,7 +199,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="#FFFFFF"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="1dp"
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -239,7 +240,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="#FFFFFF"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="1dp"
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -280,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="#FFFFFF"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="1dp"
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -321,7 +322,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="#FFFFFF"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="1dp"
                     android:padding="10dp">
                     <RelativeLayout
                         android:layout_width="match_parent"

@@ -3,7 +3,6 @@ package com.makejin.beautyproject_and.SkinType;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,28 +13,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_and.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.makejin.beautyproject_and.DressingTable.DressingTableActivity;
 import com.makejin.beautyproject_and.DressingTable.DressingTableAdapter;
 import com.makejin.beautyproject_and.DressingTable.More.MoreActivity_;
-import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.ParentFragment;
 import com.makejin.beautyproject_and.R;
-import com.makejin.beautyproject_and.Utils.Connections.CSConnection;
-import com.makejin.beautyproject_and.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
-import com.makejin.beautyproject_and.Utils.Loadings.LoadingUtil;
 import com.makejin.beautyproject_and.Utils.SharedManager.SharedManager;
-import com.makejin.beautyproject_and.Video.Video.PlayerViewDemoActivity;
-
-import java.util.List;
-
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by kksd0900 on 16. 10. 11..

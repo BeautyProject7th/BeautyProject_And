@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical"
-        android:background="#FFFFFF">
+        android:background="@color/colorGrayBackGround">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,25 +31,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="등록하시려는 화장품의 브랜드를 선택하세요"
-                android:textColor="#4a4a4a"
+                android:textColor="@color/colorBlackText"
                 android:gravity="center"
                 android:layout_centerVertical="true"
                 android:textSize="12.5sp"/>
         </RelativeLayout>
 
-        <ScrollView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorGrayLight"
-            android:padding="10dp">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorGrayLight"
-                android:scrollbars="vertical"/>
-        </ScrollView>
+            android:background="@color/colorWhite"
+            android:scrollbars="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"/>
 
         <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
 

@@ -48,7 +48,7 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cosmetic_upload2_2);
+        setContentView(R.layout.activity_cosmetic_upload_2);
 
         activity = this;
 

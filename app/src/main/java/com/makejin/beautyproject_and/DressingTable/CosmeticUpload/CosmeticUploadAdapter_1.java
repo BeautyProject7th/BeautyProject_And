@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.makejin.beautyproject_and.DressingTable.More.MoreFragment;
 import com.makejin.beautyproject_and.Model.Brand;
-import com.makejin.beautyproject_and.Model.Cosmetic;
 import com.makejin.beautyproject_and.R;
 import com.makejin.beautyproject_and.Utils.Constants.Constants;
 
@@ -23,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
-public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAdapter.ViewHolder> {
+public class CosmeticUploadAdapter_1 extends RecyclerView.Adapter<CosmeticUploadAdapter_1.ViewHolder> {
     private static final int TYPE_ITEM = 0;
 
     public Context context;
@@ -35,7 +32,7 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
         void onItemClick(View view, int position);
     }
 
-    public CosmeticUploadAdapter(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadActivity_1 mActivity) {
+    public CosmeticUploadAdapter_1(OnItemClickListener onItemClickListener, Context mContext, CosmeticUploadActivity_1 mActivity) {
         mOnItemClickListener = onItemClickListener;
         context = mContext;
         activity = mActivity;
@@ -43,7 +40,6 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
     }
 
     public void addData(Brand brand) {
-        Log.i("zxc","addData()");
         mDataset.add(brand);
     }
 
@@ -56,10 +52,9 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
     }
 
     @Override
-     public CosmeticUploadAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+     public CosmeticUploadAdapter_1.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-            Log.i("zxc","onCreateViewholder()");
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_cosmetic_upload, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_cosmetic_upload1, parent, false);
             return new ItemViewHolder(v);
         }
         return null;
@@ -83,6 +78,7 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
                     load(image_url).
                     thumbnail(0.1f).
                     into(itemViewHolder.IV_brand);
+            itemViewHolder.TV_brand.setText(mDataset.get(position).name);
 
             Log.i("zxc","onBindViewHolder()");
         }
@@ -111,11 +107,12 @@ public class CosmeticUploadAdapter extends RecyclerView.Adapter<CosmeticUploadAd
     }
     public class ItemViewHolder extends ViewHolder {
         public ImageView IV_brand;
+        public TextView TV_brand;
 
         public ItemViewHolder(View v) {
             super(v);
             IV_brand = (ImageView) v.findViewById(R.id.IV_brand);
-
+            TV_brand = (TextView) v.findViewById(R.id.TV_brand);
         }
     }
 
