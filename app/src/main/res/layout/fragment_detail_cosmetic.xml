@@ -22,25 +22,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:background="#777777">
-            <TextView
-                android:id="@+id/TV_top_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="화장품명의 상세정보"
-                android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:layout_centerVertical="true"
-                android:textSize="10dp"/>
-        </RelativeLayout>
-
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,20 +36,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:padding="10dp">
+                    android:padding="20dp">
+                    <Switch
+                        android:id="@+id/S_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="사용 여부 "
+                        android:textSize="9sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"/>
                     <ImageView
                         android:id="@+id/IV_product"
                         android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_height="wrap_content"
                         android:background="#555555"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true" />
                     <LinearLayout
+                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_toRightOf="@id/IV_product"
-                        android:layout_marginLeft="10dp">
+                        android:layout_marginLeft="15dp">
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
@@ -77,30 +70,32 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"/>
-                            <Switch
-                                android:id="@+id/S_status"
+                            <TextView
+                                android:id="@+id/TV_center"
+                                android:layout_toRightOf="@+id/TV_main_category"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="현재 사용 여부 "
-                                android:textSize="9sp"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"/>
+                                android:text="-"
+                                android:textSize="12sp"
+                                android:textColor="#9e9e9e"
+                                android:layout_alignParentBottom="true" />
+                            <TextView
+                                android:id="@+id/TV_sub_category"
+                                android:layout_toRightOf="@+id/TV_center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="중분류"
+                                android:textSize="12sp"
+                                android:textColor="#9e9e9e"
+                                android:layout_alignParentBottom="true" />
                         </RelativeLayout>
-                        <TextView
-                            android:id="@+id/TV_sub_category"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="중분류"
-                            android:textSize="12sp"
-                            android:textColor="#9e9e9e" />
                         <TextView
                             android:id="@+id/TV_brand"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="브랜드"
                             android:textSize="14sp"
-                            android:textColor="#000000"
+                            android:textColor="@color/colorBlackText"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="16dp"/>
                         <TextView
@@ -108,19 +103,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="이름"
-                            android:textSize="13dp"
-                            android:textColor="#333333"
+                            android:textSize="13sp"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold" />
                     </LinearLayout>
 
 
                 </RelativeLayout>
                 <LinearLayout
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/colorGrayLight"
+                    android:background="#f5f5f5"
                     android:padding="20dp">
                     <TextView
                         android:id="@+id/TV_expiration_date"
@@ -158,12 +153,11 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="20dp"
-                    android:background="@color/colorGrayLight">
+                    android:background="@color/colorGrayBackGround">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -185,7 +179,7 @@
                             android:numStars="5"
                             android:rating="3.1"
                             android:layout_gravity="center"
-                            style="@style/cosmeticRatingBar" />
+                            style="@style/bigitRatingBar" />
                     </LinearLayout>
 
                     <EditText

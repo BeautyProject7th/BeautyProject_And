@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@null" >
+    android:background="@null"
+    android:layout_margin="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
                 <ImageView
                     android:id="@+id/IV_cosmetic"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"/>
 
                 <TextView
@@ -37,6 +38,4 @@
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
-
-
 </LinearLayout>

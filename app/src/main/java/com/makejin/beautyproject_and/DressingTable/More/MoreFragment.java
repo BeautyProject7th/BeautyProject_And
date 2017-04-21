@@ -54,7 +54,7 @@ public class MoreFragment extends ParentFragment {
     public LinearLayout indicator;
     SwipeRefreshLayout pullToRefresh;
 
-    TextView TV_top_desc, TV_category;
+    TextView TV_desc, TV_category;
 
     public String main_category [] = new String[7];
 
@@ -98,7 +98,7 @@ public class MoreFragment extends ParentFragment {
 
         TV_category = (TextView) view.findViewById(R.id.TV_category);
 
-        TV_top_desc = (TextView) view.findViewById(R.id.TV_top_desc);
+        TV_desc = (TextView) view.findViewById(R.id.TV_desc);
 
         String category = "";
 
@@ -138,7 +138,7 @@ public class MoreFragment extends ParentFragment {
         }
 
         TV_category.setText(category);
-        TV_top_desc.setText(SharedManager.getInstance().getMe().name + "님의 " + category + "목록");
+        TV_desc.setText(SharedManager.getInstance().getMe().name + "님의 " + category + "목록입니다.");
 
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");

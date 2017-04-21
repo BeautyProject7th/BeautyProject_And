@@ -9,11 +9,15 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp">
 
-    <ImageView
-        android:id="@+id/IV_brand"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"/>
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/IV_brand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
     <TextView
         android:id="@+id/TV_brand"
         android:layout_width="match_parent"

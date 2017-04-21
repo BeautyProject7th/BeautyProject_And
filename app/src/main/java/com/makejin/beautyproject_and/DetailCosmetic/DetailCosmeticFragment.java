@@ -101,7 +101,7 @@ public class DetailCosmeticFragment extends ParentFragment {
 
         IV_product = (ImageView) view.findViewById(R.id.IV_product);
 
-        TV_top_desc = (TextView) view.findViewById(R.id.TV_top_desc);
+        //TV_top_desc = (TextView) view.findViewById(R.id.TV_top_desc);
         TV_product_name = (TextView) view.findViewById(R.id.TV_product_name);
         TV_main_category = (TextView) view.findViewById(R.id.TV_main_category);
         TV_sub_category = (TextView) view.findViewById(R.id.TV_sub_category);
@@ -190,7 +190,7 @@ public class DetailCosmeticFragment extends ParentFragment {
                         RB_rate.setRating(cosmetic.rate_num);
                         ET_review.setText(cosmetic.review);
 
-                        TV_top_desc.setText("\""+cosmetic.product_name + "\"의 상세정보");
+                        //TV_top_desc.setText("\""+cosmetic.product_name + "\"의 상세정보");
                         TV_product_name.setText(cosmetic.product_name);
                         TV_main_category.setText(cosmetic.main_category);
                         TV_sub_category.setText(cosmetic.sub_category);

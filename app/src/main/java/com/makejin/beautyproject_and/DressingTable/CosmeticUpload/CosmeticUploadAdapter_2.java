@@ -79,9 +79,11 @@ public class CosmeticUploadAdapter_2 extends BaseExpandableListAdapter {
         if(isExpanded){
             Drawable drawable = context.getResources().getDrawable(R.drawable.back_bt_copy_2);
             viewHolder.iv_image.setImageDrawable(drawable);
+            viewHolder.tv_groupName.setTextColor(context.getResources().getColor(R.color.colorAccent));
         }else{
             Drawable drawable = context.getResources().getDrawable(R.drawable.back_bt_copy);
             viewHolder.iv_image.setImageDrawable(drawable);
+            viewHolder.tv_groupName.setTextColor(context.getResources().getColor(R.color.colorBlackText));
         }
 
         viewHolder.tv_groupName.setText(getGroup(groupPosition));
