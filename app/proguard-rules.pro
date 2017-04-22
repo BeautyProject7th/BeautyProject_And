@@ -15,3 +15,28 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+#
+#-dontwarn org.codehaus.**
+#-dontwarn java.nio.**
+#-dontwarn java.lang.invoke.**
+#-dontwarn rx.**
+#-dontwarn okio.**
+#-dontwarn retrofit2.Platform$Java8
+#
+#-dontwarn retrofit2.**
+#-keep class retrofit2.** { *; }
+#-keepattributes Signature
+#-keepattributes Exceptions
+#
+#-keepclasseswithmembers class * {
+#    @retrofit2.http.* <methods>;
+#}
+
+
+
+-dontwarn okio.**
+-dontwarn java.nio.file.Files
+-dontwarn java.nio.file.Path
+-dontwarn java.nio.file.OpenOption
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn retrofit2.Platform$Java8
