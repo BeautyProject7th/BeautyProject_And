@@ -11,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.makejin.beautyproject_android.Video.Video.VideoContentsActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
-import com.makejin.beautyproject_android.Video.Video.VideoContentsActivity_;
 
 /**
  * Created by kksd0900 on 16. 10. 11..

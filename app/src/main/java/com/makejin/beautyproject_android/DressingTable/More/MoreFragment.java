@@ -3,7 +3,6 @@ package com.makejin.beautyproject_android.DressingTable.More;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -37,16 +36,11 @@ import rx.schedulers.Schedulers;
 public class MoreFragment extends ParentFragment {
     public static MoreActivity activity;
 
-    private long backKeyPressedTime = 0;
-    private Toast toast;
-
     public MoreAdapter adapter;
 
     private RecyclerView recycler_view;
 
-    private RecyclerView.LayoutManager layoutManager;
     public LinearLayout indicator;
-    SwipeRefreshLayout pullToRefresh;
 
     TextView TV_desc, TV_category;
 
@@ -104,42 +98,13 @@ public class MoreFragment extends ParentFragment {
         main_category[5] = "향수";
         main_category[6] = "기타";
 
-
-        switch(activity.main_category_num){
-            case 0:
-                category = "Skin/Care";
-                break;
-            case 1:
-                category = "Cleansing";
-                break;
-            case 2:
-                category = "Base Makeup";
-                break;
-            case 3:
-                category = "Color Makeup";
-                break;
-            case 4:
-                category = "Mask/Pack";
-                break;
-            case 5:
-                category = "Perfume";
-                break;
-            case 6:
-                category = "Etc";
-                break;
-            default:
-                category = "error";
-        }
-
-        TV_category.setText(category);
-        TV_desc.setText(SharedManager.getInstance().getMe().name + "님의 " + category + "목록입니다.");
+        TV_category.setText(moreActivity.main_category);
+        TV_desc.setText(SharedManager.getInstance().getMe().name + "님의 " + moreActivity.main_category + " 목록입니다.");
 
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
-        connectTestCall(moreActivity.main_category_num);
-
-
+        connectTestCall(moreActivity.main_category);
 
 
         if (recycler_view == null) {
@@ -176,10 +141,10 @@ public class MoreFragment extends ParentFragment {
         refresh();
     }
 
-    void connectTestCall(int main_category_num) {
+    void connectTestCall(String main_category) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category[main_category_num], page_num)
+        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Cosmetic>>() {
@@ -190,7 +155,6 @@ public class MoreFragment extends ParentFragment {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         endOfPage = true;
                     }
                     @Override

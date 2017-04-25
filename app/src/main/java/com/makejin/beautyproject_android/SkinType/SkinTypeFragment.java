@@ -15,10 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.makejin.beautyproject_android.DressingTable.More.MoreActivity_;
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity;
 import com.makejin.beautyproject_android.DressingTable.DressingTableAdapter;
-import com.makejin.beautyproject_android.DressingTable.More.MoreActivity_;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;

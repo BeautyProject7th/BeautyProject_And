@@ -19,7 +19,7 @@ public class MoreActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
 
-    public static int main_category_num;
+    public static String main_category;
 
 
     MoreActivity activity;
@@ -31,8 +31,8 @@ public class MoreActivity extends AppCompatActivity {
     void afterBindingView() {
         this.activity = this;
 
-        main_category_num = getIntent().getIntExtra("main_category_num", -1);
-        Log.i("vxcvx", main_category_num+"");
+        main_category = getIntent().getStringExtra("main_category");
+        Log.i("vxcvx", main_category+"");
 
         Fragment fragment = new MoreFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();

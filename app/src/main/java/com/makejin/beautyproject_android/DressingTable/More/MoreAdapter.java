@@ -85,7 +85,7 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
             if (position == mDataset.size()-1 && !fragment.endOfPage) {
                 //fragment.connectTestCall(SharedManager.getInstance().getMe().id, fragment.main_category[temp_main_category_num], ++fragment.page_num);
                 fragment.page_num++;
-                fragment.connectTestCall(MoreActivity.main_category_num);
+                fragment.connectTestCall(MoreActivity.main_category);
             }
         }
     }
