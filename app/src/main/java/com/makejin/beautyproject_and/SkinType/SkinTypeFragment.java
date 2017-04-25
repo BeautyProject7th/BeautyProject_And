@@ -102,8 +102,8 @@ public class SkinTypeFragment extends ParentFragment {
 
         //TV_top_desc = (TextView) view.findViewById(R.id.TV_top_desc);
         TV_name = (TextView) view.findViewById(R.id.TV_name);
-        TV_skin_trouble = (TextView) view.findViewById(R.id.TV_skin_trouble);
-        TV_skin_type = (TextView) view.findViewById(R.id.TV_skin_type);
+        //TV_skin_trouble = (TextView) view.findViewById(R.id.TV_skin_trouble);
+        //TV_skin_type = (TextView) view.findViewById(R.id.TV_skin_type);
 
         String image_url = Constants.IMAGE_BASE_URL_users + SharedManager.getInstance().getMe().profile_url;
 

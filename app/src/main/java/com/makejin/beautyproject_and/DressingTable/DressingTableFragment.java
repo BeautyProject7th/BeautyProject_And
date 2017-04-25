@@ -85,7 +85,7 @@ public class DressingTableFragment extends ParentFragment {
         final DressingTableActivity dressingTableActivity = (DressingTableActivity) getActivity();
         this.activity = dressingTableActivity;
 
-        BT_logout = (Button)view.findViewById(R.id.BT_logout);
+        //BT_logout = (Button)view.findViewById(R.id.BT_logout);
         BT_cosmetic_upload = (Button) view.findViewById(R.id.BT_cosmetic_upload);
         BT_more[0] = (Button) view.findViewById(R.id.BT_more_skin_care);
         BT_more[1] = (Button) view.findViewById(R.id.BT_more_cleansing);
