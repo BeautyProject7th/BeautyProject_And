@@ -108,7 +108,7 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
 
 
             String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
-
+            Log.i("ZXc","makejin2:"+image_url);
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).

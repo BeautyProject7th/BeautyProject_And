@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--cell은 가로를 match_parent로 해야 아이템이 서로 겹치지 않고 딱 맞게 됩니다-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="150dp"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:id="@+id/LL_product">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+        <ImageView
+            android:id="@+id/IV_user"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#AAAAAA"/>
+        <TextView
+            android:id="@+id/TV_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이디"
+            android:layout_toRightOf="@id/IV_user"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp"
+            android:layout_centerVertical="true"/>
+        <Button
+            android:id="@+id/BT_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="팔로우"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/TV_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/TV_skin_trouble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="피부고민 : "/>
+        <TextView
+            android:id="@+id/TV_skin_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="피부타입 : "/>
+        <TextView
+            android:id="@+id/TV_personal_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="퍼스널컬러 : "/>
+        <TextView
+            android:id="@+id/TV_important_component"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중요요소 : "/>
+    </LinearLayout>
+
+</LinearLayout>
