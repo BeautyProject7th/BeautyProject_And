@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.makejin.beautyproject_android.DressingTable.DressingTableFragment;
 import com.makejin.beautyproject_android.R;
 
 import org.androidannotations.annotations.AfterViews;
@@ -15,6 +14,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+/* 여기 DressingTableFragment 없애서 오류에요
 @EActivity(R.layout.activity_skin_type)
 public class SkinTypeActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
@@ -28,6 +28,7 @@ public class SkinTypeActivity extends AppCompatActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+
 
         Fragment fragment = new DressingTableFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -56,3 +57,4 @@ public class SkinTypeActivity extends AppCompatActivity {
 }
 
 
+*/

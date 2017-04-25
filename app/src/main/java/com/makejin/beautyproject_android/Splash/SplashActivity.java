@@ -11,7 +11,6 @@ import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.Tracker;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
-import com.makejin.beautyproject_android.DressingTable.TestDressingTable_;
 import com.makejin.beautyproject_android.Login.LoginActivity_;
 import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.R;
@@ -161,8 +160,7 @@ public class SplashActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<User>() {
                     @Override
                     public final void onCompleted() {
-                        //startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
-                        startActivity(new Intent(getApplicationContext(), TestDressingTable_.class));
+                        startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
                     }
                     @Override
                     public final void onError(Throwable e) {

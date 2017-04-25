@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
-import com.makejin.beautyproject_android.DressingTable.DressingTableAdapter;
 import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
@@ -33,7 +32,6 @@ import rx.schedulers.Schedulers;
  */
 public class LoginFragment_email extends ParentFragment {
     public static LoginActivity activity;
-    public DressingTableAdapter adapter[] = new DressingTableAdapter[7];
 
     public LinearLayout indicator;
 

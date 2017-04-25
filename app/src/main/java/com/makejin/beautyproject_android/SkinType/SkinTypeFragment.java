@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_android.DressingTable.More.MoreActivity_;
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity;
-import com.makejin.beautyproject_android.DressingTable.DressingTableAdapter;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
@@ -26,7 +25,13 @@ import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
+ * 이 페이지 무슨 페이지 인가요?...
+ * 필요 없는 것 같은데 혹시 필요하신걸까봐 남겨놔요 ㅠㅠㅠ
+ * 기존 오빠가 만들어놓으신 activity_dressing_table layout 없애고
+ * activity_dressing_table 지금 메인 화면이라서 여기 오류 투성이에요 ㅠㅠ
+ * 필요없는건 데이터 줄일겸 다 없애고 있는데 그럼 안되면 말씀해주세요!
  */
+/*
 public class SkinTypeFragment extends ParentFragment {
     public static DressingTableActivity activity;
 
@@ -61,7 +66,7 @@ public class SkinTypeFragment extends ParentFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dressing_table, container, false);
+        View view = inflater.inflate(R.layout.activity_dressing_table, container, false);
         initViewSetting(view);
         return view;
     }
@@ -246,3 +251,4 @@ public class SkinTypeFragment extends ParentFragment {
         }
     }
 }
+*/

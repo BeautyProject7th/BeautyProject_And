@@ -32,7 +32,6 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
-import com.makejin.beautyproject_android.DressingTable.DressingTableAdapter;
 import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
@@ -61,7 +60,6 @@ import java.security.MessageDigest;
  */
 public class LoginFragment extends ParentFragment {
     public static LoginActivity activity;
-    public DressingTableAdapter adapter[] = new DressingTableAdapter[7];
 
     public LinearLayout indicator;
 
