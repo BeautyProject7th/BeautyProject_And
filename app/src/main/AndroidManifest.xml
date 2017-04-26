@@ -85,6 +85,10 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_1"></activity>
+        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_2"></activity>
+        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_3"></activity>
+
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -97,14 +101,26 @@
             android:value="@string/userhabit_api_key" />
 
         <service android:name="io.userhabit.service.main.service.UserhabitService" />
+        <service
+            android:name=".Utils.Push.MyFcmListenerService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".Utils.Push.MyInstanceIDListenerService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        [출처] 안드로이드 FCM 샘플|작성자 Tristan
+
+
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="09ee142c27b4c4383b2de767468c4536de9d0feb" />
-
-        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_1"></activity>
-        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_2"></activity>
-        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_3"></activity>
     </application>
 
 </manifest>

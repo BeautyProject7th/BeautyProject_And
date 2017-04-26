@@ -26,6 +26,7 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.kakao.auth.AuthType;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -207,6 +208,8 @@ public class LoginFragment extends ParentFragment {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 Log.v("result", object.toString());
 
+
+
                                 try {
                                     String email = object.getString("email");       // 이메일
                                     String name = object.getString("name");         // 이름
@@ -221,6 +224,7 @@ public class LoginFragment extends ParentFragment {
                                     Log.i("TAG", "페이스북 이름 -> " + name);
                                     //Log.i("TAG", "페이스북 성별 -> " + gender);
                                     Log.i("TAG", "페이스북 프로필 -> " + url);
+                                    Log.i("TAG", "push token : "+ FirebaseInstanceId.getInstance().getToken());
                                     //
                                     // Log.i("TAG", "페이스북 생일 -> " + birthday);
 
@@ -229,7 +233,7 @@ public class LoginFragment extends ParentFragment {
                                     tempUser.profile_url = url.toString();
                                     tempUser.social_type = "페이스북";
                                     tempUser.id = userId;
-
+                                    tempUser.push_token = FirebaseInstanceId.getInstance().getToken();
 
                                     //SharedManager.getInstance().setMe(tempUser);
 
@@ -385,6 +389,7 @@ public class LoginFragment extends ParentFragment {
                 tempUser.profile_url = profileUrl;
                 tempUser.social_type = "카카오톡";
                 tempUser.id = userId;
+                tempUser.push_token = FirebaseInstanceId.getInstance().getToken();
 
                 connectTestCall_login(tempUser);
 

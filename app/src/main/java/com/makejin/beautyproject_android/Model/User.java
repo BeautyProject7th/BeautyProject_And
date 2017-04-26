@@ -12,5 +12,5 @@ public class User {
     public String birthday = "";
     public String gender = "";
     public String social_type;
-
+    public String push_token;
 }

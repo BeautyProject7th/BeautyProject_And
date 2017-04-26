@@ -105,5 +105,8 @@ dependencies {
     //google analytics
     compile 'com.google.android.gms:play-services-analytics:9.0.0'
 
+    //fcm
+    compile 'com.google.firebase:firebase-messaging:9.0.0'
+
     compile 'com.artemzin.rxjava:proguard-rules:1.1.0.0'
 }

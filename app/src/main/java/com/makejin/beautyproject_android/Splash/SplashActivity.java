@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Login.LoginActivity_;
 import com.makejin.beautyproject_android.Model.User;
@@ -61,7 +62,6 @@ public class SplashActivity extends AppCompatActivity {
 
         // TODO: Move this to where you establish a user session
         logUser();
-
 
 
 

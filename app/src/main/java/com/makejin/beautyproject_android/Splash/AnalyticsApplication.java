@@ -36,7 +36,8 @@ public class AnalyticsApplication extends Application {
         if (mTracker == null) {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
             // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
-            mTracker = analytics.newTracker(R.xml.global_tracker);
+            //TODO : analytics 연동 안될겁니다(google-service.json 변경되어서) - beatuy계정으로 다시 연결해놨으니 손봐주세요
+            //mTracker = analytics.newTracker(R.xml.global_tracker);
         }
         return mTracker;
     }
