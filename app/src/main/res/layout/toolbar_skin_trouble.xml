@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="피부타입 입력"
+            android:text="피부고민 입력"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="25dp"
@@ -33,8 +33,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:text="OK"
-            android:textColor="#FFFFFF"
             android:background="@null"
+            android:textColor="#FFFFFF"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="10dp"/>
 

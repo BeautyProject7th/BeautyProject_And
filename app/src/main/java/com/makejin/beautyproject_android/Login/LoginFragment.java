@@ -32,9 +32,13 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
+import com.makejin.beautyproject_android.Model.DressingTable;
 import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
+import com.makejin.beautyproject_android.SkinTrouble.SkinTroubleActivity_;
+import com.makejin.beautyproject_android.SkinType.SkinTypeActivity;
+import com.makejin.beautyproject_android.SkinType.SkinTypeActivity_;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
@@ -450,6 +454,15 @@ public class LoginFragment extends ParentFragment {
                 .subscribe(new Subscriber<User>() {
                     @Override
                     public final void onCompleted() {
+                        Log.i("zxc", "ggggg : ");
+
+                        User me = SharedManager.getInstance().getMe();
+                        if(me.skin_type == null){
+                            startActivity(new Intent(activity, SkinTypeActivity_.class));
+                        }
+                        if(me.skin_trouble_1 == null){
+                            startActivity(new Intent(activity, SkinTroubleActivity_.class));
+                        }
                         startActivity(new Intent(activity, DressingTableActivity_.class));
                     }
                     @Override

@@ -14,6 +14,11 @@ public class User implements Serializable {
     public String birthday = "";
     public String gender = "";
     public String social_type;
+    public String skin_type;
+    public String skin_trouble_1;
+    public String skin_trouble_2;
+    public String skin_trouble_3;
+
 
     public User(){
         this.id = "id";
@@ -22,6 +27,10 @@ public class User implements Serializable {
         this.birthday = "birthday";
         this.gender = "gender";
         this.social_type = "social_type";
+        this.skin_type = "skin_type";
+        this.skin_trouble_1 = "skin_trouble_1";
+        this.skin_trouble_2 = "skin_trouble_2";
+        this.skin_trouble_3 = "skin_trouble_3";
 
     }
 }

@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.makejin.beautyproject_android.DressingTable.More.MoreActivity_;
+import com.makejin.beautyproject_android.DressingTable.Setting.SettingActivity_;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
 import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
@@ -51,6 +52,11 @@ public class DressingTableActivity extends AppCompatActivity {
 
     @ViewById
     Button BT_find_user;
+
+    @ViewById
+    Button BT_profile_setting;
+
+
 
     @AfterViews
     void afterBindingView() {
@@ -95,6 +101,10 @@ public class DressingTableActivity extends AppCompatActivity {
         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
     }
 
+    @Click
+    void BT_profile_setting(){
+        startActivity(new Intent(activity, SettingActivity_.class));
+    }
 
     @Click
     void BT_cosmetic_upload(){

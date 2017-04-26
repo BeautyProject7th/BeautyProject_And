@@ -5,16 +5,21 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.makejin.beautyproject_android.R;
+import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-/* 여기 DressingTableFragment 없애서 오류에요
+
 @EActivity(R.layout.activity_skin_type)
 public class SkinTypeActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
@@ -25,16 +30,57 @@ public class SkinTypeActivity extends AppCompatActivity {
     @ViewById
     Toolbar cs_toolbar;
 
+    @ViewById
+    TextView TV_skin_type_1,TV_skin_type_2,TV_skin_type_3,TV_skin_type_4;
+
+    @ViewById
+    Button BT_complete;
+
+    String skin_type = null;
+
     @AfterViews
     void afterBindingView() {
         this.activity = this;
 
+        TV_skin_type_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skin_type = TV_skin_type_1.getText().toString();
+                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        Fragment fragment = new DressingTableFragment();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.activity_dressing_table, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
+        TV_skin_type_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skin_type = TV_skin_type_2.getText().toString();
+                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        TV_skin_type_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skin_type = TV_skin_type_3.getText().toString();
+                Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        TV_skin_type_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skin_type = TV_skin_type_4.getText().toString();
+                Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        BT_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedManager.getInstance().getMe().skin_type = skin_type;
+
+            }
+        });
     }
 
     void refresh() {
@@ -55,6 +101,3 @@ public class SkinTypeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 }
-
-
-*/

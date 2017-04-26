@@ -67,12 +67,20 @@ public class FindUserActivity extends AppCompatActivity {
 
 
         User user = new User();
-        user.id="asd";
+        user.name="asd";
+        user.skin_type = "건성";
+        user.skin_trouble_1 = "다크서클";
+        user.skin_trouble_2 = "모공확장";
+        user.skin_trouble_3 = "민감성";
 
         adapter.addData(user);
 
         User user2 = new User();
-        user2.id="asd2";
+        user2.name="asd2";
+        user2.skin_type = "지성";
+        user2.skin_trouble_1 = "모공확장";
+        user2.skin_trouble_2 = null;
+        user2.skin_trouble_3 = null;
 
         adapter.addData(user2);
 

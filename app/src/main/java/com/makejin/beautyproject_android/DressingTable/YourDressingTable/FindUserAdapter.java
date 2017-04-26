@@ -2,6 +2,7 @@ package com.makejin.beautyproject_android.DressingTable.YourDressingTable;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -73,9 +75,17 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     thumbnail(0.1f).
                     into(itemViewHolder.IV_user);
 
-            itemViewHolder.TV_user_id.setText(user.id);
+            itemViewHolder.TV_user_name.setText(user.name);
+            itemViewHolder.TV_skin_type_.setText(user.skin_type);
+            itemViewHolder.TV_skin_trouble_.setText(user.skin_trouble_1);
+            if(user.skin_trouble_2 != null)
+                itemViewHolder.TV_skin_trouble_.append(", "+user.skin_trouble_2);
+            if(user.skin_trouble_3 != null)
+                itemViewHolder.TV_skin_trouble_.append(", "+user.skin_trouble_3);
 
-            itemViewHolder.BT_follow.setOnClickListener(new View.OnClickListener() {
+
+
+            itemViewHolder.LL_user.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(activity, YourDressingTableActivity_.class);
@@ -114,14 +124,21 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
     public class ItemViewHolder extends FindUserAdapter.ViewHolder {
         public Button BT_follow;
         public ImageView IV_user;
-        public TextView TV_user_id;
+        public TextView TV_user_name;
+        public TextView TV_skin_type_;
+        public TextView TV_skin_trouble_;
+        public LinearLayout LL_user;
 
 
         public ItemViewHolder(View v) {
             super(v);
             BT_follow = (Button) v.findViewById(R.id.BT_follow);
             IV_user = (ImageView) v.findViewById(R.id.IV_user);
-            TV_user_id = (TextView) v.findViewById(R.id.TV_user_id);
+            TV_user_name = (TextView) v.findViewById(R.id.TV_user_name);
+            TV_skin_type_ = (TextView) v.findViewById(R.id.TV_skin_type_);
+            TV_skin_trouble_ = (TextView) v.findViewById(R.id.TV_skin_trouble_);
+
+            LL_user = (LinearLayout) v.findViewById(R.id.LL_user);
         }
     }
 }

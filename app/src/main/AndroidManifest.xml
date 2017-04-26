@@ -49,13 +49,16 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <!--
-            activity
+        <activity
             android:name=".SkinType.SkinTypeActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" /
-        -->
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".SkinTrouble.SkinTroubleActivity_"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".Video.Video.VideoContentsActivity_"
             android:launchMode="singleTask"
