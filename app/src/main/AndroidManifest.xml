@@ -24,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".DressingTable.DressingTableActivity_"
             android:launchMode="singleTask"
@@ -50,11 +49,16 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <!--activity
+        <activity
             android:name=".SkinType.SkinTypeActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" /-->
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".SkinTrouble.SkinTroubleActivity_"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".Video.Video.VideoContentsActivity_"
             android:launchMode="singleTask"
@@ -121,6 +125,13 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="09ee142c27b4c4383b2de767468c4536de9d0feb" />
+        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_1" />
+        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_2" />
+        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_3" />
+        <activity android:name=".DressingTable.YourDressingTable.FindUserActivity_"></activity>
+        <activity android:name=".DressingTable.YourDressingTable.YourDressingTableActivity_"></activity>
+        <activity android:name=".DressingTable.YourDressingTable.YourMoreActivity_"></activity>
+        <activity android:name=".DressingTable.YourDressingTable.YourDetailCosmeticActivity_"></activity>
     </application>
 
 </manifest>
