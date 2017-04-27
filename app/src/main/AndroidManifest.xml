@@ -118,8 +118,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        [출처] 안드로이드 FCM 샘플|작성자 Tristan
-
 
 
         <meta-data

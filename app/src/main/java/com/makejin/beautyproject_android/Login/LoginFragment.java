@@ -473,6 +473,7 @@ public class LoginFragment extends ParentFragment {
                             startActivity(new Intent(activity, SkinTroubleActivity_.class));
                         }
                         startActivity(new Intent(activity, DressingTableActivity_.class));
+                        activity.finish();
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -491,33 +492,7 @@ public class LoginFragment extends ParentFragment {
                     }
                 });
     }
-/*
-    void connectTestCall_logout() {
-        //LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(CSConnection.class);
-        conn.user_logout()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GlobalResponse>() {
-                    @Override
-                    public final void onCompleted() {
 
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        Log.i("zxc", "zzz : ");
-                        Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public final void onNext(GlobalResponse response) {
-                        if (response != null) {
-                            Toast.makeText(activity, "Logout Success", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-*/
+
+
 }

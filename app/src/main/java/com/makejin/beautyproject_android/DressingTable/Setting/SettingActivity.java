@@ -3,17 +3,28 @@ package com.makejin.beautyproject_android.DressingTable.Setting;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.makejin.beautyproject_android.Login.LoginActivity;
+import com.makejin.beautyproject_android.Login.LoginActivity_;
+import com.makejin.beautyproject_android.Model.GlobalResponse;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.SkinTrouble.SkinTroubleActivity_;
 import com.makejin.beautyproject_android.SkinType.SkinTypeActivity_;
+import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
+import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
+import com.makejin.beautyproject_android.Utils.Constants.Constants;
 import com.makejin.beautyproject_android.Utils.SharedManager.PreferenceManager;
+import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.CheckedChange;
@@ -21,6 +32,10 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 @EActivity(R.layout.activity_setting)
 public class SettingActivity extends AppCompatActivity {
@@ -79,7 +94,7 @@ public class SettingActivity extends AppCompatActivity {
 
     @Click
     void BT_logout(){
-        //startActivity(new Intent(getApplicationContext(), SkinTypeActivity_.class));
+        connectTestCall_logout();
     }
 
 
@@ -95,6 +110,50 @@ public class SettingActivity extends AppCompatActivity {
 
     void connectTestCall() {
 
+    }
+
+    void connectTestCall_logout() {
+        //LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.user_logout()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        Log.i("zxc", SharedManager.getInstance().getMe().social_type);
+
+                        if(SharedManager.getInstance().getMe().social_type.equals("페이스북")) {
+                            LoginManager.getInstance().logOut();
+                            startActivity(new Intent(activity, LoginActivity_.class));
+                            activity.finish();
+                        }
+                        else if(SharedManager.getInstance().getMe().social_type.equals("카카오톡")){
+                            UserManagement.requestLogout(new LogoutResponseCallback() {
+                                @Override
+                                public void onCompleteLogout() {
+                                    startActivity(new Intent(activity, LoginActivity_.class));
+                                    activity.finish();
+                                }
+                            });
+                        }
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.i("zxc", "zzz : ");
+                        Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response != null) {
+                            Toast.makeText(activity, "Logout Success", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
 

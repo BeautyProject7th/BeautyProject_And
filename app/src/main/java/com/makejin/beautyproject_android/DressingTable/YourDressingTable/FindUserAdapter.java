@@ -121,6 +121,7 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
             container = itemView;
         }
     }
+
     public class ItemViewHolder extends FindUserAdapter.ViewHolder {
         public Button BT_follow;
         public ImageView IV_user;
@@ -141,4 +142,6 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
             LL_user = (LinearLayout) v.findViewById(R.id.LL_user);
         }
     }
+
+
 }

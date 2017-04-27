@@ -23,19 +23,27 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF">
-            <EditText
-                android:layout_marginLeft="10dp"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:hint="검색어를 입력해주세요"
-                android:background="@drawable/btn_search"/>
+            android:background="#FFFFFF"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
             <Button
+                android:id="@+id/BT_search"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:text="검색"
                 android:layout_alignParentRight="true"/>
+
+            <EditText
+                android:id="@+id/ET_search"
+                android:layout_marginLeft="10dp"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:hint="유저 아이디를 입력해주세요"
+                android:padding="10dp"
+                android:background="@drawable/btn_search"
+                android:layout_alignParentTop="true" />
         </RelativeLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

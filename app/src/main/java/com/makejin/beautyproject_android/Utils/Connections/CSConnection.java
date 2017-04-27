@@ -137,6 +137,15 @@ public interface CSConnection{
 
     @POST("/cosmetics/report")
     Observable<GlobalResponse> cosmetic_report(@Body Map<String, Object> fields);
+
+
+
+
+
+
+
+    @GET("/users/find/{user_id}")
+    Observable<List<User>> user_recommendUsers(@Path("user_id") String user_id);
 }
 
 

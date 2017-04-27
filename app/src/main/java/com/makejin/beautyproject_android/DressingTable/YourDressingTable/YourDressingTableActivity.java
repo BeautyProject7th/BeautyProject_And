@@ -54,7 +54,8 @@ public class YourDressingTableActivity extends AppCompatActivity {
 
         //User user = (User) getIntent().getSerializableExtra("user");
 
-        String image_url = SharedManager.getInstance().getYou().profile_url;
+        User you = SharedManager.getInstance().getYou();
+        String image_url = you.profile_url;
 
         Glide.with(activity).
                 load(image_url).
