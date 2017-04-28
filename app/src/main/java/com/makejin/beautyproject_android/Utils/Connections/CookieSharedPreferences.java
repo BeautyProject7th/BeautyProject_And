@@ -70,4 +70,11 @@ public class CookieSharedPreferences {
             return cookie;
         }
     }
+
+    public void deleteHashSet(String key){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(key);
+        Log.i("cookie", "delete : "+String.valueOf(key));
+        editor.commit();
+    }
 }

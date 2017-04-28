@@ -21,6 +21,7 @@ import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.SkinTrouble.SkinTroubleActivity_;
 import com.makejin.beautyproject_android.SkinType.SkinTypeActivity_;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
+import com.makejin.beautyproject_android.Utils.Connections.CookieSharedPreferences;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
 import com.makejin.beautyproject_android.Utils.SharedManager.PreferenceManager;
@@ -95,6 +96,9 @@ public class SettingActivity extends AppCompatActivity {
     @Click
     void BT_logout(){
         connectTestCall_logout();
+        CookieSharedPreferences cookieSharedPreferences;
+        cookieSharedPreferences = CookieSharedPreferences.getInstanceOf(activity);
+        cookieSharedPreferences.deleteHashSet(CookieSharedPreferences.COOKIE_SHARED_PREFERENCES_KEY);
     }
 
 
