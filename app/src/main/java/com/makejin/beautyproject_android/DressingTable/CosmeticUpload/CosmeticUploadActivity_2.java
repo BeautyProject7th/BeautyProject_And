@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -20,6 +21,7 @@ import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
 import com.makejin.beautyproject_android.Utils.Loadings.LoadingUtil;
+import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +55,10 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
         activity = this;
 
         setLayout();
-        connectCategoryCall();
+        categorylist = SharedManager.getInstance().getCategory();
+        adapter = new CosmeticUploadAdapter_2(activity, categorylist);
+        mListView.setAdapter(adapter);
+        Log.i("test","category : "+categorylist);
 
         Toolbar cs_toolbar = (Toolbar)findViewById(R.id.cs_toolbar);
 
@@ -140,38 +145,6 @@ public class CosmeticUploadActivity_2 extends AppCompatActivity {
     private void setLayout(){
         mListView = (ExpandableListView) findViewById(R.id.ExpandableListView);
         IV_brand = (ImageView) findViewById(R.id.IV_brand);
-    }
-
-    void connectCategoryCall() {
-        //TODO: 서버 호출 횟수를 줄이기 위해 카테고리 불러오는 작업은 어플을 처음 실행한 경우에만 불러오도록 한다.
-        LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.category()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Category>>() {
-                    @Override
-                    public final void onCompleted() {
-                        LoadingUtil.stopLoading(indicator);
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public final void onNext(List<Category> response) {
-                        if (response != null) {
-                            for(int i=0;i<response.size();i++){
-                                categorylist.put(response.get(i).main_category, response.get(i).sub_category);
-                            }
-                            adapter = new CosmeticUploadAdapter_2(activity, categorylist);
-                            mListView.setAdapter(adapter);
-                        } else {
-                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
     }
 
     /// EXIT

@@ -3,6 +3,10 @@ package com.makejin.beautyproject_android.Utils.SharedManager;
 import com.makejin.beautyproject_android.Model.Category;
 import com.makejin.beautyproject_android.Model.User;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by kksd0900 on 16. 10. 16..
  */
@@ -10,7 +14,7 @@ public class SharedManager {
     private volatile static SharedManager single;
     private User me;
     private User you;
-    private Category category;
+    private Map<String, List<String>> category = new HashMap<String, List<String>>();
 
     public static SharedManager getInstance() {
 
@@ -58,11 +62,11 @@ public class SharedManager {
     }
 
 
-    public Category getCategory() {
+    public Map<String, List<String>> getCategory() {
         return this.category;
     }
 
-    public boolean setCategory(Category category) {
+    public boolean setCategory(Map<String, List<String>> category) {
         try {
             this.category = category;
         } catch (Exception e) {

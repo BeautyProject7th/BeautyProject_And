@@ -10,9 +10,9 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.Tracker;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Login.LoginActivity_;
+import com.makejin.beautyproject_android.Model.Category;
 import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
@@ -26,6 +26,9 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,6 +37,8 @@ import io.userhabit.service.Userhabit;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.makejin.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_2.adapter;
 
 @EActivity(R.layout.activity_splash)
 public class SplashActivity extends AppCompatActivity {
@@ -160,7 +165,7 @@ public class SplashActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<User>() {
                     @Override
                     public final void onCompleted() {
-                        startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
+                        connectCategoryCall();
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -174,6 +179,37 @@ public class SplashActivity extends AppCompatActivity {
                             SharedManager.getInstance().setMe(response);
                         } else {
                             Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    void connectCategoryCall() {
+        //서버 호출 횟수를 줄이기 위해 카테고리 불러오는 작업은 어플을 처음 실행한 경우에만 불러오도록 한다.
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.category()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Category>>() {
+                    @Override
+                    public final void onCompleted() {
+                        startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<Category> response) {
+                        if (response != null) {
+                            Map<String, List<String>> categorylist = new HashMap<String, List<String>>();
+                            for(int i=0;i<response.size();i++){
+                                categorylist.put(response.get(i).main_category, response.get(i).sub_category);
+                            }
+                            SharedManager.getInstance().setCategory(categorylist);
+                        } else {
+                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
