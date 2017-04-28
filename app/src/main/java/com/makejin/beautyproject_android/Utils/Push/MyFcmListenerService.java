@@ -1,6 +1,5 @@
 package com.makejin.beautyproject_android.Utils.Push;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,7 +11,6 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Splash.SplashActivity;
-import com.makejin.beautyproject_android.Splash.SplashActivity_;
 import com.makejin.beautyproject_android.Utils.SharedManager.PreferenceManager;
 
 import android.support.v4.app.NotificationCompat;

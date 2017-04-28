@@ -20,6 +20,7 @@ import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
 import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 import com.makejin.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
+import com.makejin.beautyproject_android.Model.User;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -48,7 +49,7 @@ public class DressingTableActivity extends AppCompatActivity {
     ImageView IV_user;
 
     @ViewById
-    TextView TV_name;
+    TextView TV_name,TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3;
 
     @ViewById
     Button BT_find_user;
@@ -56,21 +57,21 @@ public class DressingTableActivity extends AppCompatActivity {
     @ViewById
     Button BT_profile_setting;
 
-
-
     @AfterViews
     void afterBindingView() {
         this.activity = this;
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
-        String image_url = SharedManager.getInstance().getMe().profile_url;
+        User me = SharedManager.getInstance().getMe();
+
+        String image_url = me.profile_url;
 
         Glide.with(activity).
                 load(image_url).
                 thumbnail(0.1f).
                 bitmapTransform(new CropCircleTransformation(activity)).into(IV_user);
-        TV_name.setText(SharedManager.getInstance().getMe().name);
+        TV_name.setText(me.name);
 
         categorylist.put(R.id.skin_care,"스킨케어");
         categorylist.put(R.id.cleansing,"클렌징");
@@ -85,6 +86,18 @@ public class DressingTableActivity extends AppCompatActivity {
         categorylist.put(R.id.perfume,"향수");
         categorylist.put(R.id.cosmetic_product,"화장 소품");
         categorylist.put(R.id.man,"남성 화장품");
+
+        if(me.skin_type==null) TV_skin_type.setText("미설정");
+        else TV_skin_type.setText(me.skin_type);
+
+        if(me.skin_trouble_1==null) TV_skin_trouble1.setText("미설정");
+        else TV_skin_trouble1.setText(me.skin_trouble_1);
+
+        if(me.skin_trouble_2==null) TV_skin_trouble2.setText("미설정");
+        else TV_skin_trouble2.setText(me.skin_trouble_2);
+
+        if(me.skin_trouble_3==null) TV_skin_trouble3.setText("미설정");
+        else TV_skin_trouble3.setText(me.skin_trouble_3);
     }
 
     @Click({R.id.skin_care,R.id.cleansing,R.id.mask_pack,R.id.suncare,R.id.base_makeup, R.id.eye_makeup,

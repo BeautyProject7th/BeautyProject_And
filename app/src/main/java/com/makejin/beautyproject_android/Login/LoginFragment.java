@@ -212,9 +212,6 @@ public class LoginFragment extends ParentFragment {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 Log.v("result", object.toString());
-
-
-
                                 try {
                                     String email = object.getString("email");       // 이메일
                                     String name = object.getString("name");         // 이름
@@ -466,13 +463,17 @@ public class LoginFragment extends ParentFragment {
                         Log.i("zxc", "ggggg : ");
 
                         User me = SharedManager.getInstance().getMe();
+                        Log.i("test","skin type : "+me.skin_type);
+                        Log.i("test","skin trouble1 : "+me.skin_trouble_1);
+                        Log.i("test","skin trouble2 : "+me.skin_trouble_2);
+                        Log.i("test","skin trouble3 : "+me.skin_trouble_3);
                         if(me.skin_type == null){
                             startActivity(new Intent(activity, SkinTypeActivity_.class));
                         }
-                        if(me.skin_trouble_1 == null){
+                        else if(me.skin_trouble_1 == null){
                             startActivity(new Intent(activity, SkinTroubleActivity_.class));
                         }
-                        startActivity(new Intent(activity, DressingTableActivity_.class));
+                        else startActivity(new Intent(activity, DressingTableActivity_.class));
                         activity.finish();
                     }
                     @Override
