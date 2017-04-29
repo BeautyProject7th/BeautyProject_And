@@ -182,7 +182,6 @@
                         android:layout_height="wrap_content"
                         android:minHeight="168.5dp"
                         android:background="@drawable/edittext_review"
-                        android:hint="이 화장품에 대한 리뷰를 입력해주세요."
                         android:textSize="15dp"
                         android:gravity="top"
                         android:textColor="@color/colorGrayText"

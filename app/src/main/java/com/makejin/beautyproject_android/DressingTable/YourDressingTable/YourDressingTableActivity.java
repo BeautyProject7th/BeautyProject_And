@@ -52,8 +52,6 @@ public class YourDressingTableActivity extends AppCompatActivity {
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
-        //User user = (User) getIntent().getSerializableExtra("user");
-
         User you = SharedManager.getInstance().getYou();
         String image_url = you.profile_url;
 

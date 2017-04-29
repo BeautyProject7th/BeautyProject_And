@@ -45,7 +45,7 @@ import rx.schedulers.Schedulers;
  * Created by kksd0900 on 16. 10. 11..
  */
 public class YourDetailCosmeticFragment extends ParentFragment {
-    public static DetailCosmeticActivity activity;
+    public static YourDetailCosmeticActivity activity;
 
     private RecyclerView.LayoutManager layoutManager;
     public LinearLayout indicator;
@@ -56,7 +56,7 @@ public class YourDetailCosmeticFragment extends ParentFragment {
     EditText ET_review;
     RatingBar RB_rate;
     DatePicker DP_expiration_date;
-    Button BT_update, BT_back;
+    Button BT_back;
     Switch S_status;
     WheelDatePicker wheelDatePicker;
 
@@ -71,8 +71,8 @@ public class YourDetailCosmeticFragment extends ParentFragment {
     }
 
     private void initViewSetting(View view) {
-        final DetailCosmeticActivity detailCosmeticActivity = (DetailCosmeticActivity) getActivity();
-        this.activity = detailCosmeticActivity;
+        final YourDetailCosmeticActivity yourDetailCosmeticActivity = (YourDetailCosmeticActivity) getActivity();
+        this.activity = yourDetailCosmeticActivity;
 
         Toolbar cs_toolbar = (Toolbar) view.findViewById(R.id.cs_toolbar);
 
@@ -98,6 +98,7 @@ public class YourDetailCosmeticFragment extends ParentFragment {
         TV_expiration_date = (TextView) view.findViewById(R.id.TV_expiration_date);
         TV_report = (TextView) view.findViewById(R.id.TV_report);
         wheelDatePicker = (WheelDatePicker) view.findViewById(R.id.wheel_date_picker);
+        wheelDatePicker.setClickable(false);
         wheelDatePicker.setVisibleItemCount(3);
         wheelDatePicker.setCurtainColor(R.color.colorPurpleLight);
         wheelDatePicker.setSelectedItemTextColor(Color.rgb(0,0,0));
@@ -114,27 +115,6 @@ public class YourDetailCosmeticFragment extends ParentFragment {
 //                Intent intent = new Intent(getActivity(), .class);
 //                intent.putExtra("user_id", SharedManager.getInstance().getMe().id);
 //                startActivity(intent);
-            }
-        });
-
-
-        BT_update = (Button) view.findViewById(R.id.BT_update);
-        BT_update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cosmetic.review = ET_review.getText().toString();
-                cosmetic.rate_num = RB_rate.getRating();
-//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                String strDate = sdf.format(new Date());
-                if(S_status.isChecked())
-                    cosmetic.status = 1;
-                else
-                    cosmetic.status = 0;
-
-                cosmetic.expiration_date = getExpirationDate(wheelDatePicker.getCurrentYear(), wheelDatePicker.getCurrentMonth(), wheelDatePicker.getCurrentDay());
-
-                Log.i("m", "cosmetic.status : " + cosmetic.status);
-                connectTestCall_post(cosmetic);
             }
         });
 
@@ -160,7 +140,7 @@ public class YourDetailCosmeticFragment extends ParentFragment {
     void connectTestCall_get() {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.myOneCosmetic_get(SharedManager.getInstance().getMe().id, activity.cosmetic_id)
+        conn.myOneCosmetic_get(SharedManager.getInstance().getYou().id, activity.cosmetic_id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Cosmetic>() {
@@ -192,9 +172,8 @@ public class YourDetailCosmeticFragment extends ParentFragment {
                             S_status.setChecked(false);
 
                         if(cosmetic.expiration_date == null){
-                            TV_expiration_date.setText("유통기한 : " + "설정해주세요");
+                            TV_expiration_date.setText("유통기한 : " + "미설정");
 
-                            Toast.makeText(getActivity(), "유통기한을 설정해주세요.", Toast.LENGTH_SHORT).show();
                             long now = System.currentTimeMillis();
                             Date currentDate = new Date(now);
 
@@ -237,35 +216,6 @@ public class YourDetailCosmeticFragment extends ParentFragment {
                             cosmetic = response;
                         } else {
                             Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    void connectTestCall_post(Cosmetic cosmetic) {
-        LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.myOneCosmetic_put(cosmetic, SharedManager.getInstance().getMe().id, cosmetic.id)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GlobalResponse>() {
-                    @Override
-                    public final void onCompleted() {
-                        LoadingUtil.stopLoading(indicator);
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public final void onNext(GlobalResponse response) {
-                        Log.i("Zxc", "response code : " + response.code);
-                        if (response.code == 200) {
-                            Toast.makeText(getActivity(), "정상적으로 수정되었습니다", Toast.LENGTH_SHORT).show();
-                            activity.finish();
-                        } else {
-                            Toast.makeText(getActivity(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -9,11 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
+import com.makejin.beautyproject_android.Model.GlobalResponse;
 import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.R;
+import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
+import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
+import com.makejin.beautyproject_android.Utils.Constants.Constants;
+import com.makejin.beautyproject_android.Utils.Loadings.LoadingUtil;
 import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.AfterViews;
@@ -26,6 +33,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 @EActivity(R.layout.activity_skin_type)
@@ -47,9 +58,13 @@ public class SkinTypeActivity extends AppCompatActivity {
 
     Map<Integer,String> skin_type_list = new HashMap<Integer, String>();
 
+    LinearLayout indicator;
+
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+
+        indicator = (LinearLayout) findViewById(R.id.indicator);
 
         skin_type_list.put(R.id.TV_skin_type_1, "건성");
         skin_type_list.put(R.id.TV_skin_type_2, "중성");
@@ -125,11 +140,15 @@ public class SkinTypeActivity extends AppCompatActivity {
 
     @Click
     void BT_complete(){
-        user.skin_type = skin_type;
+        if(skin_type == null){
+            Toast.makeText(getApplicationContext(), "피부 타입을 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Log.i("user.skin_type", user.skin_type);
-
-        //SharedManager.getInstance().getMe().skin_type = skin_type;
+        Map user = new HashMap();
+        user.put("user_id", SharedManager.getInstance().getMe().id);
+        user.put("skin_type", skin_type);
+        connectTestCall_update_skin_type(user);
     }
 
 
@@ -142,7 +161,36 @@ public class SkinTypeActivity extends AppCompatActivity {
 
     }
 
-    void connectTestCall() {
+    void connectTestCall_update_skin_type(Map user) {
+        LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.user_updateSkinType(user)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        LoadingUtil.stopLoading(indicator);
+                        Intent intent = new Intent(getApplicationContext(), DressingTableActivity_.class);
+                        startActivity(intent);
+                        setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
+                        finish();
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        LoadingUtil.stopLoading(indicator);
+                        e.printStackTrace();
+                        //Toast.makeText(getApplicationContext(), "이미 등록한 화장품입니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response != null) {
+                            Toast.makeText(getApplicationContext(), "정상적으로 변경되었습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
     }
 

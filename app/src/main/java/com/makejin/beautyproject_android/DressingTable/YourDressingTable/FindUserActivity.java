@@ -84,7 +84,7 @@ public class FindUserActivity extends AppCompatActivity {
 //                    Log.i("Zxc","ZXc999");
 //                    Intent intent = new Intent(activity, YourDressingTableActivity_.class);
 //                    intent.putExtra("user",adapter.getItem(position));
-//                    SharedManager.getInstance().setYou(adapter.getItem(position));
+//                    SharedManager.getInst ance().setYou(adapter.getItem(position));
 //                    startActivity(intent);
                 }
             }, activity, this);
@@ -113,7 +113,11 @@ public class FindUserActivity extends AppCompatActivity {
 //        adapter.notifyDataSetChanged();
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         refresh();
     }
 
@@ -123,23 +127,21 @@ public class FindUserActivity extends AppCompatActivity {
     }
 
     void refresh() {
-        connectTestCall_recommend(SharedManager.getInstance().getMe().id);
+        adapter.clear();
+        adapter.notifyDataSetChanged();
+        connectTestCall_recommend();
     }
 
-    void connectTestCall_recommend(String user_id) {
+    void connectTestCall_recommend() {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.user_recommendUsers(user_id)
+        conn.user_recommendUsers(SharedManager.getInstance().getMe().id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<User>>() {
                     @Override
                     public final void onCompleted() {
                         LoadingUtil.stopLoading(indicator);
-//                        Intent intent = new Intent(getApplicationContext(), DressingTableActivity_.class);
-//                        startActivity(intent);
-                        setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
-                        finish();
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -150,6 +152,10 @@ public class FindUserActivity extends AppCompatActivity {
                     @Override
                     public final void onNext(List<User> response) {
                         if (response != null) {
+                            for(User u : response){
+                                adapter.addData(u);
+                            }
+                            adapter.notifyDataSetChanged();
                             //Toast.makeText(getApplicationContext(), "정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -159,20 +165,16 @@ public class FindUserActivity extends AppCompatActivity {
     }
 
 
-    void connectTestCall_search(String user_id) {
+    void connectTestCall_search(String search_keyword) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.user_recommendUsers(user_id)
+        conn.user_searchUsers(SharedManager.getInstance().getMe().id, search_keyword)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<User>>() {
                     @Override
                     public final void onCompleted() {
                         LoadingUtil.stopLoading(indicator);
-//                        Intent intent = new Intent(getApplicationContext(), DressingTableActivity_.class);
-//                        startActivity(intent);
-                        setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
-                        finish();
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -183,6 +185,12 @@ public class FindUserActivity extends AppCompatActivity {
                     @Override
                     public final void onNext(List<User> response) {
                         if (response != null) {
+                            adapter.clear();
+                            adapter.notifyDataSetChanged();
+                            for(User u : response){
+                                adapter.addData(u);
+                            }
+                            adapter.notifyDataSetChanged();
                             //Toast.makeText(getApplicationContext(), "정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();

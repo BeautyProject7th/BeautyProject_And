@@ -143,9 +143,18 @@ public interface CSConnection{
 
 
 
+    @PUT("/users/skin_type")
+    Observable<GlobalResponse> user_updateSkinType(@Body Map<String, Object> fields);
+
+    @PUT("/users/skin_trouble")
+    Observable<GlobalResponse> user_updateSkinTrouble(@Body Map<String, Object> fields);
 
     @GET("/users/find/{user_id}")
     Observable<List<User>> user_recommendUsers(@Path("user_id") String user_id);
+
+    @GET("/users/find/{user_id}/search/{search_keyword}")
+    Observable<List<User>> user_searchUsers(@Path("user_id") String user_id, @Path("search_keyword") String search_keyword);
+
 }
 
 

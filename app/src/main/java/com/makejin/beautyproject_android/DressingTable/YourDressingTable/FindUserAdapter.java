@@ -68,7 +68,8 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
             final FindUserAdapter.ItemViewHolder itemViewHolder = (FindUserAdapter.ItemViewHolder) holder;
             final User user = mDataset.get(position);
 
-            String image_url = Constants.IMAGE_BASE_URL_users + user.profile_url;
+            //String image_url = Constants.IMAGE_BASE_URL_users + user.profile_url;
+            String image_url = user.profile_url;
             Log.i("ZXc","makejin2:"+image_url);
             Glide.with(context).
                     load(image_url).

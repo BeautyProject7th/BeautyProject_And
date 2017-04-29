@@ -30,9 +30,9 @@ public class YourDetailCosmeticActivity extends AppCompatActivity {
         this.activity = this;
 
         cosmetic_id = (String) getIntent().getStringExtra("cosmetic_id");
-        Fragment fragment = new DetailCosmeticFragment();
+        Fragment fragment = new YourDetailCosmeticFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.activity_detail_cosmetic, fragment);
+        ft.replace(R.id.activity_your_detail_cosmetic, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
 
