@@ -92,6 +92,11 @@
         <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_1"></activity>
         <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_2"></activity>
         <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_3"></activity>
+        <activity android:name=".DressingTable.YourDressingTable.FindUserActivity_"></activity>
+        <activity android:name=".DressingTable.YourDressingTable.YourDressingTableActivity_"></activity>
+        <activity android:name=".DressingTable.YourDressingTable.YourMoreActivity_"></activity>
+        <activity android:name=".DressingTable.YourDressingTable.YourDetailCosmeticActivity_"></activity>
+        <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity"></activity>
 
 
         <meta-data
@@ -123,13 +128,6 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="09ee142c27b4c4383b2de767468c4536de9d0feb" />
-        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_1" />
-        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_2" />
-        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_3" />
-        <activity android:name=".DressingTable.YourDressingTable.FindUserActivity_"></activity>
-        <activity android:name=".DressingTable.YourDressingTable.YourDressingTableActivity_"></activity>
-        <activity android:name=".DressingTable.YourDressingTable.YourMoreActivity_"></activity>
-        <activity android:name=".DressingTable.YourDressingTable.YourDetailCosmeticActivity_"></activity>
     </application>
 
 </manifest>

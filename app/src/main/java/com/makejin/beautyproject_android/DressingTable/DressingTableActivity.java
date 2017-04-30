@@ -13,6 +13,7 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.makejin.beautyproject_android.DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity;
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.makejin.beautyproject_android.DressingTable.More.MoreActivity_;
 import com.makejin.beautyproject_android.DressingTable.Setting.SettingActivity_;
@@ -52,10 +53,7 @@ public class DressingTableActivity extends AppCompatActivity {
     TextView TV_name,TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3;
 
     @ViewById
-    Button BT_find_user;
-
-    @ViewById
-    Button BT_profile_setting;
+    Button BT_profile_setting, BT_find_user;
 
     @AfterViews
     void afterBindingView() {
@@ -123,6 +121,13 @@ public class DressingTableActivity extends AppCompatActivity {
     void BT_cosmetic_upload(){
         Intent intent = new Intent(activity, CosmeticUploadActivity_1.class);
         startActivityForResult(intent, Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST);
+        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+    }
+
+    @Click
+    void BT_expiration_date(){
+        Intent intent = new Intent(activity, CosmeticExpirationDateActivity.class);
+        startActivity(intent);
         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
     }
 

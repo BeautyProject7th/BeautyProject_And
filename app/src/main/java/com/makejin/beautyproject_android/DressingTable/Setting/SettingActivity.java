@@ -40,8 +40,6 @@ import rx.schedulers.Schedulers;
 
 @EActivity(R.layout.activity_setting)
 public class SettingActivity extends AppCompatActivity {
-    private long backKeyPressedTime = 0;
-    private Toast toast;
 
     SettingActivity activity;
 

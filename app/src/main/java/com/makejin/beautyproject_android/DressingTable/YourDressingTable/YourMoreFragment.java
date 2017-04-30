@@ -56,7 +56,7 @@ public class YourMoreFragment extends ParentFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_your_more, container, false);
+        View view = inflater.inflate(R.layout.cell_expiration_date, container, false);
         initViewSetting(view);
         return view;
     }

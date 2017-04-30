@@ -19,7 +19,6 @@ public class Cosmetic implements Serializable{
     public int status = 0;
 
 
-
     public Cosmetic(){
         this.id = "id";
         this.product_name = "product_name";

@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#8994f0</color>
     <color name="colorPrimaryDark">#000000</color>
+    <color name="colorSecondPrimary">#8994f1</color>
     <color name="colorAccent">#C1A4E9</color>
 
     <!--Seula-->

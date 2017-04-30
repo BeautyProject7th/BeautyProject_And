@@ -140,6 +140,7 @@ public class YourDetailCosmeticFragment extends ParentFragment {
     void connectTestCall_get() {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        Log.i("asdf","dressing id : "+SharedManager.getInstance().getYou().id);
         conn.myOneCosmetic_get(SharedManager.getInstance().getYou().id, activity.cosmetic_id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -43,6 +43,9 @@ public interface CSConnection{
     @GET("/users/{user_id}/cosmetics")
     Observable<List<Cosmetic>> myCosmetic_get(@Path("user_id") String user_id);
 
+    @GET("/users/{user_id}/cosmetics/expiration_date")
+    Observable<List<Cosmetic>> expiration_cosmetic_get(@Path("user_id") String user_id);
+
 
 
 
