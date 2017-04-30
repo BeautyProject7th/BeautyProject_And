@@ -2,19 +2,17 @@ package com.makejin.beautyproject_android.DressingTable.CosmeticExpirationDate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.DividerItemDecoration;
 import com.makejin.beautyproject_android.DressingTable.YourDressingTable.YourDetailCosmeticActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
@@ -31,7 +29,7 @@ import rx.schedulers.Schedulers;
  * Created by mijeong on 2017. 4. 30..
  */
 
-public class CosmeticExpirationDateActivity extends AppCompatActivity {
+public class CosmeticExpirationDateActivity extends ParentActivity {
     public static CosmeticExpirationDateActivity activity;
 
     public CosmeticExpirationDateAdapter adapter;

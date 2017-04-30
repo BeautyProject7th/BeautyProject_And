@@ -1,12 +1,8 @@
 package com.makejin.beautyproject_android.SkinType;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -16,6 +12,7 @@ import android.widget.Toast;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.GlobalResponse;
 import com.makejin.beautyproject_android.Model.User;
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
@@ -29,9 +26,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import rx.Subscriber;
@@ -40,7 +35,7 @@ import rx.schedulers.Schedulers;
 
 
 @EActivity(R.layout.activity_skin_type)
-public class SkinTypeActivity extends AppCompatActivity {
+public class SkinTypeActivity extends ParentActivity {
     SkinTypeActivity activity;
 
     @ViewById
@@ -66,7 +61,7 @@ public class SkinTypeActivity extends AppCompatActivity {
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
 
-        skin_type_list.put(R.id.TV_skin_type_1, "건성");
+        skin_type_list.put(R.id.TV_skin_type_1, "skin_type1");
         skin_type_list.put(R.id.TV_skin_type_2, "중성");
         skin_type_list.put(R.id.TV_skin_type_3, "지성(일반)");
         skin_type_list.put(R.id.TV_skin_type_4, "지성(수분부족)");

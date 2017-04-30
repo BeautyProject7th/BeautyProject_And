@@ -8,25 +8,10 @@
     android:fitsSystemWindows="true"
     tools:context=".Splash.SplashActivity"
     android:background="@color/colorAccent">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_splash_name"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="150dp">
+            android:background="@drawable/logo"
+            android:layout_centerInParent="true">
         </ImageView>
-    </LinearLayout>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_splash_lipstick"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-10dp">
-    </ImageView>
-
 </RelativeLayout>

@@ -2,7 +2,6 @@ package com.makejin.beautyproject_android.Splash;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -14,6 +13,7 @@ import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Login.LoginActivity_;
 import com.makejin.beautyproject_android.Model.Category;
 import com.makejin.beautyproject_android.Model.User;
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
@@ -38,13 +38,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.makejin.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_2.adapter;
-
 @EActivity(R.layout.activity_splash)
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends ParentActivity {
     SplashActivity activity;
-
-    private Tracker mTracker;
 
     @AfterViews
     void afterBindingView() {

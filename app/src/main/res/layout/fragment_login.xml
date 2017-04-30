@@ -11,18 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_splash_name"
-                android:layout_centerInParent="true"
-                android:layout_marginBottom="150dp">
+                android:background="@drawable/logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="180dp">
             </ImageView>
-        </LinearLayout>
 
         <!--<Button-->
             <!--android:id="@+id/login_button_facebook"-->
@@ -41,8 +36,8 @@
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="424.5dp"/>
+            android:layout_above="@+id/login_button_kakao"
+            android:layout_marginBottom="12dp"/>
 
 
             <!--<Button-->
@@ -60,11 +55,8 @@
             android:id="@+id/login_button_kakao"
             android:layout_width="310dp"
             android:layout_height="51dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="487.6dp"
+            android:layout_marginBottom="75dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
         </RelativeLayout>
 

@@ -2,11 +2,10 @@ package com.makejin.beautyproject_android.DressingTable.YourDressingTable;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticFragment;
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 
 import org.androidannotations.annotations.AfterViews;
@@ -15,9 +14,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 @EActivity(R.layout.activity_your_detail_cosmetic)
-public class YourDetailCosmeticActivity extends AppCompatActivity {
-    private long backKeyPressedTime = 0;
-    private Toast toast;
+public class YourDetailCosmeticActivity extends ParentActivity {
     public String cosmetic_id;
 
     YourDetailCosmeticActivity activity;

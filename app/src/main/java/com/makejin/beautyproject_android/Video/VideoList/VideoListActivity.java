@@ -2,10 +2,9 @@ package com.makejin.beautyproject_android.Video.VideoList;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 
 import org.androidannotations.annotations.AfterViews;
@@ -14,9 +13,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 @EActivity(R.layout.activity_video_list)
-public class VideoListActivity extends AppCompatActivity {
-    private long backKeyPressedTime = 0;
-    private Toast toast;
+public class VideoListActivity extends ParentActivity {
 
     VideoListActivity activity;
 

@@ -2,8 +2,8 @@ package com.makejin.beautyproject_android.Login;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 
 import org.androidannotations.annotations.AfterViews;
@@ -12,7 +12,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 
 @EActivity(R.layout.activity_login)
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends ParentActivity {
     LoginActivity activity;
 
     @AfterViews

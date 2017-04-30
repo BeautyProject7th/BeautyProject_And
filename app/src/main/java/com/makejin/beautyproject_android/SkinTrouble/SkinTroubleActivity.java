@@ -2,7 +2,6 @@ package com.makejin.beautyproject_android.SkinTrouble;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.GlobalResponse;
 import com.makejin.beautyproject_android.Model.User;
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
@@ -38,7 +38,7 @@ import rx.schedulers.Schedulers;
 
 
 @EActivity(R.layout.activity_skin_trouble)
-public class SkinTroubleActivity extends AppCompatActivity {
+public class SkinTroubleActivity extends ParentActivity {
 
     SkinTroubleActivity activity;
 

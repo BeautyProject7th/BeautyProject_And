@@ -3,7 +3,6 @@ package com.makejin.beautyproject_android.DressingTable.CosmeticUpload;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.Brand;
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
@@ -26,7 +26,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class CosmeticUploadActivity_1 extends AppCompatActivity {
+import static com.facebook.FacebookSdk.getApplicationContext;
+
+public class CosmeticUploadActivity_1 extends ParentActivity {
     public static CosmeticUploadActivity_1 activity;
 
     public CosmeticUploadAdapter_1 adapter;

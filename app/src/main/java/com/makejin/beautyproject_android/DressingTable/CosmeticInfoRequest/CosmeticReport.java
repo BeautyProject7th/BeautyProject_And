@@ -1,7 +1,6 @@
 package com.makejin.beautyproject_android.DressingTable.CosmeticInfoRequest;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -17,6 +16,7 @@ import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
 import com.makejin.beautyproject_android.Model.GlobalResponse;
 
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
@@ -39,7 +39,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 @EActivity(R.layout.activity_cosmetic_report)
-public class CosmeticReport extends AppCompatActivity {
+public class CosmeticReport extends ParentActivity {
 
     /*
     TODO:기획 변동사항 말하기, 궁금한 점 묻기(기획)

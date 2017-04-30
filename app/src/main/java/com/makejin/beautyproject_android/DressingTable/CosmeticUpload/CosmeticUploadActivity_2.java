@@ -2,7 +2,6 @@ package com.makejin.beautyproject_android.DressingTable.CosmeticUpload;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -15,26 +14,19 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.Brand;
-import com.makejin.beautyproject_android.Model.Category;
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
-import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
-import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
-import com.makejin.beautyproject_android.Utils.Loadings.LoadingUtil;
 import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
 /**
  * Created by mijeong on 2017. 4. 21..
  */
-public class CosmeticUploadActivity_2 extends AppCompatActivity {
+public class CosmeticUploadActivity_2 extends ParentActivity {
 
     //새로 시도
     private Map<String, List<String>> categorylist = new HashMap<String, List<String>>();

@@ -5,16 +5,14 @@ package com.makejin.beautyproject_android.DressingTable.YourDressingTable;
  */
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_android.Model.User;
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 
@@ -30,9 +28,7 @@ import java.util.Map;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 @EActivity(R.layout.activity_your_dressing_table)
-public class YourDressingTableActivity extends AppCompatActivity {
-    private long backKeyPressedTime = 0;
-    private Toast toast;
+public class YourDressingTableActivity extends ParentActivity {
 
     YourDressingTableActivity activity;
 

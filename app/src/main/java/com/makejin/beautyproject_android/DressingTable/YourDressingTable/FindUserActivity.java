@@ -94,7 +94,7 @@ public class FindUserActivity extends AppCompatActivity {
 //
 //        User user = new User();
 //        user.name="asd";
-//        user.skin_type = "건성";
+//        user.skin_type = "skin_type1";
 //        user.skin_trouble_1 = "다크서클";
 //        user.skin_trouble_2 = "모공확장";
 //        user.skin_trouble_3 = "민감성";

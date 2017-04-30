@@ -203,7 +203,7 @@
                         android:layout_marginBottom="31dp"
                         android:layout_width="match_parent"
                         android:layout_height="9dp"
-                        android:src="@drawable/group_14"/>
+                        android:src="@drawable/cosmetic_struct"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -218,7 +218,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_11"/>
+                                android:src="@drawable/skin_care"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_12"/>
+                                android:src="@drawable/cleansing"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -260,7 +260,7 @@
                         android:layout_marginBottom="31dp"
                         android:layout_width="match_parent"
                         android:layout_height="9dp"
-                        android:src="@drawable/group_14"/>
+                        android:src="@drawable/cosmetic_struct"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -275,7 +275,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_17"/>
+                                android:src="@drawable/maskpack"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -317,7 +317,7 @@
                         android:layout_marginBottom="31dp"
                         android:layout_width="match_parent"
                         android:layout_height="9dp"
-                        android:src="@drawable/group_14"/>
+                        android:src="@drawable/cosmetic_struct"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -332,7 +332,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_8"/>
+                                android:src="@drawable/base_makeup"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -352,7 +352,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group"/>
+                                android:src="@drawable/eye_makeup"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -374,7 +374,7 @@
                         android:layout_marginBottom="31dp"
                         android:layout_width="match_parent"
                         android:layout_height="9dp"
-                        android:src="@drawable/group_14"/>
+                        android:src="@drawable/cosmetic_struct"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -389,7 +389,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_13"/>
+                                android:src="@drawable/lip_makeup"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -409,7 +409,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_5"/>
+                                android:src="@drawable/body"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -431,7 +431,7 @@
                         android:layout_marginBottom="31dp"
                         android:layout_width="match_parent"
                         android:layout_height="9dp"
-                        android:src="@drawable/group_14"/>
+                        android:src="@drawable/cosmetic_struct"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -446,7 +446,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_18"/>
+                                android:src="@drawable/hair_pack"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -466,7 +466,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_16"/>
+                                android:src="@drawable/nail"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -488,7 +488,7 @@
                         android:layout_marginBottom="31dp"
                         android:layout_width="match_parent"
                         android:layout_height="9dp"
-                        android:src="@drawable/group_14"/>
+                        android:src="@drawable/cosmetic_struct"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -503,7 +503,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_6"/>
+                                android:src="@drawable/perfume"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -523,7 +523,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_19"/>
+                                android:src="@drawable/cosmetic_product"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"
@@ -545,7 +545,7 @@
                         android:layout_marginBottom="31dp"
                         android:layout_width="match_parent"
                         android:layout_height="9dp"
-                        android:src="@drawable/group_14"/>
+                        android:src="@drawable/cosmetic_struct"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -560,7 +560,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/group_7"/>
+                                android:src="@drawable/mans"/>
                             <TextView
                                 android:layout_marginTop="20dp"
                                 android:layout_width="wrap_content"

@@ -83,8 +83,8 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.8.2'
 
     // kakao sdk
-    //    compile group: project.KAKAO_SDK_GROUP, name: 'kakaolink', version: project.KAKAO_SDK_VERSION
-    //    compile group: project.KAKAO_SDK_GROUP, name: 'kakaotalk', version: project.KAKAO_SDK_VERSION
+    //    compile eye_makeup: project.KAKAO_SDK_GROUP, name: 'kakaolink', version: project.KAKAO_SDK_VERSION
+    //    compile eye_makeup: project.KAKAO_SDK_GROUP, name: 'kakaotalk', version: project.KAKAO_SDK_VERSION
     compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 
 
@@ -107,6 +107,9 @@ dependencies {
 
     //fcm
     compile 'com.google.firebase:firebase-messaging:9.0.0'
+
+    //font
+    compile 'com.tsengvn:Typekit:1.0.0'
 
     compile 'com.artemzin.rxjava:proguard-rules:1.1.0.0'
 }
