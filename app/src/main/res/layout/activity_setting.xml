@@ -2,6 +2,7 @@
 <LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -16,159 +17,148 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/colorWhite">
-        <LinearLayout
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="40"></LinearLayout>
-        <LinearLayout
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="460"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="20"></LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="30">
-                <Button
-                    android:id="@+id/BT_push_setting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="푸쉬 설정"
-                    android:textSize="20dp"
-                    android:gravity="center_vertical"
-                    android:background="@color/colorWhite"/>
-                <LinearLayout
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"></LinearLayout>
-                <Switch
-                    android:id="@+id/push_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="10"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="30">
-                <Button
-                    android:id="@+id/BT_skin_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="피부타입 재설정"
-                    android:textSize="20dp"
-                    android:gravity="left|center_vertical"
-                    android:background="@color/colorWhite"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="10"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="30">
-                <Button
-                    android:id="@+id/BT_skin_trouble"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="피부고민 재설정"
-                    android:textSize="20dp"
-                    android:gravity="left|center_vertical"
-                    android:background="@color/colorWhite"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="10"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="30">
-                <Button
-                    android:id="@+id/BT_agreement"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="이용약관"
-                    android:textSize="20dp"
-                    android:gravity="left|center_vertical"
-                    android:background="@color/colorWhite"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="10"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="30">
-                <Button
-                    android:id="@+id/BT_privacy_rule"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="개인정보 취급방침"
-                    android:textSize="20dp"
-                    android:gravity="left|center_vertical"
-                    android:background="@color/colorWhite"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="10"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="30">
-                <Button
-                    android:id="@+id/BT_logout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="로그아웃"
-                    android:textSize="20dp"
-                    android:gravity="left|center_vertical"
-                    android:background="@color/colorWhite"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="10"></LinearLayout>
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0px"-->
-                <!--android:layout_weight="30">-->
-                <!--<Button-->
-                    <!--android:id="@+id/BT_withdrawal"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:text="회원탈퇴"-->
-                    <!--android:textSize="20dp"-->
-                    <!--android:gravity="left|center_vertical"-->
-                    <!--android:background="@color/colorWhite"/>-->
-            <!--</LinearLayout>-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="140"></LinearLayout>
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="40"></LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorGrayBackGround">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="유통기한 알림기한 설정"
+                android:textColor="@color/colorBlackText"
+                android:textSize="15sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/move_btn" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="1dp">
+            <TextView
+                android:id="@+id/BT_push_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="푸쉬 알림 설정 / 해제"
+                android:textColor="@color/colorBlackText"
+                android:gravity="center_vertical"
+                android:textSize="15sp"/>
+            <Switch
+                android:id="@+id/push_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/BT_skin_type"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="피부타입 재설정"
+                android:textColor="@color/colorBlackText"
+                android:textSize="15sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/move_btn" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/BT_skin_trouble"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="피부고민 재설정"
+                android:textColor="@color/colorBlackText"
+                android:textSize="15sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/move_btn" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/BT_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이용약관"
+                android:textColor="@color/colorBlackText"
+                android:textSize="15sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/move_btn" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/BT_privacy_rule"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="개인정보 취급방침"
+                android:textColor="@color/colorBlackText"
+                android:textSize="15sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/move_btn" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/BT_logout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그아웃"
+                android:textColor="@color/colorBlackText"
+                android:textSize="15sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/move_btn" />
+        </RelativeLayout>
     </LinearLayout>
-
 </LinearLayout>

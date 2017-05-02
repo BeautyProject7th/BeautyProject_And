@@ -16,9 +16,25 @@
             android:text="유저 리스트"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:textSize="25dp"
+            android:textSize="19sp"
             android:layout_gravity="center"
             android:id="@+id/textView" />
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="17dp">
+                <Button
+                    android:id="@+id/BT_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@null"/>
 
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/back_bt"/>
+        </RelativeLayout>
 </android.support.v7.widget.Toolbar>

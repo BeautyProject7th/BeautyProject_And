@@ -33,6 +33,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/*
+todo: 우선 선택되면 텍스트 색 변경되도록 해놓았음. 디자인 변동사항 있으면 맞춰 재변경할 것
+ */
 
 @EActivity(R.layout.activity_skin_type)
 public class SkinTypeActivity extends ParentActivity {
@@ -43,6 +46,9 @@ public class SkinTypeActivity extends ParentActivity {
 
     @ViewById
     TextView TV_skin_type_1,TV_skin_type_2,TV_skin_type_3,TV_skin_type_4;
+
+    @ViewById
+    TextView TV_skin_type_1_explain,TV_skin_type_2_explain,TV_skin_type_3_explain,TV_skin_type_4_explain;
 
     @ViewById
     Button BT_complete;
@@ -61,77 +67,71 @@ public class SkinTypeActivity extends ParentActivity {
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
 
+        /*
         skin_type_list.put(R.id.TV_skin_type_1, "skin_type1");
         skin_type_list.put(R.id.TV_skin_type_2, "중성");
         skin_type_list.put(R.id.TV_skin_type_3, "지성(일반)");
-        skin_type_list.put(R.id.TV_skin_type_4, "지성(수분부족)");
-
-//        TV_skin_type_1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                skin_type = TV_skin_type_1.getText().toString();
-//                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        TV_skin_type_2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                skin_type = TV_skin_type_2.getText().toString();
-//                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        TV_skin_type_3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                skin_type = TV_skin_type_3.getText().toString();
-//                Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        TV_skin_type_4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                skin_type = TV_skin_type_4.getText().toString();
-//                Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        BT_complete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedManager.getInstance().getMe().skin_type = skin_type;
-//
-//            }
-//        });
+        skin_type_list.put(R.id.TV_skin_type_4, "지성(수부지)");
+        */
     }
 
 
-    @Click({R.id.TV_skin_type_1,R.id.TV_skin_type_2,R.id.TV_skin_type_3,R.id.TV_skin_type_4})
+    @Click({R.id.LL_skin_type_1,R.id.LL_skin_type_2,R.id.LL_skin_type_3,R.id.LL_skin_type_4})
     void onClick(View v){
-        click_TV_skin_type(v.getId());
+        setAllGray();
+        switch (v.getId()){
+            case R.id.LL_skin_type_1 :
+                TV_skin_type_1.setTextColor(getResources().getColor(R.color.colorAccent));
+                TV_skin_type_1_explain.setTextColor(getResources().getColor(R.color.colorAccent));
+                skin_type = "건성";
+                break;
+            case R.id.LL_skin_type_2 :
+                TV_skin_type_2.setTextColor(getResources().getColor(R.color.colorAccent));
+                TV_skin_type_2_explain.setTextColor(getResources().getColor(R.color.colorAccent));
+                skin_type = "중성";
+                break;
+            case R.id.LL_skin_type_3 :
+                TV_skin_type_3.setTextColor(getResources().getColor(R.color.colorAccent));
+                TV_skin_type_3_explain.setTextColor(getResources().getColor(R.color.colorAccent));
+                skin_type = "지성(일반)";
+                break;
+            case R.id.LL_skin_type_4 :
+                TV_skin_type_4.setTextColor(getResources().getColor(R.color.colorAccent));
+                TV_skin_type_4_explain.setTextColor(getResources().getColor(R.color.colorAccent));
+                skin_type = "지성(수부지)";
+                break;
+        }
     }
 
+    void setAllGray(){
+        TV_skin_type_1.setTextColor(getResources().getColor(R.color.colorBlackText));
+        TV_skin_type_2.setTextColor(getResources().getColor(R.color.colorBlackText));
+        TV_skin_type_3.setTextColor(getResources().getColor(R.color.colorBlackText));
+        TV_skin_type_4.setTextColor(getResources().getColor(R.color.colorBlackText));
 
-    void click_TV_skin_type(int view_id){
-//        if(skin_type != null){
-//
-//        }
+        TV_skin_type_1_explain.setTextColor(getResources().getColor(R.color.colorBlackText));
+        TV_skin_type_2_explain.setTextColor(getResources().getColor(R.color.colorBlackText));
+        TV_skin_type_3_explain.setTextColor(getResources().getColor(R.color.colorBlackText));
+        TV_skin_type_4_explain.setTextColor(getResources().getColor(R.color.colorBlackText));
+    }
+
+    /*
+    void click_LL_skin_type(int view_id){
+        findViewById(R.id.TV_skin_type_1).setBackgroundColor(Color.GRAY);
+        findViewById(R.id.TV_skin_type_2).setBackgroundColor(Color.GRAY);
+        findViewById(R.id.TV_skin_type_3).setBackgroundColor(Color.GRAY);
+        findViewById(R.id.TV_skin_type_4).setBackgroundColor(Color.GRAY);
         if(skin_type_list.get(view_id) == skin_type) {
             skin_type = null;
             findViewById(view_id).setBackgroundColor(Color.GRAY);
             return;
         }
-        findViewById(R.id.TV_skin_type_1).setBackgroundColor(Color.GRAY);
-        findViewById(R.id.TV_skin_type_2).setBackgroundColor(Color.GRAY);
-        findViewById(R.id.TV_skin_type_3).setBackgroundColor(Color.GRAY);
-        findViewById(R.id.TV_skin_type_4).setBackgroundColor(Color.GRAY);
 
         skin_type = skin_type_list.get(view_id);
         findViewById(view_id).setBackgroundColor(Color.GREEN);
 
     }
+    */
 
     @Click
     void BT_complete(){

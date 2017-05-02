@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -91,10 +92,12 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
                         itemViewHolder.CB_product.setChecked(true);
                         checkedList.add(cosmetic);
                         itemViewHolder.CB_product.setButtonDrawable(R.drawable.btn_check);
+                        itemViewHolder.TV_product.setTextColor(context.getResources().getColor(R.color.colorAccent));
                     }else { //없앤 상태
                         itemViewHolder.CB_product.setChecked(false);
                         checkedList.remove(cosmetic);
                         itemViewHolder.CB_product.setButtonDrawable(R.drawable.btn_uncheck);
+                        itemViewHolder.TV_product.setTextColor(context.getResources().getColor(R.color.colorBlack));
                     }
 
                     Log.i("asdf","a 개수 : "+checkedList.size()+"개");
@@ -147,6 +150,7 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
         public CheckBox CB_product;
         public ImageView IV_product;
         public TextView TV_product;
+        public RelativeLayout RL_product;
 
 
         public ItemViewHolder(View v) {
@@ -155,6 +159,7 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
             CB_product = (CheckBox) v.findViewById(R.id.CB_product);
             IV_product = (ImageView) v.findViewById(R.id.IV_product);
             TV_product = (TextView) v.findViewById(R.id.TV_product);
+            RL_product = (RelativeLayout) v.findViewById(R.id.RL_product);
         }
     }
 }

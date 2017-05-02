@@ -61,7 +61,6 @@ public class SplashActivity extends ParentActivity {
 
         Fabric.with(this, new Crashlytics());
 
-        // TODO: Move this to where you establish a user session
         logUser();
 
 
@@ -85,7 +84,6 @@ public class SplashActivity extends ParentActivity {
 
 
     private void logUser() {
-        // TODO: Use the current user's information
         // You can call any combination of these three methods
         Crashlytics.setUserIdentifier("12345");
         Crashlytics.setUserEmail("user@fabric.io");

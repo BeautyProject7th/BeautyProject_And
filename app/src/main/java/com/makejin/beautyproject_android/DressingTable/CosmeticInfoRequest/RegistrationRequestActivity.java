@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.GlobalResponse;
+import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
@@ -29,7 +30,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 @EActivity(R.layout.activity_registration_request)
-public class RegistrationRequestActivity extends AppCompatActivity {
+public class RegistrationRequestActivity extends ParentActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
 

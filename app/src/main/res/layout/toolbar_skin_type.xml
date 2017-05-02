@@ -16,27 +16,26 @@
             android:text="피부타입 입력"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:textSize="25dp"
+            android:textSize="19sp"
             android:layout_gravity="center"
             android:id="@+id/textView" />
 
-        <Button
-            android:id="@+id/BT_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_back"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginRight="10dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="17dp">
+                <Button
+                    android:id="@+id/BT_complete"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@null"/>
 
-        <Button
-            android:id="@+id/BT_complete"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:text="OK"
-            android:textColor="#FFFFFF"
-            android:background="@null"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dp"/>
-
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/next_bt"/>
+        </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

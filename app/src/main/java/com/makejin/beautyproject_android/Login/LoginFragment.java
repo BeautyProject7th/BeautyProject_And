@@ -419,7 +419,6 @@ public class LoginFragment extends ParentFragment {
                 Log.i("hash", something);
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             Log.e("name not found", e.toString());
         }
     }

@@ -22,24 +22,17 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical"
         android:background="@color/colorGrayBackGround">
-
-        <RelativeLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#FFFFFF">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="등록하시려는 화장품의 브랜드를 선택하세요"
-                android:textColor="@color/colorBlackText"
-                android:gravity="center"
-                android:layout_centerVertical="true"
-                android:textSize="12.5sp"/>
-        </RelativeLayout>
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="&quot;등록하시려는 화장품의 브랜드를 선택하세요.&quot;"
+            android:background="@color/colorExplainBackGround"
+            android:layout_centerHorizontal="true"
+            android:textSize="14sp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorWhite"

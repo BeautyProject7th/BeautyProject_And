@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -51,7 +52,7 @@ public class SettingActivity extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    Button BT_skin_type, BT_skin_trouble, BT_agreement, BT_privacy_rule, BT_logout;
+    RelativeLayout BT_skin_type, BT_skin_trouble, BT_agreement, BT_privacy_rule, BT_logout;
 
     @ViewById
     Switch push_switch;
@@ -73,6 +74,11 @@ public class SettingActivity extends ParentActivity {
             push_switch.setChecked(true);
         }else push_switch.setChecked(false);
 
+    }
+
+    @Click
+    void BT_back(){
+        onBackPressed();
     }
 
     @Click

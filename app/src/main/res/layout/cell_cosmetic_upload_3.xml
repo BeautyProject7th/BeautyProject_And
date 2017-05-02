@@ -9,13 +9,15 @@
     android:id="@+id/LL_product">
 
     <RelativeLayout
+        android:id="@+id/RL_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/IV_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#AAAAAA"/>
+            android:background="#AAAAAA"
+            android:layout_margin="12dp"/>
         <CheckBox
             android:id="@+id/CB_product"
             android:layout_width="20dp"
@@ -32,7 +34,8 @@
         android:minHeight="20dp"
         android:text="product_name"
         android:textColor="#000000"
-        android:textSize="12sp"
+        android:textSize="9sp"
+        android:textStyle="bold"
         android:layout_gravity="center"/>
 
 </LinearLayout>

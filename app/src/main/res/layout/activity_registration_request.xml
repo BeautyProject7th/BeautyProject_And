@@ -23,11 +23,12 @@
             android:layout_above="@+id/input_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="40dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="40dp"
             android:text="원하는 화장품 정보를 작성해주세요 :)"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:gravity="center"/>
         <LinearLayout
             android:id="@+id/input_area"
@@ -40,35 +41,37 @@
             <EditText
                 android:id="@+id/ET_brand"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
                 android:hint="브랜드를 입력해주세요."
                 android:singleLine="true"
                 android:textSize="14sp"
                 android:maxLength="50"
-                android:padding="15dp"
-                android:background="@drawable/edittext_review"/>
+                android:padding="20dp"
+                android:background="@drawable/rectangle_8_copy"/>
             <EditText
                 android:id="@+id/ET_cosmetic"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
                 android:hint="화장품명을 입력해주세요."
                 android:singleLine="true"
                 android:textSize="14sp"
                 android:maxLength="50"
-                android:padding="15dp"
-                android:background="@drawable/edittext_review"/>
+                android:padding="20dp"
+                android:background="@drawable/rectangle_8_copy"/>
             <Button
                 android:id="@+id/BT_request"
                 android:layout_below="@+id/input_area"
                 android:layout_centerHorizontal="true"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
                 android:layout_gravity="center_horizontal"
                 android:text="등록 요청하기"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="14.5sp"
+                android:textStyle="bold"
                 android:background="@drawable/btn_ver2"/>
         </LinearLayout>
     </LinearLayout>

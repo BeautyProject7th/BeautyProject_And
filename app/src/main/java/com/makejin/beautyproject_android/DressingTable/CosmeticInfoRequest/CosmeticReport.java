@@ -41,15 +41,6 @@ import rx.schedulers.Schedulers;
 @EActivity(R.layout.activity_cosmetic_report)
 public class CosmeticReport extends ParentActivity {
 
-    /*
-    TODO:기획 변동사항 말하기, 궁금한 점 묻기(기획)
-    원래 '카테고리 정보' 대신 '브랜드 이미지' 였으나,
-    기본 정보 제공해주는 곳에 브랜드 이미지에 대한 정보는 없는데 체크박스에 있으면 이상할 것 같기도 하고, 브랜드 이미지는 틀릴일이 없을 것 같아 넣지 않았다
-    카테고리 정보에 관한 내용은 있는데 체크 항목에는 없길래 안 넣음
-
-    해당 페이지의 로직은
-    체크박스는 무조건 하나 이상 체크 가능 하도록, 세부사항은 선택항목
-     */
     CosmeticReport activity;
 
     Cosmetic cosmetic;

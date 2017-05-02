@@ -6,11 +6,11 @@
     android:background="@color/colorWhite"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="9.5dp"
-    android:paddingBottom="9.5dp">
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
     <RelativeLayout
         android:id="@+id/image"
-        android:layout_width="110dp"
+        android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="16dp" >
@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="6dp"
         android:text="D-i"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -48,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7.5dp"
             android:text="브랜드 명"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/colorBlackText"/>
     </LinearLayout>

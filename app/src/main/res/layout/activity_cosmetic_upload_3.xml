@@ -29,19 +29,20 @@
 
             <ImageView
                 android:id="@+id/IV_brand"
-                android:layout_width="46.5dp"
-                android:layout_height="46.5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="#FFFFFF"
-                android:layout_margin="10dp"/>
+                android:layout_margin="13dp"/>
             <TextView
                 android:id="@+id/TV_brand"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="브랜드"
                 android:textSize="17sp"
+                android:textStyle="bold"
                 android:background="#FFFFFF"
                 android:gravity="center_vertical"
-                android:textColor="#000000" />
+                android:textColor="@color/colorBlack" />
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -57,11 +58,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="&quot;등록하시려는 화장품을 선택해주세요.&quot;"
+                        android:background="@color/colorExplainBackGround"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14sp"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp">
                         <TextView
                             android:id="@+id/TV_main_category"
                             android:layout_width="wrap_content"
@@ -79,7 +90,7 @@
                             android:id="@+id/TV_sub_category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="15dp"
+                            android:textSize="14sp"
                             android:text="sub_category"
                             android:layout_marginLeft="5dp"/>
                         <Space
@@ -88,15 +99,15 @@
                             android:layout_weight="1"/>
                         <Button
                             android:id="@+id/BT_cosmetic_upload"
-                            android:layout_width="55.5dp"
-                            android:layout_height="25dp"
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
                             android:background="@drawable/btn_save"/>
                     </LinearLayout>
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp">
+                        android:padding="16dp">
                     </android.support.v7.widget.RecyclerView>
                 </LinearLayout>
             </ScrollView>
@@ -105,7 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/colorPurpleLight"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:gravity="center">
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -114,20 +126,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_centerInParent="true"
+                        android:gravity="center"
                         android:text="찾으시는 제품이 없다면 화장품 등록요청을 해주세요"/>
                 </RelativeLayout>
                 <Button
                     android:id="@+id/BT_registration_request"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:text="등록요청 > "
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textColor="#000000"
                     android:gravity="center"
-                    android:layout_margin="10dp"
+                    android:layout_marginRight="5dp"
                     android:background="#FFFFFF"/>
             </LinearLayout>
         </RelativeLayout>

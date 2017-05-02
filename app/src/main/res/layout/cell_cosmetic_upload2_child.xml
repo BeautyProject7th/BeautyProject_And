@@ -8,11 +8,13 @@
         android:id="@+id/TV_sub_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="12.5sp"
+        android:textStyle="bold"
         android:text="소분류"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:paddingLeft="33dp"
+        android:paddingRight="33dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
         android:layout_centerVertical="true"
         android:textColor="@color/colorBlackText"/>
 </RelativeLayout>
