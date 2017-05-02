@@ -55,10 +55,6 @@ public class SkinTypeActivity extends ParentActivity {
 
     String skin_type = null;
 
-    User user = SharedManager.getInstance().getMe();
-
-    Map<Integer,String> skin_type_list = new HashMap<Integer, String>();
-
     LinearLayout indicator;
 
     @AfterViews
@@ -66,13 +62,6 @@ public class SkinTypeActivity extends ParentActivity {
         this.activity = this;
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
-
-        /*
-        skin_type_list.put(R.id.TV_skin_type_1, "skin_type1");
-        skin_type_list.put(R.id.TV_skin_type_2, "중성");
-        skin_type_list.put(R.id.TV_skin_type_3, "지성(일반)");
-        skin_type_list.put(R.id.TV_skin_type_4, "지성(수부지)");
-        */
     }
 
 
@@ -115,24 +104,6 @@ public class SkinTypeActivity extends ParentActivity {
         TV_skin_type_4_explain.setTextColor(getResources().getColor(R.color.colorBlackText));
     }
 
-    /*
-    void click_LL_skin_type(int view_id){
-        findViewById(R.id.TV_skin_type_1).setBackgroundColor(Color.GRAY);
-        findViewById(R.id.TV_skin_type_2).setBackgroundColor(Color.GRAY);
-        findViewById(R.id.TV_skin_type_3).setBackgroundColor(Color.GRAY);
-        findViewById(R.id.TV_skin_type_4).setBackgroundColor(Color.GRAY);
-        if(skin_type_list.get(view_id) == skin_type) {
-            skin_type = null;
-            findViewById(view_id).setBackgroundColor(Color.GRAY);
-            return;
-        }
-
-        skin_type = skin_type_list.get(view_id);
-        findViewById(view_id).setBackgroundColor(Color.GREEN);
-
-    }
-    */
-
     @Click
     void BT_complete(){
         if(skin_type == null){
@@ -144,16 +115,6 @@ public class SkinTypeActivity extends ParentActivity {
         user.put("user_id", SharedManager.getInstance().getMe().id);
         user.put("skin_type", skin_type);
         connectTestCall_update_skin_type(user);
-    }
-
-
-    void refresh() {
-
-    }
-
-    @UiThread
-    void uiThread() {
-
     }
 
     void connectTestCall_update_skin_type(Map user) {
@@ -187,10 +148,5 @@ public class SkinTypeActivity extends ParentActivity {
                     }
                 });
 
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }
