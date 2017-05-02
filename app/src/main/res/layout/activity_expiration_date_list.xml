@@ -22,16 +22,15 @@
         android:layout_marginTop="?attr/actionBarSize">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="유통기한으로부터 최대 30일 이전의 제품이 표시됩니다."
-            android:textColor="@color/colorBlackText"
-            android:textSize="12.5sp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:background="@color/colorWhite"/>
+            android:text="&quot;유통기한으로부터 최대 30일 이전의 제품이 표시됩니다.&quot;"
+            android:background="@color/colorExplainBackGround"
+            android:layout_centerHorizontal="true"
+            android:textSize="12sp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorWhite"

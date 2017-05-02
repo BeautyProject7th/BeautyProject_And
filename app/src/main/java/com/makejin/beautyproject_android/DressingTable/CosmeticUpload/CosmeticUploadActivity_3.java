@@ -162,7 +162,7 @@ public class CosmeticUploadActivity_3 extends ParentActivity {
             }
         });
 
-        BT_registration_request.setOnClickListener(new View.OnClickListener() {
+        LL_registration_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent requestintent = new Intent(getApplicationContext(), RegistrationRequestActivity_.class);

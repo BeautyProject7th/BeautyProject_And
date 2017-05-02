@@ -30,6 +30,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.makejin.beautyproject_android.R.id.BT_home;
+
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
@@ -46,7 +48,7 @@ public class MoreFragment extends ParentFragment {
 
     public String main_category [] = new String[7];
 
-    Button BT_home,BT_back;
+    Button BT_back;
 
     public int page_num = 1;
     public boolean endOfPage = false;
@@ -71,16 +73,6 @@ public class MoreFragment extends ParentFragment {
             @Override
             public void onClick(View v) {
                 activity.finish();
-            }
-        });
-
-        BT_home = (Button) cs_toolbar.findViewById(R.id.BT_home);
-        BT_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homeIntent = new Intent(getActivity(), DressingTableActivity_.class);
-                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(homeIntent);
             }
         });
 

@@ -103,8 +103,8 @@ public class CosmeticReport extends ParentActivity {
         Intent intent = getIntent();
         cosmetic = (Cosmetic) intent.getSerializableExtra("cosmetic");
 
-        TV_main_category.setText("("+cosmetic.main_category);
-        TV_sub_category.setText(cosmetic.sub_category+")");
+        TV_main_category.setText(cosmetic.main_category);
+        TV_sub_category.setText(cosmetic.sub_category);
         TV_brand.setText(cosmetic.brand);
         TV_product_name.setText(cosmetic.product_name);
         String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;

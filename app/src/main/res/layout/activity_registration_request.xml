@@ -72,7 +72,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14.5sp"
                 android:textStyle="bold"
-                android:background="@drawable/btn_ver2"/>
+                android:background="@drawable/large_btn_shadow"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
