@@ -3,9 +3,7 @@ package com.makejin.beautyproject_android.DressingTable;
 /**
  * Created by mijeong on 2017. 4. 23..
  */
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_android.DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity;
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.makejin.beautyproject_android.DressingTable.More.MoreActivity_;
-import com.makejin.beautyproject_android.DressingTable.Setting.SettingActivity_;
+import com.makejin.beautyproject_android.Setting.SettingActivity_;
 import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
@@ -25,7 +23,6 @@ import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 import com.makejin.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
 import com.makejin.beautyproject_android.Model.User;
 import com.tsengvn.typekit.Typekit;
-import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -62,12 +59,6 @@ public class DressingTableActivity extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-
-        //폰트 설정
-        Typekit.getInstance()
-                .addNormal(Typekit.createFromAsset(this, "NanumSquareOTFBold.otf"));
-        //.addBold(Typekit.createFromAsset(this, "fonts/NanumBarunGothic-Bold.otf"));
-
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 

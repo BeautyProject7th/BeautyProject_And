@@ -1,36 +1,28 @@
-package com.makejin.beautyproject_android.DressingTable.Setting;
+package com.makejin.beautyproject_android.Setting;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
-import com.makejin.beautyproject_android.Login.LoginActivity;
 import com.makejin.beautyproject_android.Login.LoginActivity_;
 import com.makejin.beautyproject_android.Model.GlobalResponse;
 import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
-import com.makejin.beautyproject_android.SkinTrouble.SkinTroubleActivity_;
-import com.makejin.beautyproject_android.SkinType.SkinTypeActivity_;
+import com.makejin.beautyproject_android.Skin.SkinTroubleActivity_;
+import com.makejin.beautyproject_android.Skin.SkinTypeActivity_;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
 import com.makejin.beautyproject_android.Utils.Connections.CookieSharedPreferences;
 import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
 import com.makejin.beautyproject_android.Utils.SharedManager.PreferenceManager;
 import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
-import com.tsengvn.typekit.Typekit;
-import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.CheckedChange;

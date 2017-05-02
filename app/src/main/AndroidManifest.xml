@@ -40,7 +40,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".DressingTable.Setting.SettingActivity_"
+            android:name=".Setting.SettingActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
@@ -50,12 +50,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".SkinType.SkinTypeActivity_"
+            android:name=".Skin.SkinTypeActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name=".SkinTrouble.SkinTroubleActivity_"
+            android:name=".Skin.SkinTroubleActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>

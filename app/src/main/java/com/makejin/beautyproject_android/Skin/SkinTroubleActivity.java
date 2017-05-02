@@ -1,7 +1,7 @@
-package com.makejin.beautyproject_android.SkinTrouble;
+package com.makejin.beautyproject_android.Skin;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.GlobalResponse;
-import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
@@ -45,111 +44,87 @@ public class SkinTroubleActivity extends ParentActivity {
     @ViewById
     Toolbar cs_toolbar;
 
-    //@ViewById
-    //TextView TV_skin_trouble_1,TV_skin_trouble_2,TV_skin_trouble_3,TV_skin_trouble_4,TV_skin_trouble_5,TV_skin_trouble_6,TV_skin_trouble_7,TV_skin_trouble_8;
-
-    TextView [] TV_skin_trouble = new TextView[8];
+    @ViewById
+    TextView TV_skin_trouble_1,TV_skin_trouble_2,TV_skin_trouble_3,TV_skin_trouble_4,TV_skin_trouble_5,TV_skin_trouble_6,TV_skin_trouble_7,TV_skin_trouble_8,TV_skin_trouble_9;
 
     @ViewById
     Button BT_complete;
 
-    String skin_trouble = null;
+    Integer skin_trouble = null;
 
-    User user = SharedManager.getInstance().getMe();
+    //LinearLayout id 저장하는 거임
+    List<Integer> user_skin_trouble_list = new ArrayList<Integer>();
 
-    List<String> user_skin_trouble_list = new ArrayList<String>();
-
-    Map<Integer,String> skin_trouble_list = new HashMap<Integer, String>();
+    Map<Integer,Trouble> skin_trouble_list = new HashMap<Integer, Trouble>();
 
     LinearLayout indicator;
 
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-//        if(user.skin_trouble_1)
-//        user_skin_trouble_list.add(user.skin_trouble_1);
-//        user_skin_trouble_list.add(user.skin_trouble_2);
-//        user_skin_trouble_list.add(user.skin_trouble_3);
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
 
-        skin_trouble_list.put(R.id.TV_skin_trouble_1, "다크서클");
-        skin_trouble_list.put(R.id.TV_skin_trouble_2, "블랙헤드");
-        skin_trouble_list.put(R.id.TV_skin_trouble_3, "모공확장");
-        skin_trouble_list.put(R.id.TV_skin_trouble_4, "각질");
-        skin_trouble_list.put(R.id.TV_skin_trouble_5, "주름");
-        skin_trouble_list.put(R.id.TV_skin_trouble_6, "민감성");
-        skin_trouble_list.put(R.id.TV_skin_trouble_7, "여드름/트러블");
-        skin_trouble_list.put(R.id.TV_skin_trouble_8, "안면홍조");
-
-
-
-        TV_skin_trouble[0] = (TextView) findViewById(R.id.TV_skin_trouble_1);
-        TV_skin_trouble[1] = (TextView) findViewById(R.id.TV_skin_trouble_2);
-        TV_skin_trouble[2] = (TextView) findViewById(R.id.TV_skin_trouble_3);
-        TV_skin_trouble[3] = (TextView) findViewById(R.id.TV_skin_trouble_4);
-        TV_skin_trouble[4] = (TextView) findViewById(R.id.TV_skin_trouble_5);
-        TV_skin_trouble[5] = (TextView) findViewById(R.id.TV_skin_trouble_6);
-        TV_skin_trouble[6] = (TextView) findViewById(R.id.TV_skin_trouble_7);
-        TV_skin_trouble[7] = (TextView) findViewById(R.id.TV_skin_trouble_8);
-
-//        //기존에 이미 유저가 선택했었던 피부고민 사항들 체크
-//        for(int i=0;i<8;i++){
-//            for(String s : user_skin_trouble_list){
-//                if(skin_trouble == s){
-//                    TV_skin_trouble[i].setBackgroundColor(Color.GREEN);
-//                    break;
-//                }
-//            }
-//        }
-
+        skin_trouble_list.put(R.id.LL_skin_trouble_1, new Trouble(TV_skin_trouble_1,"다크서클"));
+        skin_trouble_list.put(R.id.LL_skin_trouble_2, new Trouble(TV_skin_trouble_2,"블랙헤드"));
+        skin_trouble_list.put(R.id.LL_skin_trouble_3, new Trouble(TV_skin_trouble_3,"모공"));
+        skin_trouble_list.put(R.id.LL_skin_trouble_4, new Trouble(TV_skin_trouble_4,"각질"));
+        skin_trouble_list.put(R.id.LL_skin_trouble_5, new Trouble(TV_skin_trouble_5,"민감성"));
+        skin_trouble_list.put(R.id.LL_skin_trouble_6, new Trouble(TV_skin_trouble_6,"주름"));
+        skin_trouble_list.put(R.id.LL_skin_trouble_7, new Trouble(TV_skin_trouble_7,"여드름/트러블"));
+        skin_trouble_list.put(R.id.LL_skin_trouble_8, new Trouble(TV_skin_trouble_8,"안면홍조"));
+        skin_trouble_list.put(R.id.LL_skin_trouble_9, new Trouble(TV_skin_trouble_9,"없음"));
     }
 
-    @Click({R.id.TV_skin_trouble_1,R.id.TV_skin_trouble_2,R.id.TV_skin_trouble_3,R.id.TV_skin_trouble_4,R.id.TV_skin_trouble_5, R.id.TV_skin_trouble_6,
-            R.id.TV_skin_trouble_7,R.id.TV_skin_trouble_8})
+    @Click({R.id.LL_skin_trouble_1,R.id.LL_skin_trouble_2,R.id.LL_skin_trouble_3,R.id.LL_skin_trouble_4,R.id.LL_skin_trouble_5, R.id.LL_skin_trouble_6,
+            R.id.LL_skin_trouble_7,R.id.LL_skin_trouble_8,R.id.LL_skin_trouble_9})
     void onClick(View v){
-        click_TV_skin_trouble(v.getId());
+        click_skin_trouble(v.getId());
     }
 
 
-    void click_TV_skin_trouble(int view_id){
-        skin_trouble = skin_trouble_list.get(view_id);
-        int i=0;
-        for(;i<user_skin_trouble_list.size();i++){
-            if(skin_trouble_list.get(view_id) == user_skin_trouble_list.get(i)) {
-                user_skin_trouble_list.remove(skin_trouble);
-                findViewById(view_id).setBackgroundColor(Color.GRAY);
-                return;
+    void click_skin_trouble(int view_id){
+        skin_trouble = view_id;
+
+        if(user_skin_trouble_list.contains(skin_trouble)) {//피부고민 취소
+            user_skin_trouble_list.remove(skin_trouble);
+            skin_trouble_list.get(view_id).TV_trouble.setTextColor(getResources().getColor(R.color.colorBlackText));
+        }else if(skin_trouble == R.id.LL_skin_trouble_9){ //없음 선택시 다른 버튼 모두 취소됨(단일 선택이기 때문)
+            for (Integer trouble:user_skin_trouble_list){
+                skin_trouble_list.get(trouble).TV_trouble.setTextColor(getResources().getColor(R.color.colorBlackText));
             }
-        }
+            user_skin_trouble_list.removeAll(user_skin_trouble_list);
 
-        if(user_skin_trouble_list.size()>2){
-            Toast.makeText(getApplicationContext(), "피부고민 사항은 최대 3개까지 선택 가능합니다.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if(i==user_skin_trouble_list.size()) {
+            skin_trouble_list.get(view_id).TV_trouble.setTextColor(getResources().getColor(R.color.colorAccent));
+            user_skin_trouble_list.add(view_id);
+        }else if(user_skin_trouble_list.size()>=3){//피부고민 3개 이상일때
+            Snackbar.make(TV_skin_trouble_9,"피부고민 사항은 최대 3개까지 선택 가능합니다.",Snackbar.LENGTH_SHORT).show();
+        }else{//아니면 고민항목에 담기
+            //없음 선택된 경우 없음 체크 해제
+            if(user_skin_trouble_list.contains(R.id.LL_skin_trouble_9)){
+                TV_skin_trouble_9.setTextColor(getResources().getColor(R.color.colorBlackText));
+                user_skin_trouble_list.removeAll(user_skin_trouble_list);
+            }
             user_skin_trouble_list.add(skin_trouble);
-            findViewById(view_id).setBackgroundColor(Color.GREEN);
+            skin_trouble_list.get(view_id).TV_trouble.setTextColor(getResources().getColor(R.color.colorAccent));
         }
-
     }
 
     @Click
     void BT_complete(){
+        String result[] = new String[3];
+        for(int i=0;i<user_skin_trouble_list.size();i++) {
+            result[i] = skin_trouble_list.get(user_skin_trouble_list.get(i)).trouble;
+        }
         Map user = new HashMap();
         user.put("user_id", SharedManager.getInstance().getMe().id);
-        user.put("skin_trouble_1", user_skin_trouble_list.get(0));
-        user.put("skin_trouble_2", user_skin_trouble_list.get(1));
-        user.put("skin_trouble_3", user_skin_trouble_list.get(2));
+        user.put("skin_trouble_1", result[0]);
+        user.put("skin_trouble_2", result[1]);
+        user.put("skin_trouble_3", result[2]);
 
         Log.i("sad", user.toString());
 
         connectTestCall_update_skin_trouble(user);
-    }
-
-    void refresh() {
-
     }
 
     @UiThread
@@ -192,5 +167,15 @@ public class SkinTroubleActivity extends ParentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+}
+
+class Trouble{
+    public TextView TV_trouble;
+    public String trouble;
+
+    Trouble(TextView textView, String trouble){
+        this.TV_trouble = textView;
+        this.trouble = trouble;
     }
 }

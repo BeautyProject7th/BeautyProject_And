@@ -24,8 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="vertical"
-            android:background="@color/colorExplainBackGround"
-            android:paddingBottom="10dp">
+            android:background="@color/colorWhite">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -35,9 +34,10 @@
                 android:textSize="14sp"/>
             <ImageView
                 android:id="@+id/IV_brand"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"/>
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="70dp"
+                android:padding="10dp"/>
         </LinearLayout>
 
         <ExpandableListView
