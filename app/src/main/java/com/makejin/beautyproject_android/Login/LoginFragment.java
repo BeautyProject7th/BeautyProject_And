@@ -33,6 +33,8 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
+import com.makejin.beautyproject_android.Model.Category;
+import com.makejin.beautyproject_android.Model.GlobalResponse;
 import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
@@ -56,6 +58,11 @@ import org.json.JSONObject;
 
 import java.net.URL;
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -238,7 +245,6 @@ public class LoginFragment extends ParentFragment {
                                     //SharedManager.getInstance().setMe(tempUser);
 
                                     connectTestCall_login(tempUser);
-
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -447,7 +453,7 @@ public class LoginFragment extends ParentFragment {
     }
 
 
-    void connectTestCall_login(User user) {
+    void connectTestCall_login(final User user) {
         //LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.user_login(user)
@@ -458,19 +464,16 @@ public class LoginFragment extends ParentFragment {
                     public final void onCompleted() {
                         Log.i("zxc", "ggggg : ");
 
-                        User me = SharedManager.getInstance().getMe();
-                        Log.i("test","skin type : "+me.skin_type);
-                        Log.i("test","skin trouble1 : "+me.skin_trouble_1);
-                        Log.i("test","skin trouble2 : "+me.skin_trouble_2);
-                        Log.i("test","skin trouble3 : "+me.skin_trouble_3);
-                        if(me.skin_type == null){
-                            startActivity(new Intent(activity, SkinTypeActivity_.class));
+                        if(PreferenceManager.getInstance(activity).getPush().equals(user.push_token)){
+                            //토큰값이 동일하다면 바로 메인으로
+                            goMain();
+                        }else {
+                            //토큰값이 다르면 토큰 다시 저장
+                            Map tempuser = new HashMap();
+                            tempuser.put("user_id", SharedManager.getInstance().getMe().id);
+                            tempuser.put("push_token", user.push_token);
+                            connect_update_skin_type(tempuser);
                         }
-                        else if(me.skin_trouble_1 == null){
-                            startActivity(new Intent(activity, SkinTroubleActivity_.class));
-                        }
-                        else startActivity(new Intent(activity, DressingTableActivity_.class));
-                        activity.finish();
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -489,7 +492,90 @@ public class LoginFragment extends ParentFragment {
                     }
                 });
     }
+/*
+    void connectCategoryCall(final User user) {
+        //서버 호출 횟수를 줄이기 위해 카테고리 불러오는 작업은 어플을 처음 실행한 경우에만 불러오도록 한다.
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.category()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Category>>() {
+                    @Override
+                    public final void onCompleted() {
+                        if(PreferenceManager.getInstance(activity).getPush().equals(user.push_token)){
+                            //토큰값이 동일하다면 바로 메인으로
+                            goMain();
+                        }else {
+                            //토큰값이 다르면 다른거
+                            Map tempuser = new HashMap();
+                            tempuser.put("user_id", SharedManager.getInstance().getMe().id);
+                            tempuser.put("push_token", user.push_token);
+                            connect_update_skin_type(tempuser);
+                        }
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<Category> response) {
+                        if (response != null) {
+                            Map<String, List<String>> categorylist = new HashMap<String, List<String>>();
+                            for(int i=0;i<response.size();i++){
+                                categorylist.put(response.get(i).main_category, response.get(i).sub_category);
+                            }
+                            SharedManager.getInstance().setCategory(categorylist);
+                        } else {
+                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+    */
 
+    void connect_update_skin_type(final Map user) {
+        CSConnection conn = ServiceGenerator.createService(getApplicationContext(),CSConnection.class);
+        conn.user_updateToken(user)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        Log.i("push","token값 재갱신-완료");
+                        goMain();
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response != null) {
+                            Log.i("push","token값 재갱신-성공");
+                            //Toast.makeText(getApplicationContext(), "정상적으로 변경되었습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
+    }
+
+    void goMain(){
+        User me = SharedManager.getInstance().getMe();
+        Log.i("test","skin type : "+me.skin_type);
+        Log.i("test","skin trouble1 f: "+me.skin_trouble_1);
+        Log.i("test","skin trouble2 : "+me.skin_trouble_2);
+        Log.i("test","skin trouble3 : "+me.skin_trouble_3);
+        if(me.skin_type == null){
+            startActivity(new Intent(activity, SkinTypeActivity_.class));
+        }
+        else if(me.skin_trouble_1 == null){
+            startActivity(new Intent(activity, SkinTroubleActivity_.class));
+        }
+        else startActivity(new Intent(activity, DressingTableActivity_.class));
+        activity.finish();
+    }
 
 }

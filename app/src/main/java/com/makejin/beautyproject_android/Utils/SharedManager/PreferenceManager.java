@@ -46,6 +46,21 @@ public class PreferenceManager {
         editor = prefs.edit();
     }
 
+    public String getPushToken() {
+        return prefs.getString("token",null);
+    }
+
+    public boolean setPushToken(String token) {
+        try {
+            editor.putString("token",token);
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     public Boolean getPush() {
         return prefs.getBoolean("push",true);
     }

@@ -158,6 +158,9 @@ public interface CSConnection{
     @GET("/users/find/{user_id}/search/{search_keyword}")
     Observable<List<User>> user_searchUsers(@Path("user_id") String user_id, @Path("search_keyword") String search_keyword);
 
+    @PUT("/users/token")
+    Observable<GlobalResponse> user_updateToken(@Body Map<String, Object> fields);
+
 }
 
 

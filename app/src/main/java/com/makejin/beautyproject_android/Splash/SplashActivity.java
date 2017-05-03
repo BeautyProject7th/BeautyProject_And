@@ -106,7 +106,7 @@ public class SplashActivity extends ParentActivity {
                 login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(login);
             }else{
-                connectTestCall_access(temp_id);
+                connectCategoryCall(temp_id);
             }
             finish();
 
@@ -159,7 +159,7 @@ public class SplashActivity extends ParentActivity {
                 .subscribe(new Subscriber<User>() {
                     @Override
                     public final void onCompleted() {
-                        connectCategoryCall();
+                        startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -178,7 +178,7 @@ public class SplashActivity extends ParentActivity {
                 });
     }
 
-    void connectCategoryCall() {
+    void connectCategoryCall(final String id) {
         //서버 호출 횟수를 줄이기 위해 카테고리 불러오는 작업은 어플을 처음 실행한 경우에만 불러오도록 한다.
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.category()
@@ -187,7 +187,7 @@ public class SplashActivity extends ParentActivity {
                 .subscribe(new Subscriber<List<Category>>() {
                     @Override
                     public final void onCompleted() {
-                        startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
+                        connectTestCall_access(id);
                     }
                     @Override
                     public final void onError(Throwable e) {
