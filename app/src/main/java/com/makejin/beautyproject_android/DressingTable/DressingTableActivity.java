@@ -44,6 +44,8 @@ public class DressingTableActivity extends ParentActivity {
 
     Map<Integer,String> categorylist = new HashMap<Integer, String>();
 
+    User me;
+
     @ViewById
     Toolbar cs_toolbar;
 
@@ -56,6 +58,26 @@ public class DressingTableActivity extends ParentActivity {
     @ViewById
     Button BT_profile_setting, BT_find_user;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // just as usual
+
+        me = SharedManager.getInstance().getMe();
+
+        if(me.skin_type==null) TV_skin_type.setText("미설정");
+        else TV_skin_type.setText(me.skin_type);
+
+        if(me.skin_trouble_1==null) TV_skin_trouble1.setText("미설정");
+        else TV_skin_trouble1.setText(me.skin_trouble_1);
+
+        if(me.skin_trouble_2==null) TV_skin_trouble2.setText("미설정");
+        else TV_skin_trouble2.setText(me.skin_trouble_2);
+
+        if(me.skin_trouble_3==null) TV_skin_trouble3.setText("미설정");
+        else TV_skin_trouble3.setText(me.skin_trouble_3);
+    }
+
     @AfterViews
     void afterBindingView() {
         this.activity = this;
@@ -63,7 +85,7 @@ public class DressingTableActivity extends ParentActivity {
         activity.getSupportActionBar().setTitle("");
 
 
-        User me = SharedManager.getInstance().getMe();
+        me = SharedManager.getInstance().getMe();
 
         String image_url = me.profile_url;
 
@@ -86,18 +108,6 @@ public class DressingTableActivity extends ParentActivity {
         categorylist.put(R.id.perfume,"향수");
         categorylist.put(R.id.cosmetic_product,"화장 소품");
         categorylist.put(R.id.man,"남성 화장품");
-
-        if(me.skin_type==null) TV_skin_type.setText("미설정");
-        else TV_skin_type.setText(me.skin_type);
-
-        if(me.skin_trouble_1==null) TV_skin_trouble1.setText("미설정");
-        else TV_skin_trouble1.setText(me.skin_trouble_1);
-
-        if(me.skin_trouble_2==null) TV_skin_trouble2.setText("미설정");
-        else TV_skin_trouble2.setText(me.skin_trouble_2);
-
-        if(me.skin_trouble_3==null) TV_skin_trouble3.setText("미설정");
-        else TV_skin_trouble3.setText(me.skin_trouble_3);
     }
 
     @Click({R.id.skin_care,R.id.cleansing,R.id.mask_pack,R.id.suncare,R.id.base_makeup, R.id.eye_makeup,

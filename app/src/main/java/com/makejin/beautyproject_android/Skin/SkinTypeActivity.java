@@ -100,7 +100,7 @@ public class SkinTypeActivity extends ParentActivity {
         connectTestCall_update_skin_type(user);
     }
 
-    void connectTestCall_update_skin_type(Map user) {
+    void connectTestCall_update_skin_type(final Map user) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.user_updateSkinType(user)
@@ -124,6 +124,8 @@ public class SkinTypeActivity extends ParentActivity {
                     @Override
                     public final void onNext(GlobalResponse response) {
                         if (response != null) {
+                            String skintype = user.get("skin_type").toString();
+                            SharedManager.getInstance().updateMeSkinType(skintype);
                             Toast.makeText(getApplicationContext(), "정상적으로 변경되었습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();

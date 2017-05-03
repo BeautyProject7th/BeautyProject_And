@@ -124,7 +124,7 @@ public class SkinTroubleActivity extends ParentActivity {
 
         Log.i("sad", user.toString());
 
-        connectTestCall_update_skin_trouble(user);
+        connectTestCall_update_skin_trouble(user, result);
     }
 
     @UiThread
@@ -132,7 +132,7 @@ public class SkinTroubleActivity extends ParentActivity {
 
     }
 
-    void connectTestCall_update_skin_trouble(Map user) {
+    void connectTestCall_update_skin_trouble(final Map user, final String[] results) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.user_updateSkinTrouble(user)
@@ -151,14 +151,15 @@ public class SkinTroubleActivity extends ParentActivity {
                     public final void onError(Throwable e) {
                         LoadingUtil.stopLoading(indicator);
                         e.printStackTrace();
-                        //Toast.makeText(getApplicationContext(), "이미 등록한 화장품입니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "서버 문제.", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {
                         if (response != null) {
+                            SharedManager.getInstance().updateMeSkinTrouble(results[0],results[1],results[2]);
                             Toast.makeText(getApplicationContext(), "정상적으로 변경되었습니다", Toast.LENGTH_SHORT).show();
                         } else {
-                            //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

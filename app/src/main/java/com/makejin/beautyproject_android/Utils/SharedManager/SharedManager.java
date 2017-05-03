@@ -57,6 +57,28 @@ public class SharedManager {
         return true;
     }
 
+    public boolean updateMeSkinType(String skintype) {
+        try {
+            this.me.skin_type = skintype;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean updateMeSkinTrouble(String t1,String t2,String t3) {
+        try {
+            this.me.skin_trouble_1 = t1;
+            this.me.skin_trouble_2 = t2;
+            this.me.skin_trouble_3 = t3;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     public User getMe() {
         return this.me;
     }
