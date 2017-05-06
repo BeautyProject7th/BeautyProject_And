@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.makejin.beautyproject_android.R.id.BT_next;
+
 
 @EActivity(R.layout.activity_skin_trouble)
 public class SkinTroubleActivity extends ParentActivity {
@@ -48,7 +51,7 @@ public class SkinTroubleActivity extends ParentActivity {
     TextView TV_skin_trouble_1,TV_skin_trouble_2,TV_skin_trouble_3,TV_skin_trouble_4,TV_skin_trouble_5,TV_skin_trouble_6,TV_skin_trouble_7,TV_skin_trouble_8,TV_skin_trouble_9;
 
     @ViewById
-    Button BT_complete;
+    Button BT_complete, BT_back;
 
     Integer skin_trouble = null;
 
@@ -58,12 +61,46 @@ public class SkinTroubleActivity extends ParentActivity {
     Map<Integer,Trouble> skin_trouble_list = new HashMap<Integer, Trouble>();
 
     LinearLayout indicator;
+    Boolean before_flag = false;
+
+    @Click
+    void BT_back(){
+        if(before_flag){
+            Intent intent = new Intent(getApplicationContext(), SkinTypeActivity_.class);
+            intent.putExtra("before_login",true);
+            startActivity(intent);
+            setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
+            finish();
+        }else{
+            activity.finish();
+        }
+    }
+
+    @Click
+    void BT_complete(){
+        String result[] = new String[3];
+        for(int i=0;i<user_skin_trouble_list.size();i++) {
+            result[i] = skin_trouble_list.get(user_skin_trouble_list.get(i)).trouble;
+        }
+        Map user = new HashMap();
+        user.put("user_id", SharedManager.getInstance().getMe().id);
+        user.put("skin_trouble_1", result[0]);
+        user.put("skin_trouble_2", result[1]);
+        user.put("skin_trouble_3", result[2]);
+
+        Log.i("sad", user.toString());
+
+        connectTestCall_update_skin_trouble(user, result);
+    }
 
     @AfterViews
     void afterBindingView() {
         this.activity = this;
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
+
+        Intent intent = getIntent();
+        before_flag = intent.getBooleanExtra("before_login",false);
 
         skin_trouble_list.put(R.id.LL_skin_trouble_1, new Trouble(TV_skin_trouble_1,"다크서클"));
         skin_trouble_list.put(R.id.LL_skin_trouble_2, new Trouble(TV_skin_trouble_2,"블랙헤드"));
@@ -108,23 +145,6 @@ public class SkinTroubleActivity extends ParentActivity {
             user_skin_trouble_list.add(skin_trouble);
             skin_trouble_list.get(view_id).TV_trouble.setTextColor(getResources().getColor(R.color.colorAccent));
         }
-    }
-
-    @Click
-    void BT_complete(){
-        String result[] = new String[3];
-        for(int i=0;i<user_skin_trouble_list.size();i++) {
-            result[i] = skin_trouble_list.get(user_skin_trouble_list.get(i)).trouble;
-        }
-        Map user = new HashMap();
-        user.put("user_id", SharedManager.getInstance().getMe().id);
-        user.put("skin_trouble_1", result[0]);
-        user.put("skin_trouble_2", result[1]);
-        user.put("skin_trouble_3", result[2]);
-
-        Log.i("sad", user.toString());
-
-        connectTestCall_update_skin_trouble(user, result);
     }
 
     @UiThread

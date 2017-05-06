@@ -46,7 +46,7 @@
             android:background="@null"
             android:textColor="#FFFFFF"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginLeft="17dp"/>
 
 
 </android.support.v7.widget.Toolbar>

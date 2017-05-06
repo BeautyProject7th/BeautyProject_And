@@ -3,9 +3,12 @@ package com.makejin.beautyproject_android.Skin;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +30,13 @@ import org.androidannotations.annotations.ViewById;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.http.Body;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static com.makejin.beautyproject_android.R.id.TV_skin_trouble_9;
+import static com.makejin.beautyproject_android.R.id.indicator;
 
 /*
 todo: 우선 선택되면 텍스트 색 변경되도록 해놓았음. 디자인 변동사항 있으면 맞춰 재변경할 것
@@ -51,17 +56,50 @@ public class SkinTypeActivity extends ParentActivity {
     TextView TV_skin_type_1_explain,TV_skin_type_2_explain,TV_skin_type_3_explain,TV_skin_type_4_explain;
 
     @ViewById
-    Button BT_complete;
+    Button BT_next,BT_complete,BT_back;
+
+    @ViewById
+    ImageView BT_back_img;
 
     //LinearLayout id 저장
     Integer skin_type = null;
     Map<Integer,Type> skin_type_list = new HashMap<Integer, Type>();
 
+    Boolean before_flag = false;
+
     LinearLayout indicator;
+
+    @Click
+    void BT_back(){
+        activity.finish();
+    }
+
+    @Click({R.id.BT_complete,R.id.BT_next})
+    void BT_complete(){
+        if(skin_type == null){
+            Toast.makeText(getApplicationContext(), "피부 타입을 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Map user = new HashMap();
+        user.put("user_id", SharedManager.getInstance().getMe().id);
+        user.put("skin_type", skin_type_list.get(skin_type).type);
+        connectTestCall_update_skin_type(user);
+    }
 
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+
+        Intent intent = getIntent();
+        before_flag = intent.getBooleanExtra("before_login",false);
+        if(before_flag){
+            BT_back.setVisibility(View.GONE);
+            BT_back_img.setVisibility(View.GONE);
+            BT_complete.setVisibility(View.GONE);
+        }else{
+            BT_next.setVisibility(View.GONE);
+        }
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
 
@@ -87,19 +125,6 @@ public class SkinTypeActivity extends ParentActivity {
         skin_type_list.get(skin_type).TV_type.setTextColor(getResources().getColor(R.color.colorAccent));
     }
 
-    @Click
-    void BT_complete(){
-        if(skin_type == null){
-            Toast.makeText(getApplicationContext(), "피부 타입을 선택해주세요.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Map user = new HashMap();
-        user.put("user_id", SharedManager.getInstance().getMe().id);
-        user.put("skin_type", skin_type_list.get(skin_type).type);
-        connectTestCall_update_skin_type(user);
-    }
-
     void connectTestCall_update_skin_type(final Map user) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
@@ -109,8 +134,14 @@ public class SkinTypeActivity extends ParentActivity {
                 .subscribe(new Subscriber<GlobalResponse>() {
                     @Override
                     public final void onCompleted() {
+                        Intent intent;
+                        if(before_flag){
+                            intent = new Intent(getApplicationContext(), SkinTroubleActivity_.class);
+                            intent.putExtra("before_login",true);
+                        }else{
+                            intent = new Intent(getApplicationContext(), DressingTableActivity_.class);
+                        }
                         LoadingUtil.stopLoading(indicator);
-                        Intent intent = new Intent(getApplicationContext(), DressingTableActivity_.class);
                         startActivity(intent);
                         setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
                         finish();

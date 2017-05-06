@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,10 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static com.makejin.beautyproject_android.R.id.BT_home;
+import static com.makejin.beautyproject_android.R.id.TV_skin_trouble1;
+import static com.makejin.beautyproject_android.R.id.TV_skin_trouble2;
+import static com.makejin.beautyproject_android.R.id.TV_skin_trouble3;
+import static com.makejin.beautyproject_android.R.id.TV_skin_type;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -52,7 +57,6 @@ public class MoreFragment extends ParentFragment {
 
     public int page_num = 1;
     public boolean endOfPage = false;
-
 
     @Nullable
     @Override
@@ -96,7 +100,6 @@ public class MoreFragment extends ParentFragment {
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
-        connectTestCall(moreActivity.main_category);
 
 
         if (recycler_view == null) {
@@ -126,6 +129,8 @@ public class MoreFragment extends ParentFragment {
     public void refresh() {
         page_num=1;
         endOfPage=false;
+        adapter.clear();
+        connectTestCall(activity.main_category);
     }
 
     @Override

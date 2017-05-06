@@ -569,10 +569,14 @@ public class LoginFragment extends ParentFragment {
         Log.i("test","skin trouble2 : "+me.skin_trouble_2);
         Log.i("test","skin trouble3 : "+me.skin_trouble_3);
         if(me.skin_type == null){
-            startActivity(new Intent(activity, SkinTypeActivity_.class));
+            Intent intent = new Intent(activity, SkinTypeActivity_.class);
+            intent.putExtra("before_login",true);
+            startActivity(intent);
         }
         else if(me.skin_trouble_1 == null){
-            startActivity(new Intent(activity, SkinTroubleActivity_.class));
+            Intent intent = new Intent(activity, SkinTroubleActivity_.class);
+            intent.putExtra("before_login",true);
+            startActivity(intent);
         }
         else startActivity(new Intent(activity, DressingTableActivity_.class));
         activity.finish();
