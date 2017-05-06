@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         android:id="@+id/appBarLayout2">
 
-        <include layout="@layout/toolbar_detail_cosmetic" android:id="@+id/cs_toolbar" />
+        <include layout="@layout/detail_cosmetic_toolbar" android:id="@+id/cs_toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 

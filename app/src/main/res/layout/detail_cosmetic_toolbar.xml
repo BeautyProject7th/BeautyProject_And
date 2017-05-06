@@ -38,14 +38,4 @@
             android:src="@drawable/back_bt"/>
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/BT_update"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="right|center_vertical"
-        android:background="#FFFFFF"
-        android:text="수정"/>
-
-
 </android.support.v7.widget.Toolbar>

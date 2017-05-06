@@ -59,10 +59,10 @@
         <item name="android:color">@color/colorGrayBackGround</item>
     </style>
 
-    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
+    <style name="RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingstars</item>
-        <item name="android:minHeight">22dip</item>
-        <item name="android:maxHeight">22dip</item>
+        <item name="android:minHeight">10dip</item>
+        <item name="android:maxHeight">10dip</item>
     </style>
     <style name="cosmeticRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingstars_2</item>

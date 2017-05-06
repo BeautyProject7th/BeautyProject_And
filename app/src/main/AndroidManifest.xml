@@ -98,6 +98,8 @@
         <activity android:name=".DressingTable.YourDressingTable.YourMoreActivity_"></activity>
         <activity android:name=".DressingTable.YourDressingTable.YourDetailCosmeticActivity_"></activity>
         <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity"></activity>
+        <activity android:name=".DetailCosmetic.DetailCosmeticActivity2_">
+        </activity>
 
 
         <meta-data

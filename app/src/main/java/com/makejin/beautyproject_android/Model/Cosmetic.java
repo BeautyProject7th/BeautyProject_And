@@ -16,6 +16,7 @@ public class Cosmetic implements Serializable{
     public String review;
     public float rate_num ;
     public String expiration_date ;
+    public String purchase_date;
     public int status = 1;
 
 

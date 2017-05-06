@@ -66,6 +66,8 @@ public class DetailCosmeticFragment extends ParentFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail_cosmetic, container, false);
         initViewSetting(view);
+
+
         return view;
     }
 
@@ -115,8 +117,7 @@ public class DetailCosmeticFragment extends ParentFragment {
 //                startActivity(intent);
             }
         });
-
-
+        /*
         BT_update = (Button) view.findViewById(R.id.BT_update);
         BT_update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +137,7 @@ public class DetailCosmeticFragment extends ParentFragment {
                 connectTestCall_post(cosmetic);
             }
         });
+        */
 
         S_status = (Switch) view.findViewById(R.id.S_status);
     }

@@ -48,7 +48,7 @@
                 android:textSize="14sp"
                 android:maxLength="50"
                 android:padding="20dp"
-                android:background="@drawable/rectangle_8_copy"/>
+                android:background="@drawable/cosmetic_user_rectangle"/>
             <EditText
                 android:id="@+id/ET_cosmetic"
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                 android:textSize="14sp"
                 android:maxLength="50"
                 android:padding="20dp"
-                android:background="@drawable/rectangle_8_copy"/>
+                android:background="@drawable/cosmetic_user_rectangle"/>
             <Button
                 android:id="@+id/BT_request"
                 android:layout_below="@+id/input_area"
