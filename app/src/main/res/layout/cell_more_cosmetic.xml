@@ -38,5 +38,5 @@
                         android:numStars="5"
                         android:rating="3.5"
                         android:isIndicator="true"
-                        style="@style/smallRatingBar"/>
+                        style="@style/RatingBar"/>
 </LinearLayout>

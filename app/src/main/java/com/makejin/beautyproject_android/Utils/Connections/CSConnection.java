@@ -55,7 +55,7 @@ public interface CSConnection{
                                          @Path("cosmetic-id") String cosmetic_id);
 
     @PUT("/users/{user_id}/cosmetics/{cosmetic-id}")
-    Observable<GlobalResponse> myOneCosmetic_put(@Body Cosmetic cosmetic,
+    Observable<GlobalResponse> myOneCosmetic_put(@Body Map<String, Object> fields,
                                          @Path("user_id") String user_id,
                                          @Path("cosmetic-id") String cosmetic_id);
 

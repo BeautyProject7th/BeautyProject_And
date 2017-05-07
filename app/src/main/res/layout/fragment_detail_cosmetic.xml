@@ -107,8 +107,6 @@
                             android:textColor="@color/colorBlack"
                             android:textStyle="bold" />
                     </LinearLayout>
-
-
                 </RelativeLayout>
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -179,7 +177,7 @@
                             android:numStars="5"
                             android:rating="3.1"
                             android:layout_gravity="center"
-                            style="@style/bigitRatingBar" />
+                            style="@style/RatingBar" />
                     </LinearLayout>
 
                     <EditText

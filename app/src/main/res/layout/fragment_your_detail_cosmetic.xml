@@ -171,7 +171,7 @@
                             android:numStars="5"
                             android:rating="3.1"
                             android:layout_gravity="center"
-                            style="@style/bigitRatingBar"
+                            style="@style/largeRatingBar"
                             android:isIndicator="true"/>
                     </LinearLayout>
 

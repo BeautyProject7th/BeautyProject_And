@@ -1,7 +1,6 @@
 package com.makejin.beautyproject_android.DetailCosmetic;
 
 import android.content.Intent;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Switch;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
-import com.makejin.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
 import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
@@ -25,15 +23,10 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static com.makejin.beautyproject_android.R.id.S_status;
-import static com.makejin.beautyproject_android.R.id.TV_report;
 
 /**
  * Created by mijeong on 2017. 5. 6..
@@ -41,8 +34,6 @@ import static com.makejin.beautyproject_android.R.id.TV_report;
 
 @EActivity(R.layout.detail_cosmetic_activity)
 public class DetailCosmeticActivity2 extends ParentActivity {
-    public String cosmetic_id;
-
     DetailCosmeticActivity2 activity;
 
     @ViewById
@@ -58,6 +49,7 @@ public class DetailCosmeticActivity2 extends ParentActivity {
     TextView TV_expiration_date,TV_purchase_date,TV_rating,TV_review;
 
     Cosmetic cosmetic = null;
+    String cosmetic_id = null;
 
     @ViewById
     RatingBar RB_rate;
@@ -68,8 +60,12 @@ public class DetailCosmeticActivity2 extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+        cosmetic_id = getIntent().getStringExtra("cosmetic_id");
+    }
 
-        String cosmetic_id = getIntent().getStringExtra("cosmetic_id");
+    @Override
+    public void onResume() {
+        super.onResume();
         connectTestCall_get(cosmetic_id);
     }
 
@@ -80,7 +76,9 @@ public class DetailCosmeticActivity2 extends ParentActivity {
 
     @Click
     void BT_modify(){
-        Toast.makeText(activity,"수정버튼 눌림",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(activity, ModifyCosmeticActivity_.class);
+        intent.putExtra("cosmetic",cosmetic);
+        startActivity(intent);
     }
 
     @Click

@@ -243,35 +243,6 @@ public class DetailCosmeticFragment extends ParentFragment {
                 });
     }
 
-    void connectTestCall_post(Cosmetic cosmetic) {
-        LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.myOneCosmetic_put(cosmetic, SharedManager.getInstance().getMe().id, cosmetic.id)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GlobalResponse>() {
-                    @Override
-                    public final void onCompleted() {
-                        LoadingUtil.stopLoading(indicator);
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public final void onNext(GlobalResponse response) {
-                        Log.i("Zxc", "response code : " + response.code);
-                        if (response.code == 200) {
-                            Toast.makeText(getActivity(), "정상적으로 수정되었습니다", Toast.LENGTH_SHORT).show();
-                            activity.finish();
-                        } else {
-                            Toast.makeText(getActivity(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
     public String getExpirationDate(int year, int month, int day){
         String tempMonth = "";
         String tempDay = "";
