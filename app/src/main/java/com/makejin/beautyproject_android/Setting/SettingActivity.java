@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
@@ -44,6 +45,9 @@ public class SettingActivity extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
+    TextView toolbar_title;
+
+    @ViewById
     RelativeLayout BT_skin_type, BT_skin_trouble, BT_agreement, BT_privacy_rule, BT_logout;
 
     @ViewById
@@ -61,6 +65,7 @@ public class SettingActivity extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+        toolbar_title.setText("설정");
 
         if(PreferenceManager.getInstance(activity).getPush()){
             push_switch.setChecked(true);

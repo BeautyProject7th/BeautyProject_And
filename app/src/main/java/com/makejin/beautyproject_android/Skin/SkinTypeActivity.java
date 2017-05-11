@@ -50,7 +50,7 @@ public class SkinTypeActivity extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    TextView TV_skin_type_1,TV_skin_type_2,TV_skin_type_3,TV_skin_type_4;
+    TextView TV_skin_type_1,TV_skin_type_2,TV_skin_type_3,TV_skin_type_4,toolbar_title;
 
     @ViewById
     TextView TV_skin_type_1_explain,TV_skin_type_2_explain,TV_skin_type_3_explain,TV_skin_type_4_explain;
@@ -90,6 +90,7 @@ public class SkinTypeActivity extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+        toolbar_title.setText("피부타입 입력");
 
         Intent intent = getIntent();
         before_flag = intent.getBooleanExtra("before_login",false);

@@ -48,10 +48,10 @@ public class SkinTroubleActivity extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    TextView TV_skin_trouble_1,TV_skin_trouble_2,TV_skin_trouble_3,TV_skin_trouble_4,TV_skin_trouble_5,TV_skin_trouble_6,TV_skin_trouble_7,TV_skin_trouble_8,TV_skin_trouble_9;
+    TextView TV_skin_trouble_1,TV_skin_trouble_2,TV_skin_trouble_3,TV_skin_trouble_4,TV_skin_trouble_5,TV_skin_trouble_6,TV_skin_trouble_7,TV_skin_trouble_8,TV_skin_trouble_9,toolbar_title;
 
     @ViewById
-    Button BT_complete, BT_back;
+    Button BT_complete, BT_back,BT_next;
 
     Integer skin_trouble = null;
 
@@ -98,6 +98,8 @@ public class SkinTroubleActivity extends ParentActivity {
         this.activity = this;
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
+        toolbar_title.setText("피부고민 입력");
+        BT_next.setVisibility(View.GONE);
 
         Intent intent = getIntent();
         before_flag = intent.getBooleanExtra("before_login",false);

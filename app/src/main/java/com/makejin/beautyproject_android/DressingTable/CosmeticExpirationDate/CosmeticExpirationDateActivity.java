@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.DividerItemDecoration;
@@ -24,6 +25,8 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.makejin.beautyproject_android.R.id.toolbar_title;
 
 /**
  * Created by mijeong on 2017. 4. 30..
@@ -47,6 +50,8 @@ public class CosmeticExpirationDateActivity extends ParentActivity {
         activity = this;
 
         Toolbar cs_toolbar = (Toolbar) findViewById(R.id.cs_toolbar);
+        TextView toolbar_title = (TextView) cs_toolbar.findViewById(R.id.toolbar_title);
+        toolbar_title.setText("유통기한 임박리스트");
 
         BT_back = (Button) cs_toolbar.findViewById(R.id.BT_back);
         BT_back.setOnClickListener(new View.OnClickListener() {

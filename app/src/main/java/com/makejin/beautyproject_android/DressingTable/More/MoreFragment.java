@@ -6,14 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
@@ -31,12 +29,6 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.makejin.beautyproject_android.R.id.BT_home;
-import static com.makejin.beautyproject_android.R.id.TV_skin_trouble1;
-import static com.makejin.beautyproject_android.R.id.TV_skin_trouble2;
-import static com.makejin.beautyproject_android.R.id.TV_skin_trouble3;
-import static com.makejin.beautyproject_android.R.id.TV_skin_type;
-
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
@@ -49,7 +41,7 @@ public class MoreFragment extends ParentFragment {
 
     public LinearLayout indicator;
 
-    TextView TV_desc, TV_category;
+    TextView TV_desc, TV_category,toolbar_title;
 
     Button BT_back;
 
@@ -81,6 +73,9 @@ public class MoreFragment extends ParentFragment {
                 activity.finish();
             }
         });
+        toolbar_title = (TextView) cs_toolbar.findViewById(R.id.toolbar_title);
+        if(activity.me_dressing_table) toolbar_title.setText("나의 화장대");
+        else toolbar_title.setText(user.name+"님의 화장대");
 
         TV_category = (TextView) view.findViewById(R.id.TV_category);
 
@@ -104,6 +99,7 @@ public class MoreFragment extends ParentFragment {
                     Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic_id", adapter.mDataset.get(position).id);
                     intent.putExtra("user_id",user.id);
+                    intent.putExtra("me",activity.me_dressing_table);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 }

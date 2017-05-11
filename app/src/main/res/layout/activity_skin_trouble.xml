@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay" >
 
-        <include layout="@layout/toolbar_skin_trouble" android:id="@+id/cs_toolbar" />
+        <include layout="@layout/toolbar_skin_info" android:id="@+id/cs_toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 

@@ -8,7 +8,7 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         android:id="@+id/appBarLayout2">
 
-        <include layout="@layout/toolbar_registration_request" android:id="@+id/cs_toolbar" />
+        <include layout="@layout/toolbar_only_back" android:id="@+id/cs_toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 

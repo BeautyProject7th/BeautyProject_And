@@ -1,7 +1,9 @@
 package com.makejin.beautyproject_android.DetailCosmetic;
 
 import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -43,13 +45,17 @@ public class DetailCosmeticActivity extends ParentActivity {
     ImageView IV_product,BT_delete,BT_modify;
 
     @ViewById
-    TextView TV_product_name,TV_brand,TV_main_category, TV_sub_category;
+    TextView TV_product_name,TV_brand,TV_main_category, TV_sub_category,toolbar_title;
 
     @ViewById
     TextView TV_expiration_date,TV_purchase_date,TV_rating,TV_review;
 
+    @ViewById
+    LinearLayout about_me;
+
     Cosmetic cosmetic = null;
     String cosmetic_id = null;
+    Boolean me_flag = null;
 
     @ViewById
     RatingBar RB_rate;
@@ -60,8 +66,13 @@ public class DetailCosmeticActivity extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+        toolbar_title.setText("화장품 상세정보");
+
         cosmetic_id = getIntent().getStringExtra("cosmetic_id");
         user_id = getIntent().getStringExtra("user_id");
+        me_flag = getIntent().getBooleanExtra("me",true);
+
+        if(me_flag==false) about_me.setVisibility(View.GONE);
     }
 
     @Override
