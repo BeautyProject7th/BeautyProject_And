@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +36,8 @@ import java.util.Map;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
+import static com.makejin.beautyproject_android.R.id.BT_find_user;
+
 @EActivity(R.layout.activity_dressing_table)
 public class DressingTableActivity extends ParentActivity {
     private long backKeyPressedTime = 0;
@@ -50,20 +53,18 @@ public class DressingTableActivity extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    ImageView IV_user;
+    ImageView IV_user,IV_back;
 
     @ViewById
     TextView TV_name,TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3;
 
     @ViewById
-    Button BT_profile_setting, BT_find_user;
+    Button BT_back,BT_profile_setting, BT_find_user;
 
     @Override
     protected void onResume() {
         super.onResume();
         // just as usual
-
-        me = SharedManager.getInstance().getMe();
 
         if(me.skin_type==null) TV_skin_type.setText("미설정");
         else TV_skin_type.setText(me.skin_type);
@@ -84,6 +85,8 @@ public class DressingTableActivity extends ParentActivity {
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
+        BT_back.setVisibility(View.GONE);
+        IV_back.setVisibility(View.GONE);
 
         me = SharedManager.getInstance().getMe();
 
@@ -116,7 +119,7 @@ public class DressingTableActivity extends ParentActivity {
         goCategoryActivity(v.getId());
     }
 
-    @Click
+    @Click({R.id.BT_find_user})
     void BT_find_user(){
         Intent intent = new Intent(activity, FindUserActivity_.class);
         startActivity(intent);
@@ -124,7 +127,7 @@ public class DressingTableActivity extends ParentActivity {
         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
     }
 
-    @Click
+    @Click({R.id.BT_profile_setting})
     void BT_profile_setting(){
         startActivity(new Intent(activity, SettingActivity_.class));
     }
@@ -146,22 +149,9 @@ public class DressingTableActivity extends ParentActivity {
     void goCategoryActivity(int view_id){
         Intent intent = new Intent(activity, MoreActivity_.class);
         intent.putExtra("main_category", categorylist.get(view_id));
+        intent.putExtra("me",true);
         startActivity(intent);
     }
-
-    void refresh() {
-
-    }
-
-    @UiThread
-    void uiThread() {
-
-    }
-
-    void connectTestCall() {
-
-    }
-
     /// EXIT
     @Override
     public void onBackPressed() {

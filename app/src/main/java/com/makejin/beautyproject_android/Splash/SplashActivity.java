@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
-import com.google.android.gms.analytics.Tracker;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Login.LoginActivity_;
 import com.makejin.beautyproject_android.Model.Category;
@@ -45,10 +44,6 @@ public class SplashActivity extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-
-
-//        AnalyticsApplication application = (AnalyticsApplication) getApplication();
-//        mTracker = application.getDefaultTracker();
 
         Userhabit.start(this);
 

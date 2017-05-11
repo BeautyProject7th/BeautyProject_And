@@ -19,6 +19,7 @@ import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity2_
 import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
+import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
@@ -52,17 +53,19 @@ public class MoreFragment extends ParentFragment {
 
     TextView TV_desc, TV_category;
 
-    public String main_category [] = new String[7];
-
     Button BT_back;
 
     public int page_num = 1;
     public boolean endOfPage = false;
 
+    private User user = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_more, container, false);
+        if(activity.me_dressing_table) user = SharedManager.getInstance().getMe();
+        else user = SharedManager.getInstance().getYou();
         initViewSetting(view);
         return view;
     }
@@ -85,23 +88,11 @@ public class MoreFragment extends ParentFragment {
 
         TV_desc = (TextView) view.findViewById(R.id.TV_desc);
 
-        String category = "";
-
-        main_category[0] = "스킨케어";
-        main_category[1] = "클렌징";
-        main_category[2] = "베이스메이크업";
-        main_category[3] = "색조메이크업";
-        main_category[4] = "마스크팩";
-        main_category[5] = "향수";
-        main_category[6] = "기타";
-
         TV_category.setText(moreActivity.main_category);
-        TV_desc.setText(SharedManager.getInstance().getMe().name + "님의 " + moreActivity.main_category + " 목록입니다.");
+        TV_desc.setText(user.name + "님의 " + moreActivity.main_category + " 목록입니다.");
 
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
-
-
 
         if (recycler_view == null) {
             recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -142,7 +133,7 @@ public class MoreFragment extends ParentFragment {
     void connectTestCall(String main_category) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category, page_num)
+        conn.myMainCategoryCosmetic(user.id, main_category, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Cosmetic>>() {

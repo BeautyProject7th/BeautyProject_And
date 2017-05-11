@@ -15,18 +15,29 @@
         android:layout_gravity="left|center_vertical"
         android:layout_marginLeft="17dp">
         <Button
-            android:id="@+id/BT_profile_setting"
+            android:id="@+id/BT_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@null"/>
 
         <ImageView
+            android:id="@+id/IV_back"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/back_bt"/>
+        <Button
+            android:id="@+id/BT_profile_setting"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@null"/>
+        <ImageView
+            android:id="@+id/IV_setting"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_centerInParent="true"
             android:src="@drawable/setting"/>
     </RelativeLayout>
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,6 +61,7 @@
             android:background="@null"/>
 
         <ImageView
+            android:id="@+id/IV_find_user"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_centerInParent="true"

@@ -8,19 +8,21 @@ import android.widget.Toast;
 
 import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
+import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import static android.R.attr.fragment;
+
 @EActivity(R.layout.activity_more)
 public class MoreActivity extends ParentActivity {
-    private long backKeyPressedTime = 0;
-    private Toast toast;
 
-    public static String main_category;
+    public static String main_category = null;
 
+    public static Boolean me_dressing_table = null;
 
     MoreActivity activity;
 
@@ -32,7 +34,7 @@ public class MoreActivity extends ParentActivity {
         this.activity = this;
 
         main_category = getIntent().getStringExtra("main_category");
-        Log.i("vxcvx", main_category+"");
+        me_dressing_table = getIntent().getBooleanExtra("me",true);
 
         Fragment fragment = new MoreFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -40,20 +42,6 @@ public class MoreActivity extends ParentActivity {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
-
-    void refresh() {
-
-    }
-
-    @UiThread
-    void uiThread() {
-
-    }
-
-    void connectTestCall() {
-
-    }
-
 }
 
 
