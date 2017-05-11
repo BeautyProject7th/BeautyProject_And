@@ -45,6 +45,10 @@ public class SplashActivity extends ParentActivity {
     void afterBindingView() {
         this.activity = this;
 
+
+//        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+//        mTracker = application.getDefaultTracker();
+
         Userhabit.start(this);
 
 

@@ -15,9 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity2_;
 import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
-import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
 import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.ParentFragment;
@@ -103,8 +101,9 @@ public class MoreFragment extends ParentFragment {
             adapter = new MoreAdapter(new MoreAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, DetailCosmeticActivity2_.class);
+                    Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic_id", adapter.mDataset.get(position).id);
+                    intent.putExtra("user_id",user.id);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 }

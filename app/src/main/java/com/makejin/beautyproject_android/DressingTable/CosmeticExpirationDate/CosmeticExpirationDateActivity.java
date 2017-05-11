@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.support.v7.widget.Toolbar;
 
+import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.DividerItemDecoration;
-import com.makejin.beautyproject_android.DressingTable.YourDressingTable.YourDetailCosmeticActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
 import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
@@ -69,8 +69,9 @@ public class CosmeticExpirationDateActivity extends ParentActivity {
             adapter = new CosmeticExpirationDateAdapter(new CosmeticExpirationDateAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, YourDetailCosmeticActivity_.class);
+                    Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic_id", adapter.mDataset.get(position).id);
+                    intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 }
