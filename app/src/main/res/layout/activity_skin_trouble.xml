@@ -49,204 +49,231 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/LL_skin_trouble_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="84dp"
+                    android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
                     <ImageView
+                        android:id="@+id/IV_skin_trouble_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:src="@drawable/trouble1_darkcircle"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/TV_skin_trouble_1"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="다크서클"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBlackText"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
+                        android:textColor="@color/colorBlackText"/>
+                </RelativeLayout>
+                <RelativeLayout
                     android:id="@+id/LL_skin_trouble_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="84dp"
+                    android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
                     <ImageView
+                        android:id="@+id/IV_skin_trouble_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:src="@drawable/trouble2_blackhead"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/TV_skin_trouble_2"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="블랙헤드"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBlackText"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
+                        android:textColor="@color/colorBlackText"/>
+                </RelativeLayout>
+                <RelativeLayout
                     android:id="@+id/LL_skin_trouble_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="84dp"
+                    android:layout_height="104dp"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/IV_skin_trouble_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:src="@drawable/trouble3_pore"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/TV_skin_trouble_3"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="모공"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBlackText"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                        android:textColor="@color/colorBlackText"/>
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="30dp">
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/LL_skin_trouble_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="84dp"
+                    android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
                     <ImageView
+                        android:id="@+id/IV_skin_trouble_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:src="@drawable/trouble4_deadskin"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/TV_skin_trouble_4"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="각질"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBlackText"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
+                        android:textColor="@color/colorBlackText"/>
+                </RelativeLayout>
+                <RelativeLayout
                     android:id="@+id/LL_skin_trouble_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="84dp"
+                    android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
                     <ImageView
+                        android:id="@+id/IV_skin_trouble_5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:src="@drawable/trouble5_sensitivity"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/TV_skin_trouble_5"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="민감성"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBlackText"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
+                        android:textColor="@color/colorBlackText"/>
+                </RelativeLayout>
+                <RelativeLayout
                     android:id="@+id/LL_skin_trouble_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="84dp"
+                    android:layout_height="104dp"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/IV_skin_trouble_6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:src="@drawable/trouble6_wrinkle"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/TV_skin_trouble_6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:text="주름"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBlackText"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                        android:textColor="@color/colorBlackText"/>
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="30dp">
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/LL_skin_trouble_7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="84dp"
+                    android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
                     <ImageView
+                        android:id="@+id/IV_skin_trouble_7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:src="@drawable/trouble7_acne"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/TV_skin_trouble_7"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="여드름/트러블"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBlackText"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
+                        android:textColor="@color/colorBlackText"/>
+                </RelativeLayout>
+                <RelativeLayout
                     android:id="@+id/LL_skin_trouble_8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="84dp"
+                    android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
                     <ImageView
+                        android:id="@+id/IV_skin_trouble_8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:src="@drawable/trouble8_flush"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/TV_skin_trouble_8"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="안면홍조"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBlackText"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
+                        android:textColor="@color/colorBlackText"/>
+                </RelativeLayout>
+                <RelativeLayout
                     android:id="@+id/LL_skin_trouble_9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="84dp"
+                    android:layout_height="104dp"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/IV_skin_trouble_9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/trouble3_pore"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/trouble9_nothing"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/TV_skin_trouble_9"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="없음"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBlackText"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                        android:textColor="@color/colorBlackText"/>
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
