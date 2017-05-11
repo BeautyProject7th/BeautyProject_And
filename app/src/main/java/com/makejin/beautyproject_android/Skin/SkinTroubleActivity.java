@@ -1,7 +1,6 @@
 package com.makejin.beautyproject_android.Skin;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +36,6 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.makejin.beautyproject_android.R.id.BT_next;
 import static com.makejin.beautyproject_android.R.id.LL_skin_trouble_9;
 
 
@@ -121,18 +118,18 @@ public class SkinTroubleActivity extends ParentActivity {
     }
 
     private void init_trouble_image() {
-        skin_trouble_image.put(R.id.LL_skin_trouble_1, getImageList(R.drawable.trouble1_darkcircle,R.drawable.trouble1_select));
-        skin_trouble_image.put(R.id.LL_skin_trouble_2, getImageList(R.drawable.trouble2_blackhead,R.drawable.trouble2_select));
-        skin_trouble_image.put(R.id.LL_skin_trouble_3, getImageList(R.drawable.trouble3_pore,R.drawable.trouble3_select));
-        skin_trouble_image.put(R.id.LL_skin_trouble_4, getImageList(R.drawable.trouble4_deadskin,R.drawable.trouble4_select));
-        skin_trouble_image.put(R.id.LL_skin_trouble_5, getImageList(R.drawable.trouble5_sensitivity,R.drawable.trouble5_select));
-        skin_trouble_image.put(R.id.LL_skin_trouble_6, getImageList(R.drawable.trouble6_wrinkle,R.drawable.trouble6_select));
-        skin_trouble_image.put(R.id.LL_skin_trouble_7, getImageList(R.drawable.trouble7_acne,R.drawable.trouble7_select));
-        skin_trouble_image.put(R.id.LL_skin_trouble_8, getImageList(R.drawable.trouble8_flush,R.drawable.trouble8_selec));
-        skin_trouble_image.put(LL_skin_trouble_9, getImageList(R.drawable.trouble9_nothing,R.drawable.trouble9_select));
+        skin_trouble_image.put(R.id.LL_skin_trouble_1, setImageList(R.drawable.trouble1_darkcircle,R.drawable.trouble1_select));
+        skin_trouble_image.put(R.id.LL_skin_trouble_2, setImageList(R.drawable.trouble2_blackhead,R.drawable.trouble2_select));
+        skin_trouble_image.put(R.id.LL_skin_trouble_3, setImageList(R.drawable.trouble3_pore,R.drawable.trouble3_select));
+        skin_trouble_image.put(R.id.LL_skin_trouble_4, setImageList(R.drawable.trouble4_deadskin,R.drawable.trouble4_select));
+        skin_trouble_image.put(R.id.LL_skin_trouble_5, setImageList(R.drawable.trouble5_sensitivity,R.drawable.trouble5_select));
+        skin_trouble_image.put(R.id.LL_skin_trouble_6, setImageList(R.drawable.trouble6_wrinkle,R.drawable.trouble6_select));
+        skin_trouble_image.put(R.id.LL_skin_trouble_7, setImageList(R.drawable.trouble7_acne,R.drawable.trouble7_select));
+        skin_trouble_image.put(R.id.LL_skin_trouble_8, setImageList(R.drawable.trouble8_flush,R.drawable.trouble8_selec));
+        skin_trouble_image.put(LL_skin_trouble_9, setImageList(R.drawable.trouble9_nothing,R.drawable.trouble9_select));
     }
 
-    private int[] getImageList(int one,int two){
+    private int[] setImageList(int one, int two){
         int[] skintrouble = new int[2];
         skintrouble[0] = one;
         skintrouble[1] = two;

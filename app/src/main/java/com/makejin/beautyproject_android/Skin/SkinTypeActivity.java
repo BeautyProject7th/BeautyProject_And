@@ -35,6 +35,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.makejin.beautyproject_android.R.id.LL_skin_trouble_9;
 import static com.makejin.beautyproject_android.R.id.TV_skin_trouble_9;
 import static com.makejin.beautyproject_android.R.id.indicator;
 
@@ -56,6 +57,9 @@ public class SkinTypeActivity extends ParentActivity {
     TextView TV_skin_type_1_explain,TV_skin_type_2_explain,TV_skin_type_3_explain,TV_skin_type_4_explain;
 
     @ViewById
+    ImageView IV_skin_type_1,IV_skin_type_2,IV_skin_type_3,IV_skin_type_4;
+
+    @ViewById
     Button BT_next,BT_complete,BT_back;
 
     @ViewById
@@ -64,6 +68,7 @@ public class SkinTypeActivity extends ParentActivity {
     //LinearLayout id 저장
     Integer skin_type = null;
     Map<Integer,Type> skin_type_list = new HashMap<Integer, Type>();
+    Map<Integer,int[]> skin_type_image = new HashMap<Integer, int[]>();
 
     Boolean before_flag = false;
 
@@ -104,12 +109,30 @@ public class SkinTypeActivity extends ParentActivity {
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
 
-        skin_type_list.put(R.id.LL_skin_type_1, new Type(TV_skin_type_1,TV_skin_type_1_explain,"건성"));
-        skin_type_list.put(R.id.LL_skin_type_2, new Type(TV_skin_type_2,TV_skin_type_2_explain,"중성"));
-        skin_type_list.put(R.id.LL_skin_type_3, new Type(TV_skin_type_3,TV_skin_type_3_explain,"지성(일반)"));
-        skin_type_list.put(R.id.LL_skin_type_4, new Type(TV_skin_type_4,TV_skin_type_4_explain,"지성(수부지)"));
+        init_type_image();
+        init_skin_type_list();
     }
 
+    private void init_type_image() {
+        skin_type_image.put(R.id.LL_skin_type_1, setImageList(R.drawable.skin_type1,R.drawable.skin_type1_select));
+        skin_type_image.put(R.id.LL_skin_type_2, setImageList(R.drawable.skin_type2,R.drawable.skin_type2_select));
+        skin_type_image.put(R.id.LL_skin_type_3, setImageList(R.drawable.skin_type3,R.drawable.skin_type3_select));
+        skin_type_image.put(R.id.LL_skin_type_4, setImageList(R.drawable.skin_type4,R.drawable.skin_type4_select));
+    }
+
+    private void init_skin_type_list() {
+        skin_type_list.put(R.id.LL_skin_type_1, new Type(TV_skin_type_1,TV_skin_type_1_explain,"건성",IV_skin_type_1));
+        skin_type_list.put(R.id.LL_skin_type_2, new Type(TV_skin_type_2,TV_skin_type_2_explain,"중성",IV_skin_type_2));
+        skin_type_list.put(R.id.LL_skin_type_3, new Type(TV_skin_type_3,TV_skin_type_3_explain,"지성(일반)",IV_skin_type_3));
+        skin_type_list.put(R.id.LL_skin_type_4, new Type(TV_skin_type_4,TV_skin_type_4_explain,"지성(수부지)",IV_skin_type_4));
+    }
+
+    private int[] setImageList(int one, int two){
+        int[] skintrouble = new int[2];
+        skintrouble[0] = one;
+        skintrouble[1] = two;
+        return skintrouble;
+    }
 
     @Click({R.id.LL_skin_type_1,R.id.LL_skin_type_2,R.id.LL_skin_type_3,R.id.LL_skin_type_4})
     void onClick(View v){
@@ -118,12 +141,22 @@ public class SkinTypeActivity extends ParentActivity {
 
     void click_skin_type(int view_id){
         if(skin_type!=null){ // 기존 설정 값이 있으면 해제 시켜 줌
-            skin_type_list.get(skin_type).TV_explain.setTextColor(getResources().getColor(R.color.colorBlackText));
-            skin_type_list.get(skin_type).TV_type.setTextColor(getResources().getColor(R.color.colorBlackText));
+            unselect_type(skin_type);
         }
         skin_type = view_id;
+        select_type(skin_type);
+    }
+
+    private void select_type(int skin_type) {
         skin_type_list.get(skin_type).TV_explain.setTextColor(getResources().getColor(R.color.colorAccent));
         skin_type_list.get(skin_type).TV_type.setTextColor(getResources().getColor(R.color.colorAccent));
+        skin_type_list.get(skin_type).IV_type.setImageDrawable(getResources().getDrawable(skin_type_image.get(skin_type)[1]));
+    }
+
+    private void unselect_type(int skin_type) {
+        skin_type_list.get(skin_type).TV_explain.setTextColor(getResources().getColor(R.color.colorBlackText));
+        skin_type_list.get(skin_type).TV_type.setTextColor(getResources().getColor(R.color.colorBlackText));
+        skin_type_list.get(skin_type).IV_type.setImageDrawable(getResources().getDrawable(skin_type_image.get(skin_type)[0]));
     }
 
     void connectTestCall_update_skin_type(final Map user) {
@@ -172,11 +205,13 @@ class Type{
     public TextView TV_type;
     public TextView TV_explain;
     public String type;
+    public ImageView IV_type;
 
-    Type(TextView tv1, TextView tv2, String type){
+    Type(TextView tv1, TextView tv2, String type, ImageView imageView){
         this.TV_type = tv1;
         this.TV_explain = tv2;
         this.type = type;
+        this.IV_type = imageView;
     }
 }
 
