@@ -161,6 +161,12 @@ public interface CSConnection{
     @PUT("/users/token")
     Observable<GlobalResponse> user_updateToken(@Body Map<String, Object> fields);
 
+    @POST("/users/follow/{follower_id}/{followee_id}")
+    Observable<GlobalResponse> user_follow_post(@Path("follower_id") String follower_id, @Path("followee_id") String followee_id);
+
+    @GET("/users/follow/{follower_id}/{followee_id}")
+    Observable<GlobalResponse> user_follow_get(@Path("follower_id") String follower_id, @Path("followee_id") String followee_id);
+
 }
 
 

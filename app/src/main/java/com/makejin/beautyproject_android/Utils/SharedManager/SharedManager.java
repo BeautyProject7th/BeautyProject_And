@@ -15,7 +15,6 @@ public class SharedManager {
     private User me;
     private User you;
     private Map<String, List<String>> category = new HashMap<String, List<String>>();
-
     public static SharedManager getInstance() {
 
         if (single == null) {

@@ -1,14 +1,20 @@
 package com.makejin.beautyproject_android.Video.Video;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.google.android.youtube.player.YouTubePlayerView;
@@ -16,6 +22,9 @@ import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -39,6 +48,9 @@ public class VideoContentsFragment extends ParentFragment {
     public VideoContentsAdapter adapter;
     public RecyclerView recycler_view;
 
+    public Button BT_share;
+    public Button BT_share2;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +67,51 @@ public class VideoContentsFragment extends ParentFragment {
         youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, activity);
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
+
+        BT_share = (Button) view.findViewById(R.id.BT_share);
+
+
+        BT_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://13.112.190.217:8888/deeplink";
+
+                Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+
+                List<ResolveInfo> resInfo = getActivity().getPackageManager().queryIntentActivities(shareIntent, 0);
+                if (resInfo.isEmpty()) {
+                    Log.i("###", "공유할 수 있는 앱 없음");
+                    return;
+                }
+
+                List<Intent> targetedShareIntents = new ArrayList<>();
+
+                for (ResolveInfo resolveInfo : resInfo) {
+                    String packageName = resolveInfo.activityInfo.packageName;
+                    Intent targetedShareIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    targetedShareIntent.setType("text/plain");
+
+                    // 페이스북, 카카오톡, 카카오 스토리만 표시
+                    if (packageName.contains("com.facebook.katana") || packageName.contains("com.kakao.talk") || packageName.contains("com.kakao.story")) {
+                        ComponentName name = new ComponentName(packageName, resolveInfo.activityInfo.name);
+                        targetedShareIntent.putExtra(android.content.Intent.EXTRA_TEXT, url);
+                        targetedShareIntent.setComponent(name);
+                        targetedShareIntent.setPackage(packageName);
+                        targetedShareIntents.add(targetedShareIntent);
+                    }
+                }
+
+                if (targetedShareIntents.isEmpty()) {
+                    Log.i("###", "공유할 수 있는 앱 없음");
+                    return;
+                }
+
+                Intent chooserIntent = Intent.createChooser(targetedShareIntents.remove(0), "공유하기");
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, targetedShareIntents.toArray(new Parcelable[targetedShareIntents.size()]));
+                startActivity(chooserIntent);
+            }
+        });
 
 //        activity.setSupportActionBar(cs_toolbar);
 //        activity.getSupportActionBar().setTitle("");

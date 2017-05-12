@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -53,6 +55,7 @@ import rx.schedulers.Schedulers;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.util.exception.KakaoException;
+import com.makejin.beautyproject_android.Video.Video.VideoContentsActivity_;
 
 import org.json.JSONObject;
 
@@ -88,6 +91,8 @@ public class LoginFragment extends ParentFragment {
     private CallbackManager callbackManager = null;
     private AccessTokenTracker accessTokenTracker = null;
     private com.facebook.login.widget.LoginButton loginButton = null;
+
+    Button BT_share2;
 
     private FacebookCallback<LoginResult> callback_facebook = new FacebookCallback<LoginResult>() {
         @Override
