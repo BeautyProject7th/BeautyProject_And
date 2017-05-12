@@ -49,7 +49,7 @@ public class CosmeticReport extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    TextView TV_main_category, TV_sub_category, TV_brand, TV_product_name;
+    TextView TV_main_category, TV_sub_category, TV_brand, TV_product_name,toolbar_title;
 
     @ViewById
     ImageView IV_product;
@@ -96,9 +96,7 @@ public class CosmeticReport extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-        Toolbar cs_toolbar = (Toolbar)findViewById(R.id.cs_toolbar);
-        activity.setSupportActionBar(cs_toolbar);
-        activity.getSupportActionBar().setTitle("");
+        toolbar_title.setText("화장품 정보신고");
 
         Intent intent = getIntent();
         cosmetic = (Cosmetic) intent.getSerializableExtra("cosmetic");

@@ -16,26 +16,17 @@
         android:text="타인의 화장대"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="19sp"
+        android:textSize="25dp"
         android:layout_gravity="center"
         android:id="@+id/textView" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/BT_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_back"
         android:layout_gravity="left|center_vertical"
-        android:layout_marginLeft="17dp">
-        <Button
-            android:id="@+id/BT_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@null"/>
+        android:layout_marginRight="10dp"/>
 
-        <ImageView
-            android:layout_width="17dp"
-            android:layout_height="17dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/back_bt"/>
-    </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

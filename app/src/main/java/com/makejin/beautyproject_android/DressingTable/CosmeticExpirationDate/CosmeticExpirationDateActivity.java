@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
+import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.DividerItemDecoration;
-import com.makejin.beautyproject_android.DressingTable.YourDressingTable.YourDetailCosmeticActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
 import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
@@ -24,6 +25,8 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.makejin.beautyproject_android.R.id.toolbar_title;
 
 /**
  * Created by mijeong on 2017. 4. 30..
@@ -47,6 +50,8 @@ public class CosmeticExpirationDateActivity extends ParentActivity {
         activity = this;
 
         Toolbar cs_toolbar = (Toolbar) findViewById(R.id.cs_toolbar);
+        TextView toolbar_title = (TextView) cs_toolbar.findViewById(R.id.toolbar_title);
+        toolbar_title.setText("유통기한 임박리스트");
 
         BT_back = (Button) cs_toolbar.findViewById(R.id.BT_back);
         BT_back.setOnClickListener(new View.OnClickListener() {
@@ -69,8 +74,9 @@ public class CosmeticExpirationDateActivity extends ParentActivity {
             adapter = new CosmeticExpirationDateAdapter(new CosmeticExpirationDateAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, YourDetailCosmeticActivity_.class);
+                    Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic_id", adapter.mDataset.get(position).id);
+                    intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 }

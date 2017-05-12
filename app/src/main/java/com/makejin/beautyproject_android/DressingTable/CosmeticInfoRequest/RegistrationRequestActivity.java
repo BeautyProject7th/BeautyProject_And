@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
@@ -45,12 +46,13 @@ public class RegistrationRequestActivity extends ParentActivity {
     @ViewById
     Button BT_request;
 
+    @ViewById
+    TextView toolbar_title;
+
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-        Toolbar cs_toolbar = (Toolbar)findViewById(R.id.cs_toolbar);
-        activity.setSupportActionBar(cs_toolbar);
-        activity.getSupportActionBar().setTitle("");
+        toolbar_title.setText("화장품 등록요청");
     }
 
     @Click

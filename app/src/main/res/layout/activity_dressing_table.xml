@@ -42,6 +42,7 @@
                     <TextView
                         android:id="@+id/TV_name"
                         android:layout_marginTop="11dp"
+                        android:layout_marginBottom="17.8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="user_name"
@@ -55,7 +56,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/TV_name"
-                        android:layout_marginTop="17.8dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="12dp"
                         android:gravity="center">

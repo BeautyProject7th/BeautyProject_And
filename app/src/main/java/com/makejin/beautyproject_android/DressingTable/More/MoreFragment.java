@@ -6,19 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity2_;
 import com.makejin.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
-import com.makejin.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.makejin.beautyproject_android.Model.Cosmetic;
+import com.makejin.beautyproject_android.Model.User;
 import com.makejin.beautyproject_android.ParentFragment;
 import com.makejin.beautyproject_android.R;
 import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
@@ -32,12 +29,6 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.makejin.beautyproject_android.R.id.BT_home;
-import static com.makejin.beautyproject_android.R.id.TV_skin_trouble1;
-import static com.makejin.beautyproject_android.R.id.TV_skin_trouble2;
-import static com.makejin.beautyproject_android.R.id.TV_skin_trouble3;
-import static com.makejin.beautyproject_android.R.id.TV_skin_type;
-
 /**
  * Created by kksd0900 on 16. 10. 11..
  */
@@ -50,19 +41,21 @@ public class MoreFragment extends ParentFragment {
 
     public LinearLayout indicator;
 
-    TextView TV_desc, TV_category;
-
-    public String main_category [] = new String[7];
+    TextView TV_desc, TV_category,toolbar_title;
 
     Button BT_back;
 
     public int page_num = 1;
     public boolean endOfPage = false;
 
+    private User user = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_more, container, false);
+        if(activity.me_dressing_table) user = SharedManager.getInstance().getMe();
+        else user = SharedManager.getInstance().getYou();
         initViewSetting(view);
         return view;
     }
@@ -80,28 +73,19 @@ public class MoreFragment extends ParentFragment {
                 activity.finish();
             }
         });
+        toolbar_title = (TextView) cs_toolbar.findViewById(R.id.toolbar_title);
+        if(activity.me_dressing_table) toolbar_title.setText("나의 화장대");
+        else toolbar_title.setText(user.name+"님의 화장대");
 
         TV_category = (TextView) view.findViewById(R.id.TV_category);
 
         TV_desc = (TextView) view.findViewById(R.id.TV_desc);
 
-        String category = "";
-
-        main_category[0] = "스킨케어";
-        main_category[1] = "클렌징";
-        main_category[2] = "베이스메이크업";
-        main_category[3] = "색조메이크업";
-        main_category[4] = "마스크팩";
-        main_category[5] = "향수";
-        main_category[6] = "기타";
-
         TV_category.setText(moreActivity.main_category);
-        TV_desc.setText(SharedManager.getInstance().getMe().name + "님의 " + moreActivity.main_category + " 목록입니다.");
+        TV_desc.setText(user.name + "님의 " + moreActivity.main_category + " 목록입니다.");
 
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
-
-
 
         if (recycler_view == null) {
             recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -112,8 +96,10 @@ public class MoreFragment extends ParentFragment {
             adapter = new MoreAdapter(new MoreAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(activity, DetailCosmeticActivity2_.class);
+                    Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic_id", adapter.mDataset.get(position).id);
+                    intent.putExtra("user_id",user.id);
+                    intent.putExtra("me",activity.me_dressing_table);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 }
@@ -142,7 +128,7 @@ public class MoreFragment extends ParentFragment {
     void connectTestCall(String main_category) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.myMainCategoryCosmetic(SharedManager.getInstance().getMe().id, main_category, page_num)
+        conn.myMainCategoryCosmetic(user.id, main_category, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Cosmetic>>() {

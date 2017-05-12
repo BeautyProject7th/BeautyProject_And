@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.makejin.beautyproject_android.Model.Cosmetic;
@@ -48,6 +49,9 @@ public class FindUserActivity extends AppCompatActivity {
     @ViewById
     EditText ET_search;
 
+    @ViewById
+    TextView toolbar_title;
+
     RecyclerView recycler_view;
 
     private RecyclerView.LayoutManager layoutManager;
@@ -59,8 +63,7 @@ public class FindUserActivity extends AppCompatActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-        activity.setSupportActionBar(cs_toolbar);
-        activity.getSupportActionBar().setTitle("");
+        toolbar_title.setText("유저 리스트");
 
         if (recycler_view== null) {
             recycler_view = (RecyclerView) findViewById(R.id.recycler_view);

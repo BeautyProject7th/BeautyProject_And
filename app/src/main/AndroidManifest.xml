@@ -106,10 +106,7 @@
         <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_3"></activity>
         <activity android:name=".DressingTable.YourDressingTable.FindUserActivity_"></activity>
         <activity android:name=".DressingTable.YourDressingTable.YourDressingTableActivity_"></activity>
-        <activity android:name=".DressingTable.YourDressingTable.YourMoreActivity_"></activity>
-        <activity android:name=".DressingTable.YourDressingTable.YourDetailCosmeticActivity_"></activity>
         <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity"></activity>
-        <activity android:name=".DetailCosmetic.DetailCosmeticActivity2_"/>
         <activity android:name=".DetailCosmetic.ModifyCosmeticActivity_"></activity>
 
 
