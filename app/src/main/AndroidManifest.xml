@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.makejin.beautyproject_android">
+    package="com.soma.beautyproject_android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
-    <uses-permission android:name="com.samsung.permission.SSENSOR" />
-    <uses-permission android:name="android.permission.BODY_SENSORS" />
     <uses-permission android:name="com.samsung.permission.HRM_EXT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
-        android:name=".Login.GlobalApplication"
+        android:name="com.soma.beautyproject_android.Login.GlobalApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
         android:launchMode="singleTask"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash.SplashActivity_">
+        <activity android:name="com.soma.beautyproject_android.Splash.SplashActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,42 +24,42 @@
 
         </activity>
         <activity
-            android:name=".DressingTable.DressingTableActivity_"
+            android:name="com.soma.beautyproject_android.DressingTable.DressingTableActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".DressingTable.More.MoreActivity_"
+            android:name="com.soma.beautyproject_android.DressingTable.More.MoreActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".DetailCosmetic.DetailCosmeticActivity_"
+            android:name="com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Setting.SettingActivity_"
+            android:name="com.soma.beautyproject_android.Setting.SettingActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Video.Video.PlayerViewDemoActivity"
+            android:name="com.soma.beautyproject_android.Video.Video.PlayerViewDemoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Skin.SkinTypeActivity_"
+            android:name="com.soma.beautyproject_android.Skin.SkinTypeActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name=".Skin.SkinTroubleActivity_"
+            android:name="com.soma.beautyproject_android.Skin.SkinTroubleActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name=".Video.Video.VideoContentsActivity_"
+            android:name="com.soma.beautyproject_android.Video.Video.VideoContentsActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
@@ -77,22 +75,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Video.VideoList.VideoListActivity_"
+            android:name="com.soma.beautyproject_android.Video.VideoList.VideoListActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Login.LoginActivity_"
+            android:name="com.soma.beautyproject_android.Login.LoginActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".DressingTable.CosmeticInfoRequest.RegistrationRequestActivity_"
+            android:name="com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.RegistrationRequestActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".DressingTable.CosmeticInfoRequest.CosmeticReport_"
+            android:name="com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
@@ -101,16 +99,16 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_1"></activity>
-        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_2"></activity>
-        <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_3"></activity>
-        <activity android:name=".DressingTable.YourDressingTable.FindUserActivity_"></activity>
-        <activity android:name=".DressingTable.YourDressingTable.YourDressingTableActivity_"></activity>
-        <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity"></activity>
-        <activity android:name=".DetailCosmetic.ModifyCosmeticActivity_"></activity>
+        <activity android:name="com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1"></activity>
+        <activity android:name="com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_2"></activity>
+        <activity android:name="com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_3"></activity>
+        <activity android:name="com.soma.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_"></activity>
+        <activity android:name="com.soma.beautyproject_android.DressingTable.YourDressingTable.YourDressingTableActivity_"></activity>
+        <activity android:name="com.soma.beautyproject_android.DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity"></activity>
+        <activity android:name="com.soma.beautyproject_android.DetailCosmetic.ModifyCosmeticActivity_"></activity>
 
-        <activity android:name=".DressingTable.YourDressingTable.FollowingListActivity_"></activity>
-        <activity android:name=".DressingTable.YourDressingTable.FollowerListActivity_"></activity>
+        <activity android:name="com.soma.beautyproject_android.DressingTable.YourDressingTable.FollowingListActivity_"></activity>
+        <activity android:name="com.soma.beautyproject_android.DressingTable.YourDressingTable.FollowerListActivity_"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -124,14 +122,14 @@
 
         <service android:name="io.userhabit.service.main.service.UserhabitService" />
         <service
-            android:name=".Utils.Push.MyFcmListenerService">
+            android:name="com.soma.beautyproject_android.Utils.Push.MyFcmListenerService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <service
-            android:name=".Utils.Push.MyInstanceIDListenerService">
+            android:name="com.soma.beautyproject_android.Utils.Push.MyInstanceIDListenerService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
