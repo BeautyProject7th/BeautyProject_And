@@ -167,6 +167,15 @@ public interface CSConnection{
     @GET("/users/follow/{follower_id}/{followee_id}")
     Observable<GlobalResponse> user_follow_get(@Path("follower_id") String follower_id, @Path("followee_id") String followee_id);
 
+    @GET("/users/my_follow/{user_id}")
+    Observable<List<String>> user_my_follow(@Path("user_id") String user_id);
+
+    @GET("/users/load/following/{user_id}")
+    Observable<List<User>> user_loadFollowingUsers(@Path("user_id") String user_id);
+
+    @GET("/users/load/follower/{user_id}")
+    Observable<List<User>> user_loadFollowerUsers(@Path("user_id") String user_id);
+
 }
 
 

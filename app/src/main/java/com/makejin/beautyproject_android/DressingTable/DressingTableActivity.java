@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,9 +17,16 @@ import com.bumptech.glide.Glide;
 import com.makejin.beautyproject_android.DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity;
 import com.makejin.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.makejin.beautyproject_android.DressingTable.More.MoreActivity_;
+import com.makejin.beautyproject_android.DressingTable.YourDressingTable.FindUserAdapter;
+import com.makejin.beautyproject_android.DressingTable.YourDressingTable.FollowerListActivity_;
+import com.makejin.beautyproject_android.DressingTable.YourDressingTable.FollowingListActivity;
+import com.makejin.beautyproject_android.DressingTable.YourDressingTable.FollowingListActivity_;
+import com.makejin.beautyproject_android.Model.GlobalResponse;
 import com.makejin.beautyproject_android.Setting.SettingActivity_;
 import com.makejin.beautyproject_android.ParentActivity;
 import com.makejin.beautyproject_android.R;
+import com.makejin.beautyproject_android.Utils.Connections.CSConnection;
+import com.makejin.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.makejin.beautyproject_android.Utils.Constants.Constants;
 import com.makejin.beautyproject_android.Utils.SharedManager.SharedManager;
 import com.makejin.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
@@ -32,9 +40,13 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.makejin.beautyproject_android.R.id.BT_find_user;
 
@@ -59,12 +71,20 @@ public class DressingTableActivity extends ParentActivity {
     TextView TV_name,TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3;
 
     @ViewById
+    TextView TV_following, TV_follower;
+
+    @ViewById
     Button BT_back,BT_profile_setting, BT_find_user;
+
+    @ViewById
+    LinearLayout LL_following, LL_follower;
 
     @Override
     protected void onResume() {
         super.onResume();
         // just as usual
+
+        connectTestCall_my_follow();
 
         if(me.skin_type==null) TV_skin_type.setText("미설정");
         else TV_skin_type.setText(me.skin_type);
@@ -117,6 +137,16 @@ public class DressingTableActivity extends ParentActivity {
             R.id.lip_makeup,R.id.body,R.id.hair, R.id.nail,R.id.perfume,R.id.cosmetic_product,R.id.man})
     void onClick(View v){
         goCategoryActivity(v.getId());
+    }
+
+    @Click
+    void LL_following(){
+        startActivity(new Intent(activity, FollowingListActivity_.class));
+    }
+
+    @Click
+    void LL_follower(){
+        startActivity(new Intent(activity, FollowerListActivity_.class));
     }
 
     @Click({R.id.BT_find_user})
@@ -175,6 +205,34 @@ public class DressingTableActivity extends ParentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
+    void connectTestCall_my_follow() {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.user_my_follow(SharedManager.getInstance().getMe().id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "팔로우 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<String> response) {
+                        if (response != null) {
+                            TV_following.setText(response.get(0));
+                            TV_follower.setText(response.get(1));
+                        } else{
+
+                        }
+                    }
+                });
+    }
+
 }
 
 

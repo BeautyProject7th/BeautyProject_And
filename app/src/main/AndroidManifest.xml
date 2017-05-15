@@ -109,6 +109,8 @@
         <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity"></activity>
         <activity android:name=".DetailCosmetic.ModifyCosmeticActivity_"></activity>
 
+        <activity android:name=".DressingTable.YourDressingTable.FollowingListActivity_"></activity>
+        <activity android:name=".DressingTable.YourDressingTable.FollowerListActivity_"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
