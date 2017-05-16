@@ -97,6 +97,8 @@
         <activity android:name=".DressingTable.YourDressingTable.YourDressingTableActivity_"></activity>
         <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity"></activity>
         <activity android:name=".DetailCosmetic.ModifyCosmeticActivity_"></activity>
+        <activity android:name=".Login.JoinActivity_">
+        </activity>
 
 
         <meta-data

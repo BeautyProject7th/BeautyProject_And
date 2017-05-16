@@ -128,6 +128,10 @@ public class DetailCosmeticActivity extends ParentActivity {
                         if(cosmetic.status == 1) using_switch.setChecked(true);
                         else using_switch.setChecked(false);
 
+                        if(cosmetic.purchase_date != null){
+                            TV_purchase_date.setText("구매일 : "+ cosmetic.purchase_date.substring(0,10));
+                        }
+
                         if(cosmetic.expiration_date != null){
                             TV_expiration_date.setText("유통기한 : " + cosmetic.expiration_date.substring(0,10));
                         }

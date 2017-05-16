@@ -75,11 +75,11 @@ public class CosmeticUploadAdapter_2 extends BaseExpandableListAdapter {
 
         // 그룹을 펼칠때와 닫을때 아이콘을 변경해 준다.
         if(isExpanded){
-            Drawable drawable = context.getResources().getDrawable(R.drawable.back_bt_copy_2);
+            Drawable drawable = context.getResources().getDrawable(R.drawable.btn_category_select);
             viewHolder.iv_image.setImageDrawable(drawable);
             viewHolder.tv_groupName.setTextColor(context.getResources().getColor(R.color.colorAccent));
         }else{
-            Drawable drawable = context.getResources().getDrawable(R.drawable.back_bt_copy);
+            Drawable drawable = context.getResources().getDrawable(R.drawable.btn_category);
             viewHolder.iv_image.setImageDrawable(drawable);
             viewHolder.tv_groupName.setTextColor(context.getResources().getColor(R.color.colorBlackText));
         }
