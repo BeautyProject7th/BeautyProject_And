@@ -11,12 +11,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.DressingTable.More.MoreActivity_;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
+import com.soma.beautyproject_android.Utils.Connections.CSConnection;
+import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.AfterViews;
@@ -26,9 +29,13 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /*
 xml 하나로 통일했어요
@@ -50,15 +57,21 @@ public class YourDressingTableActivity extends ParentActivity {
     TextView TV_name,TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3,textView;
 
     @ViewById
+    TextView TV_following, TV_follower;
+
+    @ViewById
     LinearLayout button_space;
 
     @ViewById
     Button BT_profile_setting,BT_find_user,BT_back;
 
+
     @Override
     protected void onResume() {
         super.onResume();
         // just as usual
+
+        connectTestCall_follow_number();
 
         if(you.skin_type==null) TV_skin_type.setText("미설정");
         else TV_skin_type.setText(you.skin_type);
@@ -111,7 +124,6 @@ public class YourDressingTableActivity extends ParentActivity {
         categorylist.put(R.id.cosmetic_product,"화장 소품");
         categorylist.put(R.id.man,"남성 화장품");
     }
-
     @Click
     void BT_back(){
         finish();
@@ -134,6 +146,33 @@ public class YourDressingTableActivity extends ParentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    void connectTestCall_follow_number() {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.user_follow_number(you.id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "팔로우 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<String> response) {
+                        if (response != null) {
+                            TV_following.setText(response.get(0));
+                            TV_follower.setText(response.get(1));
+                        } else{
+
+                        }
+                    }
+                });
+    }
+
 }
 
 

@@ -10,11 +10,14 @@ import com.soma.beautyproject_android.Model.User;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -167,14 +170,20 @@ public interface CSConnection{
     @GET("/users/follow/{follower_id}/{followee_id}")
     Observable<GlobalResponse> user_follow_get(@Path("follower_id") String follower_id, @Path("followee_id") String followee_id);
 
-    @GET("/users/my_follow/{user_id}")
-    Observable<List<String>> user_my_follow(@Path("user_id") String user_id);
+    @GET("/users/follow_number/{user_id}")
+    Observable<List<String>> user_follow_number(@Path("user_id") String user_id);
 
     @GET("/users/load/following/{user_id}")
     Observable<List<User>> user_loadFollowingUsers(@Path("user_id") String user_id);
 
     @GET("/users/load/follower/{user_id}")
     Observable<List<User>> user_loadFollowerUsers(@Path("user_id") String user_id);
+
+    @Multipart
+    @POST("post/{user_id}/image/upload")
+    Observable<GlobalResponse> fileUploadWrite(@Path("user_id") String user_id,
+                                     @Part("post_image\"; filename=\"android_post_image_file") RequestBody file);
+
 
 }
 

@@ -133,6 +133,7 @@ public class FollowerListActivity extends AppCompatActivity {
                             for(User u : response){
                                 adapter.addData(u);
                             }
+
                             adapter.notifyDataSetChanged();
                         } else {
                         }
