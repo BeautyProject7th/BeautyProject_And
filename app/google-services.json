@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:585679505262:android:c859d4c64e014029",
         "android_client_info": {
-          "package_name": "com.makejin.beautyproject_android"
+          "package_name": "com.soma.beautyproject_android"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "585679505262-rgvd0a7qg77ercactghf6rbo4464gvvt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.makejin.beautyproject_android",
+            "package_name": "com.soma.beautyproject_android",
             "certificate_hash": "47c5c4023d2879a20c5d7f1f7de52028f5a973df"
           }
         },
