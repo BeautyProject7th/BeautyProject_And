@@ -76,7 +76,7 @@ public class LoginFragment extends ParentFragment {
 
     public LinearLayout indicator;
 
-    private SessionCallback callback_kakao;      //콜백 선언
+    //private SessionCallback callback_kakao;      //콜백 선언
 
 
     // view
@@ -86,7 +86,7 @@ public class LoginFragment extends ParentFragment {
     private String profileUrl;
 
 
-    private SessionCallback mKakaocallback;
+    //private SessionCallback mKakaocallback;
 
     private CallbackManager callbackManager = null;
     private AccessTokenTracker accessTokenTracker = null;
@@ -274,8 +274,8 @@ public class LoginFragment extends ParentFragment {
 
         accessTokenTracker.startTracking();
 
-        callback_kakao = new SessionCallback();                  // 이 두개의 함수 중요함
-        Session.getCurrentSession().addCallback(callback_kakao);
+//        callback_kakao = new SessionCallback();                  // 이 두개의 함수 중요함
+//        Session.getCurrentSession().addCallback(callback_kakao);
 
 
 //        Button login_button_kakaotalk = (Button) view.findViewById(R.id.login_button_kakaotalk);
@@ -286,13 +286,13 @@ public class LoginFragment extends ParentFragment {
 //            }
 //        });
 
-        com.kakao.usermgmt.LoginButton login_button_kakao = (com.kakao.usermgmt.LoginButton) view.findViewById(R.id.login_button_kakao);
-        login_button_kakao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isKakaoLogin();
-            }
-        });
+//        com.kakao.usermgmt.LoginButton login_button_kakao = (com.kakao.usermgmt.LoginButton) view.findViewById(R.id.login_button_kakao);
+//        login_button_kakao.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                isKakaoLogin();
+//            }
+//        });
 
 
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
@@ -349,71 +349,71 @@ public class LoginFragment extends ParentFragment {
                 });
     }
 
-    private class SessionCallback implements ISessionCallback {
-        @Override
-        public void onSessionOpened() {
-            Log.d("TAG" , "세션 오픈됨");
-            // 사용자 정보를 가져옴, 회원가입 미가입시 자동가입 시킴
-
-            KakaorequestMe();
-        }
-
-        @Override
-        public void onSessionOpenFailed(KakaoException exception) {
-            if(exception != null) {
-                Log.d("TAG" , exception.getMessage());
-                Log.i("ZXc","QWeqweqwe");
-            }
-            Log.i("ZXc","QWeqweqwe2");
-        }
-    }
-    /**
-     * 사용자의 상태를 알아 보기 위해 me API 호출을 한다.
-     */
-    protected void KakaorequestMe() {
-        UserManagement.requestMe(new MeResponseCallback() {
-            @Override
-            public void onFailure(ErrorResult errorResult) {
-                int ErrorCode = errorResult.getErrorCode();
-                int ClientErrorCode = -777;
-
-                if (ErrorCode == ClientErrorCode) {
-                    Toast.makeText(getActivity(), "카카오톡 서버의 네트워크가 불안정합니다. 잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.d("TAG" , "오류로 카카오로그인 실패 ");
-                }
-            }
-
-            @Override
-            public void onSessionClosed(ErrorResult errorResult) {
-                Log.d("TAG" , "오류로 카카오로그인 실패 ");
-            }
-
-            @Override
-            public void onSuccess(UserProfile userProfile) {
-                profileUrl = userProfile.getProfileImagePath();
-                userId = String.valueOf(userProfile.getId());
-                userName = userProfile.getNickname();
-
-                User tempUser = new User();
-                tempUser.name = userName;
-                tempUser.profile_url = profileUrl;
-                tempUser.social_type = "카카오톡";
-                tempUser.id = userId;
-                tempUser.push_token = FirebaseInstanceId.getInstance().getToken();
-
-                PreferenceManager.getInstance(activity).setPush(true);
-
-                connectTestCall_login(tempUser);
-
-            }
-
-            @Override
-            public void onNotSignedUp() {
-                // 자동가입이 아닐경우 동의창
-            }
-        });
-    }
+//    private class SessionCallback implements ISessionCallback {
+//        @Override
+//        public void onSessionOpened() {
+//            Log.d("TAG" , "세션 오픈됨");
+//            // 사용자 정보를 가져옴, 회원가입 미가입시 자동가입 시킴
+//
+//            KakaorequestMe();
+//        }
+//
+//        @Override
+//        public void onSessionOpenFailed(KakaoException exception) {
+//            if(exception != null) {
+//                Log.d("TAG" , exception.getMessage());
+//                Log.i("ZXc","QWeqweqwe");
+//            }
+//            Log.i("ZXc","QWeqweqwe2");
+//        }
+//    }
+//    /**
+//     * 사용자의 상태를 알아 보기 위해 me API 호출을 한다.
+//     */
+//    protected void KakaorequestMe() {
+//        UserManagement.requestMe(new MeResponseCallback() {
+//            @Override
+//            public void onFailure(ErrorResult errorResult) {
+//                int ErrorCode = errorResult.getErrorCode();
+//                int ClientErrorCode = -777;
+//
+//                if (ErrorCode == ClientErrorCode) {
+//                    Toast.makeText(getActivity(), "카카오톡 서버의 네트워크가 불안정합니다. 잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Log.d("TAG" , "오류로 카카오로그인 실패 ");
+//                }
+//            }
+//
+//            @Override
+//            public void onSessionClosed(ErrorResult errorResult) {
+//                Log.d("TAG" , "오류로 카카오로그인 실패 ");
+//            }
+//
+//            @Override
+//            public void onSuccess(UserProfile userProfile) {
+//                profileUrl = userProfile.getProfileImagePath();
+//                userId = String.valueOf(userProfile.getId());
+//                userName = userProfile.getNickname();
+//
+//                User tempUser = new User();
+//                tempUser.name = userName;
+//                tempUser.profile_url = profileUrl;
+//                tempUser.social_type = "카카오톡";
+//                tempUser.id = userId;
+//                tempUser.push_token = FirebaseInstanceId.getInstance().getToken();
+//
+//                PreferenceManager.getInstance(activity).setPush(true);
+//
+//                connectTestCall_login(tempUser);
+//
+//            }
+//
+//            @Override
+//            public void onNotSignedUp() {
+//                // 자동가입이 아닐경우 동의창
+//            }
+//        });
+//    }
 
 
     private void getAppKeyHash() {
@@ -431,13 +431,8 @@ public class LoginFragment extends ParentFragment {
         }
     }
 
-    private void isKakaoLogin() {
-        // 카카오 세션을 오픈한다
-        mKakaocallback = new SessionCallback();
-        com.kakao.auth.Session.getCurrentSession().addCallback(mKakaocallback);
-        com.kakao.auth.Session.getCurrentSession().checkAndImplicitOpen();
-        com.kakao.auth.Session.getCurrentSession().open(AuthType.KAKAO_TALK_EXCLUDE_NATIVE_LOGIN, getActivity());
-    }
+//
+
 
     @Override
     public void onResume() {

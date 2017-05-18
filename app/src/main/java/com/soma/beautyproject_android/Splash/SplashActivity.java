@@ -49,19 +49,19 @@ public class SplashActivity extends ParentActivity {
 
 //        AnalyticsApplication application = (AnalyticsApplication) getApplication();
 //        mTracker = application.getDefaultTracker();
-
-        Userhabit.start(this);
-
-
-        Userhabit.setSessionEndTime(10);
-
-        new FlurryAgent.Builder()
-                .withLogEnabled(true)
-                .build(this, "HCPCS75FNYY8H97NSW7Q");
-
-        Fabric.with(this, new Crashlytics());
-
-        logUser();
+//
+//        Userhabit.start(this);
+//
+//
+//        Userhabit.setSessionEndTime(10);
+//
+//        new FlurryAgent.Builder()
+//                .withLogEnabled(true)
+//                .build(this, "HCPCS75FNYY8H97NSW7Q");
+//
+//        Fabric.with(this, new Crashlytics());
+//
+//        logUser();
 
 
 
@@ -212,7 +212,7 @@ public class SplashActivity extends ParentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//
+
 //        String name = "google analytics";
 //        Log.i(name, "Setting screen name: " + name);
 //        mTracker.setScreenName("Image~" + name);
