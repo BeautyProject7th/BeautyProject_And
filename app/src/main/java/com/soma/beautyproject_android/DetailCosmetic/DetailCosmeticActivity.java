@@ -11,6 +11,7 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.soma.beautyproject_android.DetailCosmetic.ModifyCosmeticActivity_;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;

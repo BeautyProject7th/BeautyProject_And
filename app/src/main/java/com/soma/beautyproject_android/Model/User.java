@@ -21,6 +21,7 @@ public class User implements Serializable {
     public String skin_trouble_3;
 
 
+    /*
     public User(){
         this.id = "id";
         this.name = "name";
@@ -29,9 +30,7 @@ public class User implements Serializable {
         this.gender = "gender";
         this.social_type = "social_type";
         this.skin_type = "skin_type";
-        this.skin_trouble_1 = "skin_trouble_1";
-        this.skin_trouble_2 = "skin_trouble_2";
-        this.skin_trouble_3 = "skin_trouble_3";
 
     }
+    */
 }

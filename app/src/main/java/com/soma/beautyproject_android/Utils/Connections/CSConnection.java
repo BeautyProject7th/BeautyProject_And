@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -28,7 +29,7 @@ import rx.Observable;
 public interface CSConnection{
 
     @POST("/users/login")
-    Observable<User> user_login(@Body User user);
+    Observable<User> user_login(@Body  Map<String, Object> user);
 
     @GET("/users/logout")
     Observable<GlobalResponse> user_logout();

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.facebook.login.LoginManager;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Login.JoinActivity_;
 import com.soma.beautyproject_android.Login.LoginActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
@@ -49,7 +50,7 @@ public class SettingActivity extends ParentActivity {
     TextView toolbar_title;
 
     @ViewById
-    RelativeLayout BT_skin_type, BT_skin_trouble, BT_agreement, BT_privacy_rule, BT_logout, BT_edit_user;
+    RelativeLayout BT_skin_type, BT_skin_trouble, BT_agreement, BT_privacy_rule, BT_logout;
 
     @ViewById
     Switch push_switch;
@@ -79,11 +80,12 @@ public class SettingActivity extends ParentActivity {
         onBackPressed();
     }
 
-
+/*
     @Click
     void BT_edit_user(){
         startActivity(new Intent(getApplicationContext(), JoinActivity_.class));
     }
+    */
     @Click
     void BT_skin_type(){
         startActivity(new Intent(getApplicationContext(), SkinTypeActivity_.class));
@@ -112,18 +114,15 @@ public class SettingActivity extends ParentActivity {
         cookieSharedPreferences.deleteHashSet(CookieSharedPreferences.COOKIE_SHARED_PREFERENCES_KEY);
     }
 
-
-
-    void refresh() {
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(activity, DressingTableActivity_.class);
+        startActivity(intent);
+        finish();
     }
 
     @UiThread
     void uiThread() {
-
-    }
-
-    void connectTestCall() {
 
     }
 

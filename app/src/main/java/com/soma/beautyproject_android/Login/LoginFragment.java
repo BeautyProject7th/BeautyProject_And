@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -29,13 +29,7 @@ import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.kakao.auth.AuthType;
-import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.MeResponseCallback;
-import com.kakao.usermgmt.response.model.UserProfile;
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
-import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.ParentFragment;
@@ -48,24 +42,24 @@ import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.SharedManager.PreferenceManager;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
+import rx.Observable;
+import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-
-import com.kakao.auth.ISessionCallback;
-import com.kakao.auth.Session;
-import com.kakao.util.exception.KakaoException;
-import com.soma.beautyproject_android.Video.Video.VideoContentsActivity_;
-
 import org.json.JSONObject;
 
 import java.net.URL;
 import java.security.MessageDigest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import static android.R.attr.id;
+import static android.R.attr.name;
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static com.flurry.sdk.bh.U;
 
 
 /**
@@ -239,17 +233,15 @@ public class LoginFragment extends ParentFragment {
                                     //
                                     // Log.i("TAG", "페이스북 생일 -> " + birthday);
 
-                                    User tempUser = new User();
-                                    tempUser.name = name;
-                                    tempUser.profile_url = url.toString();
-                                    tempUser.social_type = "페이스북";
-                                    tempUser.id = userId;
-                                    tempUser.push_token = FirebaseInstanceId.getInstance().getToken();
+                                    Map<String, Object> user = new HashMap<String, Object>();
+                                    user.put("id",userId);
+                                    user.put("push_token",FirebaseInstanceId.getInstance().getToken());
+                                    user.put("social_type","페이스북");
+                                    user.put("profile_url",url.toString());
+                                    user.put("name",name);
                                     PreferenceManager.getInstance(activity).setPush(true);
 
-                                    //SharedManager.getInstance().setMe(tempUser);
-
-                                    connectTestCall_login(tempUser);
+                                    connectTestCall_login(user);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -452,41 +444,51 @@ public class LoginFragment extends ParentFragment {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-
-    void connectTestCall_login(final User user) {
+    void connectTestCall_login(final Map<String, Object> user) {
+        Log.i("TAG","-------connectTestCall내부------");
+        Log.i("TAG", "페이스북 아이디 -> " + user.get("id"));
+        Log.i("TAG", "페이스북 이름 -> " + user.get("name"));
+        //Log.i("TAG", "페이스북 성별 -> " + gender);
+        Log.i("TAG", "페이스북 프로필 -> " + user.get("profile_url"));
+        Log.i("TAG", "push token : "+ user.get("push_token"));
         //LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        final CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.user_login(user)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<User>() {
                     @Override
                     public final void onCompleted() {
-                        Log.i("zxc", "ggggg : ");
+                        Log.i("session", "성공");
 
-                        if(PreferenceManager.getInstance(activity).getPush().equals(user.push_token)){
+                        if(PreferenceManager.getInstance(activity).getPush().equals(user.get("push_token"))){
                             //토큰값이 동일하다면 바로 메인으로
+                            Log.i("session", "바로 메인으로");
                             goMain();
                         }else {
+                            Log.i("session", "push 토큰 값 다름 다시 저장");
                             //토큰값이 다르면 토큰 다시 저장
                             Map tempuser = new HashMap();
-                            tempuser.put("user_id", SharedManager.getInstance().getMe().id);
-                            tempuser.put("push_token", user.push_token);
-                            connect_update_skin_type(tempuser);
+                            tempuser.put("id", user.get("id"));
+                            tempuser.put("push_token", user.get("push_token"));
+                            connect_update_token(tempuser);
                         }
                     }
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        Log.i("zxc", "zzz : ");
+                        Log.i("session", "서버 문제");
                         Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(User response) {
                         if (response != null) {
+                            Log.i("session", "값이 있음");
+                            Log.i("user","user_id : "+response.id);
                             PreferenceManager.getInstance(getActivity()).set_id(response.id);
                             SharedManager.getInstance().setMe(response);
                         } else {
+                            Log.i("session", "값이 없음");
                             Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -534,7 +536,11 @@ public class LoginFragment extends ParentFragment {
     }
     */
 
-    void connect_update_skin_type(final Map user) {
+    void connect_update_token(final Map user) {
+        Log.i("push", "토큰 값 저장하러 들어옴");
+        Log.i("push","token : "+user.get("push_token"));
+        Log.i("push","id : "+user.get("id"));
+
         CSConnection conn = ServiceGenerator.createService(getApplicationContext(),CSConnection.class);
         conn.user_updateToken(user)
                 .subscribeOn(Schedulers.newThread())
@@ -547,38 +553,48 @@ public class LoginFragment extends ParentFragment {
                     }
                     @Override
                     public final void onError(Throwable e) {
+                        Log.i("test","토큰 저장하던 도중 오류");
                         e.printStackTrace();
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {
-                        if (response != null) {
+                        Log.i("push","message : "+response.message);
+                        Log.i("push","code 값 : "+response.code);
+                        if (response.code == 201) {
                             Log.i("push","token값 재갱신-성공");
                             //Toast.makeText(getApplicationContext(), "정상적으로 변경되었습니다", Toast.LENGTH_SHORT).show();
                         } else {
+                            Log.i("push","token값 재갱신-실패");
                             //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
     }
 
     void goMain(){
+        Log.i("test","다른데로 이동할라구");
         User me = SharedManager.getInstance().getMe();
         Log.i("test","skin type : "+me.skin_type);
         Log.i("test","skin trouble1 f: "+me.skin_trouble_1);
         Log.i("test","skin trouble2 : "+me.skin_trouble_2);
         Log.i("test","skin trouble3 : "+me.skin_trouble_3);
         if(me.skin_type == null){
+            Log.i("test","스킨타입갈꺼야");
             Intent intent = new Intent(activity, SkinTypeActivity_.class);
             intent.putExtra("before_login",true);
             startActivity(intent);
         }
         else if(me.skin_trouble_1 == null){
+            Log.i("test","스킨트러블갈꺼야");
             Intent intent = new Intent(activity, SkinTroubleActivity_.class);
             intent.putExtra("before_login",true);
             startActivity(intent);
         }
-        else startActivity(new Intent(activity, DressingTableActivity_.class));
+        else
+        {
+            Log.i("test","메인으로갈꺼야");
+            startActivity(new Intent(activity, DressingTableActivity_.class));
+        }
         activity.finish();
     }
 

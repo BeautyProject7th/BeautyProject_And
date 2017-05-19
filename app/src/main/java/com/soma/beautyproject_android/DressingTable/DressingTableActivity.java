@@ -178,6 +178,7 @@ public class DressingTableActivity extends ParentActivity {
     @Click({R.id.BT_profile_setting})
     void BT_profile_setting(){
         startActivity(new Intent(activity, SettingActivity_.class));
+        finish();
     }
 
     @Click

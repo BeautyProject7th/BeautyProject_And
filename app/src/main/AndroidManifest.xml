@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.soma.beautyproject_android.DressingTable.DressingTableActivity_"
+            android:name=".DressingTable.DressingTableActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
@@ -33,7 +33,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_"
+            android:name=".DetailCosmetic.DetailCosmeticActivity_"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

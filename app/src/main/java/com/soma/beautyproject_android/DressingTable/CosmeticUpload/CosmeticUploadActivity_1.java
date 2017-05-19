@@ -26,8 +26,6 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
 public class CosmeticUploadActivity_1 extends ParentActivity {
     public static CosmeticUploadActivity_1 activity;
 
