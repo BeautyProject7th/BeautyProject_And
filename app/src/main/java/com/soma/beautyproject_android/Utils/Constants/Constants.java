@@ -4,7 +4,7 @@ package com.soma.beautyproject_android.Utils.Constants;
  * Created by kksd0900 on 16. 9. 29..
  */
 public class Constants {
-    public static final String API_BASE_URL = "http://13.112.190.217:8888";
+    public static final String API_BASE_URL = "http://13.124.137.105:8888";
     public static final String IMAGE_BASE_URL_cosmetics = API_BASE_URL+"/cosmetics/images/";
     public static final String IMAGE_BASE_URL_users = API_BASE_URL+"/users/images/";
     public static final String IMAGE_BASE_URL_brand = API_BASE_URL+"/brand/images/";

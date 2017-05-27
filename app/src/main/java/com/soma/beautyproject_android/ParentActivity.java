@@ -27,8 +27,6 @@ public class ParentActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
-
     }
 }

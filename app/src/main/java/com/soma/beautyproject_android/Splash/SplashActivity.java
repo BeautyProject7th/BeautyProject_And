@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Login.LoginActivity_;
 import com.soma.beautyproject_android.Model.Category;
@@ -50,27 +52,28 @@ import static com.kakao.usermgmt.StringSet.id;
 @EActivity(R.layout.activity_splash)
 public class SplashActivity extends ParentActivity {
     SplashActivity activity;
+    private Tracker mTracker;
 
     @AfterViews
     void afterBindingView() {
         this.activity = this;
 
 
-//        AnalyticsApplication application = (AnalyticsApplication) getApplication();
-//        mTracker = application.getDefaultTracker();
-//
-//        Userhabit.start(this);
-//
-//
-//        Userhabit.setSessionEndTime(10);
-//
-//        new FlurryAgent.Builder()
-//                .withLogEnabled(true)
-//                .build(this, "HCPCS75FNYY8H97NSW7Q");
-//
-//        Fabric.with(this, new Crashlytics());
-//
-//        logUser();
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
+        Userhabit.start(application);
+
+
+        Userhabit.setSessionEndTime(10);
+
+        new FlurryAgent.Builder()
+                .withLogEnabled(true)
+                .build(this, "HCPCS75FNYY8H97NSW7Q");
+
+        Fabric.with(this, new Crashlytics());
+
+        logUser();
 
         try {
             PackageInfo info = getPackageManager().getPackageInfo("com.soma.beautyproject_android", PackageManager.GET_SIGNATURES);
@@ -248,14 +251,14 @@ public class SplashActivity extends ParentActivity {
     protected void onResume() {
         super.onResume();
 
-//        String name = "google analytics";
-//        Log.i(name, "Setting screen name: " + name);
-//        mTracker.setScreenName("Image~" + name);
-//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-//
-//        mTracker.send(new HitBuilders.EventBuilder()
-//                .setCategory("Action")
-//                .setAction("Share")
-//                .build());
+        String name = "google analytics";
+        Log.i(name, "Setting screen name: " + name);
+        mTracker.setScreenName("Image~" + name);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Action")
+                .setAction("Share")
+                .build());
     }
 }

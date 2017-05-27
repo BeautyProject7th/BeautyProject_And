@@ -78,22 +78,16 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.23.+'
     compile 'jp.wasabeef:glide-transformations:2.0.0'
     compile 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'
-
     compile files('libs/YouTubeAndroidPlayerApi.jar')
-
     // facebook sdk
     compile 'com.facebook.android:facebook-android-sdk:4.8.2'
-
     // kakao sdk
     //    compile eye_makeup: project.KAKAO_SDK_GROUP, name: 'kakaolink', version: project.KAKAO_SDK_VERSION
     //    compile eye_makeup: project.KAKAO_SDK_GROUP, name: 'kakaotalk', version: project.KAKAO_SDK_VERSION
     //compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
     compile group: 'com.kakao.sdk', name: 'usermgmt', version: project.KAKAO_SDK_VERSION
-
     //userhabit
-    compile files('libs/userhabitsdk_1.0.15.jar')
-
-
+    compile files('libs/userhabitsdk_1.1.0.jar')
     //flurry
     // Required for Flurry Analytics integration
     compile 'com.flurry.android:analytics:7.0.0@aar'
@@ -102,16 +96,12 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
         transitive = true;
     }
-
-
     //google analytics
     compile 'com.google.android.gms:play-services-analytics:9.0.0'
-
     //fcm
     compile 'com.google.firebase:firebase-messaging:9.0.0'
-
     //font
     compile 'com.tsengvn:Typekit:1.0.0'
-
     compile 'com.artemzin.rxjava:proguard-rules:1.1.0.0'
+
 }
