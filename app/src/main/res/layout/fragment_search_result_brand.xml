@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay" >
+
+        <include layout="@layout/toolbar_only_back" android:id="@+id/cs_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="제품 "
+                    android:gravity="center"
+                    android:textSize="13.5sp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/TV_product_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12.5sp"
+                    android:textColor="#fc617e"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="개"
+                    android:gravity="center"
+                    android:textSize="13.5sp"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_line_vertical"/>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_sort" />
+                <Space
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="필터"
+                    android:textColor="#9b9b9b"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_line_vertical"/>
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <Spinner
+                    android:id="@+id/SP_sort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"></Spinner>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:orientation="horizontal"
+            android:background="#FFFFFF">
+            <ImageView
+                android:id="@+id/IV_brand"
+                android:layout_width="44.5dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:id="@+id/TV_brand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이니스프리"
+                    android:textSize="13sp"
+                    android:textColor="#4a494a"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    
+
+   
+        <!--<include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F3F3F3"
+        android:scrollbars="vertical"
+        android:layout_marginTop="150dp" />
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="95dp"-->
+        <!--android:background="#f3f3f3">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="8dp">-->
+            <!--<include layout="@layout/cell_search_result_brand" android:id="@+id/cell_search_result_brand"/>-->
+            <!--<Space-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="8dp" />-->
+            <!--<include layout="@layout/cell_search_result_cosmetic_perfect" android:id="@+id/cell_search_result_cosmetic_perfect"/>-->
+            <!--<Space-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="8dp" />-->
+            <!--<include layout="@layout/cell_search_result_cosmetic" android:id="@+id/cell_search_result_cosmetic"/>-->
+        <!--</LinearLayout>-->
+    <!--</ScrollView>-->
+
+</android.support.design.widget.CoordinatorLayout>

@@ -56,7 +56,6 @@ public class SearchFragmentSearchResult extends Fragment {
     public Button BT_search,BT_close_circle;
     public EditText ET_search;
 
-
     /**
      * Create a new instance of the fragment
      */
@@ -142,6 +141,8 @@ public class SearchFragmentSearchResult extends Fragment {
                 return false;
             }
         });
+
+
     }
 
 

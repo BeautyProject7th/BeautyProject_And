@@ -23,8 +23,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
+import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
 import com.soma.beautyproject_android.Login.LoginFragment;
+import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.ParentActivity;
@@ -57,6 +59,7 @@ import rx.schedulers.Schedulers;
 public class SearchActivity extends ParentActivity {
     SearchActivity activity;
     public String keyword;
+    public Brand brand;
 
     @Override
     protected void onResume() {
@@ -82,6 +85,16 @@ public class SearchActivity extends ParentActivity {
     @Click
     void LL_cosmetic_rank_1(){
 
+    }
+
+    /// EXIT
+    @Override
+    public void onBackPressed() {
+//        Intent beforeintent = new Intent(activity, CosmeticUploadActivity_1.class);
+//        beforeintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        beforeintent.putExtra("brand", brand);
+//        startActivity(beforeintent);
+        activity.finish();
     }
 }
 

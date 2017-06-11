@@ -219,16 +219,21 @@ public interface CSConnection{
     @GET("/cosmetics/search/more/{keyword}/{page_num}")
     Observable<List<Cosmetic>> search_cosmetic_more(@Path("keyword") String keyword, @Path("page_num") int page_num);
 
-
     @GET("/cosmetics/search/more/quantity/{keyword}")
     Observable<List<Integer>> search_cosmetic_more_quantity(@Path("keyword") String keyword);
-
 
     @GET("/cosmetics/search/limit_3/{keyword}")
     Observable<List<Cosmetic>> search_cosmetic_limit_3(@Path("keyword") String keyword);
 
+    @GET("/cosmetics/search/by_brand/{keyword}/{page_num}")
+    Observable<List<Cosmetic>> search_cosmetic_by_brand(@Path("keyword") String keyword, @Path("page_num") int page_num);
+
+    @GET("/cosmetics/search/by_brand/quantity/{keyword}")
+    Observable<List<Integer>> search_cosmetic_by_brand_quantity(@Path("keyword") String keyword);
+
     @GET("/video/search/{keyword}")
     Observable<List<Video>> search_video(@Path("keyword") String keyword);
+
 
 }
 

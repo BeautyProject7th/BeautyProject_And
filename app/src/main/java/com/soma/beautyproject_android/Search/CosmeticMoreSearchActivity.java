@@ -157,7 +157,6 @@ public class CosmeticMoreSearchActivity extends ParentActivity {
                             adapter.notifyDataSetChanged();
                         } else {
                             endOfPage = true;
-                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
