@@ -1,6 +1,7 @@
 package com.soma.beautyproject_android.DetailCosmetic;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,7 +12,6 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
-import com.soma.beautyproject_android.DetailCosmetic.ModifyCosmeticActivity_;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
@@ -113,6 +113,8 @@ public class DetailCosmeticActivity extends ParentActivity {
                     @Override
                     public final void onCompleted() {
                         String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
+
+                        Log.i("zxc", "image_url : " + image_url);
 
                         Glide.with(activity).
                                 load(image_url).

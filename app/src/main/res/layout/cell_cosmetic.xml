@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/LL_cosmetic_rank_1" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="75dp"
+    android:layout_height="110dp"
+    android:gravity="center"
+    android:layout_marginRight="32dp">
+    <RelativeLayout
+        android:layout_width="75dp"
+        android:layout_height="80dp">
+        <ImageView
+            android:id="@+id/IV_cosmetic_rank_1"
+            android:layout_width="75dp"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/TV_cosmetic_rank_1_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="브랜드명"
+        android:textSize="10sp"
+        android:textColor="#fb607d"
+        android:layout_marginBottom="4dp"/>
+    <TextView
+        android:id="@+id/TV_cosmetic_rank_1_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="화장품명"
+        android:textSize="9sp"
+        android:textColor="#4a4a4a"/>
+</LinearLayout>

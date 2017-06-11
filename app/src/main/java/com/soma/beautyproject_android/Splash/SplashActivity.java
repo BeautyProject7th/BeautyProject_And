@@ -14,7 +14,7 @@ import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
+import com.soma.beautyproject_android.Main.MainActivity_;
 import com.soma.beautyproject_android.Login.LoginActivity_;
 import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.User;
@@ -33,11 +33,9 @@ import org.androidannotations.annotations.UiThread;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,8 +44,6 @@ import io.userhabit.service.Userhabit;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static com.kakao.usermgmt.StringSet.id;
 
 @EActivity(R.layout.activity_splash)
 public class SplashActivity extends ParentActivity {
@@ -163,7 +159,8 @@ public class SplashActivity extends ParentActivity {
                 .subscribe(new Subscriber<User>() {
                     @Override
                     public final void onCompleted() {
-                        startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
+                        //startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity_.class));
                         finish();
                     }
                     @Override

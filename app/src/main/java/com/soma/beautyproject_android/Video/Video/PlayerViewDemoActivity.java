@@ -17,6 +17,8 @@
 package com.soma.beautyproject_android.Video.Video;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
@@ -43,7 +45,7 @@ public class PlayerViewDemoActivity extends YouTubeFailureRecoveryActivity {
   public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
                                       boolean wasRestored) {
     if (!wasRestored) {
-      player.cueVideo("mz7hBm9VNjg");
+      player.cueVideo("fK31dVKyhOw");
     }
   }
 

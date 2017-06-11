@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay" >
+
+        <include layout="@layout/toolbar_main" android:id="@+id/cs_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f3f3f3">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="344dp"
+                    android:layout_height="157dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/card_base">
+                    <TextView
+                        android:id="@+id/TV_cosmetic_ranking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:text="화장품 랭킹"
+                        android:textColor="#4a494a"
+                        android:textSize="13sp"/>
+                    <!--<Button-->
+                        <!--android:id="@+id/BT_cosmetic_ranking_more"-->
+                        <!--android:layout_width="60dp"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:text="더보기"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginLeft="15dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@drawable/btn_circle" />-->
+                    <LinearLayout
+                        android:layout_below="@id/TV_cosmetic_ranking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7.5dp"
+                        android:layout_marginLeft="27.5dp">
+
+                        <LinearLayout
+                            android:id="@+id/LL_cosmetic_rank_1"
+                            android:orientation="vertical"
+                            android:layout_width="75dp"
+                            android:layout_height="105dp"
+                            android:gravity="center"
+                            android:layout_marginRight="32dp">
+                            <RelativeLayout
+                                android:layout_width="75dp"
+                                android:layout_height="80dp">
+                                <ImageView
+                                    android:id="@+id/IV_cosmetic_rank_1"
+                                    android:layout_width="75dp"
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true" />
+                                <ImageView
+                                    android:id="@+id/IV_cosmetic_rank_1_medal"
+                                    android:layout_width="23dp"
+                                    android:layout_height="23dp"
+                                    android:background="@drawable/medal_1"/>
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/TV_cosmetic_rank_1_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="10sp"
+                                android:textColor="#fb607d"
+                                android:layout_marginBottom="4dp"/>
+                            <TextView
+                                android:id="@+id/TV_cosmetic_rank_1_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="9sp"
+                                android:textColor="#4a4a4a"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/LL_cosmetic_rank_2"
+                            android:orientation="vertical"
+                            android:layout_width="75dp"
+                            android:layout_height="105dp"
+                            android:gravity="center"
+                            android:layout_marginRight="32dp">
+                            <RelativeLayout
+                                android:layout_width="75dp"
+                                android:layout_height="80dp">
+                                <ImageView
+                                    android:id="@+id/IV_cosmetic_rank_2"
+                                    android:layout_width="75dp"
+                                    android:layout_height="80dp" />
+                                <ImageView
+                                    android:id="@+id/IV_cosmetic_rank_2_medal"
+                                    android:layout_width="23dp"
+                                    android:layout_height="23dp"
+                                    android:background="@drawable/medal_2"/>
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/TV_cosmetic_rank_2_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="10sp"
+                                android:textColor="#fb607d"
+                                android:layout_marginBottom="4dp"/>
+                            <TextView
+                                android:id="@+id/TV_cosmetic_rank_2_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="9sp"
+                                android:textColor="#4a4a4a"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/LL_cosmetic_rank_3"
+                            android:orientation="vertical"
+                            android:layout_width="75dp"
+                            android:layout_height="105dp"
+                            android:gravity="center"
+                            android:layout_marginRight="32dp">
+                            <RelativeLayout
+                                android:layout_width="75dp"
+                                android:layout_height="80dp">
+                                <ImageView
+                                    android:id="@+id/IV_cosmetic_rank_3"
+                                    android:layout_width="75dp"
+                                    android:layout_height="80dp" />
+                                <ImageView
+                                    android:id="@+id/IV_cosmetic_rank_3_medal"
+                                    android:layout_width="23dp"
+                                    android:layout_height="23dp"
+                                    android:background="@drawable/medal_3"/>
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/TV_cosmetic_rank_3_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="10sp"
+                                android:textColor="#fb607d"
+
+                                android:layout_marginBottom="4dp"/>
+                            <TextView
+                                android:id="@+id/TV_cosmetic_rank_3_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="9sp"
+                                android:textColor="#4a4a4a"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="344dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_base"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center_horizontal">
+                    <!--<Button-->
+                        <!--android:id="@+id/BT_recommend_cosmetic_more"-->
+                        <!--android:layout_width="60dp"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:text="더보기"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginLeft="15dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@drawable/btn_circle" />-->
+                    <TextView
+                        android:id="@+id/TV_recommend_cosmetic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="추천 화장품"
+                        android:textColor="#4a494a"
+                        android:textSize="13sp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="15dp" />
+                    <LinearLayout
+                        android:layout_below="@id/TV_recommend_cosmetic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7.5dp"
+                        android:layout_marginLeft="27.5dp"
+                        android:layout_marginBottom="15dp">
+                        <LinearLayout
+                            android:id="@+id/LL_recommend_cosmetic_1"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginRight="32dp">
+                            <RelativeLayout
+                                android:layout_width="75dp"
+                                android:layout_height="80dp">
+                                <ImageView
+                                    android:layout_width="75dp"
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true" />
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_1_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="10sp"
+                                android:textColor="#fb607d"
+                                android:layout_marginBottom="4dp"/>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_1_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="9sp"
+                                android:textColor="#4a4a4a"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/LL_recommend_cosmetic_2"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginRight="32dp">
+                            <RelativeLayout
+                                android:layout_width="75dp"
+                                android:layout_height="80dp">
+                                <ImageView
+                                    android:layout_width="75dp"
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true" />
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_2_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="10sp"
+                                android:textColor="#fb607d"
+                                android:layout_marginBottom="4dp"/>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_2_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="9sp"
+                                android:textColor="#4a4a4a"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/LL_recommend_cosmetic_3"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginRight="32dp">
+                            <RelativeLayout
+                                android:layout_width="75dp"
+                                android:layout_height="80dp">
+                                <ImageView
+                                    android:layout_width="75dp"
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true" />
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_3_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="10sp"
+                                android:textColor="#fb607d"
+                                android:layout_marginBottom="4dp"/>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_3_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="9sp"
+                                android:textColor="#4a4a4a"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="344dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_base"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/TV_recommend_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="추천 영상"
+                        android:textColor="#4a494a"
+                        android:textSize="13sp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"/>
+                    <!--<Button-->
+                        <!--android:id="@+id/BT_recommend_video_more"-->
+                        <!--android:layout_width="60dp"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:text="더보기"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginLeft="15dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@drawable/btn_circle" />-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/TV_recommend_video"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="22.5dp"
+                        android:layout_marginRight="22.5dp"
+                        android:layout_marginBottom="15dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <include layout="@layout/cell_video" android:id="@+id/video_1" />
+                            <android.support.v4.widget.Space
+                                android:layout_width="9dp"
+                                android:layout_height="match_parent" />
+                            <include layout="@layout/cell_video" android:id="@+id/video_2" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="344dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_base"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/TV_match_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="나와 비슷한 타입의 유저"
+                        android:textColor="#4a494a"
+                        android:textSize="13sp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"/>
+                    <!--<Button-->
+                        <!--android:id="@+id/BT_match_user_more"-->
+                        <!--android:layout_width="60dp"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:text="더보기"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginLeft="15dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@drawable/btn_circle" />-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/TV_match_user"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="15dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <include layout="@layout/cell_user" android:id="@+id/user_1" />
+                            <android.support.v4.widget.Space
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent" />
+                            <include layout="@layout/cell_user" android:id="@+id/user_2" />
+                            <android.support.v4.widget.Space
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent" />
+                            <include layout="@layout/cell_user" android:id="@+id/user_3" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="344dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_base"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/TV_match_creator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="나와 비슷한 타입의 크리에이터"
+                        android:textColor="#4a494a"
+                        android:textSize="13sp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"/>
+                    <!--<Button-->
+                        <!--android:id="@+id/BT_match_creator_more"-->
+                        <!--android:layout_width="60dp"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:text="더보기"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginLeft="15dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@drawable/btn_circle" />-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/TV_match_creator"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="15dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <include layout="@layout/cell_user" android:id="@+id/creator_1" />
+                            <android.support.v4.widget.Space
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent"/>
+                            <include layout="@layout/cell_user" android:id="@+id/creator_2" />
+                            <android.support.v4.widget.Space
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent" />
+                            <include layout="@layout/cell_user" android:id="@+id/creator_3" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="344dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_base"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/TV_dressing_table_ranking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="화장대 랭킹"
+                        android:textColor="#4a494a"
+                        android:textSize="13sp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"/>
+                    <!--<Button-->
+                        <!--android:id="@+id/BT_dressing_table_ranking_more"-->
+                        <!--android:layout_width="60dp"-->
+                        <!--android:layout_height="20dp"-->
+                        <!--android:text="더보기"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginLeft="15dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@drawable/btn_circle" />-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/TV_dressing_table_ranking"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="15dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <include layout="@layout/cell_user" android:id="@+id/ranker_1" />
+                                <ImageView
+                                    android:layout_width="23dp"
+                                    android:layout_height="23dp"
+                                    android:background="@drawable/medal_1"/>
+                            </RelativeLayout>
+
+                            <android.support.v4.widget.Space
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent"/>
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <include layout="@layout/cell_user" android:id="@+id/ranker_2" />
+                                <ImageView
+                                    android:layout_width="23dp"
+                                    android:layout_height="23dp"
+                                    android:background="@drawable/medal_2"/>
+                            </RelativeLayout>
+
+                            <android.support.v4.widget.Space
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent" />
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <include layout="@layout/cell_user" android:id="@+id/ranker_3" />
+                                <ImageView
+                                    android:layout_width="23dp"
+                                    android:layout_height="23dp"
+                                    android:background="@drawable/medal_3"/>
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

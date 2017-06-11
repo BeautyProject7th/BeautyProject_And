@@ -29,7 +29,7 @@ import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
+import com.soma.beautyproject_android.Main.MainActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.ParentFragment;
@@ -318,7 +318,7 @@ public class LoginFragment extends ParentFragment {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                Intent intent = new Intent(activity, DressingTableActivity_.class);
+                                Intent intent = new Intent(activity, MainActivity_.class);
                                 startActivity(intent);
                                 activity.finish();
                             }
@@ -593,7 +593,7 @@ public class LoginFragment extends ParentFragment {
         else
         {
             Log.i("test","메인으로갈꺼야");
-            startActivity(new Intent(activity, DressingTableActivity_.class));
+            startActivity(new Intent(activity, MainActivity_.class));
         }
         activity.finish();
     }

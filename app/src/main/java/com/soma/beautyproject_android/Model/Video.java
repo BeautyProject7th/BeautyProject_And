@@ -6,14 +6,12 @@ import java.io.Serializable;
  * Created by mac on 2017. 2. 20..
  */
 
-public class Cosmetic implements Serializable{
+public class Video implements Serializable{
     public String id;
     public String brand;
     public String main_category;
     public String sub_category;
     public String product_name;
-    public String price;
-    public String link;
     public String img_src;
     public String review;
     public float rate_num;
@@ -21,14 +19,12 @@ public class Cosmetic implements Serializable{
     public String purchase_date;
     public int status = 1;
 
-    public Cosmetic(){
+    public Video(){
         this.id = "id";
         this.product_name = "product_name";
         this.main_category = "main_category";
         this.sub_category = "sub_category";
         this.brand = "brand";
-        this.price = "17,000원";
-        this.price = "http://";
         this.img_src = "http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif";
         this.review = null;
         this.rate_num = 0;

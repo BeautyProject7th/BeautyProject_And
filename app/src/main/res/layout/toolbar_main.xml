@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:layout_collapseMode="pin"
+    app:titleTextAppearance="@style/Toolbar.TitleText"
+    android:background="@color/colorAccent">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="19sp"
+        android:layout_gravity="left"
+        android:id="@+id/IV_logo"
+        android:background="@drawable/logo" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:layout_marginRight="17dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp">
+            <Button
+                android:id="@+id/BT_find_user"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@null"/>
+            <ImageView
+                android:id="@+id/IV_find_user"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/account"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/BT_search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@null"/>
+            <ImageView
+                android:id="@+id/IV_search"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/search"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

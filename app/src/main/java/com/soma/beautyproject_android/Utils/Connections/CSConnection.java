@@ -1,11 +1,13 @@
 package com.soma.beautyproject_android.Utils.Connections;
 
 
+import com.soma.beautyproject_android.Main.MainActivity;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.User;
+import com.soma.beautyproject_android.Model.Video;
 
 import java.util.List;
 import java.util.Map;
@@ -187,6 +189,46 @@ public interface CSConnection{
     Observable<GlobalResponse> fileUploadWrite(@Path("user_id") String user_id,
                                      @Part("post_image\"; filename=\"android_post_image_file") RequestBody file);
 
+    @GET("/cosmetics/rank")
+    Observable<List<Cosmetic>> cosmetic_rank();
+
+    @GET("/users/match/user/{user_id}")
+    Observable<List<User>> match_user(@Path("user_id") String user_id);
+
+    @GET("/users/match/creator/{user_id}")
+    Observable<List<User>> match_creator(@Path("user_id") String user_id);
+
+    @GET("/users/get/follower/number/{user_id}")
+    Observable<List<MainActivity.Count>> get_follower_number(@Path("user_id") String user_id);
+
+    @GET("/users/get/cosmetic/number/{user_id}")
+    Observable<List<MainActivity.Count>> get_cosmetic_number(@Path("user_id") String user_id);
+
+    @GET("/cosmetics/dressing_table/rank")
+    Observable<List<User>> dressing_table_rank();
+
+    @GET("/cosmetics/search/auto_complete/{keyword}")
+    Observable<List<String>> auto_complete_search(@Path("keyword") String keyword);
+
+    @GET("/brand/search/{keyword}")
+    Observable<List<Brand>> search_brand(@Path("keyword") String keyword);
+
+    @GET("/cosmetics/search/{keyword}")
+    Observable<List<Cosmetic>> search_cosmetic(@Path("keyword") String keyword);
+
+    @GET("/cosmetics/search/more/{keyword}/{page_num}")
+    Observable<List<Cosmetic>> search_cosmetic_more(@Path("keyword") String keyword, @Path("page_num") int page_num);
+
+
+    @GET("/cosmetics/search/more/quantity/{keyword}")
+    Observable<List<Integer>> search_cosmetic_more_quantity(@Path("keyword") String keyword);
+
+
+    @GET("/cosmetics/search/limit_3/{keyword}")
+    Observable<List<Cosmetic>> search_cosmetic_limit_3(@Path("keyword") String keyword);
+
+    @GET("/video/search/{keyword}")
+    Observable<List<Video>> search_video(@Path("keyword") String keyword);
 
 }
 

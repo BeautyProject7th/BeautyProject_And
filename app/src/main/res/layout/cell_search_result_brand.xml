@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cell_search_result_brand"
+    android:orientation="horizontal"
+    android:layout_width="344dp"
+    android:layout_height="63dp"
+    android:background="@drawable/card_base"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp">
+    <ImageView
+        android:id="@+id/IV_brand"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="15dp"/>
+    <LinearLayout
+        android:layout_width="220dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/TV_brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="브랜드명"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#4a494a"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="1.5dp"/>
+        <TextView
+            android:id="@+id/TV_product_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="9sp"
+            android:textColor="#9b9a9b"
+            android:lineSpacingExtra="6sp"
+            android:text="총 1,556개 제품" />
+    </LinearLayout>
+    <Space
+        android:layout_width="10dp"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:layout_width="9dp"
+        android:layout_height="17dp"
+        android:background="@drawable/ic_back_east"
+        android:layout_gravity="center_vertical"/>
+
+
+</LinearLayout>

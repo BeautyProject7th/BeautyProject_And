@@ -237,7 +237,7 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                         thumbnail(0.1f).
                         bitmapTransform(new CropCircleTransformation(activity)).
                         into(itemViewHolder.IV_skin_trouble_3);
-                itemViewHolder.TV_skin_trouble_3.append(user.skin_trouble_3);
+                itemViewHolder.TV_skin_trouble_3.setText(user.skin_trouble_3);
             }
 
             itemViewHolder.LL_user.setOnClickListener(new View.OnClickListener() {
