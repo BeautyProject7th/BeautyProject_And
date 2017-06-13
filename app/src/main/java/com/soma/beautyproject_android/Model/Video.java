@@ -8,27 +8,22 @@ import java.io.Serializable;
 
 public class Video implements Serializable{
     public String id;
-    public String brand;
-    public String main_category;
-    public String sub_category;
-    public String product_name;
-    public String img_src;
-    public String review;
-    public float rate_num;
-    public String expiration_date ;
-    public String purchase_date;
-    public int status = 1;
+    public String video_id;
+    public String video_name;
+    public String youtuber_name;
+    public String upload_date;
+    public String description;
+    public String thumbnail;
+    public int view_cnt;
 
     public Video(){
         this.id = "id";
-        this.product_name = "product_name";
-        this.main_category = "main_category";
-        this.sub_category = "sub_category";
-        this.brand = "brand";
-        this.img_src = "http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif";
-        this.review = null;
-        this.rate_num = 0;
-        this.expiration_date = "1997-02-22";
-
+        this.video_id = "video_id";
+        this.video_name = "video_name";
+        this.youtuber_name = "youtuber_name";
+        this.upload_date = "upload_date";
+        this.description = "description";
+        this.thumbnail = "thumbnail";
+        this.view_cnt = -1;
     }
 }

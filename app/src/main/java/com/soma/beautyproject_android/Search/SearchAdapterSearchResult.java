@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,11 +21,17 @@ import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploa
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.Video;
+import com.soma.beautyproject_android.Model.Youtuber;
 import com.soma.beautyproject_android.R;
+import com.soma.beautyproject_android.Model.Trouble;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.soma.beautyproject_android.R.id.LL_skin_trouble_9;
 
 
 /**
@@ -44,7 +51,13 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
     public ArrayList<Brand> mDataset_brand = new ArrayList<>();
     public ArrayList<Cosmetic> mDataset_cosmetic = new ArrayList<>();
     public ArrayList<Video> mDataset_video = new ArrayList<>();
+    public ArrayList<Youtuber> mDataset_youtuber = new ArrayList<>();
 
+    //LinearLayout id 저장하는 거임
+    List<Integer> user_skin_trouble_list = new ArrayList<Integer>();
+
+    Map<Integer,int[]> skin_trouble_image = new HashMap<Integer, int[]>();
+    Map<Integer,Trouble> skin_trouble_list = new HashMap<Integer, Trouble>();
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -98,6 +111,17 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
         mDataset_video.clear();
     }
 
+    //youtuber
+    public void addData_youtuber(Youtuber youtuber, int i) {
+        mDataset_youtuber.add(i, youtuber);
+    }
+    public Youtuber getItem_youtuber(int position) {
+        return mDataset_youtuber.get(position);
+    }
+    public void clear_youtuber() {
+        mDataset_youtuber.clear();
+    }
+
     @Override
     public SearchAdapterSearchResult.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_SEARCH_RESULT_BRAND) {
@@ -110,8 +134,9 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_cosmetic, parent, false);
             return new CosmeticViewHolder(v);
         } else if (viewType == TYPE_SEARCH_RESULT_VIDEO) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_video, parent, false);
             //View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_video, parent, false);
-            //return new VideoViewHolder(v);
+            return new VideoViewHolder(v);
         }
 //        } else if (viewType == TYPE_TAIL_SIMILAR) {
 //            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_detail_simiral_tail, parent, false);
@@ -225,6 +250,183 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             });
 
         }else if (holder instanceof VideoViewHolder){
+            VideoViewHolder videoViewHolder = (VideoViewHolder) holder;
+
+            //videoViewHolder.TV_video_name =
+
+            Video video;
+            Youtuber youtuber;
+
+            for(int i=0;i<mDataset_video.size();i++){
+                video = mDataset_video.get(i);
+                String image_url_youtuber = "";
+                int image_url_skin_type = -1;
+                int image_url_skin_trouble_1 = -1;
+                int image_url_skin_trouble_2 = -1;
+                int image_url_skin_trouble_3 = -1;
+
+
+                Log.i("zxc", "mDataset_youtuber.size() : " + mDataset_youtuber.size());
+                Log.i("zxc", "i : " + i);
+
+                if(i < mDataset_youtuber.size()){
+                    youtuber = mDataset_youtuber.get(i);
+                    image_url_youtuber = youtuber.profile_url;
+                    Log.i("zxc", i +" youtuber.skin_type" + youtuber.skin_type);
+
+
+                    switch(youtuber.skin_type){
+                        case "건성":
+                            Log.i("zxc", i +" youtuber.skin_type(건성) " + youtuber.skin_type);
+                            image_url_skin_type = R.drawable.skin_type1;
+                            break;
+                        case "중성":
+                            image_url_skin_type = R.drawable.skin_type2;
+                            break;
+                        case "지성":
+                            image_url_skin_type = R.drawable.skin_type3;
+                            break;
+                        case "지성(수부지)":
+                            image_url_skin_type = R.drawable.skin_type4;
+                            break;
+
+                    }
+
+                    switch(youtuber.skin_trouble_1){
+                        case "다크서클":
+                            image_url_skin_trouble_1 = R.drawable.trouble1_darkcircle;
+                            break;
+                        case "블랙헤드":
+                            image_url_skin_trouble_1 = R.drawable.trouble2_blackhead;
+                            break;
+                        case "모공":
+                            image_url_skin_trouble_1 = R.drawable.trouble3_pore;
+                            break;
+                        case "각질":
+                            image_url_skin_trouble_1 = R.drawable.trouble4_deadskin;
+                            break;
+                        case "민감성":
+                            image_url_skin_trouble_1 = R.drawable.trouble5_sensitivity;
+                            break;
+                        case "주름":
+                            image_url_skin_trouble_1 = R.drawable.trouble6_wrinkle;
+                            break;
+                        case "여드름":
+                            image_url_skin_trouble_1 = R.drawable.trouble7_acne;
+                            break;
+                        case "안면홍조":
+                            image_url_skin_trouble_1 = R.drawable.trouble8_flush;
+                            break;
+                        case "없음":
+                            image_url_skin_trouble_1 = R.drawable.trouble9_nothing;
+                            break;
+
+                    }
+
+                    switch(youtuber.skin_trouble_2){
+                        case "다크서클":
+                            image_url_skin_trouble_2 = R.drawable.trouble1_darkcircle;
+                            break;
+                        case "블랙헤드":
+                            image_url_skin_trouble_2 = R.drawable.trouble2_blackhead;
+                            break;
+                        case "모공":
+                            image_url_skin_trouble_2 = R.drawable.trouble3_pore;
+                            break;
+                        case "각질":
+                            image_url_skin_trouble_2 = R.drawable.trouble4_deadskin;
+                            break;
+                        case "민감성":
+                            image_url_skin_trouble_2 = R.drawable.trouble5_sensitivity;
+                            break;
+                        case "주름":
+                            image_url_skin_trouble_2 = R.drawable.trouble6_wrinkle;
+                            break;
+                        case "여드름":
+                            image_url_skin_trouble_2 = R.drawable.trouble7_acne;
+                            break;
+                        case "안면홍조":
+                            image_url_skin_trouble_2 = R.drawable.trouble8_flush;
+                            break;
+                        case "없음":
+                            image_url_skin_trouble_2 = R.drawable.trouble9_nothing;
+                            break;
+
+                    }
+
+                    switch(youtuber.skin_trouble_3){
+                        case "다크서클":
+                            image_url_skin_trouble_3 = R.drawable.trouble1_darkcircle;
+                            break;
+                        case "블랙헤드":
+                            image_url_skin_trouble_3 = R.drawable.trouble2_blackhead;
+                            break;
+                        case "모공":
+                            image_url_skin_trouble_3 = R.drawable.trouble3_pore;
+                            break;
+                        case "각질":
+                            image_url_skin_trouble_3 = R.drawable.trouble4_deadskin;
+                            break;
+                        case "민감성":
+                            image_url_skin_trouble_3 = R.drawable.trouble5_sensitivity;
+                            break;
+                        case "주름":
+                            image_url_skin_trouble_3 = R.drawable.trouble6_wrinkle;
+                            break;
+                        case "여드름":
+                            image_url_skin_trouble_3 = R.drawable.trouble7_acne;
+                            break;
+                        case "안면홍조":
+                            image_url_skin_trouble_3 = R.drawable.trouble8_flush;
+                            break;
+                        case "없음":
+                            image_url_skin_trouble_3 = R.drawable.trouble9_nothing;
+                            break;
+
+                    }
+                }
+
+                //videoViewHolder.TV_video_name.setText(mDataset_video.get(i).video_name);
+                //videoViewHolder.TV_view_cnt.setText(video.view_cnt);
+                //videoViewHolder.TV_upload_date.setText(video.upload_date);
+
+
+//                String image_url_skin_type = Constants.IMAGE_BASE_URL_youtuber + y
+//                String image_url_skin_trouble_1 = Constants.IMAGE_BASE_URL_youtuber + y
+//                String image_url_skin_trouble_2 = Constants.IMAGE_BASE_URL_youtuber + y
+//                String image_url_skin_trouble_3 = Constants.IMAGE_BASE_URL_youtuber + y
+
+                String image_url_video = Constants.IMAGE_BASE_URL_video + video.thumbnail;
+
+                Glide.with(context).
+                        load(image_url_youtuber).
+                        thumbnail(0.1f).
+                        into(videoViewHolder.IV_youtuber);
+                Glide.with(context).
+                        load(image_url_skin_type).
+                        thumbnail(0.1f).
+                        into(videoViewHolder.IV_skin_type);
+                Glide.with(context).
+                        load(image_url_skin_trouble_1).
+                        thumbnail(0.1f).
+                        into(videoViewHolder.IV_skin_trouble_1);
+                Glide.with(context).
+                        load(image_url_skin_trouble_2).
+                        thumbnail(0.1f).
+                        into(videoViewHolder.IV_skin_trouble_2);
+                Glide.with(context).
+                        load(image_url_skin_trouble_3).
+                        thumbnail(0.1f).
+                        into(videoViewHolder.IV_skin_trouble_3);
+
+                Log.i("ZXc",image_url_video);
+
+                Glide.with(context)
+                        .load(image_url_video)
+                        .thumbnail(0.1f).
+                        into(videoViewHolder.IV_video);
+
+            }
 
         }
     }
@@ -280,8 +482,27 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
         }
     }
     public class VideoViewHolder extends ViewHolder {
+        public TextView TV_video_name, TV_view_cnt, TV_upload_date, TV_youtuber_name;
+        public ImageView IV_youtuber, IV_video, IV_skin_type, IV_skin_trouble_1, IV_skin_trouble_2, IV_skin_trouble_3;
+
         public VideoViewHolder(View v) {
             super(v);
+            TV_video_name = (TextView) v.findViewById(R.id.TV_video_name);
+            TV_view_cnt = (TextView) v.findViewById(R.id.LL_video_info).findViewById(R.id.TV_view_cnt);
+            TV_upload_date = (TextView) v.findViewById(R.id.TV_upload_date);
+            TV_youtuber_name = (TextView) v.findViewById(R.id.TV_youtuber_name);
+
+
+            IV_youtuber = (ImageView) v.findViewById(R.id.LL_video_total).findViewById(R.id.LL_youtuber_profile).findViewById(R.id.RL_youtuber_image).findViewById(R.id.IV_youtuber);
+            IV_video = (ImageView) v.findViewById(R.id.IV_video);
+            IV_skin_type = (ImageView) v.findViewById(R.id.IV_skin_type);
+            IV_skin_trouble_1 = (ImageView) v.findViewById(R.id.IV_skin_trouble_1);
+            IV_skin_trouble_2 = (ImageView) v.findViewById(R.id.IV_skin_trouble_2);
+            IV_skin_trouble_3 = (ImageView) v.findViewById(R.id.IV_skin_trouble_3);
+//            IV_skin_type = (ImageView) v.findViewById(R.id.LL_video_total).findViewById(R.id.LL_youtuber_profile).findViewById(R.id.LL_youtuber_profile_skin).findViewById(R.id.IV_skin_type);
+//            IV_skin_trouble_1 = (ImageView) v.findViewById(R.id.LL_video_total).findViewById(R.id.LL_youtuber_profile).findViewById(R.id.LL_youtuber_profile_skin).findViewById(R.id.IV_skin_trouble_1);
+//            IV_skin_trouble_2 = (ImageView) v.findViewById(R.id.LL_video_total).findViewById(R.id.LL_youtuber_profile).findViewById(R.id.LL_youtuber_profile_skin).findViewById(R.id.IV_skin_trouble_2);
+//            IV_skin_trouble_3 = (ImageView) v.findViewById(R.id.LL_video_total).findViewById(R.id.LL_youtuber_profile).findViewById(R.id.LL_youtuber_profile_skin).findViewById(R.id.IV_skin_trouble_3);
         }
     }
 
@@ -302,7 +523,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
     }
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 
 

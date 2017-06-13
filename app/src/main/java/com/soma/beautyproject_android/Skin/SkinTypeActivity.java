@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
+import com.soma.beautyproject_android.Model.Type;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
@@ -198,20 +199,6 @@ public class SkinTypeActivity extends ParentActivity {
                     }
                 });
 
-    }
-}
-
-class Type{
-    public TextView TV_type;
-    public TextView TV_explain;
-    public String type;
-    public ImageView IV_type;
-
-    Type(TextView tv1, TextView tv2, String type, ImageView imageView){
-        this.TV_type = tv1;
-        this.TV_explain = tv2;
-        this.type = type;
-        this.IV_type = imageView;
     }
 }
 

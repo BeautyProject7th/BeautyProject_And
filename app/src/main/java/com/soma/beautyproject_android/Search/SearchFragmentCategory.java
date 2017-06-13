@@ -262,35 +262,6 @@ public class SearchFragmentCategory extends Fragment {
         }
     };
 
-    void conn_search_video(String keyword) {
-        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.search_video(keyword)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Video>>() {
-                    @Override
-                    public final void onCompleted() {
-
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        Toast.makeText(activity, "conn_search_video 에러", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public final void onNext(List<Video> response) {
-                        if (response != null) {
-                            for(int i=0;i<response.size();i++){
-
-                            }
-                        } else{
-
-                        }
-                    }
-                });
-    }
-
-
     void conn_auto_complete_search(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.auto_complete_search(keyword)

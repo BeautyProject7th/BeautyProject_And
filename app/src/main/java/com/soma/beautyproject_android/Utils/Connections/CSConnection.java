@@ -8,6 +8,7 @@ import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.Model.Video;
+import com.soma.beautyproject_android.Model.Youtuber;
 
 import java.util.List;
 import java.util.Map;
@@ -231,8 +232,12 @@ public interface CSConnection{
     @GET("/cosmetics/search/by_brand/quantity/{keyword}")
     Observable<List<Integer>> search_cosmetic_by_brand_quantity(@Path("keyword") String keyword);
 
-    @GET("/video/search/{keyword}")
-    Observable<List<Video>> search_video(@Path("keyword") String keyword);
+    @GET("/video/search/{keyword}/{page_num}")
+    Observable<List<Video>> search_video(@Path("keyword") String keyword, @Path("page_num") int page_num);
+
+    @GET("/youtuber/{youtuber_name}")
+    Observable<Youtuber> get_youtuber(@Path("youtuber_name") String youtuber_name);
+
 
 
 }

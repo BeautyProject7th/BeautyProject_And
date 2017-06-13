@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
+import com.soma.beautyproject_android.Model.Trouble;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
@@ -228,14 +229,3 @@ public class SkinTroubleActivity extends ParentActivity {
     }
 }
 
-class Trouble{
-    public TextView TV_trouble;
-    public String trouble;
-    public ImageView IV_trouble;
-
-    Trouble(TextView textView, String trouble, ImageView imageView){
-        this.TV_trouble = textView;
-        this.trouble = trouble;
-        this.IV_trouble = imageView;
-    }
-}

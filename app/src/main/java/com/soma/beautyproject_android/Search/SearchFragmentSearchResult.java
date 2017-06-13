@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.Video;
+import com.soma.beautyproject_android.Model.Youtuber;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
@@ -55,6 +56,9 @@ public class SearchFragmentSearchResult extends Fragment {
     public TextView TV_product_quantity;
     public Button BT_search,BT_close_circle;
     public EditText ET_search;
+
+    public int page_video = 1;
+    public boolean endOfPage = false;
 
     /**
      * Create a new instance of the fragment
@@ -157,6 +161,7 @@ public class SearchFragmentSearchResult extends Fragment {
         adapter.notifyDataSetChanged();
         conn_search_brand(activity.keyword);
         conn_search_cosmetic(TV_product_quantity, activity.keyword);
+        conn_search_video(activity.keyword, page_video);
         //conn_search_video(activity.keyword);
     }
 
@@ -219,9 +224,9 @@ public class SearchFragmentSearchResult extends Fragment {
                 });
     }
 
-    void conn_search_video(String keyword) {
+    void conn_search_video(String keyword, final int page_num) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.search_video(keyword)
+        conn.search_video(keyword, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Video>>() {
@@ -239,10 +244,38 @@ public class SearchFragmentSearchResult extends Fragment {
                         if (response != null) {
                             for(int i=0;i<response.size();i++){
                                 adapter.addData_video(response.get(i));
+                                conn_get_youtuber(response.get(i).youtuber_name, i);
                             }
                             adapter.notifyDataSetChanged();
                         } else{
+                            endOfPage = true;
+                        }
+                    }
+                });
+    }
 
+    void conn_get_youtuber(String youtuber_name, final int i) {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.get_youtuber(youtuber_name)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Youtuber>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "conn_get_youtuber 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(Youtuber response) {
+                        if (response != null) {
+                            adapter.addData_youtuber(response, i);
+                            adapter.notifyDataSetChanged();
+                        } else{
+                            endOfPage = true;
                         }
                     }
                 });
