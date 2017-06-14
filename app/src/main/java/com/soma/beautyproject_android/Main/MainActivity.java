@@ -98,10 +98,13 @@ public class MainActivity extends ParentActivity {
     @ViewById
     RelativeLayout creator_1, creator_2, creator_3;
 
+    @ViewById
+    LinearLayout LL_user_info;
 
     //5.화장대 랭킹
     @ViewById
     RelativeLayout ranker_1, ranker_2, ranker_3;
+
 
     private String imagepath = null;
 
@@ -234,6 +237,9 @@ public class MainActivity extends ParentActivity {
                         if (response != null) {
                             Log.i("ZXC", "u response.size() : " + response.size());
                             TextView t;
+                            LinearLayout LL_user_info_1 = (LinearLayout) user_1.findViewById(R.id.LL_user_info);
+                            LL_user_info_1.setVisibility(View.VISIBLE);
+
                             if(response.size()>0) {
                                 Glide.with(activity).
                                         load(response.get(0).profile_url).
@@ -246,6 +252,9 @@ public class MainActivity extends ParentActivity {
                             }
 
                             if(response.size()>1) {
+                                LinearLayout LL_user_info_2 = (LinearLayout) user_2.findViewById(R.id.LL_user_info);
+                                LL_user_info_2.setVisibility(View.VISIBLE);
+
                                 Glide.with(activity).
                                         load(response.get(1).profile_url).
                                         thumbnail(0.1f).
@@ -257,6 +266,9 @@ public class MainActivity extends ParentActivity {
                             }
 
                             if(response.size()>2) {
+                                LinearLayout LL_user_info_3 = (LinearLayout) user_3.findViewById(R.id.LL_user_info);
+                                LL_user_info_3.setVisibility(View.VISIBLE);
+
                                 Glide.with(activity).
                                         load(response.get(2).profile_url).
                                         thumbnail(0.1f).
@@ -302,6 +314,9 @@ public class MainActivity extends ParentActivity {
 
                             TextView t;
                             if(response.size()>0) {
+                                LinearLayout LL_user_info_1 = (LinearLayout) creator_1.findViewById(R.id.LL_user_info);
+                                LL_user_info_1.setVisibility(View.VISIBLE);
+
                                 Glide.with(activity).
                                         load(response.get(0).profile_url).
                                         thumbnail(0.1f).
@@ -313,6 +328,9 @@ public class MainActivity extends ParentActivity {
                             }
 
                             if(response.size()>1) {
+                                LinearLayout LL_user_info_2 = (LinearLayout) creator_2.findViewById(R.id.LL_user_info);
+                                LL_user_info_2.setVisibility(View.VISIBLE);
+
                                 Glide.with(activity).
                                         load(response.get(1).profile_url).
                                         thumbnail(0.1f).
@@ -325,6 +343,8 @@ public class MainActivity extends ParentActivity {
 
 
                             if(response.size()>2) {
+                                LinearLayout LL_user_info_3 = (LinearLayout) creator_3.findViewById(R.id.LL_user_info);
+                                LL_user_info_3.setVisibility(View.VISIBLE);
                                 Glide.with(activity).
                                         load(response.get(2).profile_url).
                                         thumbnail(0.1f).
@@ -534,6 +554,14 @@ public class MainActivity extends ParentActivity {
                     @Override
                     public final void onNext(List<User> response) {
                         if (response != null) {
+
+                            LinearLayout LL_user_info_1 = (LinearLayout) ranker_1.findViewById(R.id.LL_user_info);
+                            LL_user_info_1.setVisibility(View.VISIBLE);
+                            LinearLayout LL_user_info_2 = (LinearLayout) ranker_2.findViewById(R.id.LL_user_info);
+                            LL_user_info_2.setVisibility(View.VISIBLE);
+                            LinearLayout LL_user_info_3 = (LinearLayout) ranker_3.findViewById(R.id.LL_user_info);
+                            LL_user_info_3.setVisibility(View.VISIBLE);
+
                             Glide.with(activity).
                                     load(response.get(0).profile_url).
                                     thumbnail(0.1f).

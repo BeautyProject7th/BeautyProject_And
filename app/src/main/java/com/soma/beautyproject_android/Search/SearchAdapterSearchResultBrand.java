@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,7 @@ public class SearchAdapterSearchResultBrand extends RecyclerView.Adapter<SearchA
             itemViewHolder.RB_rate.setRating(cosmetic.rate_num);
 
 
+            Log.i("asdf", position + " : " + mDataset.size());
             if (position == mDataset.size()-1 && !fragment.endOfPage)
                 fragment.conn_search_cosmetic_by_brand(++fragment.page, fragment.activity.keyword);
         }

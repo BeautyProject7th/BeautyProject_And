@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="75dp"
+    android:background="@null">
+    <RelativeLayout
+        android:id="@+id/RR_cosmetic_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/IV_cosmetic_img"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginRight="9.5dp"
+            android:background="#AAAAAA"/>
+        <TextView
+            android:id="@+id/TV_cosmetic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#fc627f"
+            android:layout_toRightOf="@id/IV_cosmetic_img"
+            android:text="화장품명"/>
+        <TextView
+            android:id="@+id/TV_cosmetic_brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="9sp"
+            android:textColor="#4a4a4a"
+            android:layout_toRightOf="@id/IV_cosmetic_img"
+            android:layout_below="@id/TV_cosmetic_name"
+            android:text="브랜드명"/>
+        <TextView
+            android:id="@+id/TV_cosmetic_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/IV_cosmetic_img"
+            android:layout_below="@id/TV_cosmetic_brand"
+            android:textSize="9sp"
+            android:textColor="#4a4a4a"
+            android:text="00,000원"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_toRightOf="@id/IV_cosmetic_img"
+            android:layout_marginTop="12sp"
+            android:layout_alignParentBottom="true">
+            <Button
+                android:id="@+id/BT_buy"
+                android:layout_width="30dp"
+                android:layout_height="19dp"
+                android:text="구매"
+                android:textSize="10dp"
+                android:layout_below="@id/RR_cosmetic_info"
+                android:background="@drawable/btn_circle"
+                android:textColor="#FFFFFF"/>
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/BT_reserve"
+                android:layout_width="30dp"
+                android:layout_height="19dp"
+                android:text="♡찜"
+                android:textSize="10dp"
+                android:layout_below="@id/RR_cosmetic_info"
+                android:layout_toRightOf="@id/BT_reserve"
+                android:background="@drawable/btn_circle_empty"
+                android:textColor="#fc627f"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

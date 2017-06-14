@@ -1,10 +1,6 @@
-package com.soma.beautyproject_android.Search;
+package com.soma.beautyproject_android.Search.MoreSearch;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.support.v7.widget.GridLayoutManager;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,18 +11,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadAdapter_3;
-import com.soma.beautyproject_android.Model.Brand;
-import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.Video;
+import com.soma.beautyproject_android.Model.Video_Youtuber;
+import com.soma.beautyproject_android.Model.Youtuber;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
+import com.soma.beautyproject_android.Search.VideoDetailActivity_;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
-import com.soma.beautyproject_android.Utils.Loadings.LoadingUtil;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 
 import java.util.ArrayList;
@@ -36,24 +31,23 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
 /**
  * Created by mijeong on 2017. 4. 23..
  * <p>
  * Created by mijeong on 2017. 4. 23..
  */
+
 /**
  * Created by mijeong on 2017. 4. 23..
  */
 
-@EActivity(R.layout.activity_cosmetic_more_search)
-public class CosmeticMoreSearchActivity extends ParentActivity {
-    CosmeticMoreSearchActivity activity;
+@EActivity(R.layout.activity_video_more_search)
+public class VideoMoreSearchActivity extends ParentActivity {
+    VideoMoreSearchActivity activity;
     RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    CosmeticMoreSearchAdapter adapter;
-    List<Cosmetic> cosmetic_list = new ArrayList<>();
+    VideoMoreSearchAdapter adapter;
+    List<Video> video_list = new ArrayList<>();
     public TextView TV_product_quantity;
 
     public int page = 1;
@@ -92,17 +86,20 @@ public class CosmeticMoreSearchActivity extends ParentActivity {
         }
 
         if (adapter == null) {
-            adapter = new CosmeticMoreSearchAdapter(new CosmeticMoreSearchAdapter.OnItemClickListener() {
+            adapter = new VideoMoreSearchAdapter(new VideoMoreSearchAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(getApplicationContext(), VideoDetailActivity_.class);
+                    intent.putExtra("video_youtuber", adapter.getItem(position));
+                    startActivity(intent);
                 }
             }, activity, this);
         }
         recyclerView.setAdapter(adapter);
-        conn_cosmetic_more_search(page, keyword);
+
 
         TV_product_quantity = (TextView) findViewById(R.id.TV_product_quantity);
-        conn_cosmetic_more_search_quantity(TV_product_quantity, keyword);
+
 
         SP_sort = (Spinner) findViewById(R.id.SP_sort);
 
@@ -131,14 +128,16 @@ public class CosmeticMoreSearchActivity extends ParentActivity {
         endOfPage = false;
         adapter.clear();
         adapter.notifyDataSetChanged();
+        conn_video_more_search(page, keyword);
+        conn_video_more_search_quantity(TV_product_quantity, keyword);
     }
 
-    void conn_cosmetic_more_search(final int page_num, String keyword) {
+    void conn_video_more_search(final int page_num, String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.search_cosmetic_more(keyword, page_num)
+        conn.search_video_more(keyword, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Cosmetic>>() {
+                .subscribe(new Subscriber<List<Video_Youtuber>>() {
                     @Override
                     public final void onCompleted() {
                         //LoadingUtil.stopLoading(indicator);
@@ -149,11 +148,10 @@ public class CosmeticMoreSearchActivity extends ParentActivity {
                         Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public final void onNext(List<Cosmetic> response) {
+                    public final void onNext(List<Video_Youtuber> response) {
                         if (response != null) {
-                            for (Cosmetic cosmetic : response) {
-                                adapter.addData(cosmetic);
-                            }
+                            for(int i=0;i<response.size();i++)
+                                adapter.addData(response.get(i));
                             adapter.notifyDataSetChanged();
                         } else {
                             endOfPage = true;
@@ -162,10 +160,40 @@ public class CosmeticMoreSearchActivity extends ParentActivity {
                 });
     }
 
+//
+//
+//    void conn_get_youtuber(String youtuber_name, final int i) {
+//        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+//        conn.get_youtuber(youtuber_name)
+//                .subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<Video_Youtuber>() {
+//                    @Override
+//                    public final void onCompleted() {
+//
+//                    }
+//                    @Override
+//                    public final void onError(Throwable e) {
+//                        e.printStackTrace();
+//                        Toast.makeText(activity, "conn_get_youtuber 에러", Toast.LENGTH_SHORT).show();
+//                    }
+//                    @Override
+//                    public final void onNext(Video_Youtuber response) {
+//                        if (response != null && !adapter.mDataset_youtuber.contains(response)) {
+//                            adapter.addData_video(response);
+//                            adapter.addData_youtuber(response);
+//                            adapter.notifyDataSetChanged();
+//                        } else{
+//
+//                        }
+//                    }
+//                });
+//    }
 
-    void conn_cosmetic_more_search_quantity(final TextView view, String keyword) {
+
+    void conn_video_more_search_quantity(final TextView view, String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.search_cosmetic_more_quantity(keyword)
+        conn.search_video_more_quantity(keyword)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Integer>>() {
@@ -181,7 +209,6 @@ public class CosmeticMoreSearchActivity extends ParentActivity {
                     @Override
                     public final void onNext(List<Integer> response) {
                         if (response != null) {
-                            //Log.i("Zxc", "response.toString() : " + response.get(0)+"");
                             view.setText(response.get(0)+"");
                         } else {
                             Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();

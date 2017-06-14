@@ -52,7 +52,7 @@ public class VideoContentsAdapter extends RecyclerView.Adapter<VideoContentsAdap
     @Override
      public VideoContentsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_video_contents, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_video_product, parent, false);
             return new ItemViewHolder(v);
         }
         return null;

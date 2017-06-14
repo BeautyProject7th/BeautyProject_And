@@ -1,14 +1,11 @@
-package com.soma.beautyproject_android.Search;
+package com.soma.beautyproject_android.Search.MoreSearch;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -77,6 +74,8 @@ public class CosmeticMoreSearchAdapter extends RecyclerView.Adapter<CosmeticMore
 
             String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
 
+            itemViewHolder.TV_cosmetic_have.setVisibility(View.GONE);
+
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
@@ -117,11 +116,12 @@ public class CosmeticMoreSearchAdapter extends RecyclerView.Adapter<CosmeticMore
     }
     public class ItemViewHolder extends ViewHolder {
         public ImageView IV_cosmetic;
-        public TextView TV_brand, TV_product_name, TV_product_price, TV_rate_num, TV_product_review_quantity;
+        public TextView TV_cosmetic_have, TV_brand, TV_product_name, TV_product_price, TV_rate_num, TV_product_review_quantity;
         public RatingBar RB_rate;
         public ItemViewHolder(View v) {
             super(v);
             IV_cosmetic = (ImageView) v.findViewById(R.id.IV_cosmetic);
+            TV_cosmetic_have = (TextView) v.findViewById(R.id.TV_cosmetic_have);
             TV_brand = (TextView) v.findViewById(R.id.TV_brand);
             TV_product_name = (TextView) v.findViewById(R.id.TV_product_name);
             TV_product_price = (TextView) v.findViewById(R.id.TV_product_price);

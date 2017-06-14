@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay" >
+
+        <include layout="@layout/toolbar_only_back" android:id="@+id/cs_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+        <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="#f3f3f3"
+        android:padding="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="344dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/card_base"
+                android:gravity="center"
+                android:paddingTop="15dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="15dp">
+                <ImageView
+                    android:id="@+id/IV_video"
+                    android:layout_width="320dp"
+                    android:layout_height="180dp"
+                    android:background="@null"
+                    android:layout_marginBottom="5dp"/>
+                <TextView
+                    android:id="@+id/TV_video_name"
+                    android:layout_below="@id/IV_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="[ENG] 빈티지 플라워 아트메이크업(Vintage Flower Art Makeup) | 이사배"
+                    android:textSize="13sp"
+                    android:textColor="#4a4a4a"
+                    android:lineSpacingExtra="3.5sp"/>
+                <LinearLayout
+                    android:id="@+id/LL_video_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/TV_video_name"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10dp">
+                    <ImageView
+                        android:layout_width="9dp"
+                        android:layout_height="9dp"
+                        android:background="@drawable/ic_play_circle_outline"/>
+                    <TextView
+                        android:id="@+id/TV_view_cnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#a6a6a6"
+                        android:textSize="9sp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="4.5dp"/>
+                    <ImageView
+                        android:layout_width="1.5dp"
+                        android:layout_height="9dp"
+                        android:background="@drawable/ic_line_vertical"
+                        android:layout_marginRight="4dp"/>
+                    <ImageView
+                        android:layout_width="9dp"
+                        android:layout_height="9dp"
+                        android:background="@drawable/ic_upload"/>
+                    <TextView
+                        android:id="@+id/TV_upload_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#a6a6a6"
+                        android:textSize="9sp"
+                        android:layout_marginLeft="2dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/LL_video_info">
+                    <ImageView
+                        android:id="@+id/IV_youtuber"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"/>
+                    <Space
+                        android:layout_width="7dp"
+                        android:layout_height="match_parent" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/TV_youtuber_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="youtuber_name"
+                            android:textSize="12sp"
+                            android:textColor="#fc627f"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="4dp">
+                            <ImageView
+                                android:id="@+id/IV_youtuber_skin_type"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:background="@null"/>
+                            <Space
+                                android:layout_width="5dp"
+                                android:layout_height="match_parent" />
+                            <ImageView
+                                android:id="@+id/IV_youtuber_skin_trouble_1"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:background="@null"/>
+                            <Space
+                                android:layout_width="5dp"
+                                android:layout_height="match_parent" />
+                            <ImageView
+                                android:id="@+id/IV_youtuber_skin_trouble_2"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:background="@null"/>
+                            <Space
+                                android:layout_width="5dp"
+                                android:layout_height="match_parent" />
+                            <ImageView
+                                android:id="@+id/IV_youtuber_skin_trouble_3"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:background="@null"/>
+                            <Space
+                                android:layout_width="5dp"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <Space
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="16dp"
+                                    android:background="@drawable/ic_rectangle"
+                                    android:layout_centerInParent="true"/>
+                                <ImageView
+                                    android:layout_width="13.5dp"
+                                    android:layout_height="9.5dp"
+                                    android:background="@drawable/ic_account_check"
+                                    android:layout_centerInParent="true"/>
+                            </RelativeLayout>
+                            <Space
+                                android:layout_width="5dp"
+                                android:layout_height="match_parent" />
+                            <TextView
+                                android:id="@+id/TV_follower_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="123,123"/>
+                        </LinearLayout>
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="7dp" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="16dp"
+                                    android:background="@drawable/ic_rectangle"
+                                    android:layout_centerInParent="true"/>
+                                <ImageView
+                                    android:layout_width="13.5dp"
+                                    android:layout_height="9.5dp"
+                                    android:background="@drawable/ic_crown_white"
+                                    android:layout_centerInParent="true"/>
+                            </RelativeLayout>
+                            <Space
+                                android:layout_width="5dp"
+                                android:layout_height="match_parent" />
+                            <TextView
+                                android:id="@+id/TV_dressing_table_have"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="화장대 보유"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_base"
+                android:padding="15dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="영상에 나온 제품"
+                    android:textSize="13sp"
+                    android:textColor="#4a494a"
+                    android:background="@null"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:scrollbars="vertical"
+                    android:layout_marginTop="30dp"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="95dp"-->
+        <!--android:background="#f3f3f3">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="8dp">-->
+            <!--<include layout="@layout/cell_search_result_brand" android:id="@+id/cell_search_result_brand"/>-->
+            <!--<Space-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="8dp" />-->
+            <!--<include layout="@layout/cell_search_result_cosmetic_perfect" android:id="@+id/cell_search_result_cosmetic_perfect"/>-->
+            <!--<Space-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="8dp" />-->
+            <!--<include layout="@layout/cell_search_result_cosmetic" android:id="@+id/cell_search_result_cosmetic"/>-->
+        <!--</LinearLayout>-->
+    <!--</ScrollView>-->
+
+</android.support.design.widget.CoordinatorLayout>

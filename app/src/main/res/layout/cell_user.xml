@@ -21,11 +21,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp" />
     <LinearLayout
+        android:id="@+id/LL_user_info"
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:layout_below="@+id/TV_user_name"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="invisible">
         <ImageView
             android:layout_width="9.5dp"
             android:layout_height="11dp"

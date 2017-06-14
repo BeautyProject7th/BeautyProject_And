@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,7 +103,7 @@ public class SearchFragmentSearchResultBrand extends Fragment {
         toolbar_title = (TextView) view.findViewById(R.id.toolbar_title);
         toolbar_title.setText(brand.name+" 브랜드관");
 
-        BT_back = (Button) cs_toolbar.findViewById(R.id.BT_back);
+        BT_back = (Button) view.findViewById(R.id.BT_back);
         BT_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,8 +149,9 @@ public class SearchFragmentSearchResultBrand extends Fragment {
         conn_search_cosmetic_by_brand_quantity(TV_product_quantity, brand.name);
     }
 
-    void conn_search_cosmetic_by_brand(int page_num, String keyword) {
+    void conn_search_cosmetic_by_brand(final int page_num, String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        Log.i("by_brand", "page_num : "+page_num);
         conn.search_cosmetic_by_brand(keyword, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
