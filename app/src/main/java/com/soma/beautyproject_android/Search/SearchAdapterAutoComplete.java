@@ -1,5 +1,6 @@
 package com.soma.beautyproject_android.Search;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.R;
+import com.soma.beautyproject_android.Search.MoreSearch.*;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class SearchAdapterAutoComplete extends RecyclerView.Adapter<SearchAdapte
 
     public Context context;
     public Fragment fragment;
+    public Activity activity;
     private OnItemClickListener mOnItemClickListener;
     public ArrayList<String> mDataset = new ArrayList<>();
 
@@ -43,6 +46,12 @@ public class SearchAdapterAutoComplete extends RecyclerView.Adapter<SearchAdapte
         mOnItemClickListener = onItemClickListener;
         context = mContext;
         fragment = mFragment;
+        mDataset.clear();
+    }
+    public SearchAdapterAutoComplete(OnItemClickListener onItemClickListener, Context mContext, Activity mActivity) {
+        mOnItemClickListener = onItemClickListener;
+        context = mContext;
+        activity = mActivity;
         mDataset.clear();
     }
 

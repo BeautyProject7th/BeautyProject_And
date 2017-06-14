@@ -39,12 +39,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <include layout="@layout/cell_cosmetic_have" android:id="@+id/LL_cosmetic_1"/>
-        <include layout="@layout/cell_cosmetic_have" android:id="@+id/LL_cosmetic_2"/>
-        <include layout="@layout/cell_cosmetic_have" android:id="@+id/LL_cosmetic_3"/>
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <include layout="@layout/cell_cosmetic_have" android:id="@+id/LL_cosmetic_1"/>
+            <Space
+                android:layout_width="32dp"
+                android:layout_height="match_parent" />
+            <include layout="@layout/cell_cosmetic_have" android:id="@+id/LL_cosmetic_2"/>
+            <Space
+                android:layout_width="32dp"
+                android:layout_height="match_parent" />
+            <include layout="@layout/cell_cosmetic_have" android:id="@+id/LL_cosmetic_3"/>
 
+        </LinearLayout>
     </LinearLayout>
+
 
 
 </LinearLayout>

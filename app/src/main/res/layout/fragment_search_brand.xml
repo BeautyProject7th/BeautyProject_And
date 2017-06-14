@@ -15,73 +15,84 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:orientation="vertical"
-        android:background="@color/colorGrayBackGround">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#FFFFFF"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/BT_category"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="카테고리"
-                android:textSize="13.5sp"
-                android:textStyle="bold"
-                android:textColor="#9b9a9b"
-                android:background="@null" />
-            <ImageView
-                android:layout_width="1dp"
-                android:layout_height="25dp"
-                android:background="@drawable/ic_line_vertical"
-                android:layout_gravity="center_vertical"/>
-            <Button
-                android:id="@+id/BT_brand"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="브랜드"
-                android:textSize="13.5sp"
-                android:textStyle="bold"
-                android:textColor="#fb607d"
-                android:background="@null" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="#f2f2f2">
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@null">
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="#fb607d">
-            </LinearLayout>
-        </LinearLayout>
-
+        android:layout_marginTop="?attr/actionBarSize">
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/RV_search_auto_complete"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"
-            android:scrollbars="vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"/>
+            android:visibility="gone">
+        </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:id="@+id/LL_non_search_auto_complete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorGrayBackGround">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/BT_category"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="카테고리"
+                    android:textSize="13.5sp"
+                    android:textStyle="bold"
+                    android:textColor="#9b9a9b"
+                    android:background="@null" />
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/ic_line_vertical"
+                    android:layout_gravity="center_vertical"/>
+                <Button
+                    android:id="@+id/BT_brand"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="브랜드"
+                    android:textSize="13.5sp"
+                    android:textStyle="bold"
+                    android:textColor="#fb607d"
+                    android:background="@null" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#f2f2f2">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@null">
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="#fb607d">
+                </LinearLayout>
+            </LinearLayout>
 
-        <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:scrollbars="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"/>
 
-    </LinearLayout>
+            <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

@@ -27,6 +27,7 @@ import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploa
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
 import com.soma.beautyproject_android.Login.LoginFragment;
 import com.soma.beautyproject_android.Model.Brand;
+import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.ParentActivity;
@@ -60,6 +61,9 @@ public class SearchActivity extends ParentActivity {
     SearchActivity activity;
     public String keyword;
     public Brand brand;
+    public String main_category;
+    public String sub_category;
+
 
     @Override
     protected void onResume() {

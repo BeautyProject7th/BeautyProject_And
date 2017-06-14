@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.soma.beautyproject_android.DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.soma.beautyproject_android.DressingTable.More.MoreActivity_;
@@ -42,6 +44,8 @@ import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
+import com.soma.beautyproject_android.Video.Video.DeveloperKey;
+import com.soma.beautyproject_android.Video.Video.YouTubeFailureRecoveryActivity;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -65,7 +69,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 @EActivity(R.layout.activity_video_detail)
-public class VideoDetailActivity extends ParentActivity {
+public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
 
@@ -81,6 +85,7 @@ public class VideoDetailActivity extends ParentActivity {
     @ViewById
     TextView toolbar_title;
 
+    public String video_id;
 
     @Override
     protected void onResume() {
@@ -94,9 +99,11 @@ public class VideoDetailActivity extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+        YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, activity);
 
         video_youtuber = (Video_Youtuber) getIntent().getSerializableExtra("video_youtuber");
-
+        video_id = video_youtuber.video_id;
         toolbar_title.setText("비디오 이름");
         //toolbar_title.setText(video.video_name);
 
@@ -227,10 +234,10 @@ public class VideoDetailActivity extends ParentActivity {
                 thumbnail(0.1f).
                 bitmapTransform(new CropCircleTransformation(activity)).
                 into(IV_youtuber);
-        Glide.with(activity).
-                load(image_url_video).
-                thumbnail(0.1f).
-                into(IV_video);
+//        Glide.with(activity).
+//                load(image_url_video).
+//                thumbnail(0.1f).
+//                into(IV_video);
         Glide.with(activity).
                 load(image_url_skin_type).
                 thumbnail(0.1f).
@@ -308,6 +315,21 @@ public class VideoDetailActivity extends ParentActivity {
                     }
                 });
     }
+
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+                                        boolean wasRestored) {
+        if (!wasRestored) {
+            player.cueVideo(video_id);
+        }
+    }
+
+    @Override
+    protected YouTubePlayer.Provider getYouTubePlayerProvider() {
+        return (YouTubePlayerView) findViewById(R.id.youtube_view);
+    }
+
 }
 
 

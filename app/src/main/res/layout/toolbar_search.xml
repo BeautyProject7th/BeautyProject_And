@@ -34,12 +34,14 @@
                     android:id="@+id/ET_search"
                     android:layout_width="215dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
                     android:hint="영상이나 화장품을 검색해보세요"
                     android:textSize="15sp"
                     android:textColorHint="#FFFFFF"
                     android:textColor="#FFFFFF"
-                    android:background="@null"/>
+                    android:background="@null"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textCursorDrawable="@null"/>
                 <!--<AutoCompleteTextView-->
                     <!--android:id="@+id/ET_search"-->
                     <!--android:layout_width="215dp"-->
@@ -59,7 +61,7 @@
                     android:layout_width="290dp"
                     android:layout_height="1dp"
                     android:background="@drawable/line"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="7dp"/>
                 <Button
                     android:id="@+id/BT_close_circle"
                     android:layout_toRightOf="@id/ET_search"
@@ -67,7 +69,8 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/ic_close_circle"/>
+                    android:background="@drawable/ic_close_circle"
+                    android:layout_marginBottom="2dp"/>
                 <Button
                     android:id="@+id/BT_search"
                     android:layout_toRightOf="@id/BT_close_circle"
@@ -75,26 +78,8 @@
                     android:layout_width="17dp"
                     android:layout_height="16dp"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/search"/>
-        </RelativeLayout>
-
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="17dp">
-                <Button
-                    android:id="@+id/BT_home"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@null"/>
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/home"/>
+                    android:background="@drawable/search"
+                    android:layout_marginBottom="2dp"/>
         </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

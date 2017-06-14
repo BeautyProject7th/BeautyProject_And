@@ -20,6 +20,8 @@ import com.soma.beautyproject_android.Utils.Constants.Constants;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -216,6 +218,7 @@ public class VideoMoreSearchAdapter extends RecyclerView.Adapter<VideoMoreSearch
                 Glide.with(context).
                         load(image_url_youtuber).
                         thumbnail(0.1f).
+                        bitmapTransform(new CropCircleTransformation(activity)).
                         into(itemViewHolder.IV_youtuber);
                 Glide.with(context).
                         load(image_url_skin_type).

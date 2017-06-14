@@ -23,6 +23,9 @@ import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
+import com.soma.beautyproject_android.Search.SearchActivity;
+import com.soma.beautyproject_android.Search.SearchActivity_;
+import com.soma.beautyproject_android.Search.SearchFragmentCategory;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -60,6 +63,8 @@ public class CosmeticUploadActivity_3 extends ParentActivity {
     public Brand brand;
     public String main_category;
     public String sub_category;
+
+    String before_intent_page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +108,10 @@ public class CosmeticUploadActivity_3 extends ParentActivity {
 
         BT_cosmetic_upload = (Button) findViewById(R.id.BT_cosmetic_upload);
 
-
+        before_intent_page = (String) getIntent().getStringExtra("before_intent_page");
         brand = (Brand) getIntent().getSerializableExtra("brand");
         main_category = (String) getIntent().getStringExtra("main_category");
         sub_category = (String) getIntent().getStringExtra("sub_category");
-
 
         TV_main_category.setText(main_category);
         TV_sub_category.setText(sub_category);
@@ -263,12 +267,21 @@ public class CosmeticUploadActivity_3 extends ParentActivity {
     /// EXIT
     @Override
     public void onBackPressed() {
-        Intent beforeintent = new Intent(getApplicationContext(), CosmeticUploadActivity_2.class);
-        beforeintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        beforeintent.putExtra("brand", brand);
-        beforeintent.putExtra("main_category", main_category);
-        beforeintent.putExtra("sub_category", sub_category);
-        startActivity(beforeintent);
-        finish();
+        Log.i("sad", "before_intent_page : " + before_intent_page);
+        if(before_intent_page.equals("1")){
+            Intent beforeintent = new Intent(getApplicationContext(), CosmeticUploadActivity_2.class);
+            beforeintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            beforeintent.putExtra("brand", brand);
+            beforeintent.putExtra("main_category", main_category);
+            beforeintent.putExtra("sub_category", sub_category);
+            startActivity(beforeintent);
+            finish();
+        }else if(before_intent_page.equals("2")){
+            Intent beforeintent = new Intent(getApplicationContext(), SearchActivity_.class);
+            beforeintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(beforeintent);
+            finish();
+        }
+
     }
 }

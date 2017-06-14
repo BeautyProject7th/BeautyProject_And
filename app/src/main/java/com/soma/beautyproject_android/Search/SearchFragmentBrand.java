@@ -10,11 +10,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -25,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_3;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
@@ -51,7 +55,12 @@ public class SearchFragmentBrand extends Fragment {
     SearchActivity activity;
 
     public SearchAdapterBrand adapter;
+    public SearchAdapterAutoComplete adapter_auto_complete;
+
+    public LinearLayout LL_non_search_auto_complete;
     private RecyclerView recyclerView;
+    private RecyclerView recyclerView_auto_complete;
+
     private RecyclerView.LayoutManager layoutManager;
     public LinearLayout indicator;
     Button fab;
@@ -91,6 +100,27 @@ public class SearchFragmentBrand extends Fragment {
         final SearchActivity searchActivity = (SearchActivity) getActivity();
         this.activity = searchActivity;
 
+        LL_non_search_auto_complete = (LinearLayout) view.findViewById(R.id.LL_non_search_auto_complete);
+        if (recyclerView_auto_complete == null) {
+            recyclerView_auto_complete = (RecyclerView) view.findViewById(R.id.RV_search_auto_complete);
+            recyclerView_auto_complete.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(activity);
+            recyclerView_auto_complete.setLayoutManager(layoutManager);
+        }
+
+        if (adapter_auto_complete == null) {
+            adapter_auto_complete = new SearchAdapterAutoComplete(new SearchAdapterAutoComplete.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    ET_search.setText(adapter_auto_complete.getItem(position).toString());
+                    BT_search.callOnClick();
+                }
+            }, activity, activity);
+        }
+        recyclerView_auto_complete.setAdapter(adapter_auto_complete);
+
+
+
         cs_toolbar = (Toolbar) view.findViewById(R.id.cs_toolbar);
 
         ET_search = (EditText) view.findViewById(R.id.ET_search);
@@ -109,10 +139,18 @@ public class SearchFragmentBrand extends Fragment {
             adapter = new SearchAdapterBrand(new SearchAdapterBrand.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-//                    Intent intent = new Intent(getContext(), DetailActivity_.class);
-//                    intent.putExtra("food", adapter.getItem(position));
-//                    startActivity(intent);
-//                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                    activity.brand = adapter.getItem(position);
+                    if(activity.main_category == null & activity.sub_category == null){
+                        BT_category.callOnClick();
+                    }else{
+                        Intent intent = new Intent(getApplicationContext(), CosmeticUploadActivity_3.class);
+                        intent.putExtra("brand", activity.brand);
+                        intent.putExtra("main_category",activity.main_category);
+                        intent.putExtra("sub_category", activity.sub_category);
+                        intent.putExtra("before_intent_page", "2");
+                        startActivity(intent);
+                        activity.finish();
+                    }
                 }
             }, activity, this);
         }
@@ -120,6 +158,7 @@ public class SearchFragmentBrand extends Fragment {
 
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
 
+        ET_search.clearFocus();
         BT_close_circle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,10 +186,14 @@ public class SearchFragmentBrand extends Fragment {
                 ft.replace(R.id.activity_search, fragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
-                //conn_search_cosmetic(ET_search.getText().toString());
-                //conn_search_video(ET_search.getText().toString());
+
+                recyclerView.invalidate();
+                InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(ET_search.getWindowToken(), 0);
             }
         });
+        ET_search.addTextChangedListener(textChecker);
+
         ET_search.setOnKeyListener(new View.OnKeyListener()
         {
             public boolean onKey(View v, int keyCode, KeyEvent event)
@@ -159,7 +202,6 @@ public class SearchFragmentBrand extends Fragment {
                 {
                     BT_search.callOnClick();
 
-                    recyclerView.invalidate();
 
                     //ET_search.callOnClick();
                     return true;
@@ -210,6 +252,25 @@ public class SearchFragmentBrand extends Fragment {
                 });
     }
 
+    final TextWatcher textChecker = new TextWatcher() {
+        public void afterTextChanged(Editable s) {}
+
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+            if(s.toString().equals("")){
+                adapter_auto_complete.clear();
+                LL_non_search_auto_complete.setVisibility(View.VISIBLE);
+                recyclerView_auto_complete.setVisibility(View.INVISIBLE);
+            }else{
+                LL_non_search_auto_complete.setVisibility(View.INVISIBLE);
+                recyclerView_auto_complete.setVisibility(View.VISIBLE);
+                conn_auto_complete_search(s.toString());
+            }
+
+        }
+    };
 
     @Override
     public void onResume() {
@@ -217,4 +278,32 @@ public class SearchFragmentBrand extends Fragment {
         refresh();
     }
 
+
+    void conn_auto_complete_search(String keyword) {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.auto_complete_search(keyword)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+                        adapter_auto_complete.notifyDataSetChanged();
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "conn_auto_complete_search 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<String> response) {
+                        if (response != null) {
+                            adapter_auto_complete.clear();
+                            for(int i=0;i<response.size();i++){
+                                adapter_auto_complete.addData(response.get(i));
+                            }
+                        } else{
+                        }
+                    }
+                });
+    }
 }

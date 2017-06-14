@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
+import com.soma.beautyproject_android.DressingTable.YourDressingTable.YourDressingTableActivity_;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.ParentActivity;
@@ -203,7 +204,16 @@ public class MainActivity extends ParentActivity {
                                     into(IV_cosmetic_rank_2);
                             TV_cosmetic_rank_2_brand.setText(response.get(1).brand);
                             TV_cosmetic_rank_2_name.setText(response.get(1).product_name);
-
+                            LL_cosmetic_rank_2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
+                                    intent.putExtra("cosmetic_id", response.get(1).id);
+                                    intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
+                                    startActivity(intent);
+                                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                                }
+                            });
 
                             Glide.with(activity).
                                     load(Constants.IMAGE_BASE_URL_cosmetics+response.get(2).img_src).
@@ -211,6 +221,16 @@ public class MainActivity extends ParentActivity {
                                     into(IV_cosmetic_rank_3);
                             TV_cosmetic_rank_3_brand.setText(response.get(2).brand);
                             TV_cosmetic_rank_3_name.setText(response.get(2).product_name);
+                            LL_cosmetic_rank_3.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
+                                    intent.putExtra("cosmetic_id", response.get(2).id);
+                                    intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
+                                    startActivity(intent);
+                                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                                }
+                            });
                         } else{
 
                         }
@@ -233,14 +253,23 @@ public class MainActivity extends ParentActivity {
                         Toast.makeText(activity, "connectTestCall_match_user 에러", Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public final void onNext(List<User> response) {
+                    public final void onNext(final List<User> response) {
                         if (response != null) {
                             Log.i("ZXC", "u response.size() : " + response.size());
                             TextView t;
-                            LinearLayout LL_user_info_1 = (LinearLayout) user_1.findViewById(R.id.LL_user_info);
-                            LL_user_info_1.setVisibility(View.VISIBLE);
 
                             if(response.size()>0) {
+                                LinearLayout LL_user_info_1 = (LinearLayout) user_1.findViewById(R.id.LL_user_info);
+                                LL_user_info_1.setVisibility(View.VISIBLE);
+                                user_1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+                                        SharedManager.getInstance().setYou(response.get(0));
+                                        activity.startActivity(intent);
+                                    }
+                                });
+
                                 Glide.with(activity).
                                         load(response.get(0).profile_url).
                                         thumbnail(0.1f).
@@ -254,6 +283,14 @@ public class MainActivity extends ParentActivity {
                             if(response.size()>1) {
                                 LinearLayout LL_user_info_2 = (LinearLayout) user_2.findViewById(R.id.LL_user_info);
                                 LL_user_info_2.setVisibility(View.VISIBLE);
+                                user_2.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+                                        SharedManager.getInstance().setYou(response.get(1));
+                                        activity.startActivity(intent);
+                                    }
+                                });
 
                                 Glide.with(activity).
                                         load(response.get(1).profile_url).
@@ -268,6 +305,14 @@ public class MainActivity extends ParentActivity {
                             if(response.size()>2) {
                                 LinearLayout LL_user_info_3 = (LinearLayout) user_3.findViewById(R.id.LL_user_info);
                                 LL_user_info_3.setVisibility(View.VISIBLE);
+                                user_3.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+                                        SharedManager.getInstance().setYou(response.get(2));
+                                        activity.startActivity(intent);
+                                    }
+                                });
 
                                 Glide.with(activity).
                                         load(response.get(2).profile_url).
@@ -308,7 +353,7 @@ public class MainActivity extends ParentActivity {
                         Toast.makeText(activity, "connectTestCall_match_creator 에러", Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public final void onNext(List<User> response) {
+                    public final void onNext(final List<User> response) {
                         if (response != null) {
                             Log.i("ZXC", "c response.size() : " + response.size());
 
@@ -316,6 +361,14 @@ public class MainActivity extends ParentActivity {
                             if(response.size()>0) {
                                 LinearLayout LL_user_info_1 = (LinearLayout) creator_1.findViewById(R.id.LL_user_info);
                                 LL_user_info_1.setVisibility(View.VISIBLE);
+                                creator_1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+                                        SharedManager.getInstance().setYou(response.get(0));
+                                        activity.startActivity(intent);
+                                    }
+                                });
 
                                 Glide.with(activity).
                                         load(response.get(0).profile_url).
@@ -330,6 +383,14 @@ public class MainActivity extends ParentActivity {
                             if(response.size()>1) {
                                 LinearLayout LL_user_info_2 = (LinearLayout) creator_2.findViewById(R.id.LL_user_info);
                                 LL_user_info_2.setVisibility(View.VISIBLE);
+                                creator_2.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+                                        SharedManager.getInstance().setYou(response.get(1));
+                                        activity.startActivity(intent);
+                                    }
+                                });
 
                                 Glide.with(activity).
                                         load(response.get(1).profile_url).
@@ -345,6 +406,15 @@ public class MainActivity extends ParentActivity {
                             if(response.size()>2) {
                                 LinearLayout LL_user_info_3 = (LinearLayout) creator_3.findViewById(R.id.LL_user_info);
                                 LL_user_info_3.setVisibility(View.VISIBLE);
+                                creator_3.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+                                        SharedManager.getInstance().setYou(response.get(2));
+                                        activity.startActivity(intent);
+                                    }
+                                });
+
                                 Glide.with(activity).
                                         load(response.get(2).profile_url).
                                         thumbnail(0.1f).
@@ -552,7 +622,7 @@ public class MainActivity extends ParentActivity {
                         Toast.makeText(activity, "connectTestCall_dressing_table_rank 에러", Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public final void onNext(List<User> response) {
+                    public final void onNext(final List<User> response) {
                         if (response != null) {
 
                             LinearLayout LL_user_info_1 = (LinearLayout) ranker_1.findViewById(R.id.LL_user_info);
@@ -562,6 +632,14 @@ public class MainActivity extends ParentActivity {
                             LinearLayout LL_user_info_3 = (LinearLayout) ranker_3.findViewById(R.id.LL_user_info);
                             LL_user_info_3.setVisibility(View.VISIBLE);
 
+                            ranker_1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+                                    SharedManager.getInstance().setYou(response.get(0));
+                                    activity.startActivity(intent);
+                                }
+                            });
                             Glide.with(activity).
                                     load(response.get(0).profile_url).
                                     thumbnail(0.1f).
@@ -569,6 +647,14 @@ public class MainActivity extends ParentActivity {
                             TextView t = (TextView)ranker_1.findViewById(R.id.TV_user_name);
                             t.setText(response.get(0).name);
 
+                            ranker_2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+                                    SharedManager.getInstance().setYou(response.get(1));
+                                    activity.startActivity(intent);
+                                }
+                            });
                             Glide.with(activity).
                                     load(response.get(1).profile_url).
                                     thumbnail(0.1f).
@@ -576,6 +662,14 @@ public class MainActivity extends ParentActivity {
                             t = (TextView)ranker_2.findViewById(R.id.TV_user_name);
                             t.setText(response.get(1).name);
 
+                            ranker_3.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+                                    SharedManager.getInstance().setYou(response.get(2));
+                                    activity.startActivity(intent);
+                                }
+                            });
                             Glide.with(activity).
                                     load(response.get(2).profile_url).
                                     thumbnail(0.1f).

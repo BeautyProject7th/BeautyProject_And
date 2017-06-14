@@ -14,68 +14,77 @@
         <include layout="@layout/toolbar_search" android:id="@+id/cs_toolbar" />
 
     </android.support.design.widget.AppBarLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
+        android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize">
-        <Space
-            android:layout_width="28dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="제품 "
-            android:textSize="13.5sp"
-            android:textColor="#4a494a"
-            android:layout_gravity="center_vertical"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/TV_product_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="n"
-            android:textSize="13.5sp"
-            android:textColor="#fc617e"
-            android:layout_gravity="center_vertical"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="개"
-            android:textSize="13.5sp"
-            android:textColor="#4a494a"
-            android:layout_gravity="center_vertical"
-            android:textStyle="bold"/>
-        <Space
-            android:layout_width="180dp"
-            android:layout_height="match_parent" />
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RV_search_auto_complete"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:visibility="gone">
+        </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:id="@+id/LL_non_search_auto_complete"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="#FFFFFF">
+            <Space
+                android:layout_width="28dp"
+                android:layout_height="match_parent" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="랭킹순"
+                android:text="제품 "
                 android:textSize="13.5sp"
-                android:textColor="#a0a0a0"
-                android:layout_gravity="center_vertical"/>
-            <Space
-                android:layout_width="9dp"
-                android:layout_height="match_parent" />
-            <ImageView
+                android:textColor="#4a494a"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/TV_product_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="n"
+                android:textSize="13.5sp"
+                android:textColor="#fc617e"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_south_arrow"/>
-        </LinearLayout>
-    </LinearLayout>
+                android:textStyle="bold"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="개"
+                android:textSize="13.5sp"
+                android:textColor="#4a494a"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"/>
+            <Space
+                android:layout_width="180dp"
+                android:layout_height="match_parent" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="랭킹순"
+                    android:textSize="13.5sp"
+                    android:textColor="#a0a0a0"
+                    android:layout_gravity="center_vertical"/>
+                <Space
+                    android:layout_width="9dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_south_arrow"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
         <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
 

@@ -4,8 +4,7 @@
     android:orientation="vertical"
     android:layout_width="75dp"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:layout_marginRight="32dp">
+    android:gravity="center">
     <RelativeLayout
         android:id="@+id/RR_cosmetic"
         android:layout_width="75dp"

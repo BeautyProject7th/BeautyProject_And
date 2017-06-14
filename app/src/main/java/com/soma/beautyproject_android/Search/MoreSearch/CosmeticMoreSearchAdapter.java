@@ -66,6 +66,7 @@ public class CosmeticMoreSearchAdapter extends RecyclerView.Adapter<CosmeticMore
                 @Override
                 public void onClick(View v) {
                     mOnItemClickListener.onItemClick(v, position);
+
                 }
             });
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;

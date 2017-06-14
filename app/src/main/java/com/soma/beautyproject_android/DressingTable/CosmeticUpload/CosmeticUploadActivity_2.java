@@ -107,7 +107,7 @@ public class CosmeticUploadActivity_2 extends ParentActivity {
                 intent.putExtra("brand", brand);
                 intent.putExtra("main_category", adapter.getGroup(groupPosition));
                 intent.putExtra("sub_category", adapter.getChild(groupPosition,childPosition));
-
+                intent.putExtra("before_intent_page", "1");
                 startActivity(intent);
                 finish();
                 return false;

@@ -18,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -126,7 +127,8 @@ public class SearchFragmentCategory extends Fragment {
             adapter_auto_complete = new SearchAdapterAutoComplete(new SearchAdapterAutoComplete.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-
+                    ET_search.setText(adapter_auto_complete.getItem(position).toString());
+                    BT_search.callOnClick();
                 }
             }, getActivity(), fragment);
         }
@@ -142,6 +144,7 @@ public class SearchFragmentCategory extends Fragment {
         mListView.setAdapter(adapter);
 
         ET_search = (EditText) view.findViewById(R.id.ET_search);
+        ET_search.clearFocus();
         BT_search = (Button) view.findViewById(R.id.BT_search);
         BT_close_circle = (Button) view.findViewById(R.id.BT_close_circle);
         BT_brand = (Button) view.findViewById(R.id.BT_brand);
@@ -177,10 +180,16 @@ public class SearchFragmentCategory extends Fragment {
                 ft.replace(R.id.activity_search, fragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
+
+                recyclerView.invalidate();
+
+                InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(ET_search.getWindowToken(), 0);
                 //conn_search_cosmetic(ET_search.getText().toString());
                 //conn_search_video(ET_search.getText().toString());
             }
         });
+
         ET_search.setOnKeyListener(new View.OnKeyListener()
         {
             public boolean onKey(View v, int keyCode, KeyEvent event)
@@ -188,9 +197,6 @@ public class SearchFragmentCategory extends Fragment {
                 if(keyCode ==  KeyEvent.KEYCODE_ENTER && KeyEvent.ACTION_DOWN == event.getAction())
                 {
                     BT_search.callOnClick();
-
-                    recyclerView.invalidate();
-
                     //ET_search.callOnClick();
                     return true;
                 }
@@ -216,6 +222,21 @@ public class SearchFragmentCategory extends Fragment {
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
                 v.setBackgroundColor(getResources().getColor(R.color.colorGrayDark));
+
+                activity.main_category = adapter.getGroup(groupPosition);
+                activity.sub_category = adapter.getChild(groupPosition, childPosition);
+
+                if(activity.brand != null){
+                    Intent intent = new Intent(getApplicationContext(), CosmeticUploadActivity_3.class);
+                    intent.putExtra("brand", activity.brand);
+                    intent.putExtra("main_category", adapter.getGroup(groupPosition));
+                    intent.putExtra("sub_category", adapter.getChild(groupPosition,childPosition));
+                    intent.putExtra("before_intent_page", "2");
+                    startActivity(intent);
+                    activity.finish();
+                }else{
+                    BT_brand.callOnClick();
+                }
 //                Intent intent = new Intent(getApplicationContext(), CosmeticUploadActivity_3.class);
 //                intent.putExtra("brand", brand);
 //                intent.putExtra("main_category", adapter.getGroup(groupPosition));
@@ -223,6 +244,7 @@ public class SearchFragmentCategory extends Fragment {
 //
 //                startActivity(intent);
 //                finish();
+
                 return false;
             }
         });
@@ -285,7 +307,6 @@ public class SearchFragmentCategory extends Fragment {
                             adapter_auto_complete.addData(response.get(i));
                         }
                     } else{
-
                     }
                 }
             });

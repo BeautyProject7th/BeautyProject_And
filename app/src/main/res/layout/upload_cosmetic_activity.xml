@@ -134,7 +134,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textColor="@color/colorBlack"
-                        android:text="구매일"/>
+                        android:text="구매일  "/>
                     <com.aigestudio.wheelpicker.widgets.WheelDatePicker
                         android:id="@+id/purchase_date_picker"
                         android:layout_width="0dp"
@@ -195,10 +195,11 @@
                         android:layout_height="match_parent"
                         android:gravity="top"
                         android:padding="17dp"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorBlackText"
-                        android:hint="이 화장품을 쓰고나서 자신의 리뷰\n( 최대 100글자 )"
-                        android:maxLength="100"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorGrayDark"
+                        android:hint="-자신의 화장품 상세정보에서 수정할 수 있어요!\n-화장품 사용 후 느꼈던 점을 메모로 작성해 보세요!\n-화장품을 사용하면서 아쉬웠던 점\n-제품의 사용감\n(최대 300글자까지 작성이 가능합니다.)"
+                        android:textColorHint="#9e9e9e"
+                        android:maxLength="300"
                         android:background="@drawable/cosmetic_user_rectangle"/>
                 </LinearLayout>
             </LinearLayout>

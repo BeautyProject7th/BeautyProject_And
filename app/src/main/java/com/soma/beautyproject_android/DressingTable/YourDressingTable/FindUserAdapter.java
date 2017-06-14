@@ -249,7 +249,6 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     activity.startActivity(intent);
                 }
             });
-
             itemViewHolder.FF_follow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -2,17 +2,21 @@ package com.soma.beautyproject_android.Search;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,6 +34,8 @@ import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
 
+import org.androidannotations.annotations.ViewById;
+
 import java.util.List;
 
 import rx.Subscriber;
@@ -43,7 +49,9 @@ public class SearchFragmentSearchResultBrand extends Fragment {
     SearchActivity activity;
 
     private RecyclerView recyclerView;
+    private RecyclerView recyclerView_auto_complete;
     private RecyclerView.LayoutManager layoutManager;
+    public SearchAdapterAutoComplete adapter_auto_complete;
 
     public SearchAdapterSearchResultBrand adapter;
     public SearchFragmentSearchResultBrand fragment;
@@ -55,10 +63,10 @@ public class SearchFragmentSearchResultBrand extends Fragment {
     public Brand brand;
     public TextView toolbar_title;
 
-    public Button BT_back;
-
     public int page = 1;
     public boolean endOfPage = false;
+
+    public Button BT_back;
 
 
     /**
@@ -86,6 +94,7 @@ public class SearchFragmentSearchResultBrand extends Fragment {
         this.activity = searchActivity;
         fragment = this;
 
+
         brand = activity.brand;
 
 //        cs_toolbar = (Toolbar) view.findViewById(R.id.cs_toolbar);
@@ -111,6 +120,7 @@ public class SearchFragmentSearchResultBrand extends Fragment {
             }
         });
 
+
         if (recyclerView == null) {
             recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
             recyclerView.setHasFixedSize(true);
@@ -131,6 +141,7 @@ public class SearchFragmentSearchResultBrand extends Fragment {
         TV_product_quantity = (TextView) view.findViewById(R.id.TV_product_quantity);
 
     }
+
 
 
     @Override
@@ -203,6 +214,5 @@ public class SearchFragmentSearchResultBrand extends Fragment {
                     }
                 });
     }
-
 
 }

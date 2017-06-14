@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
@@ -31,6 +32,7 @@ import com.soma.beautyproject_android.Search.MoreSearch.*;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
+import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -200,6 +202,22 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             cosmeticPerfectViewHolder.TV_product_review_quantity.setText("(" + "리뷰 개수" +")"); //:TODO
         }else if (holder instanceof CosmeticViewHolder){
             CosmeticViewHolder cosmeticViewHolder = (CosmeticViewHolder) holder;
+            holder.container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(v, position);
+
+
+//                    Intent intent = new Intent(fragment.activity, DetailCosmeticActivity_.class);
+//                    intent.putExtra("cosmetic_id", .getItem_cosmetic(0).id);
+//                    intent.putExtra("user_id", SharedManager.getInstance().getMe().id);
+//                    intent.putExtra("user_id", SharedManager.getInstance().getMe().id);
+//                    startActivity(intent);
+//                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+
+                }
+            });
+
             if(mDataset_cosmetic.size() == 1){
                 cosmeticViewHolder.cell_search_result_cosmetic.setVisibility(View.GONE);
                 return;
@@ -216,7 +234,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             for(int i=0;i<mDataset_cosmetic.size();i++){
                 LinearLayout LL_cosmetic = cosmeticViewHolder.LL_cosmetic[i];
 
-                Cosmetic cosmetic = mDataset_cosmetic.get(i);
+                final Cosmetic cosmetic = mDataset_cosmetic.get(i);
                 String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
 
                 TextView TV_cosmetic_have = (TextView) LL_cosmetic.findViewById(R.id.TV_cosmetic_have);
@@ -233,6 +251,16 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                 TV_brand.setText(mDataset_cosmetic.get(i).brand);
                 TV_cosmetic_name.setText(mDataset_cosmetic.get(i).product_name);
 
+                LL_cosmetic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(fragment.activity, DetailCosmeticActivity_.class);
+                        intent.putExtra("cosmetic_id", cosmetic.id);
+                        intent.putExtra("user_id", SharedManager.getInstance().getMe().id);
+                        fragment.activity.startActivity(intent);
+                        fragment.activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                    }
+                });
             }
 
             cosmeticViewHolder.BT_cosmetic_more.setOnClickListener(new View.OnClickListener() {

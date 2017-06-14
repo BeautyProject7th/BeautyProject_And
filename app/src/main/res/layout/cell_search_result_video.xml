@@ -93,7 +93,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="6.5dp">
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center">
         <LinearLayout
             android:id="@+id/LL_youtuber_profile"
             android:layout_width="wrap_content"
@@ -106,14 +107,15 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="3.5dp">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="13dp"
+                    android:layout_height="9dp"
                     android:background="@drawable/ic_crown"/>
                 <ImageView
                     android:id="@+id/IV_youtuber"
                     android:layout_width="61dp"
                     android:layout_height="61dp"
-                    android:background="@drawable/ic_youtuber"></ImageView>
+                    android:background="@drawable/ic_youtuber"
+                    android:layout_marginLeft="7dp"></ImageView>
             </RelativeLayout>
             <TextView
                 android:id="@+id/TV_youtuber_name"
@@ -166,7 +168,7 @@
             android:id="@+id/IV_video"
             android:layout_width="184dp"
             android:layout_height="103.5dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:background="@null">
         </ImageView>
     </LinearLayout>

@@ -38,15 +38,20 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingBottom="15dp">
-                <ImageView
-                    android:id="@+id/IV_video"
+                <com.google.android.youtube.player.YouTubePlayerView
+                    android:id="@+id/youtube_view"
                     android:layout_width="320dp"
                     android:layout_height="180dp"
-                    android:background="@null"
                     android:layout_marginBottom="5dp"/>
+                <!--<ImageView-->
+                    <!--android:id="@+id/IV_video"-->
+                    <!--android:layout_width="320dp"-->
+                    <!--android:layout_height="180dp"-->
+                    <!--android:background="@null"-->
+                    <!--android:layout_marginBottom="5dp"/>-->
                 <TextView
                     android:id="@+id/TV_video_name"
-                    android:layout_below="@id/IV_video"
+                    android:layout_below="@id/youtube_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="[ENG] 빈티지 플라워 아트메이크업(Vintage Flower Art Makeup) | 이사배"
