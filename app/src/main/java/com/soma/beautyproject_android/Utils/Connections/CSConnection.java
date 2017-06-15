@@ -6,6 +6,7 @@ import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
+import com.soma.beautyproject_android.Model.Review;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.Model.Video;
 import com.soma.beautyproject_android.Model.Video_Youtuber;
@@ -68,6 +69,9 @@ public interface CSConnection{
     Observable<GlobalResponse> myOneCosmetic_put(@Body Map<String, Object> fields,
                                          @Path("user_id") String user_id,
                                          @Path("cosmetic-id") String cosmetic_id);
+
+    @POST("/users/cosmetics")
+    Observable<GlobalResponse> myOneCosmetic_post(@Body Map<String, Object> fields);
 
     @DELETE("/users/{user_id}/cosmetics/{cosmetic-id}")
     Observable<GlobalResponse> myOneCosmetic_delete(@Path("user_id") String user_id,
@@ -248,6 +252,11 @@ public interface CSConnection{
     @GET("/video/video_product/{video_id}")
     Observable<List<Cosmetic>> video_product(@Path("video_id") String video_id);
 
+    @GET("/cosmetics/detail/dressing_table/review/{cosmetic_id}/{page_num}")
+    Observable<List<Review>> get_review(@Path("cosmetic_id") String cosmetic_id, @Path("page_num") int page_num);
+
+    @GET("/cosmetics/detail/dressing_table/my_review/{cosmetic_id}/{user_id}")
+    Observable<List<Review>> get_my_review(@Path("cosmetic_id") String cosmetic_id, @Path("user_id") String user_id);
 
 }
 

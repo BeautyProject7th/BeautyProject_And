@@ -461,6 +461,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_card"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_gravity="center_horizontal">
                     <TextView
                         android:id="@+id/TV_dressing_table_ranking"

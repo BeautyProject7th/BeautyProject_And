@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="8dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/IV_user"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginBottom="3.5dp"
+                android:background="#AAAAAA"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColor="#fc627f"
+                android:textSize="10sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/IV_skin_type"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@null"/>
+                <Space
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/IV_skin_trouble_1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@null"/>
+                <Space
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/IV_skin_trouble_2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@null"/>
+                <Space
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/IV_skin_trouble_3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="#AAAAAA"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RatingBar
+                    android:id="@+id/RB_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="12.5dp"
+                    android:numStars="5"
+                    style="@style/RatingBar_yellow"/>
+                <Space
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/TV_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(2.3)"
+                    android:textColor="#ffcf40"
+                    android:textSize="11sp"/>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="6dp" />
+            <LinearLayout
+                android:id="@+id/LL_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="구매일 "
+                    android:textColor="#fc617e"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/TV_purchase_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2017 "
+                    android:textColor="@color/colorBlack"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="유통기한 "
+                    android:textColor="#fc617e"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/TV_expiration_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
+            <TextView
+                android:id="@+id/TV_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0"
+        android:layout_marginTop="7.5dp"
+        android:layout_marginLeft="7.5dp"
+        android:layout_marginRight="7.5dp"/>
+</LinearLayout>

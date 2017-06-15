@@ -78,10 +78,25 @@ public class ModifyCosmeticActivity extends ParentActivity {
         String review = ET_review.getText().toString();
 
         Map<String, Object> fields = new HashMap<String, Object>();
-        if(rating_num>0) fields.put("rate_num",RB_rate.getRating());
-        if(review!=null) fields.put("review",review);
-        if(purchase_date!=null) fields.put("purchase_date",purchase_date);
-        if(expiration_date!=null) fields.put("expiration_date",expiration_date);
+        if(rating_num == 0){
+            Toast.makeText(activity, "평점을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        fields.put("rate_num",RB_rate.getRating());
+        //if(review!=null)
+        if(review == null){
+            Toast.makeText(activity, "리뷰를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        fields.put("review",review);
+        //if(purchase_date!=null)
+        fields.put("purchase_date",purchase_date);
+        //if(expiration_date!=null)
+        fields.put("expiration_date",expiration_date);
+
+        fields.put("user_id",SharedManager.getInstance().getMe().id);
+        fields.put("cosmetic_id",cosmetic_id);
+        fields.put("status",1);
         connect_cosmetic_update(fields);
     }
 
@@ -151,7 +166,7 @@ public class ModifyCosmeticActivity extends ParentActivity {
 
     void connect_cosmetic_update(Map<String, Object> cosmetic) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.myOneCosmetic_put(cosmetic, SharedManager.getInstance().getMe().id, cosmetic_id)
+        conn.myOneCosmetic_post(cosmetic)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -163,7 +178,7 @@ public class ModifyCosmeticActivity extends ParentActivity {
                     public final void onError(Throwable e) {
                         e.printStackTrace();
                         Log.e("cer",e.toString());
-                        Toast.makeText(activity, "서버오류", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "서버 오류", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {
