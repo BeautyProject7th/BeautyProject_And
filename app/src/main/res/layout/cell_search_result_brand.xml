@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="344dp"
     android:layout_height="63dp"
-    android:background="@drawable/card_base"
+    android:background="@drawable/ic_card"
     android:layout_gravity="center_horizontal"
     android:layout_marginTop="8dp"
     android:layout_marginLeft="8dp"

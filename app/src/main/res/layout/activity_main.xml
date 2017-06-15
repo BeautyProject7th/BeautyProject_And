@@ -33,7 +33,7 @@
                     android:layout_height="157dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/card_base">
+                    android:background="@drawable/ic_card">
                     <TextView
                         android:id="@+id/TV_cosmetic_ranking"
                         android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/card_base"
+                    android:background="@drawable/ic_card"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center_horizontal">
                     <!--<Button-->
@@ -310,7 +310,7 @@
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/card_base"
+                    android:background="@drawable/ic_card"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center_horizontal">
                     <TextView
@@ -357,7 +357,7 @@
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/card_base"
+                    android:background="@drawable/ic_card"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center_horizontal">
                     <TextView
@@ -408,7 +408,7 @@
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/card_base"
+                    android:background="@drawable/ic_card"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center_horizontal">
                     <TextView
@@ -459,7 +459,7 @@
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/card_base"
+                    android:background="@drawable/ic_card"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center_horizontal">
                     <TextView

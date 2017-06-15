@@ -49,7 +49,7 @@ public class CosmeticReport extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    TextView TV_main_category, TV_sub_category, TV_brand, TV_product_name,toolbar_title;
+    TextView TV_main_category, TV_sub_category, TV_brand, TV_product_name,TV_product_price, toolbar_title;
 
     @ViewById
     ImageView IV_product;
@@ -62,6 +62,7 @@ public class CosmeticReport extends ParentActivity {
 
     @ViewById
     EditText ET_detail;
+
 
     List<String> problem = new ArrayList<String>();
 
@@ -96,7 +97,7 @@ public class CosmeticReport extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-        toolbar_title.setText("화장품 정보신고");
+        toolbar_title.setText("화장품 정보 수정 요청");
 
         Intent intent = getIntent();
         cosmetic = (Cosmetic) intent.getSerializableExtra("cosmetic");
@@ -105,6 +106,8 @@ public class CosmeticReport extends ParentActivity {
         TV_sub_category.setText(cosmetic.sub_category);
         TV_brand.setText(cosmetic.brand);
         TV_product_name.setText(cosmetic.product_name);
+        TV_product_price.setText(cosmetic.price+"원");
+
         String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
 
         Glide.with(activity).

@@ -268,7 +268,7 @@ public class CosmeticMoreSearchActivity extends ParentActivity {
                     }
                     @Override
                     public final void onNext(List<Cosmetic> response) {
-                        if (response != null) {
+                        if (response.size() != 0) {
                             for (Cosmetic cosmetic : response) {
                                 adapter.addData(cosmetic);
                             }

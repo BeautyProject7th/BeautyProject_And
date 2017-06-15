@@ -123,11 +123,11 @@ public class ModifyCosmeticActivity extends ParentActivity {
 
         final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         purchase_date_picker.setVisibleItemCount(3);
-        expiration_date_picker.setItemTextSize(55);
+        //purchase_date_picker.setItemTextSize(55);
         purchase_date_picker.setTypeface(Typeface.createFromAsset(getAssets(), "NanumSquareOTFRegular.otf"));
         purchase_date_picker.setSelectedItemTextColor(getResources().getColor(R.color.colorPrimary));
         purchase_date_picker.setCurved(true);
-        expiration_date_picker.setItemSpace(70);
+        //purchase_date_picker.setItemSpace(70);
         purchase_date_picker.setOnDateSelectedListener(new WheelDatePicker.OnDateSelectedListener() {
             @Override
             public void onDateSelected(WheelDatePicker picker, Date date) {
@@ -136,11 +136,11 @@ public class ModifyCosmeticActivity extends ParentActivity {
         });
 
         expiration_date_picker.setVisibleItemCount(3);
-        expiration_date_picker.setItemTextSize(55);
+        //expiration_date_picker.setItemTextSize(55);
         expiration_date_picker.setTypeface(Typeface.createFromAsset(getAssets(), "NanumSquareOTFRegular.otf"));
         expiration_date_picker.setSelectedItemTextColor(getResources().getColor(R.color.colorPrimary));
         expiration_date_picker.setCurved(true);
-        expiration_date_picker.setItemSpace(70);
+        //expiration_date_picker.setItemSpace(70);
         expiration_date_picker.setOnDateSelectedListener(new WheelDatePicker.OnDateSelectedListener() {
             @Override
             public void onDateSelected(WheelDatePicker picker, Date date) {

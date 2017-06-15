@@ -49,9 +49,7 @@ public class SearchFragmentSearchResultBrand extends Fragment {
     SearchActivity activity;
 
     private RecyclerView recyclerView;
-    private RecyclerView recyclerView_auto_complete;
     private RecyclerView.LayoutManager layoutManager;
-    public SearchAdapterAutoComplete adapter_auto_complete;
 
     public SearchAdapterSearchResultBrand adapter;
     public SearchFragmentSearchResultBrand fragment;
@@ -178,7 +176,7 @@ public class SearchFragmentSearchResultBrand extends Fragment {
                     }
                     @Override
                     public final void onNext(List<Cosmetic> response) {
-                        if (response != null) {
+                        if (response.size() != 0) {
                             for(int i=0;i<response.size(); i++){
                                 adapter.addData(response.get(i));
                             }

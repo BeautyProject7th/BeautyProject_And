@@ -12,6 +12,8 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport;
+import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport_;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
@@ -43,7 +45,7 @@ public class DetailCosmeticActivity extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    ImageView IV_product,BT_delete,BT_modify;
+    ImageView IV_product;
 
     @ViewById
     TextView TV_product_name,TV_brand,TV_main_category, TV_sub_category,toolbar_title;
@@ -64,6 +66,9 @@ public class DetailCosmeticActivity extends ParentActivity {
     @ViewById
     Switch using_switch;
 
+    @ViewById
+    LinearLayout LL_adjust, LL_buy, LL_like, LL_add;
+
     @AfterViews
     void afterBindingView() {
         this.activity = this;
@@ -74,6 +79,42 @@ public class DetailCosmeticActivity extends ParentActivity {
         me_flag = getIntent().getBooleanExtra("me",true);
 
         if(me_flag==false) about_me.setVisibility(View.GONE);
+
+        LL_adjust.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CosmeticReport_.class);
+                intent.putExtra("cosmetic", cosmetic);
+                startActivity(intent);
+            }
+        });
+
+        LL_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), CosmeticReport_.class);
+//                intent.putExtra("cosmetic", cosmetic);
+//                startActivity(intent);
+            }
+        });
+
+        LL_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), CosmeticReport_.class);
+//                intent.putExtra("cosmetic", cosmetic);
+//                startActivity(intent);
+            }
+        });
+
+        LL_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ModifyCosmeticActivity_.class);
+                intent.putExtra("cosmetic", cosmetic);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -81,18 +122,13 @@ public class DetailCosmeticActivity extends ParentActivity {
         super.onResume();
         connectTestCall_get(cosmetic_id);
     }
-
-    @Click
-    void BT_delete(){
-        Toast.makeText(activity,"삭제버튼 눌림",Toast.LENGTH_SHORT).show();
-    }
-
-    @Click
-    void BT_modify(){
-        Intent intent = new Intent(activity, ModifyCosmeticActivity_.class);
-        intent.putExtra("cosmetic",cosmetic);
-        startActivity(intent);
-    }
+//
+//    @Click
+//    void BT_modify(){
+//        Intent intent = new Intent(activity, ModifyCosmeticActivity_.class);
+//        intent.putExtra("cosmetic",cosmetic);
+//        startActivity(intent);
+//    }
 
     @Click
     void BT_back(){

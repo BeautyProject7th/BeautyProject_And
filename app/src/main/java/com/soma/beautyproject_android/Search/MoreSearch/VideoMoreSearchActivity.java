@@ -240,7 +240,7 @@ public class VideoMoreSearchActivity extends ParentActivity {
                     }
                     @Override
                     public final void onNext(List<Video_Youtuber> response) {
-                        if (response != null) {
+                        if (response.size() != 0) {
                             for(int i=0;i<response.size();i++)
                                 adapter.addData(response.get(i));
                             adapter.notifyDataSetChanged();
@@ -250,37 +250,6 @@ public class VideoMoreSearchActivity extends ParentActivity {
                     }
                 });
     }
-
-//
-//
-//    void conn_get_youtuber(String youtuber_name, final int i) {
-//        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-//        conn.get_youtuber(youtuber_name)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<Video_Youtuber>() {
-//                    @Override
-//                    public final void onCompleted() {
-//
-//                    }
-//                    @Override
-//                    public final void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(activity, "conn_get_youtuber 에러", Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public final void onNext(Video_Youtuber response) {
-//                        if (response != null && !adapter.mDataset_youtuber.contains(response)) {
-//                            adapter.addData_video(response);
-//                            adapter.addData_youtuber(response);
-//                            adapter.notifyDataSetChanged();
-//                        } else{
-//
-//                        }
-//                    }
-//                });
-//    }
-
 
     final TextWatcher textChecker = new TextWatcher() {
         public void afterTextChanged(Editable s) {}
