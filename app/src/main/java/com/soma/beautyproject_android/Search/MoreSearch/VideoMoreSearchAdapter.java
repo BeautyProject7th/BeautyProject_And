@@ -202,7 +202,7 @@ public class VideoMoreSearchAdapter extends RecyclerView.Adapter<VideoMoreSearch
                 }
 //                }
 
-                //videoViewHolder.TV_video_name.setText(mDataset_video.get(i).video_name);
+                itemViewHolder.TV_video_name.setText(video_youtuber.title);
                 itemViewHolder.TV_view_cnt.setText(String.valueOf(video_youtuber.view_cnt));
                 itemViewHolder.TV_upload_date.setText(video_youtuber.upload_date.substring(0,10));
                 itemViewHolder.BT_video_more.setVisibility(View.GONE);

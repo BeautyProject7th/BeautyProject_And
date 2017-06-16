@@ -11,7 +11,7 @@ import java.util.List;
 public class Video_Youtuber implements Serializable{
     public String id;
     public String video_id;
-    public String video_name;
+    public String title;
     public String youtuber_name;
     public String upload_date;
     public String description;

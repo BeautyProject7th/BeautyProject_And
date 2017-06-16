@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Video implements Serializable{
     public String id;
     public String video_id;
-    public String video_name;
+    public String title;
     public String youtuber_name;
     public String upload_date;
     public String description;
@@ -19,7 +19,7 @@ public class Video implements Serializable{
     public Video(){
         this.id = "id";
         this.video_id = "video_id";
-        this.video_name = "video_name";
+        this.title = "video_name";
         this.youtuber_name = "youtuber_name";
         this.upload_date = "upload_date";
         this.description = "description";
