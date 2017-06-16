@@ -12,4 +12,5 @@ public class DressingTable {
     public Boolean status; //default: 1(true)
     public String expiration_date;
     public String purchase_date;
+
 }

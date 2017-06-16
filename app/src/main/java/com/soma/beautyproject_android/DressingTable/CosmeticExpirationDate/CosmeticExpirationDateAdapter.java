@@ -93,12 +93,12 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
             itemViewHolder.TV_brand.setText(cosmetic.brand);
             itemViewHolder.TV_cosmetic.setText(cosmetic.product_name);
 
-            int dday = doDiffOfDate(cosmetic.expiration_date);
-            if(dday == 100){
-                Toast.makeText(activity,"디데이 계산 문제 있음",Toast.LENGTH_SHORT).show();
-            }else if(dday>0) itemViewHolder.TV_dday.setText("D-"+dday);
-            else if(dday==0) itemViewHolder.TV_dday.setText("TODAY");
-            else if(dday<0) itemViewHolder.TV_dday.setText("유통기한 지남");
+//            int dday = doDiffOfDate(cosmetic.expiration_date);
+//            if(dday == 100){
+//                Toast.makeText(activity,"디데이 계산 문제 있음",Toast.LENGTH_SHORT).show();
+//            }else if(dday>0) itemViewHolder.TV_dday.setText("D-"+dday);
+//            else if(dday==0) itemViewHolder.TV_dday.setText("TODAY");
+//            else if(dday<0) itemViewHolder.TV_dday.setText("유통기한 지남");
         }
     }
 

@@ -15,6 +15,7 @@ import com.aigestudio.wheelpicker.WheelPicker;
 import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
 import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.DressingTable;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
@@ -29,9 +30,12 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.http.Body;
@@ -42,6 +46,7 @@ import rx.schedulers.Schedulers;
 import static android.R.attr.format;
 import static com.soma.beautyproject_android.R.id.RB_rate;
 import static com.soma.beautyproject_android.R.id.TV_product_name;
+import static com.soma.beautyproject_android.R.id.TV_review_mine;
 
 /**
  * Created by mijeong on 2017. 5. 7..
@@ -84,7 +89,7 @@ public class ModifyCosmeticActivity extends ParentActivity {
         }
         fields.put("rate_num",RB_rate.getRating());
         //if(review!=null)
-        if(review == null){
+        if(review.equals("")){
             Toast.makeText(activity, "리뷰를 입력해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -122,21 +127,44 @@ public class ModifyCosmeticActivity extends ParentActivity {
         TV_main_category.setText(cosmetic.main_category);
         TV_sub_category.setText(cosmetic.sub_category);
         TV_brand.setText(cosmetic.brand);
-        RB_rate.setRating(cosmetic.rate_num);
-        if(cosmetic.expiration_date!=null){
-            Toast.makeText(activity,"유통기한 일 : "+cosmetic.expiration_date,Toast.LENGTH_SHORT).show();
-            expiration_date_picker.setSelectedYear(Integer.parseInt(cosmetic.expiration_date.substring(0,4)));
-            expiration_date_picker.setSelectedMonth(Integer.parseInt(cosmetic.expiration_date.substring(5,7)));
-            expiration_date_picker.setSelectedDay(Integer.parseInt(cosmetic.expiration_date.substring(8,10)));
-        }
-        if(cosmetic.purchase_date!=null){
-            purchase_date_picker.setSelectedYear(Integer.parseInt(cosmetic.expiration_date.substring(0,4)));
-            purchase_date_picker.setSelectedMonth(Integer.parseInt(cosmetic.expiration_date.substring(5,7)));
-            purchase_date_picker.setSelectedDay(Integer.parseInt(cosmetic.expiration_date.substring(8,10)));
-        }
-        if(cosmetic.review!=null) ET_review.setText(cosmetic.review);
+        RB_rate.setRating(0);
 
+        RB_rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                                  boolean fromUser) {
+                if(rating<1.0f)
+                    ratingBar.setRating(1.0f);
+            }
+        });
+//        if(cosmetic.expiration_date!=null){
+//            Toast.makeText(activity,"유통기한 일 : "+cosmetic.expiration_date,Toast.LENGTH_SHORT).show();
+//            expiration_date_picker.setSelectedYear(Integer.parseInt(cosmetic.expiration_date.substring(0,4)));
+//            expiration_date_picker.setSelectedMonth(Integer.parseInt(cosmetic.expiration_date.substring(5,7)));
+//            expiration_date_picker.setSelectedDay(Integer.parseInt(cosmetic.expiration_date.substring(8,10)));
+//        }
+//        if(cosmetic.purchase_date!=null){
+//            purchase_date_picker.setSelectedYear(Integer.parseInt(cosmetic.expiration_date.substring(0,4)));
+//            purchase_date_picker.setSelectedMonth(Integer.parseInt(cosmetic.expiration_date.substring(5,7)));
+//            purchase_date_picker.setSelectedDay(Integer.parseInt(cosmetic.expiration_date.substring(8,10)));
+//        }
+
+        Date now = new Date();
         final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+
+        purchase_date = format.format(now);
+        try {
+            c.setTime(format.parse(purchase_date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        c.add(Calendar.DATE, 180); // 180 = value(6 month) to value(day)
+        Date resultdate = new Date(c.getTimeInMillis());
+        expiration_date = format.format(resultdate);
+
         purchase_date_picker.setVisibleItemCount(3);
         //purchase_date_picker.setItemTextSize(55);
         purchase_date_picker.setTypeface(Typeface.createFromAsset(getAssets(), "NanumSquareOTFRegular.otf"));
@@ -149,6 +177,16 @@ public class ModifyCosmeticActivity extends ParentActivity {
                 purchase_date = format.format(date);
             }
         });
+
+        expiration_date_picker.setYear(Integer.valueOf(expiration_date.substring(0,4)));
+        expiration_date_picker.setMonth(Integer.valueOf(expiration_date.substring(5,7)));
+        expiration_date_picker.setSelectedDay(Integer.valueOf(expiration_date.substring(8,10)));
+
+        Log.i("Zxc", "Integer.valueOf(format.format(now).substring(0,4)) : " + Integer.valueOf(format.format(now).substring(0,4)));
+        Log.i("Zxc", "expiration_date_picker.getMonth()+3 : " + expiration_date_picker.getMonth()+3);
+        Log.i("Zxc", "Integer.valueOf(format.format(now).substring(8,10)) : " + Integer.valueOf(format.format(now).substring(8,10)));
+
+
 
         expiration_date_picker.setVisibleItemCount(3);
         //expiration_date_picker.setItemTextSize(55);
@@ -164,6 +202,16 @@ public class ModifyCosmeticActivity extends ParentActivity {
         });
     }
 
+    void refresh(){
+        conn_get_my_cosmetic();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refresh();
+    }
+
     void connect_cosmetic_update(Map<String, Object> cosmetic) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.myOneCosmetic_post(cosmetic)
@@ -172,7 +220,7 @@ public class ModifyCosmeticActivity extends ParentActivity {
                 .subscribe(new Subscriber<GlobalResponse>() {
                     @Override
                     public final void onCompleted() {
-                        finish();
+                        activity.finish();
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -184,9 +232,45 @@ public class ModifyCosmeticActivity extends ParentActivity {
                     public final void onNext(GlobalResponse response) {
                         if (response.code == 200) {
                             Toast.makeText(activity, "정상적으로 수정되었습니다", Toast.LENGTH_SHORT).show();
-                            activity.finish();
                         } else {
                             Toast.makeText(activity, "수정에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+    void conn_get_my_cosmetic() {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.my_cosmetic_get(SharedManager.getInstance().getMe().id, cosmetic_id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<DressingTable>>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.e("cer",e.toString());
+                        Toast.makeText(activity, "서버 오류", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<DressingTable> response) {
+                        if (response.size() != 0) {
+                            DressingTable dt = response.get(0);
+                            RB_rate.setRating(Float.valueOf(dt.rate_num+""));
+                            purchase_date_picker.setYear(Integer.valueOf(dt.purchase_date.substring(0,4)));
+                            purchase_date_picker.setMonth(Integer.valueOf(dt.purchase_date.substring(5,7)));
+                            purchase_date_picker.setSelectedDay(Integer.valueOf(dt.purchase_date.substring(8,10)));
+
+                            expiration_date_picker.setYear(Integer.valueOf(dt.expiration_date.substring(0,4)));
+                            expiration_date_picker.setMonth(Integer.valueOf(dt.expiration_date.substring(5,7)));
+                            expiration_date_picker.setSelectedDay(Integer.valueOf(dt.expiration_date.substring(8,10)));
+
+                            ET_review.setText(dt.review);
+                        } else {
+                            //Toast.makeText(activity, "수정에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

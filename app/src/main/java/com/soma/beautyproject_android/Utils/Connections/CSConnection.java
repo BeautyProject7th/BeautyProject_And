@@ -5,7 +5,9 @@ import com.soma.beautyproject_android.Main.MainActivity;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.DressingTable;
 import com.soma.beautyproject_android.Model.GlobalResponse;
+import com.soma.beautyproject_android.Model.RatingEach;
 import com.soma.beautyproject_android.Model.Review;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.Model.Video;
@@ -258,6 +260,12 @@ public interface CSConnection{
     @GET("/cosmetics/detail/dressing_table/my_review/{cosmetic_id}/{user_id}")
     Observable<List<Review>> get_my_review(@Path("cosmetic_id") String cosmetic_id, @Path("user_id") String user_id);
 
+    @GET("/cosmetics/get_each_rating/{cosmetic_id}")
+    Observable<List<RatingEach>> get_each_rating(@Path("cosmetic_id") String cosmetic_id);
+
+    @GET("/users/dressing_table/{user_id}/{cosmetic-id}")
+    Observable<List<DressingTable>> my_cosmetic_get(@Path("user_id") String user_id,
+                                                       @Path("cosmetic-id") String cosmetic_id);
 }
 
 

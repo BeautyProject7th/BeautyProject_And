@@ -15,11 +15,8 @@ public class Cosmetic implements Serializable{
     public String price;
     public String link;
     public String img_src;
-    public String review;
     public float rate_num;
-    public String expiration_date ;
-    public String purchase_date;
-    public int status = 1;
+    public int rate_people;
 
 //    public Cosmetic(){
 //        this.id = "";

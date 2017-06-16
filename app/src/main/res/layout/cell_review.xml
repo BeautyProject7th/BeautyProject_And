@@ -13,21 +13,21 @@
         android:paddingRight="15dp">
         <LinearLayout
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="92dp"
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
                 android:id="@+id/IV_user"
                 android:layout_width="53dp"
                 android:layout_height="53dp"
-                android:layout_marginBottom="3.5dp"
-                android:background="#AAAAAA"/>
+                android:layout_marginBottom="3.5dp"/>
             <TextView
+                android:id="@+id/TV_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:textColor="#fc627f"
-                android:textSize="10sp" />
+                android:textSize="10sp"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,8 +59,7 @@
                 <ImageView
                     android:id="@+id/IV_skin_trouble_3"
                     android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="#AAAAAA"/>
+                    android:layout_height="20dp"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -85,7 +84,7 @@
                     android:id="@+id/TV_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(2.3)"
+                    android:text=""
                     android:textColor="#ffcf40"
                     android:textSize="11sp"/>
             </LinearLayout>
@@ -108,20 +107,20 @@
                     android:id="@+id/TV_purchase_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2017 "
+                    android:text=""
                     android:textColor="@color/colorBlack"
                     android:textSize="10sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="유통기한 "
+                    android:text=" 유통기한 "
                     android:textColor="#fc617e"
                     android:textSize="10sp"/>
                 <TextView
                     android:id="@+id/TV_expiration_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="123"
+                    android:text=""
                     android:textColor="@color/colorBlack"
                     android:textSize="10sp"/>
             </LinearLayout>

@@ -11,9 +11,26 @@
         android:id="@+id/appBarLayout2">
         <include layout="@layout/toolbar_cosmetic_upload" android:id="@+id/cs_toolbar" />
     </android.support.design.widget.AppBarLayout>
+
+    <Button
+        android:id="@+id/BT_complete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="12.5dp"
+        android:layout_marginLeft="12.5dp"
+        android:layout_marginBottom="15.5dp"
+        android:text="완료"
+        android:textSize="14.5sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/large_btn_shadow"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="?attr/actionBarSize">
         <LinearLayout
             android:focusable="true"
@@ -112,9 +129,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="22.5dp"
                             android:numStars="5"
-                            android:rating="2"
+                            android:stepSize="1"
                             style="@style/largeRatingBar"
-                            android:progressDrawable="@drawable/ratingstars_large"/>
+                            android:progressDrawable="@drawable/ratingstars_large"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true" />
                     </RelativeLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -202,17 +221,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <Button
-        android:id="@+id/BT_complete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="12.5dp"
-        android:layout_marginLeft="12.5dp"
-        android:layout_marginBottom="15.5dp"
-        android:text="완료"
-        android:textSize="14.5sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorWhite"
-        android:background="@drawable/large_btn_shadow"/>
 </RelativeLayout>

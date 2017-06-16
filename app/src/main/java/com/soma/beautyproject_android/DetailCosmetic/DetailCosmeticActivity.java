@@ -1,6 +1,7 @@
 package com.soma.beautyproject_android.DetailCosmetic;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport_;
 import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.RatingEach;
 import com.soma.beautyproject_android.Model.Review;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
@@ -65,7 +67,11 @@ public class DetailCosmeticActivity extends ParentActivity {
     TextView TV_product_name,TV_brand,TV_main_category, TV_sub_category,toolbar_title;
 
     @ViewById
-    TextView TV_expiration_date,TV_purchase_date,TV_rating,TV_review, TV_product_price;
+    TextView TV_expiration_date,TV_purchase_date,TV_rating,TV_review, TV_product_price, TV_rating_circle, TV_rating_circle_people;
+
+    TextView [] TV_rate_people;
+    View [] V_rate_people;
+
 
     @ViewById
     RelativeLayout about_me;
@@ -87,8 +93,17 @@ public class DetailCosmeticActivity extends ParentActivity {
     @ViewById
     TextView TV_review_mine;
 
+
     @ViewById
-    Button BT_delete, BT_pencil;
+    Button BT_add;
+
+    @ViewById
+    TextView TV_add;
+
+    @ViewById
+    LinearLayout LL_delete;
+
+    float sum;
 
     @AfterViews
     void afterBindingView() {
@@ -97,7 +112,25 @@ public class DetailCosmeticActivity extends ParentActivity {
 
         cosmetic_id = getIntent().getStringExtra("cosmetic_id");
         user_id = getIntent().getStringExtra("user_id");
-        me_flag = getIntent().getBooleanExtra("me",true);
+        //me_flag = getIntent().getBooleanExtra("me",false);
+
+        TV_rate_people = new TextView[5];
+
+        TV_rate_people[0] = (TextView) findViewById(R.id.TV_rate_1_people);
+        TV_rate_people[1] = (TextView) findViewById(R.id.TV_rate_2_people);
+        TV_rate_people[2] = (TextView) findViewById(R.id.TV_rate_3_people);
+        TV_rate_people[3] = (TextView) findViewById(R.id.TV_rate_4_people);
+        TV_rate_people[4] = (TextView) findViewById(R.id.TV_rate_5_people);
+
+        V_rate_people = new View[5];
+
+        V_rate_people[0] = (View) findViewById(R.id.V_rate_1_people);
+        V_rate_people[1] = (View) findViewById(R.id.V_rate_2_people);
+        V_rate_people[2] = (View) findViewById(R.id.V_rate_3_people);
+        V_rate_people[3] = (View) findViewById(R.id.V_rate_4_people);
+        V_rate_people[4] = (View) findViewById(R.id.V_rate_5_people);
+
+
 
         if (recyclerView == null) {
             recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -157,12 +190,10 @@ public class DetailCosmeticActivity extends ParentActivity {
         adapter.clear();
         adapter.notifyDataSetChanged();
         connectTestCall_get(cosmetic_id);
-        if(me_flag==false) {
-            about_me.setVisibility(View.GONE);
-        }else{
-            conn_get_my_review(cosmetic_id);
-        }
+        conn_get_my_review(cosmetic_id);
+
         conn_get_review(cosmetic_id, page);
+        conn_get_each_rating(cosmetic_id);
     }
 
     @Override
@@ -205,20 +236,8 @@ public class DetailCosmeticActivity extends ParentActivity {
                         TV_sub_category.setText(cosmetic.sub_category);
                         TV_brand.setText(cosmetic.brand);
                         TV_product_price.setText(cosmetic.price+"원");
-                        RB_rate.setRating(cosmetic.rate_num);
-
-                        if(cosmetic.review!=null) TV_review.setText(cosmetic.review);
-
-                        if(cosmetic.status == 1) using_switch.setChecked(true);
-                        else using_switch.setChecked(false);
-
-//                        if(cosmetic.purchase_date != null){
-//                            TV_purchase_date.setText(cosmetic.purchase_date.substring(0,10));
-//                        }
-//
-//                        if(cosmetic.expiration_date != null){
-//                            TV_expiration_date.setText(cosmetic.expiration_date.substring(0,10));
-//                        }
+                        TV_rating_circle.setText(cosmetic.rate_num+"");
+                        TV_rating_circle_people.setText(cosmetic.rate_people+"명");
 
                         if(cosmetic.rate_num >0 ){
                             RB_rate.setRating(cosmetic.rate_num);
@@ -249,29 +268,40 @@ public class DetailCosmeticActivity extends ParentActivity {
                 .subscribe(new Subscriber<List<Review>>() {
                     @Override
                     public final void onCompleted() {
-
+                        Log.i("ZXC", "conn_get_my_review 2");
                     }
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
                         //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        Log.i("ZXC", "conn_get_my_review 1");
                     }
                     @Override
                     public final void onNext(List<Review> response) {
                         if (response.size() != 0) {
-                            Review review = response.get(0);
-                            TV_review_mine.setText(review.review);
-                            TV_rating.setText(String.valueOf(review.rate_num));
-                            RB_rate.setRating(Float.valueOf(String.valueOf(review.rate_num)));
-                            TV_expiration_date.setText(review.expiration_date);
-                            TV_purchase_date.setText(review.purchase_date);
-                            BT_delete.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
+                            me_flag = true;
+                            TV_add.setText("변경하기");
 
-                                }
-                            });
-                            BT_pencil.setOnClickListener(new View.OnClickListener() {
+                            Review review = response.get(0);
+
+                            using_switch.setChecked(review.status);
+
+                            Log.i("ZXC", review.review);
+                            Log.i("ZXC", "TV_review_mine : " + TV_review_mine.toString());
+
+
+                            TV_review_mine.setText(review.review);
+                            TV_rating.setText(String.valueOf("("+review.rate_num)+")");
+                            RB_rate.setRating(Float.valueOf(String.valueOf(review.rate_num)));
+                            if(review.expiration_date != null)
+                                TV_expiration_date.setText(review.expiration_date.substring(0,10));
+                            else
+                                TV_expiration_date.setText("미기재");
+                            if(review.purchase_date != null)
+                                TV_purchase_date.setText(review.purchase_date.substring(0,10));
+                            else
+                                TV_purchase_date.setText("미기재");
+                            LL_delete.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
 
@@ -279,8 +309,9 @@ public class DetailCosmeticActivity extends ParentActivity {
                             });
 
                         } else {
-                            endOfPage = true;
-                            Toast.makeText(activity, "리뷰가 없습니다.", Toast.LENGTH_SHORT).show();
+                            me_flag = false;
+                            about_me.setVisibility(View.GONE);
+                            LL_delete.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -303,13 +334,62 @@ public class DetailCosmeticActivity extends ParentActivity {
                     }
                     @Override
                     public final void onNext(List<Review> response) {
-                        if (response != null) {
+                        if (response.size() != 0) {
                             for(int i=0;i<response.size();i++)
                                 adapter.addData(response.get(i));
                             adapter.notifyDataSetChanged();
                         } else {
                             endOfPage = true;
-                            Toast.makeText(activity, "리뷰가 없습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+    void conn_get_each_rating(final String cosmetic_id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.get_each_rating(cosmetic_id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<RatingEach>>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<RatingEach> response) {
+                        if (response != null) {
+                            sum = 0;
+                            int rate_num;
+                            int rate_people;
+                            int maxWidth = 167;
+                            float width;
+                            for(int i=0;i<response.size();i++){
+                                sum += Integer.valueOf(response.get(i).rate_people);
+                            }
+
+                            Log.i("zxc", "sum : " + sum);
+
+                            for(int i=0;i<response.size();i++){
+                                rate_num = Integer.valueOf(response.get(i).rate_num);
+                                rate_people = Integer.valueOf(response.get(i).rate_people);
+                                TV_rate_people[rate_num-1].setText(rate_people+"");
+                                //int width = (해당 평점 평가 인원) / (전체 평점 평가 인원) * 100 = ?%;
+                                width = (rate_people / sum) * maxWidth;
+                                Log.i("zxc", "rate_num : " + rate_num);
+                                Log.i("zxc", "rate_people : " + rate_people);
+                                Log.i("zxc", "width : " + width);
+                                final float scale = getResources().getDisplayMetrics().density;
+
+                                V_rate_people[rate_num-1].setLayoutParams(new LinearLayout.LayoutParams((int)(width * scale), LinearLayout.LayoutParams.MATCH_PARENT));
+                            }
+                        } else {
+                            Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

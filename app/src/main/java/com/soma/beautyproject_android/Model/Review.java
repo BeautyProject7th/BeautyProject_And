@@ -18,5 +18,4 @@ public class Review {
     public String skin_trouble_1;
     public String skin_trouble_2;
     public String skin_trouble_3;
-
 }
