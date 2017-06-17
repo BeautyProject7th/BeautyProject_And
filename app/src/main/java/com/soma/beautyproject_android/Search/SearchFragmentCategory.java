@@ -81,7 +81,7 @@ public class SearchFragmentCategory extends Fragment {
 
     EditText ET_search;
     Button BT_close_circle, BT_search;
-    Button BT_brand;
+    Button BT_brand,BT_back;
 
     private Map<String, List<String>> categorylist = new HashMap<String, List<String>>();
 
@@ -152,6 +152,14 @@ public class SearchFragmentCategory extends Fragment {
         ET_search.addTextChangedListener(textChecker);
 
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
+
+        BT_back = (Button) view.findViewById(R.id.BT_back);
+        BT_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onBackPressed();
+            }
+        });
 
         BT_brand.setOnClickListener(new View.OnClickListener() {
             @Override

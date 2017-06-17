@@ -164,6 +164,12 @@ public class VideoMoreSearchActivity extends ParentActivity {
 
 
         BT_back = (Button) findViewById(R.id.BT_back);
+        BT_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onBackPressed();
+            }
+        });
         BT_search = (Button) findViewById(R.id.BT_search);
         ET_search = (EditText) findViewById(R.id.ET_search);
         ET_search.clearFocus();
@@ -183,6 +189,10 @@ public class VideoMoreSearchActivity extends ParentActivity {
             @Override
             public void onClick(View v) {
                 activity.keyword = ET_search.getText().toString();
+                if(activity.keyword == null){
+                    Toast.makeText(activity, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Fragment fragment = new SearchFragmentSearchResult();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.activity_search, fragment);

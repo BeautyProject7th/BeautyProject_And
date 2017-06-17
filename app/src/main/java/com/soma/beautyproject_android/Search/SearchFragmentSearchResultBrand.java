@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
@@ -33,6 +34,7 @@ import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
+import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.ViewById;
 
@@ -130,7 +132,11 @@ public class SearchFragmentSearchResultBrand extends Fragment {
             adapter = new SearchAdapterSearchResultBrand(new SearchAdapterSearchResultBrand.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-
+                    Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
+                    intent.putExtra("cosmetic_id", adapter.getItem(position).id);
+                    intent.putExtra("user_id", SharedManager.getInstance().getMe().id);
+                    startActivity(intent);
+                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                 }
             }, getActivity(), fragment);
         }

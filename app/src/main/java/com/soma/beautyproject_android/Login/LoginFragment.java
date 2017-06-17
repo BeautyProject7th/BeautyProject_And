@@ -408,24 +408,6 @@ public class LoginFragment extends ParentFragment {
 //    }
 
 
-    private void getAppKeyHash() {
-        try {
-            PackageInfo info = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md;
-                md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                String something = new String(Base64.encode(md.digest(), 0));
-                Log.i("hash", something);
-            }
-        } catch (Exception e) {
-            Log.e("name not found", e.toString());
-        }
-    }
-
-//
-
-
     @Override
     public void onResume() {
         super.onResume();
@@ -488,7 +470,7 @@ public class LoginFragment extends ParentFragment {
                             PreferenceManager.getInstance(getActivity()).set_id(response.id);
                             SharedManager.getInstance().setMe(response);
                         } else {
-                            Log.i("session", "값이 없음");
+                            //Log.i("session", "값이 없음");
                             Toast.makeText(activity, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -574,24 +556,28 @@ public class LoginFragment extends ParentFragment {
     void goMain(){
         Log.i("test","다른데로 이동할라구");
         User me = SharedManager.getInstance().getMe();
+        Log.i("test","nickname : "+me.nickname);
         Log.i("test","skin type : "+me.skin_type);
         Log.i("test","skin trouble1 f: "+me.skin_trouble_1);
         Log.i("test","skin trouble2 : "+me.skin_trouble_2);
         Log.i("test","skin trouble3 : "+me.skin_trouble_3);
-        if(me.skin_type == null){
+        Intent intent;
+        if(me.nickname == null){
+            //Log.i("test","스킨타입갈꺼야");
+            intent = new Intent(activity, JoinActivity_.class);
+            intent.putExtra("before_login",true);
+            startActivity(intent);
+        }else if(me.skin_type == null){
             Log.i("test","스킨타입갈꺼야");
-            Intent intent = new Intent(activity, SkinTypeActivity_.class);
+            intent = new Intent(activity, SkinTypeActivity_.class);
             intent.putExtra("before_login",true);
             startActivity(intent);
-        }
-        else if(me.skin_trouble_1 == null){
+        }else if(me.skin_trouble_1 == null){
             Log.i("test","스킨트러블갈꺼야");
-            Intent intent = new Intent(activity, SkinTroubleActivity_.class);
+            intent = new Intent(activity, SkinTroubleActivity_.class);
             intent.putExtra("before_login",true);
             startActivity(intent);
-        }
-        else
-        {
+        }else {
             Log.i("test","메인으로갈꺼야");
             startActivity(new Intent(activity, MainActivity_.class));
         }

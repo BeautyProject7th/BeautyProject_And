@@ -105,7 +105,8 @@ public class SearchFragmentSearchResult extends Fragment {
             adapter_auto_complete = new SearchAdapterAutoComplete(new SearchAdapterAutoComplete.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-
+                    ET_search.setText(adapter_auto_complete.getItem(position).toString());
+                    BT_search.callOnClick();
                 }
             }, activity, activity);
         }
@@ -124,8 +125,6 @@ public class SearchFragmentSearchResult extends Fragment {
             adapter = new SearchAdapterSearchResult(new SearchAdapterSearchResult.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    ET_search.setText(adapter_auto_complete.getItem(position).toString());
-                    BT_search.callOnClick();
                 }
             }, getActivity(), fragment);
         }
@@ -133,6 +132,12 @@ public class SearchFragmentSearchResult extends Fragment {
 
         TV_product_quantity = (TextView) view.findViewById(R.id.TV_product_quantity);
         BT_back = (Button) view.findViewById(R.id.BT_back);
+        BT_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onBackPressed();
+            }
+        });
         BT_search = (Button) view.findViewById(R.id.BT_search);
         ET_search = (EditText) view.findViewById(R.id.ET_search);
         ET_search.clearFocus();
@@ -190,6 +195,11 @@ public class SearchFragmentSearchResult extends Fragment {
             @Override
             public void onClick(View v) {
                 activity.keyword = ET_search.getText().toString();
+                if(activity.keyword == null){
+                    Toast.makeText(activity, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Fragment fragment = new SearchFragmentSearchResult();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.activity_search, fragment);

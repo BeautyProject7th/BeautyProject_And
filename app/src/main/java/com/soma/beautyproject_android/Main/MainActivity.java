@@ -5,6 +5,9 @@ package com.soma.beautyproject_android.Main;
  */
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.opengl.GLES20;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
+import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.YourDressingTableActivity_;
 import com.soma.beautyproject_android.Model.Cosmetic;
@@ -37,6 +43,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +114,11 @@ public class MainActivity extends ParentActivity {
     @ViewById
     RelativeLayout ranker_1, ranker_2, ranker_3;
 
+    @ViewById
+    TextView TV_cosmetic_have_number ,TV_user_name, TV_cosmetic_expiration_soon;
+
+    @ViewById
+    LinearLayout LL_move_dressing_table;
 
     private String imagepath = null;
 
@@ -114,12 +127,15 @@ public class MainActivity extends ParentActivity {
         super.onResume();
         // just as usual
 
+        refresh();
+    }
+
+    void refresh(){
+        conn_get_my_cosmetic_info();
         connectTestCall_cosmetic_rank();
         connectTestCall_match_user();
         connectTestCall_match_creator();
         connectTestCall_dressing_table_rank();
-
-
     }
 
     @AfterViews
@@ -129,7 +145,7 @@ public class MainActivity extends ParentActivity {
         activity.getSupportActionBar().setTitle("");
 
         me = SharedManager.getInstance().getMe();
-
+        TV_user_name.setText(me.name+"님의\n화장대로 이동");
     }
 
 
@@ -156,12 +172,47 @@ public class MainActivity extends ParentActivity {
 
     }
 
+    @Click
+    void LL_move_dressing_table(){
+        Intent intent = new Intent(activity, DressingTableActivity_.class);
+        intent.putExtra("cosmetic_have_number", TV_cosmetic_have_number.getText().toString());
+        intent.putExtra("expiration_date_soon", TV_cosmetic_expiration_soon.getText().toString());
+
+        startActivity(intent);
+        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+    }
 
 //    @Click({R.id.skin_care,R.id.cleansing,R.id.mask_pack,R.id.suncare,R.id.base_makeup, R.id.eye_makeup,
 //            R.id.lip_makeup,R.id.body,R.id.hair, R.id.nail,R.id.perfume,R.id.cosmetic_product,R.id.man})
 //    void onClick(View v){
 //        goCategoryActivity(v.getId());
 //    }
+
+    void conn_get_my_cosmetic_info() {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.get_my_cosmetic_info(me.id, me.push_interval)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Integer>>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "conn_get_my_cosmetic_info error", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(final List<Integer> response) {
+                        if (response != null) {
+                            TV_cosmetic_have_number.setText(response.get(0)+"");
+                            TV_cosmetic_expiration_soon.setText(response.get(1)+"");
+                        } else{
+
+                        }
+                    }
+                });
+    }
 
     void connectTestCall_cosmetic_rank() {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
@@ -692,6 +743,14 @@ public class MainActivity extends ParentActivity {
                         }
                     }
                 });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Constants.ACTIVITY_CODE_MAIN_FRAGMENT_REFRESH_RESULT) {
+           refresh();
+        }
     }
 
     public class Count implements Serializable {

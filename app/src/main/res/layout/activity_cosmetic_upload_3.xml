@@ -58,14 +58,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:text="&quot;등록하시려는 화장품을 선택해주세요.&quot;"
-                        android:background="@color/colorExplainBackGround"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="14sp"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -97,11 +89,14 @@
                             android:layout_width="0px"
                             android:layout_height="match_parent"
                             android:layout_weight="1"/>
+
                         <Button
                             android:id="@+id/BT_cosmetic_upload"
                             android:layout_width="70dp"
                             android:layout_height="30dp"
-                            android:background="@drawable/btn_save"/>
+                            android:background="@drawable/btn_circle_empty"
+                            android:text="등록"
+                            android:textColor="#FFFFFF"/>
                     </LinearLayout>
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view"

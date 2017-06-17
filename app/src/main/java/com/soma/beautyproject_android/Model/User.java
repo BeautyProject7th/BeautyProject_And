@@ -9,16 +9,19 @@ public class User implements Serializable {
     //*->어느 정도 중요한 정보
     //**->가입시 반드시 입력받아야하는 정보
     public String id;
+    public String nickname;
     public String name;
     public String profile_url;
-    public String birthday = "";
-    public String gender = "";
+    public String birthyear;
+    public String gender;
     public String social_type;
     public String push_token;
     public String skin_type;
     public String skin_trouble_1;
     public String skin_trouble_2;
     public String skin_trouble_3;
+    public String push_interval;
+
 
 
     /*

@@ -15,6 +15,8 @@ public class Constants {
 
     public static final int ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST = 1111;
     public static final int ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT = 1112;
+    public static final int ACTIVITY_CODE_MAIN_FRAGMENT_REFRESH_REQUEST = 1113;
+    public static final int ACTIVITY_CODE_MAIN_FRAGMENT_REFRESH_RESULT = 1114;
 
     public static final String mockMyFriendText(int index) {
         int idx = index;

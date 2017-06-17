@@ -69,7 +69,7 @@ public class SearchFragmentBrand extends Fragment {
 
     EditText ET_search;
     Button BT_close_circle, BT_search;
-    Button BT_category;
+    Button BT_category, BT_back;
 
     private static List<String> auto_complete_keyword_list = new ArrayList<>();
 
@@ -166,6 +166,14 @@ public class SearchFragmentBrand extends Fragment {
             }
         });
 
+        BT_back = (Button) view.findViewById(R.id.BT_back);
+        BT_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onBackPressed();
+            }
+        });
+
         BT_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +189,11 @@ public class SearchFragmentBrand extends Fragment {
             @Override
             public void onClick(View v) {
                 activity.keyword = ET_search.getText().toString();
+                if(activity.keyword == null){
+                    Toast.makeText(activity, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Fragment fragment = new SearchFragmentSearchResult();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.activity_search, fragment);

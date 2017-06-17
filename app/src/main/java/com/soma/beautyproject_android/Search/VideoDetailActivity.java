@@ -85,6 +85,9 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     @ViewById
     TextView toolbar_title;
 
+    @ViewById
+    Button BT_back;
+
     public String video_id;
 
     @Override
@@ -289,6 +292,10 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                 });
     }
 
+    @Click
+    void BT_back(){
+        onBackPressed();
+    }
 
     void conn_video_product(String video_id) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);

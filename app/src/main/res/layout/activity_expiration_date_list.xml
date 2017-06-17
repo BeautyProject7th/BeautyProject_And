@@ -14,26 +14,116 @@
         <include layout="@layout/toolbar_only_back" android:id="@+id/cs_toolbar" />
 
     </android.support.design.widget.AppBarLayout>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorGrayBackGround"
+        android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="&quot;유통기한으로부터 최대 30일 이전의 제품이 표시됩니다.&quot;"
-            android:background="@color/colorExplainBackGround"
-            android:layout_centerHorizontal="true"
-            android:textSize="12sp"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"
-            android:scrollbars="vertical"/>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:background="@color/colorGrayBackGround">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="제품 "
+                        android:gravity="center"
+                        android:textSize="13.5sp"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/TV_product_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="12.5sp"
+                        android:textColor="#fc617e"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="개"
+                        android:gravity="center"
+                        android:textSize="13.5sp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/ic_line_vertical"/>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@drawable/ic_sort" />-->
+                    <!--<Space-->
+                        <!--android:layout_width="5dp"-->
+                        <!--android:layout_height="match_parent" />-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:text="필터"-->
+                        <!--android:textColor="#9b9b9b"-->
+                        <!--android:gravity="center"-->
+                        <!--android:layout_gravity="center"/>-->
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#f8f8f8"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:gravity="center"
+                    android:text="유통기한으로부터 최대 "
+                    android:background="@color/colorExplainBackGround"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="12sp"/>
+                <TextView
+                    android:id="@+id/TV_expiration_date_soon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:gravity="center"
+                    android:text=""
+                    android:background="@color/colorExplainBackGround"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="12sp"
+                    android:textColor="#fc617e"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:gravity="center"
+                    android:text="일 이전의 제품이 표시됩니다."
+                    android:background="@color/colorExplainBackGround"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:scrollbars="vertical"/>
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.design.widget.CoordinatorLayout>

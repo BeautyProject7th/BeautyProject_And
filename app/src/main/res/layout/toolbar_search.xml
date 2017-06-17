@@ -28,8 +28,10 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/RR_search"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
                 <EditText
                     android:id="@+id/ET_search"
                     android:layout_width="215dp"

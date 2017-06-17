@@ -7,10 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,13 +46,16 @@ public class FindUserActivity extends AppCompatActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    Button BT_search;
+    Button BT_search, BT_close_circle;
 
     @ViewById
     EditText ET_search;
 
     @ViewById
-    TextView toolbar_title;
+    RelativeLayout RR_search;
+
+    @ViewById
+    Button BT_back;
 
     RecyclerView recycler_view;
 
@@ -63,7 +68,8 @@ public class FindUserActivity extends AppCompatActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-        toolbar_title.setText("유저 리스트");
+
+        ET_search.setHint("다른 유저를 검색해 보세요.");
 
         if (recycler_view== null) {
             recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
@@ -93,6 +99,21 @@ public class FindUserActivity extends AppCompatActivity {
             }, activity, this);
         }
         recycler_view.setAdapter(adapter);
+
+        ET_search.setOnKeyListener(new View.OnKeyListener()
+        {
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if(keyCode ==  KeyEvent.KEYCODE_ENTER && KeyEvent.ACTION_DOWN == event.getAction())
+                {
+                    BT_search.callOnClick();
+                    //ET_search.callOnClick();
+                    return true;
+                }
+                // TODO Auto-generated method stub
+                return false;
+            }
+        });
 
 //
 //        User user = new User();
@@ -124,9 +145,27 @@ public class FindUserActivity extends AppCompatActivity {
         refresh();
     }
 
+
+    @Click
+    void BT_back(){
+        onBackPressed();
+    }
+
+
+    @Click
+    void BT_close_circle(){
+        ET_search.setText("");
+    }
+
     @Click
     void BT_search(){
         connectTestCall_search(ET_search.getText().toString());
+        recycler_view.invalidate();
+    }
+
+    @Click
+    void RR_search(){
+        ET_search.callOnClick();
     }
 
     void refresh() {

@@ -14,6 +14,7 @@ import com.soma.beautyproject_android.Model.Video;
 import com.soma.beautyproject_android.Model.Video_Youtuber;
 import com.soma.beautyproject_android.Model.Youtuber;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -266,6 +267,15 @@ public interface CSConnection{
     @GET("/users/dressing_table/{user_id}/{cosmetic-id}")
     Observable<List<DressingTable>> my_cosmetic_get(@Path("user_id") String user_id,
                                                        @Path("cosmetic-id") String cosmetic_id);
+
+    @GET("/users/my_cosmetic_info/{user_id}/{push_interval}")
+    Observable<List<Integer>> get_my_cosmetic_info(@Path("user_id") String user_id,
+                                                    @Path("push_interval") String push_interval);
+
+    @PUT("/users/join")
+    Observable<User> join(@Body Map<String, Object> fields);
+
+
 }
 
 

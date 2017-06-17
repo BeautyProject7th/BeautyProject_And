@@ -277,7 +277,15 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
 
             videoViewHolder.LL_video_top.setVisibility(View.VISIBLE);
 
-            Video_Youtuber video_youtuber = mDataset_video_youtuber.get(0);
+            final Video_Youtuber video_youtuber = mDataset_video_youtuber.get(0);
+            videoViewHolder.LL_video_total.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(fragment.activity, VideoDetailActivity_.class);
+                    intent.putExtra("video_youtuber", video_youtuber);
+                    fragment.activity.startActivity(intent);
+                }
+            });
             String image_url_youtuber = video_youtuber.profile_url;
 
             int image_url_skin_type = -1;
@@ -396,7 +404,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             }
 
 
-            //videoViewHolder.TV_video_name.setText(mDataset_video.get(i).video_name);
+            videoViewHolder.TV_video_name.setText(video_youtuber.title);
             videoViewHolder.TV_view_cnt.setText(String.valueOf(video_youtuber.view_cnt)+"회");
             videoViewHolder.TV_upload_date.setText(video_youtuber.upload_date.toString().substring(0,10));
             videoViewHolder.TV_youtuber_name.setText(video_youtuber.youtuber_name);
@@ -409,11 +417,6 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                 }
             });
 
-
-//                String image_url_skin_type = Constants.IMAGE_BASE_URL_youtuber + y
-//                String image_url_skin_trouble_1 = Constants.IMAGE_BASE_URL_youtuber + y
-//                String image_url_skin_trouble_2 = Constants.IMAGE_BASE_URL_youtuber + y
-//                String image_url_skin_trouble_3 = Constants.IMAGE_BASE_URL_youtuber + y
 
             String image_url_video = Constants.IMAGE_BASE_URL_video + video_youtuber.thumbnail;
 
@@ -508,7 +511,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
         public TextView TV_video_name, TV_view_cnt, TV_upload_date, TV_youtuber_name;
         public ImageView IV_youtuber, IV_video, IV_skin_type, IV_skin_trouble_1, IV_skin_trouble_2, IV_skin_trouble_3;
         public Button BT_video_more;
-        public LinearLayout LL_video_top;
+        public LinearLayout LL_video_top, LL_video_total;
 
         public VideoViewHolder(View v) {
             super(v);
@@ -529,6 +532,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             BT_video_more = (Button) v.findViewById(R.id.BT_video_more);
 
             LL_video_top = (LinearLayout) v.findViewById(R.id.LL_video_top);
+            LL_video_total = (LinearLayout) v.findViewById(R.id.LL_video_total);
 //            IV_skin_type = (ImageView) v.findViewById(R.id.LL_video_total).findViewById(R.id.LL_youtuber_profile).findViewById(R.id.LL_youtuber_profile_skin).findViewById(R.id.IV_skin_type);
 //            IV_skin_trouble_1 = (ImageView) v.findViewById(R.id.LL_video_total).findViewById(R.id.LL_youtuber_profile).findViewById(R.id.LL_youtuber_profile_skin).findViewById(R.id.IV_skin_trouble_1);
 //            IV_skin_trouble_2 = (ImageView) v.findViewById(R.id.LL_video_total).findViewById(R.id.LL_youtuber_profile).findViewById(R.id.LL_youtuber_profile_skin).findViewById(R.id.IV_skin_trouble_2);

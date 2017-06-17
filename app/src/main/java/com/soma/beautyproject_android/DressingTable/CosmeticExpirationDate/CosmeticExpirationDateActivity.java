@@ -41,6 +41,8 @@ public class CosmeticExpirationDateActivity extends ParentActivity {
 
     public LinearLayout indicator;
 
+    public TextView TV_product_quantity, TV_expiration_date_soon;
+
     Button BT_back;
 
     @Override
@@ -63,6 +65,11 @@ public class CosmeticExpirationDateActivity extends ParentActivity {
 
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
+
+        TV_product_quantity = (TextView) findViewById(R.id.TV_product_quantity);
+        TV_expiration_date_soon = (TextView) findViewById(R.id.TV_expiration_date_soon);
+
+        TV_expiration_date_soon.setText(SharedManager.getInstance().getMe().push_interval);
 
         if (recycler_view == null) {
             recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
@@ -92,10 +99,10 @@ public class CosmeticExpirationDateActivity extends ParentActivity {
         adapter.clear();
         adapter.notifyDataSetChanged();
 
-        connectTestCall();
+        conn_expiration_cosmetic_get();
     }
 
-    void connectTestCall() {
+    void conn_expiration_cosmetic_get() {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.expiration_cosmetic_get(SharedManager.getInstance().getMe().id)
@@ -113,10 +120,10 @@ public class CosmeticExpirationDateActivity extends ParentActivity {
                     @Override
                     public final void onNext(List<Cosmetic> response) {
                         if (response != null) {
-
                             for (Cosmetic cosmetic : response) {
                                 adapter.addData(cosmetic);
                             }
+                            TV_product_quantity.setText(response.size()+"");
                             adapter.notifyDataSetChanged();
 
                         }

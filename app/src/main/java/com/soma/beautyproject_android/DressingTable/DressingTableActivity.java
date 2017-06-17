@@ -65,6 +65,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static com.soma.beautyproject_android.R.id.BT_find_user;
+import static com.soma.beautyproject_android.R.id.TV_expiration_date;
 
 @EActivity(R.layout.activity_dressing_table)
 public class DressingTableActivity extends ParentActivity {
@@ -81,19 +82,19 @@ public class DressingTableActivity extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    ImageView IV_user,IV_back;
+    ImageView IV_user;
 
     @ViewById
-    TextView TV_name,TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3;
+    TextView TV_user_name, TV_user_info, TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3;
 
     @ViewById
-    TextView TV_following, TV_follower;
-
-    @ViewById
-    Button BT_back,BT_profile_setting, BT_find_user;
+    TextView TV_cosmetic_have_number, TV_following, TV_follower, TV_expiration_date_soon;
 
     @ViewById
     LinearLayout LL_following, LL_follower;
+
+    @ViewById
+    TextView toolbar_title;
 
     private String imagepath = null;
 
@@ -102,6 +103,7 @@ public class DressingTableActivity extends ParentActivity {
         super.onResume();
         // just as usual
 
+        //TV_cosmetic_have_number.setText(me.);
         connectTestCall_follow_number();
 
         if(me.skin_type==null) TV_skin_type.setText("미설정");
@@ -123,10 +125,17 @@ public class DressingTableActivity extends ParentActivity {
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
-        BT_back.setVisibility(View.GONE);
-        IV_back.setVisibility(View.GONE);
-
         me = SharedManager.getInstance().getMe();
+
+        toolbar_title = (TextView) findViewById(R.id.toolbar_title);
+        toolbar_title.setText("나의 화장대");
+
+        String cosmetic_have_number = getIntent().getStringExtra("cosmetic_have_number");
+        String expiration_date_soon = getIntent().getStringExtra("expiration_date_soon");
+
+        TV_cosmetic_have_number.setText(cosmetic_have_number);
+        TV_expiration_date_soon.setText(expiration_date_soon);
+
 
         String image_url = me.profile_url;
 
@@ -134,7 +143,9 @@ public class DressingTableActivity extends ParentActivity {
                 load(image_url).
                 thumbnail(0.1f).
                 bitmapTransform(new CropCircleTransformation(activity)).into(IV_user);
-        TV_name.setText(me.name);
+        TV_user_name.setText(me.nickname);
+        //if()
+        TV_user_info.setText("("+me.gender+"/"+me.birthyear+")");
 
         categorylist.put(R.id.skin_care,"스킨케어");
         categorylist.put(R.id.cleansing,"클렌징");
@@ -209,24 +220,6 @@ public class DressingTableActivity extends ParentActivity {
         intent.putExtra("main_category", categorylist.get(view_id));
         intent.putExtra("me",true);
         startActivity(intent);
-    }
-    /// EXIT
-    @Override
-    public void onBackPressed() {
-        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
-            backKeyPressedTime = System.currentTimeMillis();
-            showGuide();
-            return;
-        }
-        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
-            finish();
-            toast.cancel();
-        }
-    }
-
-    public void showGuide() {
-        toast = Toast.makeText(getApplicationContext(), getString(R.string.exit_app), Toast.LENGTH_SHORT);
-        toast.show();
     }
 
 

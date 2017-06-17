@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
+import com.soma.beautyproject_android.Main.MainActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.Trouble;
 import com.soma.beautyproject_android.ParentActivity;
@@ -144,7 +145,7 @@ public class SkinTroubleActivity extends ParentActivity {
         skin_trouble_list.put(R.id.LL_skin_trouble_4, new Trouble(TV_skin_trouble_4,"각질",IV_skin_trouble_4));
         skin_trouble_list.put(R.id.LL_skin_trouble_5, new Trouble(TV_skin_trouble_5,"민감성",IV_skin_trouble_5));
         skin_trouble_list.put(R.id.LL_skin_trouble_6, new Trouble(TV_skin_trouble_6,"주름",IV_skin_trouble_6));
-        skin_trouble_list.put(R.id.LL_skin_trouble_7, new Trouble(TV_skin_trouble_7,"여드름/트러블",IV_skin_trouble_7));
+        skin_trouble_list.put(R.id.LL_skin_trouble_7, new Trouble(TV_skin_trouble_7,"여드름",IV_skin_trouble_7));
         skin_trouble_list.put(R.id.LL_skin_trouble_8, new Trouble(TV_skin_trouble_8,"안면홍조",IV_skin_trouble_8));
         skin_trouble_list.put(LL_skin_trouble_9, new Trouble(TV_skin_trouble_9,"없음",IV_skin_trouble_9));
     }
@@ -200,9 +201,9 @@ public class SkinTroubleActivity extends ParentActivity {
                     @Override
                     public final void onCompleted() {
                         LoadingUtil.stopLoading(indicator);
-                        Intent intent = new Intent(getApplicationContext(), DressingTableActivity_.class);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
                         startActivity(intent);
-                        setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
+                        setResult(Constants.ACTIVITY_CODE_MAIN_FRAGMENT_REFRESH_RESULT);
                         finish();
                     }
                     @Override

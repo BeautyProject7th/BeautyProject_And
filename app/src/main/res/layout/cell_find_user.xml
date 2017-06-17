@@ -50,7 +50,7 @@
             android:orientation="horizontal">
             <LinearLayout
                 android:id="@+id/LL_skin_type"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginRight="18.5dp">
@@ -71,7 +71,7 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/LL_skin_trouble_1"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginRight="18.5dp">
@@ -93,7 +93,7 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/LL_skin_trouble_2"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginRight="18.5dp">
@@ -114,7 +114,7 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/LL_skin_trouble_3"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginRight="18.5dp">
@@ -137,15 +137,17 @@
 
             <FrameLayout
                 android:id="@+id/FF_follow"
-                android:layout_width="25.5dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="5dp">
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical">
                 <ImageView
                     android:id="@+id/IV_follow"
-                    android:layout_width="25.5dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/btn_follow" />
+                    android:background="@drawable/btn_follow"
+                    android:layout_gravity="center"/>
 
                 <Button
                     android:id="@+id/BT_follow"
@@ -155,11 +157,7 @@
                     android:background="@drawable/ic_account_plus_4"
                     android:layout_gravity="center"/>
             </FrameLayout>
-            <Space
-                android:layout_width="27.7dp"
-                android:layout_height="match_parent" />
         </LinearLayout>
-
     </LinearLayout>
 
 </RelativeLayout>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
+import com.soma.beautyproject_android.Main.MainActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.Type;
 import com.soma.beautyproject_android.ParentActivity;
@@ -124,8 +125,8 @@ public class SkinTypeActivity extends ParentActivity {
     private void init_skin_type_list() {
         skin_type_list.put(R.id.LL_skin_type_1, new Type(TV_skin_type_1,TV_skin_type_1_explain,"건성",IV_skin_type_1));
         skin_type_list.put(R.id.LL_skin_type_2, new Type(TV_skin_type_2,TV_skin_type_2_explain,"중성",IV_skin_type_2));
-        skin_type_list.put(R.id.LL_skin_type_3, new Type(TV_skin_type_3,TV_skin_type_3_explain,"지성(일반)",IV_skin_type_3));
-        skin_type_list.put(R.id.LL_skin_type_4, new Type(TV_skin_type_4,TV_skin_type_4_explain,"지성(수부지)",IV_skin_type_4));
+        skin_type_list.put(R.id.LL_skin_type_3, new Type(TV_skin_type_3,TV_skin_type_3_explain,"지성",IV_skin_type_3));
+        skin_type_list.put(R.id.LL_skin_type_4, new Type(TV_skin_type_4,TV_skin_type_4_explain,"수부지",IV_skin_type_4));
     }
 
     private int[] setImageList(int one, int two){
@@ -174,11 +175,11 @@ public class SkinTypeActivity extends ParentActivity {
                             intent = new Intent(getApplicationContext(), SkinTroubleActivity_.class);
                             intent.putExtra("before_login",true);
                         }else{
-                            intent = new Intent(getApplicationContext(), DressingTableActivity_.class);
+                            intent = new Intent(getApplicationContext(), MainActivity_.class);
+                            setResult(Constants.ACTIVITY_CODE_MAIN_FRAGMENT_REFRESH_RESULT);
                         }
                         LoadingUtil.stopLoading(indicator);
                         startActivity(intent);
-                        setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
                         finish();
                     }
                     @Override

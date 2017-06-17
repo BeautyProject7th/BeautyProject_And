@@ -28,6 +28,87 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="350dp"
+                    android:layout_height="213.5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/ic_dressing_table"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+                   <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="화장품 : "
+                            android:textSize="11sp"
+                            android:textColor="#4a494a"/>
+                        <TextView
+                            android:id="@+id/TV_cosmetic_have_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="11sp"
+                            android:textColor="#4a494a" />
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="개"
+                           android:textSize="11sp"
+                           android:textColor="#4a494a" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="유통기한 임박 : "
+                            android:textSize="11sp"
+                            android:textColor="#4a494a"/>
+                        <TextView
+                            android:id="@+id/TV_cosmetic_expiration_soon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="11sp"
+                            android:textColor="#4a494a"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="개"
+                            android:textSize="11sp"
+                            android:textColor="#4a494a" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/LL_move_dressing_table"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/TV_user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="님의\n화장대로 이동"
+                            android:textSize="12sp"
+                            android:textColor="#fc617e"
+                            android:layout_marginRight="7dp"/>
+                        <ImageView
+                            android:layout_width="9.5dp"
+                            android:layout_height="16.6dp"
+                            android:background="@drawable/ic_back_east_pink"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="157dp"
@@ -111,7 +192,9 @@
                                 <ImageView
                                     android:id="@+id/IV_cosmetic_rank_2"
                                     android:layout_width="75dp"
-                                    android:layout_height="80dp" />
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true" />
                                 <ImageView
                                     android:id="@+id/IV_cosmetic_rank_2_medal"
                                     android:layout_width="23dp"
