@@ -275,7 +275,6 @@ public interface CSConnection{
     @PUT("/users/join")
     Observable<User> join(@Body Map<String, Object> fields);
 
-
 }
 
 

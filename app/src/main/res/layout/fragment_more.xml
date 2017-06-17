@@ -15,50 +15,119 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical"
         android:background="@color/colorGrayDark">
-
-        <TextView
-            android:id="@+id/TV_category"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="main_category"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
             android:background="#FFFFFF"
-            android:gravity="center_vertical"
-            android:textSize="24sp"
-            android:textColor="@color/colorAccent"
-            android:paddingTop="20dp"
-            android:paddingLeft="20dp"
-            android:paddingBottom="10dp"/>
+            android:gravity="center_vertical">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="제품 "
+                    android:gravity="center"
+                    android:textSize="13.5sp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/TV_product_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12.5sp"
+                    android:textColor="#fc617e"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="개"
+                    android:gravity="center"
+                    android:textSize="13.5sp"
+                    android:layout_gravity="center"/>
 
-        <TextView
-            android:id="@+id/TV_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ㅇㅇ님의 카테고리입니다"
-            android:background="#FFFFFF"
-            android:gravity="center_vertical"
-            android:textSize="14sp"
-            android:textColor="@color/colorBlackText"
-            android:paddingLeft="20dp"
-            android:paddingBottom="20dp"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_line_vertical"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_line_vertical"/>
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <Spinner
+                    android:id="@+id/SP_sort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"></Spinner>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="2.5dp"
-            android:paddingBottom="56dp"
-            android:padding="15dp"
-            android:background="#FFFFFF"
-            android:scrollbars="vertical" />
-        <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
+            android:background="#f2f2f2"
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="5dp">
+                <Space
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사용 해제 된 상품 보지 않기"
+                    android:textSize="14sp"
+                    android:textColor="#fa6e8a" />
+                <RelativeLayout
+                    android:id="@+id/RL_check"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/check_box"/>
+                    <ImageView
+                        android:id="@+id/IV_check"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:background="@drawable/ic_check"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
 
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:background="@drawable/ic_card"
+                android:scrollbars="vertical"/>
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
