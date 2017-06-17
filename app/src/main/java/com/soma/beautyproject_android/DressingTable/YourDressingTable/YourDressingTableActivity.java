@@ -28,6 +28,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,29 +49,24 @@ public class YourDressingTableActivity extends ParentActivity {
     Map<Integer,String> categorylist = new HashMap<Integer, String>();
 
     @ViewById
-    Toolbar cs_toolbar;
+    ImageView IV_user;
 
     @ViewById
-    ImageView IV_user, IV_find_user, IV_setting;
+    TextView TV_user_name,TV_user_info,TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3;
 
     @ViewById
-    TextView TV_name,TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3,textView;
+    TextView TV_cosmetic_have_number, TV_following, TV_follower, TV_expiration_date_soon;
+
 
     @ViewById
-    TextView TV_following, TV_follower;
-
-    @ViewById
-    LinearLayout button_space;
-
-    @ViewById
-    Button BT_profile_setting,BT_find_user,BT_back;
-
+    TextView toolbar_title;
 
     @Override
     protected void onResume() {
         super.onResume();
         // just as usual
 
+        conn_get_my_cosmetic_info();
         connectTestCall_follow_number();
 
         if(you.skin_type==null) TV_skin_type.setText("미설정");
@@ -92,23 +88,17 @@ public class YourDressingTableActivity extends ParentActivity {
 
         you = SharedManager.getInstance().getYou();
 
-        BT_profile_setting.setVisibility(View.GONE);
-        BT_find_user.setVisibility(View.GONE);
-        IV_setting.setVisibility(View.GONE);
-        IV_find_user.setVisibility(View.GONE);
-        BT_back.setVisibility(View.VISIBLE);
+        TV_user_name.setText(you.nickname);
+        Date date = new Date();
 
-        textView.setText(you.name + "님의 화장대");
-
+        TV_user_info.setText(you.gender + "/" + (2017 - Integer.valueOf(you.birthyear) + 1)+"세");
+        toolbar_title.setText(you.nickname+"님의 화장대");
         String image_url = you.profile_url;
 
         Glide.with(activity).
                 load(image_url).
                 thumbnail(0.1f).
                 bitmapTransform(new CropCircleTransformation(activity)).into(IV_user);
-        TV_name.setText(SharedManager.getInstance().getYou().name);
-
-        button_space.setVisibility(View.GONE);
 
         categorylist.put(R.id.skin_care,"스킨케어");
         categorylist.put(R.id.cleansing,"클렌징");
@@ -166,6 +156,32 @@ public class YourDressingTableActivity extends ParentActivity {
                         if (response != null) {
                             TV_following.setText(response.get(0));
                             TV_follower.setText(response.get(1));
+                        } else{
+
+                        }
+                    }
+                });
+    }
+
+    void conn_get_my_cosmetic_info() {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.get_my_cosmetic_info(you.id, you.push_interval)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Integer>>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "conn_get_my_cosmetic_info error", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(final List<Integer> response) {
+                        if (response != null) {
+                            TV_cosmetic_have_number.setText(response.get(0)+"");
+                            TV_expiration_date_soon.setText(response.get(1)+"");
                         } else{
 
                         }

@@ -145,7 +145,7 @@ public class DressingTableActivity extends ParentActivity {
                 bitmapTransform(new CropCircleTransformation(activity)).into(IV_user);
         TV_user_name.setText(me.nickname);
         //if()
-        TV_user_info.setText("("+me.gender+"/"+me.birthyear+")");
+        TV_user_info.setText(me.gender + "/" + (2017 - Integer.valueOf(me.birthyear) + 1)+"세");
 
         categorylist.put(R.id.skin_care,"스킨케어");
         categorylist.put(R.id.cleansing,"클렌징");
