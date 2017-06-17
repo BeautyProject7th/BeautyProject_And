@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_3;
+import com.soma.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
@@ -47,6 +48,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static com.soma.beautyproject_android.R.id.people_search;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -57,7 +59,7 @@ public class SearchFragmentBrand extends Fragment {
     public SearchAdapterBrand adapter;
     public SearchAdapterAutoComplete adapter_auto_complete;
 
-    public LinearLayout LL_non_search_auto_complete;
+    public LinearLayout LL_non_search_auto_complete,people_search;
     private RecyclerView recyclerView;
     private RecyclerView recyclerView_auto_complete;
 
@@ -119,7 +121,16 @@ public class SearchFragmentBrand extends Fragment {
         }
         recyclerView_auto_complete.setAdapter(adapter_auto_complete);
 
+        people_search = (LinearLayout) view.findViewById(R.id.people_search);
 
+        people_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, FindUserActivity_.class);
+                startActivity(intent);
+                activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+            }
+        });
 
         cs_toolbar = (Toolbar) view.findViewById(R.id.cs_toolbar);
 

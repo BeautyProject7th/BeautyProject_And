@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#fb607d</color>
     <color name="colorPrimaryDark">#3d4480</color>
-    <color name="colorSecondPrimary">#8994f1</color>
-    <color name="colorAccent">#C1A4E9</color>
+    <color name="colorSecondPrimary">#ffc6d1</color>
+    <color name="colorAccent">#fc617e</color>
     <color name="colorAccentLight">#cdb6ee</color>
 
     <!--Seula-->

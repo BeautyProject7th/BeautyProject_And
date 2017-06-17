@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_3;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadAdapter_2;
+import com.soma.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.Cosmetic;
@@ -89,7 +90,7 @@ public class SearchFragmentCategory extends Fragment {
 
     Toolbar cs_toolbar;
 
-    LinearLayout LL_search_category;
+    LinearLayout LL_search_category, people_search;
 
     /**
      * Create a new instance of the fragment
@@ -137,6 +138,16 @@ public class SearchFragmentCategory extends Fragment {
 
         cs_toolbar = (Toolbar) view.findViewById(R.id.cs_toolbar);
         LL_search_category = (LinearLayout) view.findViewById(R.id.LL_search_category);
+        people_search = (LinearLayout) view.findViewById(R.id.people_search);
+
+        people_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, FindUserActivity_.class);
+                startActivity(intent);
+                activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+            }
+        });
 
         mListView = (ExpandableListView) view.findViewById(R.id.ExpandableListView);
         categorylist = SharedManager.getInstance().getCategory();

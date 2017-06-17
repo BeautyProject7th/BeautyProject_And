@@ -111,13 +111,18 @@
         <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_1" />
         <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_2" />
         <activity android:name=".DressingTable.CosmeticUpload.CosmeticUploadActivity_3" />
-        <activity android:name=".DressingTable.YourDressingTable.FindUserActivity_" />
+        <activity
+            android:name=".DressingTable.YourDressingTable.FindUserActivity_"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity android:name=".DressingTable.YourDressingTable.YourDressingTableActivity_" />
         <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity" />
         <activity android:name=".DetailCosmetic.ModifyCosmeticActivity_" />
         <activity android:name=".Login.JoinActivity_" />
         <activity android:name=".DressingTable.YourDressingTable.FollowingListActivity_" />
         <activity android:name=".DressingTable.YourDressingTable.FollowerListActivity_" />
+        <activity android:name=".Main.MyPageActivity_"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

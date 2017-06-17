@@ -15,16 +15,36 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/RV_search_auto_complete"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone">
         </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:id="@+id/people_search"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/colorSecondPrimary">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/group_user"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"
+                android:text="나와 비슷한 유저는? 유저 검색하러 가기 >"/>
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/LL_search_category"
             android:layout_width="match_parent"
@@ -93,7 +113,7 @@
             <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
 
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

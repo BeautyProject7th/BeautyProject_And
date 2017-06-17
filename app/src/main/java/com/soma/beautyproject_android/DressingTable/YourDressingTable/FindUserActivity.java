@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.User;
+import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
@@ -39,7 +40,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 @EActivity(R.layout.activity_find_user)
-public class FindUserActivity extends AppCompatActivity {
+public class FindUserActivity extends ParentActivity {
     FindUserActivity activity;
 
     @ViewById

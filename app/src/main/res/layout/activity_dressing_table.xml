@@ -154,10 +154,8 @@
                             <TextView
                                 android:layout_alignTop="@id/BT_expiration_date"
                                 android:layout_alignLeft="@id/BT_expiration_date"
-                                android:layout_marginLeft="27dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="102.5dp"
+                                android:layout_height="30dp"
                                 android:text="유통기한"
                                 android:background="@null"
                                 android:gravity="center"

@@ -69,7 +69,7 @@ public class MainActivity extends ParentActivity {
     Toolbar cs_toolbar;
 
     @ViewById
-    Button BT_find_user, BT_search;
+    Button BT_mypage, BT_search;
 
 //    @ViewById
 //    Button BT_cosmetic_ranking_more, BT_recommend_cosmetic_more, BT_recommend_video_more, BT_match_user_more, BT_match_creator_more, BT_dressing_table_ranking_more;
@@ -150,11 +150,11 @@ public class MainActivity extends ParentActivity {
 
 
     @Click
-    void BT_find_user(){
+    void BT_mypage(){
 //        Intent intent = new Intent(activity, CosmeticUploadActivity_1.class);
 //        startActivityForResult(intent, Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST);
 //        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-        Intent intent = new Intent(activity, FindUserActivity_.class);
+        Intent intent = new Intent(activity, MyPageActivity_.class);
         startActivity(intent);
 //        startActivityForResult(intent, Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST);
         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
