@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Main.MainActivity_;
+import com.soma.beautyproject_android.Main.MyPageActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.Trouble;
 import com.soma.beautyproject_android.ParentActivity;
@@ -78,6 +79,10 @@ public class SkinTroubleActivity extends ParentActivity {
             finish();
         }else{
             activity.finish();
+            if(!before_flag){
+                Intent intent = new Intent(activity, MyPageActivity_.class);
+                startActivity(intent);
+            }
         }
     }
 
@@ -201,9 +206,14 @@ public class SkinTroubleActivity extends ParentActivity {
                     @Override
                     public final void onCompleted() {
                         LoadingUtil.stopLoading(indicator);
-                        Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
-                        startActivity(intent);
-                        setResult(Constants.ACTIVITY_CODE_MAIN_FRAGMENT_REFRESH_RESULT);
+                        if(!before_flag){
+                            Intent intent = new Intent(activity, MyPageActivity_.class);
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
+                            startActivity(intent);
+                            setResult(Constants.ACTIVITY_CODE_MAIN_FRAGMENT_REFRESH_RESULT);
+                        }
                         finish();
                     }
                     @Override

@@ -106,10 +106,10 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     case "중성":
                         image_url_skin_type = R.drawable.skin_type2;
                         break;
-                    case "지성(일반)":
+                    case "지성":
                         image_url_skin_type = R.drawable.skin_type3;
                         break;
-                    case "지성(수부지)":
+                    case "수부지":
                         image_url_skin_type = R.drawable.skin_type4;
                         break;
                 }
@@ -145,7 +145,7 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     case "주름":
                         image_url_skin_trouble_1 = R.drawable.trouble6_wrinkle;
                         break;
-                    case "여드름/트러블":
+                    case "여드름":
                         image_url_skin_trouble_1 = R.drawable.trouble7_acne;
                         break;
                     case "안면홍조":
@@ -186,7 +186,7 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     case "주름":
                         image_url_skin_trouble_2 = R.drawable.trouble6_wrinkle;
                         break;
-                    case "여드름/트러블":
+                    case "여드름":
                         image_url_skin_trouble_2 = R.drawable.trouble7_acne;
                         break;
                     case "안면홍조":
@@ -223,7 +223,7 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     case "주름":
                         image_url_skin_trouble_3 = R.drawable.trouble6_wrinkle;
                         break;
-                    case "여드름/트러블":
+                    case "여드름":
                         image_url_skin_trouble_3 = R.drawable.trouble7_acne;
                         break;
                     case "안면홍조":

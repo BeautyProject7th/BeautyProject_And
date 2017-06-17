@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Main.MainActivity_;
+import com.soma.beautyproject_android.Main.MyPageActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.Type;
 import com.soma.beautyproject_android.ParentActivity;
@@ -79,6 +80,10 @@ public class SkinTypeActivity extends ParentActivity {
     @Click
     void BT_back(){
         activity.finish();
+        if(!before_flag){
+            Intent intent = new Intent(activity, MyPageActivity_.class);
+            startActivity(intent);
+        }
     }
 
     @Click({R.id.BT_complete,R.id.BT_next})
@@ -101,11 +106,11 @@ public class SkinTypeActivity extends ParentActivity {
 
         Intent intent = getIntent();
         before_flag = intent.getBooleanExtra("before_login",false);
-        if(before_flag){
+        if(before_flag){ // 로그인 이후
             BT_back.setVisibility(View.GONE);
             BT_back_img.setVisibility(View.GONE);
             BT_complete.setVisibility(View.GONE);
-        }else{
+        }else{ // 마이페이지 이후
             BT_next.setVisibility(View.GONE);
         }
 
@@ -175,8 +180,7 @@ public class SkinTypeActivity extends ParentActivity {
                             intent = new Intent(getApplicationContext(), SkinTroubleActivity_.class);
                             intent.putExtra("before_login",true);
                         }else{
-                            intent = new Intent(getApplicationContext(), MainActivity_.class);
-                            setResult(Constants.ACTIVITY_CODE_MAIN_FRAGMENT_REFRESH_RESULT);
+                            intent = new Intent(getApplicationContext(), MyPageActivity_.class);
                         }
                         LoadingUtil.stopLoading(indicator);
                         startActivity(intent);

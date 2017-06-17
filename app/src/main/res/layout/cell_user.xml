@@ -13,7 +13,7 @@
         android:id="@+id/TV_user_name"
         android:layout_width="wrap_content"
         android:layout_height="11dp"
-        android:text="dafdf"
+        android:text=""
         android:textColor="#fb607d"
         android:textSize="10sp"
         android:layout_below="@id/IV_user_img"

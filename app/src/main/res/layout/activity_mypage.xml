@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
+            android:id="@+id/BT_setting"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
@@ -34,9 +35,9 @@
             android:gravity="center_horizontal">
 
             <ImageView
+                android:id="@+id/IV_user"
                 android:layout_marginTop="47.5dp"
                 android:layout_marginBottom="17dp"
-                android:id="@+id/IV_user_img"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:src="@drawable/group_6"/>
@@ -53,26 +54,20 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="3dp"
-                    android:background="@drawable/group_7"/>
+                <!--<Button-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_marginLeft="3dp"-->
+                    <!--android:background="@drawable/group_7"/>-->
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
+
                 <TextView
-                    android:layout_width="34dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="13sp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="성 별"/>
-                <TextView
+                    android:id="@+id/TV_user_info"
                     android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,25 +75,149 @@
                     android:textSize="13sp"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:text="여자"/>
-                <TextView
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="34dp"
+                    android:text="" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:id="@+id/LL_skin_type"
+                    android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="13sp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="연 령"/>
-                <TextView
-                    android:layout_marginLeft="5dp"
+                    android:orientation="vertical"
+                    android:layout_marginRight="18.5dp">
+                    <ImageView
+                        android:id="@+id/IV_skin_type"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginBottom="6dp"/>
+                    <TextView
+                        android:id="@+id/TV_skin_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="8sp"
+                        android:textColor="#4a4a4a"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/LL_skin_trouble_1"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="18.5dp">
+
+                    <ImageView
+                        android:id="@+id/IV_skin_trouble_1"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginBottom="6dp"/>
+                    <TextView
+                        android:id="@+id/TV_skin_trouble_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="8sp"
+                        android:textColor="#4a4a4a"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/LL_skin_trouble_2"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="18.5dp">
+                    <ImageView
+                        android:id="@+id/IV_skin_trouble_2"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginBottom="6dp"/>
+                    <TextView
+                        android:id="@+id/TV_skin_trouble_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="8sp"
+                        android:textColor="#4a4a4a"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/LL_skin_trouble_3"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="18.5dp">
+                    <ImageView
+                        android:id="@+id/IV_skin_trouble_3"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginBottom="6dp"/>
+                    <TextView
+                        android:id="@+id/TV_skin_trouble_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="8sp"
+                        android:textColor="#4a4a4a"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorGrayLine"
-                    android:textSize="13sp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="24세"/>
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/BT_skin_type"
+                        android:layout_width="157.5dp"
+                        android:layout_height="40dp"
+                        android:text="피부 타입 수정"
+                        android:textSize="13.5sp"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/rectangle"/>
+                    <Button
+                        android:id="@+id/BT_skin_trouble"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="157.5dp"
+                        android:layout_height="40dp"
+                        android:text="피부 고민 수정"
+                        android:textSize="13.5sp"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/rectangle"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
+                    <Button
+                        android:id="@+id/BT_like_cosmetic"
+                        android:layout_width="157.5dp"
+                        android:layout_height="40dp"
+                        android:text="찜한 화장품 보기"
+                        android:textSize="13.5sp"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/rectangle"/>
+                    <Button
+                        android:id="@+id/BT_like_video"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="157.5dp"
+                        android:layout_height="40dp"
+                        android:text="찜한 영상 보기"
+                        android:textSize="13.5sp"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/rectangle"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

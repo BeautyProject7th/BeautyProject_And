@@ -275,6 +275,9 @@ public interface CSConnection{
     @PUT("/users/join")
     Observable<User> join(@Body Map<String, Object> fields);
 
+    @GET("/users/my_info/{user_id}")
+    Observable<User> get_my_info(@Path("user_id") String user_id);
+
 }
 
 
