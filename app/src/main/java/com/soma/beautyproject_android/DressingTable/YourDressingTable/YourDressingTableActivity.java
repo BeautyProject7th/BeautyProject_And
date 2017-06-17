@@ -6,6 +6,7 @@ package com.soma.beautyproject_android.DressingTable.YourDressingTable;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -89,7 +90,7 @@ public class YourDressingTableActivity extends ParentActivity {
         you = SharedManager.getInstance().getYou();
 
         TV_user_name.setText(you.nickname);
-        Date date = new Date();
+        Log.i("zxc", "you.id : " + you.id + " you.gender" + you.gender + "you.birthyear : " + you.birthyear);
 
         TV_user_info.setText(you.gender + "/" + (2017 - Integer.valueOf(you.birthyear) + 1)+"세");
         toolbar_title.setText(you.nickname+"님의 화장대");

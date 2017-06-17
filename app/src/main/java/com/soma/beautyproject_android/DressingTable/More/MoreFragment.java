@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.Model.Cosmetic;
@@ -20,6 +23,7 @@ import com.soma.beautyproject_android.ParentFragment;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
+import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.Loadings.LoadingUtil;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
@@ -41,7 +45,13 @@ public class MoreFragment extends ParentFragment {
 
     public LinearLayout indicator;
 
-    TextView TV_desc, TV_category,toolbar_title;
+    TextView TV_product_quantity;
+
+    RelativeLayout RL_check;
+
+    ImageView IV_check;
+
+    TextView TV_desc,toolbar_title;
 
     Button BT_back;
 
@@ -74,16 +84,13 @@ public class MoreFragment extends ParentFragment {
             }
         });
         toolbar_title = (TextView) cs_toolbar.findViewById(R.id.toolbar_title);
-        if(activity.me_dressing_table) toolbar_title.setText("나의 화장대");
-        else toolbar_title.setText(user.name+"님의 화장대");
-
-        TV_category = (TextView) view.findViewById(R.id.TV_category);
 
         TV_desc = (TextView) view.findViewById(R.id.TV_desc);
 
-        TV_category.setText(moreActivity.main_category);
-        TV_desc.setText(user.name + "님의 " + moreActivity.main_category + " 목록입니다.");
+        RL_check = (RelativeLayout) view.findViewById(R.id.RL_check);
+        IV_check = (ImageView) view.findViewById(R.id.IV_check);
 
+        toolbar_title.setText(moreActivity.main_category);
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
@@ -108,6 +115,17 @@ public class MoreFragment extends ParentFragment {
         recycler_view.setAdapter(adapter);
 
 
+        RL_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(IV_check.getVisibility() == View.GONE){
+                    IV_check.setVisibility(View.VISIBLE);
+                }else {
+                    IV_check.setVisibility(View.GONE);
+                }
+
+            }
+        });
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
 
     }
@@ -149,7 +167,7 @@ public class MoreFragment extends ParentFragment {
                                 adapter.addData(cosmetic);
                             }
                             adapter.notifyDataSetChanged();
-
+                            TV_product_quantity.setText(response.size()+"");
                         } else {
                             endOfPage = true;
                         }
