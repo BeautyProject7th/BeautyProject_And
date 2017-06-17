@@ -289,8 +289,12 @@ public class DetailCosmeticActivity extends ParentActivity {
                             Log.i("ZXC", review.review);
                             Log.i("ZXC", "TV_review_mine : " + TV_review_mine.toString());
 
+                            if(review.review == null){
+                                TV_review_mine.setText("리뷰 없음");
+                            }else{
+                                TV_review_mine.setText(review.review);
+                            }
 
-                            TV_review_mine.setText(review.review);
                             TV_rating.setText(String.valueOf("("+review.rate_num)+")");
                             RB_rate.setRating(Float.valueOf(String.valueOf(review.rate_num)));
                             if(review.expiration_date != null)
@@ -335,8 +339,12 @@ public class DetailCosmeticActivity extends ParentActivity {
                     @Override
                     public final void onNext(List<Review> response) {
                         if (response.size() != 0) {
-                            for(int i=0;i<response.size();i++)
-                                adapter.addData(response.get(i));
+                            for(int i=0;i<response.size();i++){
+                                Review review = response.get(i);
+                                if(review.review != null){
+                                    adapter.addData(review);
+                                }
+                            }
                             adapter.notifyDataSetChanged();
                         } else {
                             endOfPage = true;

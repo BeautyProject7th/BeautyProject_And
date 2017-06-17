@@ -91,6 +91,12 @@ public interface CSConnection{
                                          @Query("main") String main_category,
                                          @Query("page") int page_num);
 
+    @GET("/users/{user_id}/cosmetics/only_use")
+    Observable<List<Cosmetic>> myMainCategoryCosmetic_only_use(@Path("user_id") String user_id,
+                                                      @Query("main") String main_category,
+                                                      @Query("page") int page_num);
+
+
     @GET("/users/{user_id}/cosmetics?main={sub-category}")
     Observable<List<Cosmetic>> mySubCategoryCosmetic(@Path("user_id") String user_id,
                                                       @Path("sub-category") String sub_category);

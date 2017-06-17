@@ -116,8 +116,6 @@ public class SettingActivity extends ParentActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(activity, DressingTableActivity_.class);
-        startActivity(intent);
         finish();
     }
 

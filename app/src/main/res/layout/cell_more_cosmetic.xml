@@ -1,42 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="85dp"
     android:layout_height="wrap_content"
     android:background="@null"
-    android:padding="8dp">
-                    <ImageView
-                        android:id="@+id/IV_cosmetic"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"/>
-                    <TextView
-                        android:id="@+id/TV_sub_category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/IV_cosmetic"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:text="서브카테고리"
-                        android:textSize="9sp"
-                        android:textColor="@color/colorGrayText"/>
-                    <TextView
-                        android:id="@+id/TV_cosmetic_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:maxLines="3"
-                        android:layout_below="@id/IV_cosmetic"
-                        android:layout_centerHorizontal="true"
-                        android:text="화장품명"
-                        android:textSize="11sp"
-                        android:textColor="@color/colorBlackText"/>
-                    <RatingBar
-                        android:id="@+id/RB_rate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:isIndicator="true"
-                        style="@style/RatingBar"/>
+    android:layout_marginBottom="10dp">
+    <ImageView
+        android:id="@+id/IV_cosmetic"
+        android:layout_width="85dp"
+        android:layout_height="85dp" />
+    <TextView
+        android:id="@+id/TV_brand_name"
+        android:layout_marginTop="5dp"
+        android:maxWidth="85dp"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/IV_cosmetic"
+        android:gravity="center"
+        android:text="브랜드명"
+        android:textSize="10sp"
+        android:textColor="#fa6e8a"/>
+    <TextView
+        android:id="@+id/TV_cosmetic_name"
+        android:layout_marginTop="4dp"
+        android:maxWidth="85dp"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:layout_below="@id/IV_cosmetic"
+        android:gravity="center"
+        android:text="화장품명"
+        android:textSize="11sp"
+        android:textColor="@color/colorBlackText"/>
 </LinearLayout>

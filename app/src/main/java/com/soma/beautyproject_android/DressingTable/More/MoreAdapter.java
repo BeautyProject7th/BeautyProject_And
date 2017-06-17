@@ -72,9 +72,10 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             Cosmetic cosmetic = mDataset.get(position);
 
+            itemViewHolder.TV_brand_name.setText(cosmetic.brand);
             itemViewHolder.TV_cosmetic_name.setText(cosmetic.product_name);
-            itemViewHolder.TV_sub_category.setText(cosmetic.sub_category);
-            itemViewHolder.RB_rate.setRating(cosmetic.rate_num);
+            //itemViewHolder.TV_sub_category.setText(cosmetic.sub_category);
+            //itemViewHolder.RB_rate.setRating(cosmetic.rate_num);
 
             String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
             Glide.with(context).
@@ -85,7 +86,12 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
             if (position == mDataset.size()-1 && !fragment.endOfPage) {
                 //fragment.connectTestCall(SharedManager.getInstance().getMe().id, fragment.main_category[temp_main_category_num], ++fragment.page_num);
                 fragment.page_num++;
-                fragment.connectTestCall(MoreActivity.main_category);
+                if(fragment.check){
+                    fragment.conn_myMainCategoryCosmetic_only_use(MoreActivity.main_category);
+                }else{
+                    fragment.conn_myMainCategoryCosmetic(MoreActivity.main_category);
+                }
+
             }
         }
     }
@@ -112,15 +118,20 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
         }
     }
     public class ItemViewHolder extends ViewHolder {
-        public TextView TV_cosmetic_name, TV_sub_category;
-        public RatingBar RB_rate;
+        public TextView TV_brand_name;
+        public TextView TV_cosmetic_name;
+
+        //public TextView TV_sub_category;
+        //public RatingBar RB_rate;
         public ImageView IV_cosmetic;
 
         public ItemViewHolder(View v) {
             super(v);
+            TV_brand_name = (TextView) v.findViewById(R.id.TV_brand_name);
             TV_cosmetic_name = (TextView) v.findViewById(R.id.TV_cosmetic_name);
-            TV_sub_category = (TextView) v.findViewById(R.id.TV_sub_category);
-            RB_rate = (RatingBar) v.findViewById(R.id.RB_rate);
+
+//            TV_sub_category = (TextView) v.findViewById(R.id.TV_sub_category);
+//            RB_rate = (RatingBar) v.findViewById(R.id.RB_rate);
             IV_cosmetic = (ImageView) v.findViewById(R.id.IV_cosmetic);
 
         }

@@ -60,6 +60,8 @@ public class MoreFragment extends ParentFragment {
 
     private User user = null;
 
+    public boolean check = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,6 +100,7 @@ public class MoreFragment extends ParentFragment {
             recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
             recycler_view.setHasFixedSize(true);
             recycler_view.setLayoutManager(new GridLayoutManager(activity, 3));
+
         }
         if (adapter == null) {
             adapter = new MoreAdapter(new MoreAdapter.OnItemClickListener() {
@@ -119,14 +122,25 @@ public class MoreFragment extends ParentFragment {
             @Override
             public void onClick(View v) {
                 if(IV_check.getVisibility() == View.GONE){
+                    check = true;
                     IV_check.setVisibility(View.VISIBLE);
+                    adapter.clear();
+                    page_num = 1;
+                    conn_myMainCategoryCosmetic_only_use(activity.main_category);
                 }else {
+                    check = false;
                     IV_check.setVisibility(View.GONE);
+                    adapter.clear();
+                    page_num = 1;
+                    conn_myMainCategoryCosmetic(activity.main_category);
+
                 }
 
             }
         });
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
+
+        TV_product_quantity = (TextView) view.findViewById(R.id.TV_product_quantity);
 
     }
 
@@ -135,7 +149,7 @@ public class MoreFragment extends ParentFragment {
         page_num=1;
         endOfPage=false;
         adapter.clear();
-        connectTestCall(activity.main_category);
+        conn_myMainCategoryCosmetic(activity.main_category);
     }
 
     @Override
@@ -143,7 +157,7 @@ public class MoreFragment extends ParentFragment {
         refresh();
     }
 
-    void connectTestCall(String main_category) {
+    void conn_myMainCategoryCosmetic(String main_category) {
         LoadingUtil.startLoading(indicator);
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
         conn.myMainCategoryCosmetic(user.id, main_category, page_num)
@@ -158,11 +172,12 @@ public class MoreFragment extends ParentFragment {
                     public final void onError(Throwable e) {
                         e.printStackTrace();
                         endOfPage = true;
+                        adapter.notifyDataSetChanged();
+                        TV_product_quantity.setText(0+"");
                     }
                     @Override
                     public final void onNext(List<Cosmetic> response) {
-                        if (response != null) {
-
+                        if(response.size() != 0){
                             for (Cosmetic cosmetic : response) {
                                 adapter.addData(cosmetic);
                             }
@@ -170,6 +185,41 @@ public class MoreFragment extends ParentFragment {
                             TV_product_quantity.setText(response.size()+"");
                         } else {
                             endOfPage = true;
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+    }
+
+    void conn_myMainCategoryCosmetic_only_use(String main_category) {
+        LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.myMainCategoryCosmetic_only_use(user.id, main_category, page_num)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Cosmetic>>() {
+                    @Override
+                    public final void onCompleted() {
+                        LoadingUtil.stopLoading(indicator);
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        endOfPage = true;
+                        adapter.notifyDataSetChanged();
+                        TV_product_quantity.setText(0+"");
+                    }
+                    @Override
+                    public final void onNext(List<Cosmetic> response) {
+                        if(response.size() != 0){
+                            for (Cosmetic cosmetic : response) {
+                                adapter.addData(cosmetic);
+                            }
+                            adapter.notifyDataSetChanged();
+                            TV_product_quantity.setText(response.size()+"");
+                        } else {
+                            endOfPage = true;
+                            adapter.notifyDataSetChanged();
                         }
                     }
                 });
