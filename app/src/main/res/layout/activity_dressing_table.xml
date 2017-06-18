@@ -168,7 +168,7 @@
                                 android:layout_width="19dp"
                                 android:layout_height="19dp"
                                 android:text=""
-                                android:background="@drawable/ic_oval"
+                                android:background="@drawable/ic_oval_purple"
                                 android:gravity="center"
                                 android:textColor="#FFFFFF"
                                 android:textSize="13sp"/>

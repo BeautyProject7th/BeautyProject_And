@@ -416,9 +416,9 @@ public class MainActivity extends ParentActivity {
                                 creator_1.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
-                                        SharedManager.getInstance().setYou(response.get(0));
-                                        activity.startActivity(intent);
+//                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+//                                        SharedManager.getInstance().setYou(response.get(0));
+//                                        activity.startActivity(intent);
                                     }
                                 });
 
@@ -438,9 +438,9 @@ public class MainActivity extends ParentActivity {
                                 creator_2.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
-                                        SharedManager.getInstance().setYou(response.get(1));
-                                        activity.startActivity(intent);
+//                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+//                                        SharedManager.getInstance().setYou(response.get(1));
+//                                        activity.startActivity(intent);
                                     }
                                 });
 
@@ -461,9 +461,9 @@ public class MainActivity extends ParentActivity {
                                 creator_3.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
-                                        SharedManager.getInstance().setYou(response.get(2));
-                                        activity.startActivity(intent);
+//                                        Intent intent = new Intent(activity, YourDressingTableActivity_.class);
+//                                        SharedManager.getInstance().setYou(response.get(2));
+//                                        activity.startActivity(intent);
                                     }
                                 });
 

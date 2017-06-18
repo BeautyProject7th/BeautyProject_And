@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -207,10 +208,14 @@ public class MoreFragment extends ParentFragment {
                         e.printStackTrace();
                         endOfPage = true;
                         adapter.notifyDataSetChanged();
-                        TV_product_quantity.setText(0+"");
+//                        TV_product_quantity.setText(0+"");
                     }
                     @Override
                     public final void onNext(List<Cosmetic> response) {
+                        Log.i("response", "reponse : " + response.toString());
+                        Log.i("response", "reponse : " + response.toString());
+                        Log.i("response", "reponse : " + response.toString());
+
                         if(response.size() != 0){
                             for (Cosmetic cosmetic : response) {
                                 adapter.addData(cosmetic);
