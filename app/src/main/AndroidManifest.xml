@@ -122,7 +122,9 @@
         <activity android:name=".Login.JoinActivity_" />
         <activity android:name=".DressingTable.YourDressingTable.FollowingListActivity_" />
         <activity android:name=".DressingTable.YourDressingTable.FollowerListActivity_" />
-        <activity android:name=".Main.MyPageActivity_"/>
+        <activity android:name=".MyPage.MyPageActivity_"/>
+        <activity android:name=".MyPage.LikeCosmeticListActivity"/>
+        <activity android:name=".MyPage.LikeVideoListActivity_"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

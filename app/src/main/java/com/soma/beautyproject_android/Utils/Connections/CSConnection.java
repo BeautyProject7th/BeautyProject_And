@@ -305,6 +305,13 @@ public interface CSConnection{
     @GET("/users/like/video/{user_id}/{id}")
     Observable<GlobalResponse> get_my_like_video(@Path("user_id") String user_id,@Path("id") String id);
 
+    @GET("/users/like/cosmetic/{user_id}")
+    Observable<List<Cosmetic>> like_cosmetic_get(@Path("user_id") String user_id);
+
+    @GET("/users/like/video/{user_id}")
+    Observable<List<Video_Youtuber>> like_video_get(@Path("user_id") String user_id);
+
+
 }
 
 

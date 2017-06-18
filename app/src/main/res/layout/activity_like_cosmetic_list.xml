@@ -11,9 +11,10 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay" >
 
-        <include layout="@layout/toolbar_search" android:id="@+id/cs_toolbar" />
+        <include layout="@layout/toolbar_only_back" android:id="@+id/cs_toolbar" />
 
     </android.support.design.widget.AppBarLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,7 +45,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="영상 "
+                        android:text="제품 "
                         android:gravity="center"
                         android:textSize="13.5sp"
                         android:layout_gravity="center"/>
@@ -78,16 +79,16 @@
                         <!--android:layout_width="wrap_content"-->
                         <!--android:layout_height="wrap_content"-->
                         <!--android:background="@drawable/ic_sort" />-->
-                    <!--<Space-->
-                        <!--android:layout_width="5dp"-->
-                        <!--android:layout_height="match_parent" />-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:text="필터"-->
-                        <!--android:textColor="#9b9b9b"-->
-                        <!--android:gravity="center"-->
-                        <!--android:layout_gravity="center"/>-->
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textColor="#9b9b9b"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </LinearLayout>
                 <View
                     android:layout_width="1dp"
@@ -98,14 +99,15 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center">
-                    <!--<Spinner-->
-                        <!--android:id="@+id/SP_sort"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@null"></Spinner>-->
+                    <Spinner
+                        android:id="@+id/SP_sort"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"></Spinner>
                 </RelativeLayout>
 
             </LinearLayout>
+
 
             <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
 

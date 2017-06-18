@@ -112,8 +112,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
         video_youtuber = (Video_Youtuber) getIntent().getSerializableExtra("video_youtuber");
         id = video_youtuber.id;
         video_id = video_youtuber.video_id;
-        toolbar_title.setText("비디오 이름");
-        //toolbar_title.setText(video.video_name);
+        toolbar_title.setText("영상 상세정보");
 
         //TV_video_name.setText(video.video_name);
         TV_youtuber_name.setText(video_youtuber.youtuber_name);
@@ -414,6 +413,8 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                     public final void onError(Throwable e) {
                         e.printStackTrace();;
                         Log.i("ZXC", "conn_get_my_like_video error");
+                        like_flag = false;
+                        BT_like_video.setBackgroundResource(R.drawable.ic_garage);
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {

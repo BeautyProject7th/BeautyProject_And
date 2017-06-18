@@ -490,6 +490,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             cell_search_result_cosmetic_perfect = (LinearLayout) v.findViewById(R.id.cell_search_result_cosmetic_perfect);
         }
     }
+
     public class CosmeticViewHolder extends ViewHolder {
         public Button BT_cosmetic_more;
         public LinearLayout [] LL_cosmetic = new LinearLayout[3];

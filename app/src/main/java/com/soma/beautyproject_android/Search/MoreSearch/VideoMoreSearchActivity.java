@@ -141,26 +141,26 @@ public class VideoMoreSearchActivity extends ParentActivity {
         TV_product_quantity = (TextView) findViewById(R.id.TV_product_quantity);
 
 
-        SP_sort = (Spinner) findViewById(R.id.SP_sort);
+        //SP_sort = (Spinner) findViewById(R.id.SP_sort);
 
-        final Spinner SP_sort = (Spinner)findViewById(R.id.SP_sort);
-        final String[] items = new String[]{"정렬", "정확도순", "조회순"}; //정렬 -> 최신순
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item_2, items);
-        SP_sort.setAdapter(adapter);
-
-        SP_sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-                items[0] = "최신순";
-                Log.i("zxc", "items.toString() : " + items.toString());
-                //selectedItem = items[position];
-                ((TextView) arg0.getChildAt(0)).setText(items[position]);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
+//        final Spinner SP_sort = (Spinner)findViewById(R.id.SP_sort);
+//        final String[] items = new String[]{"정렬", "정확도순", "조회순"}; //정렬 -> 최신순
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item_2, items);
+//        SP_sort.setAdapter(adapter);
+//
+//        SP_sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+//                items[0] = "최신순";
+//                Log.i("zxc", "items.toString() : " + items.toString());
+//                //selectedItem = items[position];
+//                ((TextView) arg0.getChildAt(0)).setText(items[position]);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> arg0) {
+//            }
+//        });
 
 
         BT_back = (Button) findViewById(R.id.BT_back);

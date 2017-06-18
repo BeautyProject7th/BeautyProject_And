@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Main.MainActivity_;
-import com.soma.beautyproject_android.Main.MyPageActivity_;
+import com.soma.beautyproject_android.MyPage.MyPageActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.Trouble;
 import com.soma.beautyproject_android.ParentActivity;

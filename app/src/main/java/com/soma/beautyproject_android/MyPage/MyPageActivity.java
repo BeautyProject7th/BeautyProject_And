@@ -1,8 +1,6 @@
-package com.soma.beautyproject_android.Main;
+package com.soma.beautyproject_android.MyPage;
 
 import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,15 +15,12 @@ import com.soma.beautyproject_android.Skin.SkinTroubleActivity_;
 import com.soma.beautyproject_android.Skin.SkinTypeActivity_;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
-import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
-
-import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
@@ -258,14 +253,14 @@ public class MyPageActivity extends ParentActivity {
         startActivity(intent);
         finish();
     }
-//    @Click
-//    void BT_like_cosmetic(){
-//        Intent intent = new Intent(this, LikeCosmeticListActivity_.class);
-//        startActivity(intent);
-//    }
-//    @Click
-//    void BT_like_video(){
-//        Intent intent = new Intent(this, LikeVideoListActivity_.class);
-//        startActivity(intent);
-//    }
+    @Click
+    void BT_like_cosmetic(){
+        Intent intent = new Intent(this, LikeCosmeticListActivity.class);
+        startActivity(intent);
+    }
+    @Click
+    void BT_like_video(){
+        Intent intent = new Intent(this, LikeVideoListActivity_.class);
+        startActivity(intent);
+    }
 }

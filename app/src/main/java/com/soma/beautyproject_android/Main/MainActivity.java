@@ -28,6 +28,7 @@ import com.soma.beautyproject_android.DressingTable.YourDressingTable.FindUserAc
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.YourDressingTableActivity_;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.User;
+import com.soma.beautyproject_android.MyPage.*;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Search.SearchActivity;
@@ -154,7 +155,7 @@ public class MainActivity extends ParentActivity {
 //        Intent intent = new Intent(activity, CosmeticUploadActivity_1.class);
 //        startActivityForResult(intent, Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST);
 //        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-        Intent intent = new Intent(activity, MyPageActivity_.class);
+        Intent intent = new Intent(activity, com.soma.beautyproject_android.MyPage.MyPageActivity_.class);
         startActivity(intent);
 //        startActivityForResult(intent, Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_REQUEST);
         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
