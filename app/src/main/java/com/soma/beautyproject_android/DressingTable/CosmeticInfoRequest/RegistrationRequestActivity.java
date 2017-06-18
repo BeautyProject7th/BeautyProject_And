@@ -100,7 +100,7 @@ public class RegistrationRequestActivity extends ParentActivity {
                 .subscribe(new Subscriber<GlobalResponse>() {
                     @Override
                     public final void onCompleted() {
-                        startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
+                        //startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
                         finish();
                     }
                     @Override

@@ -86,9 +86,13 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     TextView toolbar_title;
 
     @ViewById
-    Button BT_back;
+    Button BT_back, BT_like_video;
 
+    public String id;
     public String video_id;
+
+
+    public boolean like_flag = false;
 
     @Override
     protected void onResume() {
@@ -106,6 +110,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
         youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, activity);
 
         video_youtuber = (Video_Youtuber) getIntent().getSerializableExtra("video_youtuber");
+        id = video_youtuber.id;
         video_id = video_youtuber.video_id;
         toolbar_title.setText("비디오 이름");
         //toolbar_title.setText(video.video_name);
@@ -261,6 +266,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     }
 
     void refresh(){
+        conn_get_my_like_video(id);
         conn_get_follower_number(TV_follower_number);
         conn_video_product(video_youtuber.id);
     }
@@ -297,6 +303,18 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
         onBackPressed();
     }
 
+    @Click
+    void BT_like_video(){
+        if(like_flag){
+            conn_delete_like_video(SharedManager.getInstance().getMe().id, id);
+        }else{
+            conn_post_like_video(SharedManager.getInstance().getMe().id, id);
+        }
+
+    }
+
+
+
     void conn_video_product(String video_id) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.video_product(video_id)
@@ -323,6 +341,92 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                 });
     }
 
+
+
+    void conn_post_like_video(String user_id, String id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.post_like_video(user_id, id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) {
+                            like_flag = true;
+                            BT_like_video.setBackgroundResource(R.drawable.ic_heart);
+                            Toast.makeText(activity, "정상적으로 찜 했습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, "찜에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    void conn_delete_like_video(String user_id, String id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.delete_like_video(user_id, id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) {
+                            like_flag = false;
+                            BT_like_video.setBackgroundResource(R.drawable.ic_garage);
+                            Toast.makeText(activity, "정상적으로 찜을 취소했습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, "찜 취소에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+    void conn_get_my_like_video(String id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.get_my_like_video(SharedManager.getInstance().getMe().id, id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        Log.i("ZXC", "conn_get_my_review 2");
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();;
+                        Log.i("ZXC", "conn_get_my_like_video error");
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) { // isLike
+                            like_flag = true;
+                            BT_like_video.setBackgroundResource(R.drawable.ic_heart);
+                        } else {
+                            like_flag = false;
+                            BT_like_video.setBackgroundResource(R.drawable.ic_garage);
+                        }
+                    }
+                });
+    }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,

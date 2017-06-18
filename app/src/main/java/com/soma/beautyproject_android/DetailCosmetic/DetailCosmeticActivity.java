@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport_;
 import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.RatingEach;
 import com.soma.beautyproject_android.Model.Review;
 import com.soma.beautyproject_android.ParentActivity;
@@ -35,6 +36,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringArrayRes;
 
 
 import java.util.List;
@@ -105,6 +107,11 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     float sum;
 
+    boolean like_flag = false;
+
+    @ViewById
+    Button BT_like;
+
     @AfterViews
     void afterBindingView() {
         this.activity = this;
@@ -173,6 +180,12 @@ public class DetailCosmeticActivity extends ParentActivity {
 //                Intent intent = new Intent(getApplicationContext(), CosmeticReport_.class);
 //                intent.putExtra("cosmetic", cosmetic);
 //                startActivity(intent);
+                if(!like_flag){
+                    conn_post_like_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id);
+                }else{
+                    conn_delete_like_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id);
+                }
+
             }
         });
 
@@ -189,9 +202,10 @@ public class DetailCosmeticActivity extends ParentActivity {
     void refresh(){
         adapter.clear();
         adapter.notifyDataSetChanged();
-        connectTestCall_get(cosmetic_id);
-        conn_get_my_review(cosmetic_id);
 
+        connectTestCall_get(cosmetic_id);
+        conn_get_my_like_cosmetic(cosmetic_id);
+        conn_get_my_review(cosmetic_id);
         conn_get_review(cosmetic_id, page);
         conn_get_each_rating(cosmetic_id);
     }
@@ -402,6 +416,93 @@ public class DetailCosmeticActivity extends ParentActivity {
                     }
                 });
     }
+
+    void conn_post_like_cosmetic(String user_id, String cosmetic_id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.post_like_cosmetic(user_id, cosmetic_id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) {
+                            like_flag = true;
+                            BT_like.setBackgroundResource(R.drawable.ic_heart);
+                            Toast.makeText(activity, "정상적으로 찜 했습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, "찜에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+
+    void conn_delete_like_cosmetic(String user_id, String cosmetic_id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.delete_like_cosmetic(user_id, cosmetic_id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(getActivity(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) {
+                            like_flag = false;
+                            BT_like.setBackgroundResource(R.drawable.ic_garage);
+                            Toast.makeText(activity, "정상적으로 찜을 취소했습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, "찜 취소에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    void conn_get_my_like_cosmetic(String cosmetic_id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.get_my_like_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        Log.i("ZXC", "conn_get_my_review 2");
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();;
+                        Log.i("ZXC", "conn_get_my_like_cosmetic error");
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) { // isLike
+                            like_flag = true;
+                            BT_like.setBackgroundResource(R.drawable.ic_heart);
+                        } else {
+                            like_flag = false;
+                            BT_like.setBackgroundResource(R.drawable.ic_garage);
+                        }
+                    }
+                });
+    }
+
 }
 
 

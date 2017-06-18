@@ -261,8 +261,8 @@ public interface CSConnection{
     @GET("/youtuber/{youtuber_name}")
     Observable<Youtuber> get_youtuber(@Path("youtuber_name") String youtuber_name);
 
-    @GET("/video/video_product/{video_id}")
-    Observable<List<Cosmetic>> video_product(@Path("video_id") String video_id);
+    @GET("/video/video_product/{id}")
+    Observable<List<Cosmetic>> video_product(@Path("id") String id);
 
     @GET("/cosmetics/detail/dressing_table/review/{cosmetic_id}/{page_num}")
     Observable<List<Review>> get_review(@Path("cosmetic_id") String cosmetic_id, @Path("page_num") int page_num);
@@ -286,6 +286,24 @@ public interface CSConnection{
 
     @GET("/users/my_info/{user_id}")
     Observable<User> get_my_info(@Path("user_id") String user_id);
+
+    @POST("/users/like/cosmetic/{user_id}/{cosmetic_id}")
+    Observable<GlobalResponse> post_like_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);
+
+    @POST("/users/like/video/{user_id}/{id}")
+    Observable<GlobalResponse> post_like_video(@Path("user_id") String user_id,@Path("id") String id);
+
+    @DELETE("/users/like/cosmetic/{user_id}/{cosmetic_id}")
+    Observable<GlobalResponse> delete_like_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);
+
+    @DELETE("/users/like/video/{user_id}/{id}")
+    Observable<GlobalResponse> delete_like_video(@Path("user_id") String user_id,@Path("id") String id);
+
+    @GET("/users/like/cosmetic/{user_id}/{cosmetic_id}")
+    Observable<GlobalResponse> get_my_like_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);
+
+    @GET("/users/like/video/{user_id}/{id}")
+    Observable<GlobalResponse> get_my_like_video(@Path("user_id") String user_id,@Path("id") String id);
 
 }
 
