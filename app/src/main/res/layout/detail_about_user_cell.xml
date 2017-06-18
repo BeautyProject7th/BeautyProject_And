@@ -21,7 +21,7 @@
             android:id="@+id/TV_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="삭제하기"
+            android:text="등록 취소하기"
             android:textColor="@color/colorBlack"
             android:textSize="12sp"
             android:gravity="center"

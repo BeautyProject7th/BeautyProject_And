@@ -22,12 +22,13 @@
             android:gravity="center"
             android:background="@color/colorWhite">
 
-            <include layout="@layout/detail_about_user_cell" android:id="@+id/about_user_cell" />
+            <!--<include layout="@layout/detail_about_user_cell" android:id="@+id/about_user_cell" />-->
 
             <ImageView
                 android:id="@+id/IV_product"
                 android:layout_width="wrap_content"
-                android:layout_height="109dp" />
+                android:layout_height="109dp"
+                android:layout_marginTop="20dp"/>
             <TextView
                 android:id="@+id/TV_brand"
                 android:layout_width="wrap_content"
@@ -147,12 +148,14 @@
                     android:layout_marginLeft="1dp"
                     android:layout_marginRight="1dp"
                     android:layout_marginBottom="1dp">
+
                     <Button
                         android:id="@+id/BT_like"
                         android:layout_width="17dp"
                         android:layout_height="14dp"
-                        android:background="@drawable/ic_garage"
+                        android:background="@drawable/ic_heart_empty"
                         android:layout_marginRight="5dp"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

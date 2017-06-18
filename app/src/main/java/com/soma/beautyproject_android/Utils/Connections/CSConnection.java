@@ -76,8 +76,8 @@ public interface CSConnection{
                                          @Path("user_id") String user_id,
                                          @Path("cosmetic-id") String cosmetic_id);
 
-    @POST("/users/cosmetics")
-    Observable<GlobalResponse> myOneCosmetic_post(@Body Map<String, Object> fields);
+    @POST("/users/cosmetics/{stat}")
+    Observable<GlobalResponse> myOneCosmetic_post(@Path("stat") String stat, @Body Map<String, Object> fields);
 
     @DELETE("/users/{user_id}/cosmetics/{cosmetic-id}")
     Observable<GlobalResponse> myOneCosmetic_delete(@Path("user_id") String user_id,
@@ -287,17 +287,17 @@ public interface CSConnection{
     @GET("/users/my_info/{user_id}")
     Observable<User> get_my_info(@Path("user_id") String user_id);
 
-    @POST("/users/like/cosmetic/{user_id}/{cosmetic_id}")
-    Observable<GlobalResponse> post_like_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);
+    @POST("/users/like/cosmetic")
+    Observable<GlobalResponse> post_like_cosmetic(@Body Map<String, Object> fields);
 
-    @POST("/users/like/video/{user_id}/{id}")
-    Observable<GlobalResponse> post_like_video(@Path("user_id") String user_id,@Path("id") String id);
+    @POST("/users/like/video")
+    Observable<GlobalResponse> post_like_video(@Body Map<String, Object> fields);
 
-    @DELETE("/users/like/cosmetic/{user_id}/{cosmetic_id}")
-    Observable<GlobalResponse> delete_like_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);
+    @DELETE("/users/like/cosmetic")
+    Observable<GlobalResponse> delete_like_cosmetic(@Body Map<String, Object> fields);
 
-    @DELETE("/users/like/video/{user_id}/{id}")
-    Observable<GlobalResponse> delete_like_video(@Path("user_id") String user_id,@Path("id") String id);
+    @DELETE("/users/like/video")
+    Observable<GlobalResponse> delete_like_video(@Body Map<String, Object> fields);
 
     @GET("/users/like/cosmetic/{user_id}/{cosmetic_id}")
     Observable<GlobalResponse> get_my_like_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);

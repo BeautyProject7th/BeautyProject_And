@@ -10,8 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +67,8 @@ public class CosmeticUploadActivity_3 extends ParentActivity {
     public String sub_category;
 
     String before_intent_page;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -284,4 +288,5 @@ public class CosmeticUploadActivity_3 extends ParentActivity {
         }
 
     }
+
 }

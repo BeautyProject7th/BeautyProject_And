@@ -304,10 +304,17 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
     @Click
     void BT_like_video(){
+        Map<String, Object> fields = new HashMap<String, Object>();
+
+
+        fields.put("user_id",SharedManager.getInstance().getMe().id);
+        fields.put("id",id);
+        fields.put("title",video_youtuber.title);
+
         if(like_flag){
-            conn_delete_like_video(SharedManager.getInstance().getMe().id, id);
+            conn_delete_like_video(fields);
         }else{
-            conn_post_like_video(SharedManager.getInstance().getMe().id, id);
+            conn_post_like_video(fields);
         }
 
     }
@@ -342,9 +349,9 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
 
 
-    void conn_post_like_video(String user_id, String id) {
+    void conn_post_like_video(Map<String, Object> fields) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.post_like_video(user_id, id)
+        conn.post_like_video(fields)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -370,9 +377,9 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                 });
     }
 
-    void conn_delete_like_video(String user_id, String id) {
+    void conn_delete_like_video(Map<String, Object> fields) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.delete_like_video(user_id, id)
+        conn.delete_like_video(fields)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {

@@ -40,7 +40,9 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -110,9 +112,6 @@ public class DetailCosmeticActivity extends ParentActivity {
     @ViewById
     Button BT_like;
 
-    @ViewById
-    Switch using_switch;
-
     @AfterViews
     void afterBindingView() {
         this.activity = this;
@@ -181,10 +180,19 @@ public class DetailCosmeticActivity extends ParentActivity {
 //                Intent intent = new Intent(getApplicationContext(), CosmeticReport_.class);
 //                intent.putExtra("cosmetic", cosmetic);
 //                startActivity(intent);
+
+
+                Map<String, Object> fields = new HashMap<String, Object>();
+
+
+                fields.put("user_id",user_id);
+                fields.put("cosmetic_id",cosmetic_id);
+                fields.put("cosmetic_name",cosmetic.product_name);
+
                 if(!like_flag){
-                    conn_post_like_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id);
+                    conn_post_like_cosmetic(fields);
                 }else{
-                    conn_delete_like_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id);
+                    conn_delete_like_cosmetic(fields);
                 }
 
             }
@@ -199,12 +207,6 @@ public class DetailCosmeticActivity extends ParentActivity {
             }
         });
 
-        using_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-            }
-        });
     }
 
     void refresh(){
@@ -306,10 +308,10 @@ public class DetailCosmeticActivity extends ParentActivity {
 
                             Review review = response.get(0);
 
-                            using_switch.setChecked(review.status);
-
-                            Log.i("ZXC", review.review);
                             Log.i("ZXC", "TV_review_mine : " + TV_review_mine.toString());
+                            Log.i("ZXC", "review.expiration_date.toString() " + review.expiration_date.toString());
+                            Log.i("ZXC", "review.purchase_date.toString() : " + review.purchase_date.toString());
+
 
                             if(review.review == null){
                                 TV_review_mine.setText("리뷰 없음");
@@ -405,6 +407,10 @@ public class DetailCosmeticActivity extends ParentActivity {
 
                             Log.i("zxc", "sum : " + sum);
 
+                            for(int i=0;i<5;i++){
+                                TV_rate_people[i].setText("0");
+                                V_rate_people[i].setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT));
+                            }
                             for(int i=0;i<response.size();i++){
                                 rate_num = Integer.valueOf(response.get(i).rate_num);
                                 rate_people = Integer.valueOf(response.get(i).rate_people);
@@ -425,9 +431,9 @@ public class DetailCosmeticActivity extends ParentActivity {
                 });
     }
 
-    void conn_post_like_cosmetic(String user_id, String cosmetic_id) {
+    void conn_post_like_cosmetic(Map<String, Object> fields) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.post_like_cosmetic(user_id, cosmetic_id)
+        conn.post_like_cosmetic(fields)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -455,9 +461,9 @@ public class DetailCosmeticActivity extends ParentActivity {
 
 
 
-    void conn_delete_like_cosmetic(String user_id, String cosmetic_id) {
+    void conn_delete_like_cosmetic(Map<String, Object> fields) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.delete_like_cosmetic(user_id, cosmetic_id)
+        conn.delete_like_cosmetic(fields)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -506,59 +512,6 @@ public class DetailCosmeticActivity extends ParentActivity {
                         } else {
                             like_flag = false;
                             BT_like.setBackgroundResource(R.drawable.ic_heart_empty);
-                        }
-                    }
-                });
-    }
-
-
-    void conn_get_status_cosmetic(String cosmetic_id) {
-        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.get_status_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Integer>() {
-                    @Override
-                    public final void onCompleted() {
-                        Log.i("ZXC", "conn_get_status_cosmetic 2");
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();;
-                        Log.i("ZXC", "conn_get_status_cosmetic error");
-                    }
-                    @Override
-                    public final void onNext(Integer response) {
-                        if (response == 1) { // isLike
-                            using_switch.setChecked(true);
-                        } else {
-                            using_switch.setChecked(false);
-                        }
-                    }
-                });
-    }
-
-    void conn_put_status_cosmetic(String cosmetic_id) {
-        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.put_status_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GlobalResponse>() {
-                    @Override
-                    public final void onCompleted() {
-                        Log.i("ZXC", "conn_post_my_like_cosmetic 2");
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();;
-                        Log.i("ZXC", "conn_get_my_like_cosmetic error");
-                    }
-                    @Override
-                    public final void onNext(GlobalResponse response) {
-                        if (response.code == 200) { // isLike
-                            Toast.makeText(activity, "사용 중 제품", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(activity, "사용 중 아닌 제품", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
