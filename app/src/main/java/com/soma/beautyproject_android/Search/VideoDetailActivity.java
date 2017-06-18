@@ -389,7 +389,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                     public final void onNext(GlobalResponse response) {
                         if (response.code == 200) {
                             like_flag = false;
-                            BT_like_video.setBackgroundResource(R.drawable.ic_garage);
+                            BT_like_video.setBackgroundResource(R.drawable.ic_heart_empty);
                             Toast.makeText(activity, "정상적으로 찜을 취소했습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(activity, "찜 취소에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -414,7 +414,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                         e.printStackTrace();;
                         Log.i("ZXC", "conn_get_my_like_video error");
                         like_flag = false;
-                        BT_like_video.setBackgroundResource(R.drawable.ic_garage);
+                        BT_like_video.setBackgroundResource(R.drawable.ic_heart_empty);
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {
@@ -423,7 +423,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                             BT_like_video.setBackgroundResource(R.drawable.ic_heart);
                         } else {
                             like_flag = false;
-                            BT_like_video.setBackgroundResource(R.drawable.ic_garage);
+                            BT_like_video.setBackgroundResource(R.drawable.ic_heart_empty);
                         }
                     }
                 });

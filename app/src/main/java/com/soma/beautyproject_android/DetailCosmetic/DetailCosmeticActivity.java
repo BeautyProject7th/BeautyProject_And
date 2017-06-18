@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -87,9 +88,6 @@ public class DetailCosmeticActivity extends ParentActivity {
     RatingBar RB_rate;
 
     @ViewById
-    Switch using_switch;
-
-    @ViewById
     LinearLayout LL_adjust, LL_buy, LL_like, LL_add;
 
     @ViewById
@@ -111,6 +109,9 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     @ViewById
     Button BT_like;
+
+    @ViewById
+    Switch using_switch;
 
     @AfterViews
     void afterBindingView() {
@@ -195,6 +196,13 @@ public class DetailCosmeticActivity extends ParentActivity {
                 Intent intent = new Intent(getApplicationContext(), ModifyCosmeticActivity_.class);
                 intent.putExtra("cosmetic", cosmetic);
                 startActivity(intent);
+            }
+        });
+
+        using_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
             }
         });
     }
@@ -466,7 +474,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                     public final void onNext(GlobalResponse response) {
                         if (response.code == 200) {
                             like_flag = false;
-                            BT_like.setBackgroundResource(R.drawable.ic_garage);
+                            BT_like.setBackgroundResource(R.drawable.ic_heart_empty);
                             Toast.makeText(activity, "정상적으로 찜을 취소했습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(activity, "찜 취소에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -497,7 +505,60 @@ public class DetailCosmeticActivity extends ParentActivity {
                             BT_like.setBackgroundResource(R.drawable.ic_heart);
                         } else {
                             like_flag = false;
-                            BT_like.setBackgroundResource(R.drawable.ic_garage);
+                            BT_like.setBackgroundResource(R.drawable.ic_heart_empty);
+                        }
+                    }
+                });
+    }
+
+
+    void conn_get_status_cosmetic(String cosmetic_id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.get_status_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public final void onCompleted() {
+                        Log.i("ZXC", "conn_get_status_cosmetic 2");
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();;
+                        Log.i("ZXC", "conn_get_status_cosmetic error");
+                    }
+                    @Override
+                    public final void onNext(Integer response) {
+                        if (response == 1) { // isLike
+                            using_switch.setChecked(true);
+                        } else {
+                            using_switch.setChecked(false);
+                        }
+                    }
+                });
+    }
+
+    void conn_put_status_cosmetic(String cosmetic_id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.put_status_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        Log.i("ZXC", "conn_post_my_like_cosmetic 2");
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();;
+                        Log.i("ZXC", "conn_get_my_like_cosmetic error");
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) { // isLike
+                            Toast.makeText(activity, "사용 중 제품", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, "사용 중 아닌 제품", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -312,6 +312,14 @@ public interface CSConnection{
     Observable<List<Video_Youtuber>> like_video_get(@Path("user_id") String user_id);
 
 
+    @GET("/users/status/cosmetic/{user_id}/{cosmetic_id}")
+    Observable<Integer> get_status_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);
+
+    @PUT("/users/status/cosmetic/{user_id}/{cosmetic_id}")
+    Observable<GlobalResponse> put_status_cosmetic(@Path("user_id") String user_id, @Path("cosmetic_id") String cosmetic_id);
+
+
+
 }
 
 

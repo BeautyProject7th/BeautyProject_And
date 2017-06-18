@@ -21,7 +21,9 @@
             android:orientation="vertical"
             android:gravity="center"
             android:background="@color/colorWhite">
+
             <include layout="@layout/detail_about_user_cell" android:id="@+id/about_user_cell" />
+
             <ImageView
                 android:id="@+id/IV_product"
                 android:layout_width="wrap_content"
