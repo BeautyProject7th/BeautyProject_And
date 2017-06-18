@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.ExpirationCosmetic;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.TimeFormatter.TimeFormmater;
@@ -38,7 +39,7 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
     public Context context;
     public CosmeticExpirationDateActivity activity;
     private OnItemClickListener mOnItemClickListener;
-    public ArrayList<Cosmetic> mDataset = new ArrayList<>();
+    public ArrayList<ExpirationCosmetic> mDataset = new ArrayList<>();
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -51,11 +52,11 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
         mDataset.clear();
     }
 
-    public void addData(Cosmetic cosmetic) {
-        mDataset.add(cosmetic);
+    public void addData(ExpirationCosmetic expirationCosmetic) {
+        mDataset.add(expirationCosmetic);
     }
 
-    public Cosmetic getItem(int position) {
+    public ExpirationCosmetic getItem(int position) {
         return mDataset.get(position);
     }
 
@@ -66,7 +67,7 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
     @Override
      public CosmeticExpirationDateAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_expiration_date, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_cosmetic_expiration, parent, false);
             return new ItemViewHolder(v);
         }
         return null;
@@ -82,16 +83,16 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
                 }
             });
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            Cosmetic cosmetic = mDataset.get(position);
+            ExpirationCosmetic expirationCosmetic = mDataset.get(position);
 
-            String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
+            String image_url = Constants.IMAGE_BASE_URL_cosmetics + expirationCosmetic.img_src;
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
-                    into(itemViewHolder.IV_Cosmetic);
+                    into(itemViewHolder.IV_cosmetic);
 
-            itemViewHolder.TV_brand.setText(cosmetic.brand);
-            itemViewHolder.TV_cosmetic.setText(cosmetic.product_name);
+            itemViewHolder.TV_brand_name.setText(expirationCosmetic.brand);
+            itemViewHolder.TV_cosmetic_name.setText(expirationCosmetic.product_name);
 
 //            int dday = doDiffOfDate(cosmetic.expiration_date);
 //            if(dday == 100){
@@ -143,15 +144,15 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
         }
     }
     public class ItemViewHolder extends ViewHolder {
-        public ImageView IV_Cosmetic;
-        public TextView TV_dday,TV_brand,TV_cosmetic;
+        public ImageView IV_cosmetic;
+        public TextView TV_expiration_date_day,TV_brand_name,TV_cosmetic_name;
 
         public ItemViewHolder(View v) {
             super(v);
-            IV_Cosmetic = (ImageView) v.findViewById(R.id.IV_Cosmetic);
-            TV_dday = (TextView) v.findViewById(R.id.TV_dday);
-            TV_brand = (TextView) v.findViewById(R.id.TV_brand);
-            TV_cosmetic = (TextView) v.findViewById(R.id.TV_cosmetic);
+            IV_cosmetic = (ImageView) v.findViewById(R.id.IV_cosmetic);
+            TV_expiration_date_day = (TextView) v.findViewById(R.id.TV_expiration_date_day);
+            TV_brand_name = (TextView) v.findViewById(R.id.TV_brand_name);
+            TV_cosmetic_name = (TextView) v.findViewById(R.id.TV_cosmetic_name);
         }
     }
 

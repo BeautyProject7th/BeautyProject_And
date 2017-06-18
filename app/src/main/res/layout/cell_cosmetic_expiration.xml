@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="85dp"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:layout_marginBottom="10dp">
+    <RelativeLayout
+        android:id="@+id/RL_cosmetic"
+        android:layout_width="85dp"
+        android:layout_height="85dp">
+            <ImageView
+                android:id="@+id/IV_cosmetic"
+                android:layout_width="85dp"
+                android:layout_height="85dp"/>
+        <RelativeLayout
+            android:id="@+id/RL_expiration_date_day"
+            android:layout_width="30dp"
+            android:layout_height="15dp"
+            android:background="@drawable/btn_circle"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp">
+            <TextView
+                android:id="@+id/TV_expiration_date_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D+1"
+                android:textSize="10dp"
+                android:textColor="#FFFFFF"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/TV_brand_name"
+        android:layout_marginTop="5dp"
+        android:maxWidth="85dp"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/IV_cosmetic"
+        android:gravity="center"
+        android:text="브랜드명"
+        android:textSize="10sp"
+        android:textColor="#fa6e8a"/>
+    <TextView
+        android:id="@+id/TV_cosmetic_name"
+        android:layout_marginTop="4dp"
+        android:maxWidth="85dp"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:layout_below="@id/IV_cosmetic"
+        android:gravity="center"
+        android:text="화장품명"
+        android:textSize="11sp"
+        android:textColor="@color/colorBlackText"/>
+</LinearLayout>
