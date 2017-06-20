@@ -5,6 +5,7 @@ package com.soma.beautyproject_android.Main;
  */
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.soma.beautyproject_android.Model.Video;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Search.SearchActivity_;
+import com.soma.beautyproject_android.Search.VideoDetailActivity_;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -45,8 +47,6 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static com.soma.beautyproject_android.R.id.TV_creator_name;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends ParentActivity {
@@ -87,6 +87,15 @@ public class MainActivity extends ParentActivity {
     @ViewById
     LinearLayout LL_recommend_cosmetic_1, LL_recommend_cosmetic_2, LL_recommend_cosmetic_3;
 
+    @ViewById
+    ImageView IV_recommend_cosmetic_rank_1, IV_recommend_cosmetic_rank_2, IV_recommend_cosmetic_rank_3;
+
+    @ViewById
+    TextView TV_recommend_cosmetic_rank_1_brand, TV_recommend_cosmetic_rank_2_brand,TV_recommend_cosmetic_rank_3_brand;
+
+    @ViewById
+    TextView TV_recommend_cosmetic_rank_1_name, TV_recommend_cosmetic_rank_2_name, TV_recommend_cosmetic_rank_3_name;
+
     //2.추천 영상
     @ViewById
     RelativeLayout video_1, video_2;
@@ -125,6 +134,10 @@ public class MainActivity extends ParentActivity {
     TextView[] TV_cosmetic_rank_name = new TextView[3];
     LinearLayout[] LL_cosmetic_rank = new LinearLayout[3];
     ImageView[] IV_cosmetic_rank = new ImageView[3];
+    ImageView[] IV_recommend_cosmetic_rank = new ImageView[3];
+    TextView[] TV_recommend_cosmetic_rank_brand = new TextView[3];
+    TextView[] TV_recommend_cosmetic_rank_name = new TextView[3];
+    LinearLayout[] LL_recommend_cosmetic = new LinearLayout[3];
     //영상 추천
     RelativeLayout[] video = new RelativeLayout[2];
     private String imagepath = null;
@@ -141,6 +154,7 @@ public class MainActivity extends ParentActivity {
         conn_get_my_cosmetic_info();
         connectTestCall_cosmetic_rank();
         connectTestCall_match_user();
+        connectTestCall_cosmetic_recommend();
         connectTestCall_video_recommend();
         connectTestCall_match_creator();
         connectTestCall_dressing_table_rank();
@@ -169,6 +183,24 @@ public class MainActivity extends ParentActivity {
         IV_cosmetic_rank[2] = IV_cosmetic_rank_3;
 
         video[0] = video_1; video[1] = video_2;
+
+        IV_recommend_cosmetic_rank[0] = IV_recommend_cosmetic_rank_1;
+        IV_recommend_cosmetic_rank[1] = IV_recommend_cosmetic_rank_2;
+        IV_recommend_cosmetic_rank[2] = IV_recommend_cosmetic_rank_3;
+
+        TV_recommend_cosmetic_rank_brand[0] = TV_recommend_cosmetic_rank_1_brand;
+        TV_recommend_cosmetic_rank_brand[1] = TV_recommend_cosmetic_rank_2_brand;
+        TV_recommend_cosmetic_rank_brand[2] = TV_recommend_cosmetic_rank_3_brand;
+
+        TV_recommend_cosmetic_rank_name[0] = TV_recommend_cosmetic_rank_1_name;
+        TV_recommend_cosmetic_rank_name[1] = TV_recommend_cosmetic_rank_2_name;
+        TV_recommend_cosmetic_rank_name[2] = TV_recommend_cosmetic_rank_3_name;
+
+        LL_recommend_cosmetic[0] = LL_recommend_cosmetic_1;
+        LL_recommend_cosmetic[1] = LL_recommend_cosmetic_2;
+        LL_recommend_cosmetic[2] = LL_recommend_cosmetic_3;
+
+        TV_user_name.setText(SharedManager.getInstance().getMe().nickname+"님의\n화장대로 이동");
     }
 
 
@@ -239,7 +271,7 @@ public class MainActivity extends ParentActivity {
 
     void connectTestCall_cosmetic_rank() {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.recommend_cosmetic_get(SharedManager.getInstance().getMe().id)
+        conn.ranking_cosmetic_get(SharedManager.getInstance().getMe().id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Cosmetic>>() {
@@ -281,6 +313,50 @@ public class MainActivity extends ParentActivity {
                 });
     }
 
+    void connectTestCall_cosmetic_recommend() {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.recommend_cosmetic_get(SharedManager.getInstance().getMe().id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Cosmetic>>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "connectTestCall_cosmetic_rank error", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(final List<Cosmetic> response) {
+                        if (response != null) {
+                            for (int index=0;index<response.size();index++){
+                                final int i = index;
+                                Glide.with(activity).
+                                        load(Constants.IMAGE_BASE_URL_cosmetics+response.get(i).img_src).
+                                        thumbnail(0.1f).
+                                        into(IV_recommend_cosmetic_rank[i]);
+                                TV_recommend_cosmetic_rank_brand[i].setText(response.get(i).brand);
+                                TV_recommend_cosmetic_rank_name[i].setText(response.get(i).product_name);
+                                LL_recommend_cosmetic[i].setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
+                                        intent.putExtra("cosmetic_id", response.get(i).id);
+                                        intent.putExtra("cosmetic_name", response.get(i).product_name);
+                                        intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
+                                        startActivity(intent);
+                                        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                                    }
+                                });
+                            }
+                        } else{
+                            Toast.makeText(activity,"화장품 추천 서버 오류",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
     void connectTestCall_video_recommend() {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.recommend_video_get(SharedManager.getInstance().getMe().id)
@@ -300,20 +376,21 @@ public class MainActivity extends ParentActivity {
                         if (response != null) {
                             for (int index=0;index<response.size();index++){
                                 final int i = index;
-                                ImageView IV_video_img = (ImageView)video[0].findViewById(R.id.IV_video_img);
-                                TextView TV_creator_name = (TextView)video[0].findViewById(R.id.TV_creator_name);
-                                TextView TV_video_name = (TextView)video[0].findViewById(R.id.TV_video_name);
+                                ImageView IV_video_img = (ImageView)video[i].findViewById(R.id.IV_video_img);
+                                TextView TV_creator_name = (TextView)video[i].findViewById(R.id.TV_creator_name);
+                                TextView TV_video_name = (TextView)video[i].findViewById(R.id.TV_video_name);
 
                                 Glide.with(activity).
-                                        load(Constants.IMAGE_BASE_URL_cosmetics+response.get(i).thumbnail).
+                                        load(Constants.IMAGE_BASE_URL_video+response.get(i).thumbnail).
                                         thumbnail(0.1f).
                                         into(IV_video_img);
                                 TV_creator_name.setText(response.get(i).youtuber_name);
                                 TV_video_name.setText(response.get(i).title);
-                                video_1.setOnClickListener(new View.OnClickListener() {
+                                video[i].setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Intent intent = new Intent(activity, VideoContentsActivity_.class);
+                                        Intent intent = new Intent(activity, VideoDetailActivity_.class);
+                                        intent.putExtra("video", (Serializable) response.get(i));
                                         startActivity(intent);
                                         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                                     }

@@ -68,13 +68,15 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.soma.beautyproject_android.R.id.IV_img;
+import static com.soma.beautyproject_android.R.id.TV_creator_name;
+
 @EActivity(R.layout.activity_video_detail)
 public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
 
     VideoDetailActivity activity;
-    Video_Youtuber video_youtuber;
 
     @ViewById
     TextView TV_follower_number,TV_youtuber_name,TV_view_cnt, TV_upload_date,TV_video_name;
@@ -91,6 +93,8 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     public String id;
     public String video_id;
 
+    private Video video;
+    private Youtuber youtuber;
 
     public boolean like_flag = false;
 
@@ -106,29 +110,30 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+
+        video = (Video) getIntent().getSerializableExtra("video");
         YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, activity);
 
-        video_youtuber = (Video_Youtuber) getIntent().getSerializableExtra("video_youtuber");
-        id = video_youtuber.id;
-        video_id = video_youtuber.video_id;
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("user_id",SharedManager.getInstance().getMe().id);
+        map.put("content",video.title);
+        conn_train_view_cosmetic(map);
+        connectTestCall_creater();
+
         toolbar_title.setText("영상 상세정보");
 
-        //TV_video_name.setText(video.video_name);
-        TV_youtuber_name.setText(video_youtuber.youtuber_name);
-        TV_view_cnt.setText(video_youtuber.view_cnt+"");
-        TV_upload_date.setText(video_youtuber.upload_date.substring(0,10));
+    }
 
-        String image_url_video = Constants.IMAGE_BASE_URL_video + video_youtuber.thumbnail;
-        String image_url_youtuber = video_youtuber.profile_url;
+    private void set_skin_type() {
         int image_url_skin_type = -1;
         int image_url_skin_trouble_1 = -1;
         int image_url_skin_trouble_2 = -1;
         int image_url_skin_trouble_3 = -1;
 
-        switch(video_youtuber.skin_type){
+        switch(youtuber.skin_type){
             case "건성":
-                //Log.i("zxc", position +" youtuber.skin_type(건성) " + youtuber.skin_type);
                 image_url_skin_type = R.drawable.skin_type1;
                 break;
             case "중성":
@@ -143,7 +148,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
         }
 
-        switch(video_youtuber.skin_trouble_1){
+        switch(youtuber.skin_trouble_1){
             case "다크서클":
                 image_url_skin_trouble_1 = R.drawable.trouble1_darkcircle;
                 break;
@@ -174,7 +179,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
         }
 
-        switch(video_youtuber.skin_trouble_2){
+        switch(youtuber.skin_trouble_2){
             case "다크서클":
                 image_url_skin_trouble_2 = R.drawable.trouble1_darkcircle;
                 break;
@@ -205,7 +210,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
         }
 
-        switch(video_youtuber.skin_trouble_3){
+        switch(youtuber.skin_trouble_3){
             case "다크서클":
                 image_url_skin_trouble_3 = R.drawable.trouble1_darkcircle;
                 break;
@@ -234,17 +239,6 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                 image_url_skin_trouble_3 = R.drawable.trouble9_nothing;
                 break;
         }
-
-
-        Glide.with(activity).
-                load(image_url_youtuber).
-                thumbnail(0.1f).
-                bitmapTransform(new CropCircleTransformation(activity)).
-                into(IV_youtuber);
-//        Glide.with(activity).
-//                load(image_url_video).
-//                thumbnail(0.1f).
-//                into(IV_video);
         Glide.with(activity).
                 load(image_url_skin_type).
                 thumbnail(0.1f).
@@ -261,13 +255,12 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                 load(image_url_skin_trouble_3).
                 thumbnail(0.1f).
                 into(IV_youtuber_skin_trouble_3);
-
     }
 
     void refresh(){
         conn_get_my_like_video(id);
         conn_get_follower_number(TV_follower_number);
-        conn_video_product(video_youtuber.id);
+        //conn_video_product(video_youtuber.id);
     }
 
     void conn_get_follower_number(final TextView view) {
@@ -304,16 +297,20 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
     @Click
     void BT_like_video(){
+        Map<String,Object> map = new HashMap<>();
+        map.put("user_id",SharedManager.getInstance().getMe().id);
+        map.put("id",video.id);
+        map.put("titld",video.title);
         if(like_flag){
-            conn_delete_like_video(SharedManager.getInstance().getMe().id, id);
+            conn_delete_like_video(map);
         }else{
-            conn_post_like_video(SharedManager.getInstance().getMe().id, id);
+            conn_post_like_video(map);
         }
 
     }
 
 
-
+/*
     void conn_video_product(String video_id) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.video_product(video_id)
@@ -339,12 +336,12 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                     }
                 });
     }
+*/
 
 
-
-    void conn_post_like_video(String user_id, String id) {
+    void conn_post_like_video(Map<String,Object> map) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.post_like_video(user_id, id)
+        conn.post_like_video(map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -370,9 +367,9 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                 });
     }
 
-    void conn_delete_like_video(String user_id, String id) {
+    void conn_delete_like_video(Map<String,Object> map) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.delete_like_video(user_id, id)
+        conn.delete_like_video(map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -389,7 +386,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                     public final void onNext(GlobalResponse response) {
                         if (response.code == 200) {
                             like_flag = false;
-                            BT_like_video.setBackgroundResource(R.drawable.ic_garage);
+                            BT_like_video.setBackgroundResource(R.drawable.heart);
                             Toast.makeText(activity, "정상적으로 찜을 취소했습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(activity, "찜 취소에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -414,7 +411,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                         e.printStackTrace();;
                         Log.i("ZXC", "conn_get_my_like_video error");
                         like_flag = false;
-                        BT_like_video.setBackgroundResource(R.drawable.ic_garage);
+                        BT_like_video.setBackgroundResource(R.drawable.heart);
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {
@@ -423,7 +420,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                             BT_like_video.setBackgroundResource(R.drawable.ic_heart);
                         } else {
                             like_flag = false;
-                            BT_like_video.setBackgroundResource(R.drawable.ic_garage);
+                            BT_like_video.setBackgroundResource(R.drawable.heart);
                         }
                     }
                 });
@@ -440,6 +437,72 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     @Override
     protected YouTubePlayer.Provider getYouTubePlayerProvider() {
         return (YouTubePlayerView) findViewById(R.id.youtube_view);
+    }
+
+    void connectTestCall_creater() {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.get_youtuber(video.youtuber_name)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Youtuber>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "connectTestCall_cosmetic_rank error", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(final Youtuber response) {
+                        if (response != null) {
+                            youtuber = response;
+                            Glide.with(activity).
+                                    load(response.profile_url).
+                                    thumbnail(0.1f).
+                                    into(IV_youtuber);
+                            TV_youtuber_name.setText(response.name);
+                            TV_view_cnt.setText(video.view_cnt);
+                            TV_upload_date.setText(video.upload_date.substring(0,10));
+                            Glide.with(activity).
+                                    load(youtuber.profile_url).
+                                    thumbnail(0.1f).
+                                    bitmapTransform(new CropCircleTransformation(activity)).
+                                    into(IV_youtuber);
+
+                            set_skin_type();
+                            //String image_url_video = Constants.IMAGE_BASE_URL_video + youtuber.thumbnail;
+                        } else{
+                            Toast.makeText(activity,"크리에이터 서버 오류",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    void conn_train_view_cosmetic(Map<String,Object> map) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.train_video_view(map)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        Log.i("train","success");
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();;
+                        Log.i("train","fail to server error");
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) { // isLike
+                            Log.i("train","success");
+                        } else {
+                            Log.i("train","fail");
+                        }
+                    }
+                });
     }
 
 }

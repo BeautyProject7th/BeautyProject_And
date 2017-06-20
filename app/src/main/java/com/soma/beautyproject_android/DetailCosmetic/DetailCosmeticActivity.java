@@ -23,9 +23,11 @@ import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.RatingEach;
 import com.soma.beautyproject_android.Model.Review;
+import com.soma.beautyproject_android.Model.Video;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Search.SearchAdapterAutoComplete;
+import com.soma.beautyproject_android.Search.VideoDetailActivity_;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -39,6 +41,7 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,10 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static com.flurry.sdk.bh.T;
+import static com.flurry.sdk.mt.i;
+import static com.soma.beautyproject_android.R.id.BT_like;
+import static com.soma.beautyproject_android.R.id.IV_video_img;
+import static com.soma.beautyproject_android.R.id.RB_rate;
 
 /**
  * Created by mijeong on 2017. 5. 6..
@@ -89,6 +96,10 @@ public class DetailCosmeticActivity extends ParentActivity {
     Boolean me_flag = null;
 
     @ViewById
+    RelativeLayout video_1,video_2;
+    RelativeLayout[] videoList = new RelativeLayout[2];
+
+    @ViewById
     RatingBar RB_rate;
 
     @ViewById
@@ -113,6 +124,8 @@ public class DetailCosmeticActivity extends ParentActivity {
     float sum;
 
     boolean like_flag = false;
+
+    List<Video> relative_content;
 
     @ViewById
     Button BT_like;
@@ -143,6 +156,11 @@ public class DetailCosmeticActivity extends ParentActivity {
         V_rate_people[3] = (View) findViewById(R.id.V_rate_4_people);
         V_rate_people[4] = (View) findViewById(R.id.V_rate_5_people);
 
+        videoList[0] = video_1;
+        videoList[1] = video_2;
+
+        get_relative_content(user_id,cosmetic_name);
+
         //상세보기 학습
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("user_id",user_id);
@@ -165,6 +183,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                 }
             }, activity, activity);
         }
+
         recyclerView.setAdapter(adapter);
         LL_adjust.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -536,6 +555,58 @@ public class DetailCosmeticActivity extends ParentActivity {
                     public final void onNext(GlobalResponse response) {
                         if (response.code == 200) { // isLike
                             Log.i("train","success");
+                        } else {
+                            Log.i("train","fail");
+                        }
+                    }
+                });
+    }
+
+    void get_relative_content(String user_id, String cosmetic_name) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.relative_video_get(user_id,cosmetic_name)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber <List<Video>>() {
+                    @Override
+                    public final void onCompleted() {
+                        Log.i("train","success");
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();;
+                        Log.i("train","fail to server error");
+                    }
+                    @Override
+                    public final void onNext(final List<Video> response) {
+                        if (response != null) { // isLike
+                            relative_content = response;
+
+                                for (int index=0;index<2;index++){
+                                    final int i = index;
+                                    ImageView IV_video_img = (ImageView)videoList[i].findViewById(R.id.IV_video_img);
+                                    TextView TV_creator_name = (TextView)videoList[i].findViewById(R.id.TV_creator_name);
+                                    TextView TV_video_name = (TextView)videoList[i].findViewById(R.id.TV_video_name);
+
+                                    Glide.with(activity).
+                                            load(Constants.IMAGE_BASE_URL_video+response.get(i).thumbnail).
+                                            thumbnail(0.1f).
+                                            into(IV_video_img);
+                                    TV_creator_name.setText(response.get(i).youtuber_name);
+                                    TV_video_name.setText(response.get(i).title);
+                                    videoList[i].setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(activity, VideoDetailActivity_.class);
+                                            intent.putExtra("video", (Serializable) response.get(i));
+                                            startActivity(intent);
+                                            activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                                        }
+                                    });
+                                }
+
+
+
                         } else {
                             Log.i("train","fail");
                         }

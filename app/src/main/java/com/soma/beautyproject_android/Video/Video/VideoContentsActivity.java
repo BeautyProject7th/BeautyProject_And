@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.soma.beautyproject_android.Model.Video;
 import com.soma.beautyproject_android.R;
 
 import org.androidannotations.annotations.AfterViews;
@@ -20,6 +21,7 @@ public class VideoContentsActivity extends YouTubeFailureRecoveryActivity {
     private Toast toast;
 
     VideoContentsActivity activity;
+    Video video;
 
     @ViewById
     Toolbar cs_toolbar;
@@ -27,6 +29,8 @@ public class VideoContentsActivity extends YouTubeFailureRecoveryActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
+
+        video = getIntent().getParcelableExtra("video");
 
         Fragment fragment = new VideoContentsFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();

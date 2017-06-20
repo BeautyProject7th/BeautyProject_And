@@ -259,130 +259,6 @@
                     </LinearLayout>
 
                 </RelativeLayout>
-                <!--RelativeLayout
-                    android:layout_width="344dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_card"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal">
-                    <TextView
-                        android:id="@+id/TV_recommend_cosmetic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="추천 화장품"
-                        android:textColor="#4a494a"
-                        android:textSize="13sp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="15dp" />
-                    <LinearLayout
-                        android:layout_below="@id/TV_recommend_cosmetic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="7.5dp"
-                        android:layout_marginLeft="27.5dp"
-                        android:layout_marginBottom="15dp">
-                        <LinearLayout
-                            android:id="@+id/LL_recommend_cosmetic_1"
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginRight="32dp">
-                            <RelativeLayout
-                                android:layout_width="75dp"
-                                android:layout_height="80dp">
-                                <ImageView
-                                    android:layout_width="75dp"
-                                    android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
-                            </RelativeLayout>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_1_brand"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="10sp"
-                                android:textColor="#fb607d"
-                                android:layout_marginBottom="4dp"/>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_1_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="9sp"
-                                android:textColor="#4a4a4a"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/LL_recommend_cosmetic_2"
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginRight="32dp">
-                            <RelativeLayout
-                                android:layout_width="75dp"
-                                android:layout_height="80dp">
-                                <ImageView
-                                    android:layout_width="75dp"
-                                    android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
-                            </RelativeLayout>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_2_brand"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="10sp"
-                                android:textColor="#fb607d"
-                                android:layout_marginBottom="4dp"/>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_2_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="9sp"
-                                android:textColor="#4a4a4a"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/LL_recommend_cosmetic_3"
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginRight="32dp">
-                            <RelativeLayout
-                                android:layout_width="75dp"
-                                android:layout_height="80dp">
-                                <ImageView
-                                    android:layout_width="75dp"
-                                    android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
-                            </RelativeLayout>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_3_brand"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="10sp"
-                                android:textColor="#fb607d"
-                                android:layout_marginBottom="4dp"/>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_3_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="9sp"
-                                android:textColor="#4a4a4a"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </RelativeLayout-->
-
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
@@ -429,7 +305,136 @@
 
                     </RelativeLayout>
                 </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="344dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_card"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/TV_recommend_cosmetic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="추천 화장품"
+                        android:textColor="#4a494a"
+                        android:textSize="13sp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="15dp" />
+                    <LinearLayout
+                        android:layout_below="@id/TV_recommend_cosmetic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7.5dp"
+                        android:layout_marginLeft="27.5dp"
+                        android:layout_marginBottom="15dp">
+                        <LinearLayout
+                            android:id="@+id/LL_recommend_cosmetic_1"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginRight="32dp">
+                            <RelativeLayout
+                                android:layout_width="75dp"
+                                android:layout_height="80dp">
 
+                                <ImageView
+                                    android:id="@+id/IV_recommend_cosmetic_rank_1"
+                                    android:layout_width="75dp"
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true" />
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_1_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="10sp"
+                                android:textColor="#fb607d"
+                                android:layout_marginBottom="4dp"/>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_1_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:maxLength="10"
+                                android:textSize="9sp"
+                                android:textColor="#4a4a4a"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/LL_recommend_cosmetic_2"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginRight="32dp">
+                            <RelativeLayout
+                                android:layout_width="75dp"
+                                android:layout_height="80dp">
+                                <ImageView
+                                    android:id="@+id/IV_recommend_cosmetic_rank_2"
+                                    android:layout_width="75dp"
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true" />
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_2_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="10sp"
+                                android:textColor="#fb607d"
+                                android:layout_marginBottom="4dp"/>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_2_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:maxLength="10"
+                                android:textSize="9sp"
+                                android:textColor="#4a4a4a"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/LL_recommend_cosmetic_3"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginRight="32dp">
+                            <RelativeLayout
+                                android:layout_width="75dp"
+                                android:layout_height="80dp">
+                                <ImageView
+                                    android:id="@+id/IV_recommend_cosmetic_rank_3"
+                                    android:layout_width="75dp"
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true" />
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_3_brand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="10sp"
+                                android:textColor="#fb607d"
+                                android:layout_marginBottom="4dp"/>
+                            <TextView
+                                android:id="@+id/TV_recommend_cosmetic_rank_3_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:maxLength="10"
+                                android:textSize="9sp"
+                                android:textColor="#4a4a4a"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"

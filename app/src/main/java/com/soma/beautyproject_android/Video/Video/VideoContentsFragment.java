@@ -15,16 +15,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.GlobalResponse;
+import com.soma.beautyproject_android.Model.Video;
+import com.soma.beautyproject_android.Model.Youtuber;
 import com.soma.beautyproject_android.ParentFragment;
 import com.soma.beautyproject_android.R;
+import com.soma.beautyproject_android.Utils.Connections.CSConnection;
+import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
+import com.soma.beautyproject_android.Utils.Constants.Constants;
+import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+import static com.soma.beautyproject_android.R.id.IV_video_img;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -41,7 +60,8 @@ public class VideoContentsFragment extends ParentFragment {
     //4-마스크팩
     //5-향수
     //6-기타
-
+    private Video video;
+    private Youtuber youtuber;
 
     public LinearLayout indicator;
 
@@ -50,12 +70,18 @@ public class VideoContentsFragment extends ParentFragment {
 
     public Button BT_share;
     public Button BT_share2;
+    private ImageView IV_img;
+    private TextView TV_creator_name;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_video_contents, container, false);
+
+        video = activity.video;
         initViewSetting(view);
+
+
         return view;
     }
 
@@ -67,9 +93,9 @@ public class VideoContentsFragment extends ParentFragment {
         youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, activity);
 
         Toolbar cs_toolbar = (Toolbar)view.findViewById(R.id.cs_toolbar);
+        IV_img = (ImageView)view.findViewById(R.id.IV_img);
 
         BT_share = (Button) view.findViewById(R.id.BT_share);
-
 
         BT_share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +141,8 @@ public class VideoContentsFragment extends ParentFragment {
 
 //        activity.setSupportActionBar(cs_toolbar);
 //        activity.getSupportActionBar().setTitle("");
+
+
 
         if (recycler_view == null) {
             recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -260,5 +288,6 @@ public class VideoContentsFragment extends ParentFragment {
         super.onResume();
         refresh();
     }
+
 
 }
