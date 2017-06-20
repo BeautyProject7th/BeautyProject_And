@@ -136,6 +136,7 @@ public class CosmeticMoreSearchActivity extends ParentActivity {
                 public void onItemClick(View view, int position) {
                     Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic_id", adapter.getItem(position).id);
+                    intent.putExtra("cosmetic_name", adapter.getItem(position).product_name);
                     intent.putExtra("user_id", SharedManager.getInstance().getMe().id);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);

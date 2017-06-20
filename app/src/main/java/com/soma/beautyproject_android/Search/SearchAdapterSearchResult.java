@@ -44,6 +44,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_2.adapter;
 import static com.soma.beautyproject_android.R.id.LL_skin_trouble_9;
 
 
@@ -256,6 +257,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                     public void onClick(View v) {
                         Intent intent = new Intent(fragment.activity, DetailCosmeticActivity_.class);
                         intent.putExtra("cosmetic_id", cosmetic.id);
+                        intent.putExtra("cosmetic_name",cosmetic.product_name);
                         intent.putExtra("user_id", SharedManager.getInstance().getMe().id);
                         fragment.activity.startActivity(intent);
                         fragment.activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);

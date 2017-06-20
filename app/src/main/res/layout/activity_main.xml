@@ -259,21 +259,12 @@
                     </LinearLayout>
 
                 </RelativeLayout>
-                <RelativeLayout
+                <!--RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_card"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center_horizontal">
-                    <!--<Button-->
-                        <!--android:id="@+id/BT_recommend_cosmetic_more"-->
-                        <!--android:layout_width="60dp"-->
-                        <!--android:layout_height="20dp"-->
-                        <!--android:text="더보기"-->
-                        <!--android:layout_alignParentRight="true"-->
-                        <!--android:layout_marginLeft="15dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:background="@drawable/btn_circle" />-->
                     <TextView
                         android:id="@+id/TV_recommend_cosmetic"
                         android:layout_width="wrap_content"
@@ -390,7 +381,8 @@
                                 android:textColor="#4a4a4a"/>
                         </LinearLayout>
                     </LinearLayout>
-                </RelativeLayout>
+                </RelativeLayout-->
+
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"

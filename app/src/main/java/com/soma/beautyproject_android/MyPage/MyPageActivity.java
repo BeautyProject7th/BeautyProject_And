@@ -22,10 +22,16 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.soma.beautyproject_android.R.id.TV_skin_type;
+import static com.soma.beautyproject_android.R.id.TV_user_info;
 
 /**
  * Created by mijeong on 2017. 6. 18..
@@ -43,7 +49,7 @@ public class MyPageActivity extends ParentActivity {
     Button BT_back, BT_setting, BT_skin_type, BT_skin_trouble, BT_like_cosmetic, BT_like_video;
 
     @ViewById
-    TextView toolbar_title, TV_user_name, TV_user_info, TV_skin_type, TV_skin_trouble_1, TV_skin_trouble_2, TV_skin_trouble_3;
+    TextView toolbar_title, TV_user_name, TV_user_age,TV_user_sex, TV_skin_type, TV_skin_trouble_1, TV_skin_trouble_2, TV_skin_trouble_3;
 
     @Override
     protected void onResume() {
@@ -77,7 +83,12 @@ public class MyPageActivity extends ParentActivity {
                         User me = SharedManager.getInstance().getMe();
                         Glide.with(activity).load(me.profile_url.replace("type=normal", "type=large")).thumbnail(0.1f).bitmapTransform(new CropCircleTransformation(activity)).into(IV_user);
                         TV_user_name.setText(me.nickname);
-                        TV_user_info.setText(me.gender + " / " + (2017 - Integer.valueOf(me.birthyear) + 1)+"세");
+                        TV_user_sex.setText(me.gender);
+
+                        Calendar cal = Calendar.getInstance();
+                        int year = cal.get(Calendar.YEAR);
+
+                        TV_user_age.setText((year - Integer.valueOf(me.birthyear) + 1)+"세");
                         TV_skin_type.setText(me.skin_type);
                         TV_skin_trouble_1.setText(me.skin_trouble_1);
                         TV_skin_trouble_2.setText(me.skin_trouble_2);
@@ -245,13 +256,11 @@ public class MyPageActivity extends ParentActivity {
     void BT_skin_type(){
         Intent intent = new Intent(this, SkinTypeActivity_.class);
         startActivity(intent);
-        finish();
     }
     @Click
     void BT_skin_trouble(){
         Intent intent = new Intent(this, SkinTroubleActivity_.class);
         startActivity(intent);
-        finish();
     }
     @Click
     void BT_like_cosmetic(){

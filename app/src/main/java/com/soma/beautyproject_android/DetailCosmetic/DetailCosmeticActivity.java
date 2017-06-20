@@ -39,11 +39,15 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.flurry.sdk.bh.T;
 
 /**
  * Created by mijeong on 2017. 5. 6..
@@ -80,6 +84,7 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     Cosmetic cosmetic = null;
     String cosmetic_id = null;
+    String cosmetic_name = null;
 
     Boolean me_flag = null;
 
@@ -118,6 +123,7 @@ public class DetailCosmeticActivity extends ParentActivity {
         toolbar_title.setText("화장품 상세정보");
 
         cosmetic_id = getIntent().getStringExtra("cosmetic_id");
+        cosmetic_name = getIntent().getStringExtra("cosmetic_name");
         user_id = getIntent().getStringExtra("user_id");
         //me_flag = getIntent().getBooleanExtra("me",false);
 
@@ -137,7 +143,11 @@ public class DetailCosmeticActivity extends ParentActivity {
         V_rate_people[3] = (View) findViewById(R.id.V_rate_4_people);
         V_rate_people[4] = (View) findViewById(R.id.V_rate_5_people);
 
-
+        //상세보기 학습
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("user_id",user_id);
+        map.put("cosmetic_name",cosmetic_name);
+        conn_train_view_cosmetic(map);
 
         if (recyclerView == null) {
             recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -180,10 +190,14 @@ public class DetailCosmeticActivity extends ParentActivity {
 //                Intent intent = new Intent(getApplicationContext(), CosmeticReport_.class);
 //                intent.putExtra("cosmetic", cosmetic);
 //                startActivity(intent);
+                Map<String,Object> map = new HashMap<String, Object>();
+                map.put("user_id",SharedManager.getInstance().getMe().id);
+                map.put("cosmetic_id",cosmetic_id);
+                map.put("cosmetic_name",cosmetic.product_name);
                 if(!like_flag){
-                    conn_post_like_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id);
+                    conn_post_like_cosmetic(map);
                 }else{
-                    conn_delete_like_cosmetic(SharedManager.getInstance().getMe().id, cosmetic_id);
+                    conn_delete_like_cosmetic(map);
                 }
 
             }
@@ -417,9 +431,9 @@ public class DetailCosmeticActivity extends ParentActivity {
                 });
     }
 
-    void conn_post_like_cosmetic(String user_id, String cosmetic_id) {
+    void conn_post_like_cosmetic(Map<String,Object> map) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.post_like_cosmetic(user_id, cosmetic_id)
+        conn.post_like_cosmetic(map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -447,9 +461,9 @@ public class DetailCosmeticActivity extends ParentActivity {
 
 
 
-    void conn_delete_like_cosmetic(String user_id, String cosmetic_id) {
+    void conn_delete_like_cosmetic(Map<String,Object> fields) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.delete_like_cosmetic(user_id, cosmetic_id)
+        conn.delete_like_cosmetic(fields)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -466,7 +480,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                     public final void onNext(GlobalResponse response) {
                         if (response.code == 200) {
                             like_flag = false;
-                            BT_like.setBackgroundResource(R.drawable.ic_garage);
+                            BT_like.setBackgroundResource(R.drawable.heart);
                             Toast.makeText(activity, "정상적으로 찜을 취소했습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(activity, "찜 취소에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -497,12 +511,37 @@ public class DetailCosmeticActivity extends ParentActivity {
                             BT_like.setBackgroundResource(R.drawable.ic_heart);
                         } else {
                             like_flag = false;
-                            BT_like.setBackgroundResource(R.drawable.ic_garage);
+                            BT_like.setBackgroundResource(R.drawable.heart);
                         }
                     }
                 });
     }
 
+    void conn_train_view_cosmetic(Map<String,Object> map) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.train_cosmetic_view(map)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        Log.i("train","success");
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();;
+                        Log.i("train","fail to server error");
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) { // isLike
+                            Log.i("train","success");
+                        } else {
+                            Log.i("train","fail");
+                        }
+                    }
+                });
+    }
 }
 
 

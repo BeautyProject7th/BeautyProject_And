@@ -109,6 +109,7 @@ public class MoreFragment extends ParentFragment {
                 public void onItemClick(View view, int position) {
                     Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic_id", adapter.mDataset.get(position).id);
+                    intent.putExtra("cosmetic_name", adapter.mDataset.get(position).product_name);
                     intent.putExtra("user_id",user.id);
                     intent.putExtra("me",activity.me_dressing_table);
                     startActivity(intent);

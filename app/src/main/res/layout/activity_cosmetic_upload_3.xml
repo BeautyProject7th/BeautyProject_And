@@ -110,7 +110,7 @@
                 android:id="@+id/LL_registration_request"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/colorPurpleLight"
+                android:background="@color/colorSecondPrimary"
                 android:layout_alignParentBottom="true"
                 android:gravity="center">
                 <RelativeLayout

@@ -7,7 +7,6 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
         android:id="@+id/appBarLayout2">
         <include layout="@layout/toolbar_only_back" android:id="@+id/cs_toolbar" />
     </android.support.design.widget.AppBarLayout>
@@ -149,7 +148,7 @@
                         android:id="@+id/BT_like"
                         android:layout_width="17dp"
                         android:layout_height="14dp"
-                        android:background="@drawable/ic_garage"
+                        android:background="@drawable/heart"
                         android:layout_marginRight="5dp"/>
                     <TextView
                         android:layout_width="wrap_content"

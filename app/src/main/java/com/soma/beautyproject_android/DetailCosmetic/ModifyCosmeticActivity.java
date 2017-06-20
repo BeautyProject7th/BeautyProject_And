@@ -101,6 +101,7 @@ public class ModifyCosmeticActivity extends ParentActivity {
 
         fields.put("user_id",SharedManager.getInstance().getMe().id);
         fields.put("cosmetic_id",cosmetic_id);
+        fields.put("cosmetic_name",cosmetic.product_name);
         fields.put("status",1);
         connect_cosmetic_update(fields);
     }

@@ -36,7 +36,10 @@
             android:id="@+id/RR_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
             android:layout_marginRight="13dp">
                 <EditText
                     android:id="@+id/ET_search"

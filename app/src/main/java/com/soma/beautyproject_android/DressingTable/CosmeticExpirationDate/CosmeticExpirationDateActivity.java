@@ -99,6 +99,7 @@ public class CosmeticExpirationDateActivity extends ParentActivity {
                 public void onItemClick(View view, int position) {
                     Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic_id", adapter.mDataset.get(position).id);
+                    intent.putExtra("cosmetic_name", adapter.mDataset.get(position).product_name);
                     intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);

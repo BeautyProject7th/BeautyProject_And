@@ -126,6 +126,7 @@ public class VideoContentsFragment extends ParentFragment {
                 @Override
                 public void onItemClick(View view, int position) {
                     Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
+                    intent.putExtra("cosmetic_name", adapter.mDataset.get(position).product_name);
                     intent.putExtra("cosmetic", adapter.mDataset.get(position));
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);

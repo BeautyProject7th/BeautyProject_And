@@ -15,7 +15,6 @@ import com.soma.beautyproject_android.Model.Video;
 import com.soma.beautyproject_android.Model.Video_Youtuber;
 import com.soma.beautyproject_android.Model.Youtuber;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -287,14 +286,14 @@ public interface CSConnection{
     @GET("/users/my_info/{user_id}")
     Observable<User> get_my_info(@Path("user_id") String user_id);
 
-    @POST("/users/like/cosmetic/{user_id}/{cosmetic_id}")
-    Observable<GlobalResponse> post_like_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);
+    @POST("/users/like/cosmetic")
+    Observable<GlobalResponse> post_like_cosmetic(@Body Map<String, Object> fields);
 
     @POST("/users/like/video/{user_id}/{id}")
     Observable<GlobalResponse> post_like_video(@Path("user_id") String user_id,@Path("id") String id);
 
-    @DELETE("/users/like/cosmetic/{user_id}/{cosmetic_id}")
-    Observable<GlobalResponse> delete_like_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);
+    @DELETE("/users/like/cosmetic")
+    Observable<GlobalResponse> delete_like_cosmetic(@Body Map<String, Object> fields);
 
     @DELETE("/users/like/video/{user_id}/{id}")
     Observable<GlobalResponse> delete_like_video(@Path("user_id") String user_id,@Path("id") String id);
@@ -312,6 +311,39 @@ public interface CSConnection{
     Observable<List<Video_Youtuber>> like_video_get(@Path("user_id") String user_id);
 
 
+    //pio
+    @POST("cosmetics/train/scrap")
+    Observable<GlobalResponse> train_cosmetic_scrap(@Body Map<String, Object> fields);
+
+    @POST("cosmetics/train/rate")
+    Observable<GlobalResponse> train_cosmetic_rate(@Body Map<String, Object> fields);
+
+    @POST("cosmetics/train/own")
+    Observable<GlobalResponse> train_cosmetic_own(@Body Map<String, Object> fields);
+
+    @POST("cosmetics/train/view")
+    Observable<GlobalResponse> train_cosmetic_view(@Body Map<String, Object> fields);
+
+    @POST("video/train/scrap")
+    Observable<GlobalResponse> train_video_rate(@Body Map<String, Object> fields);
+
+    @POST("video/train/view")
+    Observable<GlobalResponse> train_video_view(@Body Map<String, Object> fields);
+
+    @GET("cosmetics/search2/{user_id}/{query}")
+    Observable<List<Cosmetic>> search_cosmetic_get(@Path("user_id") String user_id,@Path("query") String query);
+
+    @GET("cosmetics/recommend/{user_id}")
+    Observable<List<Cosmetic>> recommend_cosmetic_get(@Path("user_id") String user_id);
+
+    @GET("video/search2/{user_id}/{query}")
+    Observable<List<Video>> search_video_get(@Path("user_id") String user_id,@Path("query") String query);
+
+    @GET("video/recommend/cosmetic/{cosmetic}/{user_id}")
+    Observable<List<Video>> relative_video_get(@Path("user_id") String user_id,@Path("cosmetic") String cosmetic);
+
+    @GET("video/recommend/{user_id}")
+    Observable<List<Video>> recommend_video_get(@Path("user_id") String user_id);
 }
 
 
