@@ -586,45 +586,45 @@
                         android:layout_toEndOf="@+id/TV_my_review" />
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="344dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/ic_card"
-                    android:layout_marginTop="8dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="추천 영상"
-                        android:textSize="13sp"
-                        android:textColor="#4a494a"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="15dp"/>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/TV_recommend_video"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="22.5dp"
-                            android:layout_marginRight="22.5dp"
-                            android:layout_marginBottom="15dp">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-                                <include layout="@layout/cell_video" android:id="@+id/video_1" />
+                <!--<LinearLayout-->
+                    <!--android:layout_width="344dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:background="@drawable/ic_card"-->
+                    <!--android:layout_marginTop="8dp">-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="추천 영상"-->
+                        <!--android:textSize="13sp"-->
+                        <!--android:textColor="#4a494a"-->
+                        <!--android:layout_marginTop="15dp"-->
+                        <!--android:layout_marginLeft="15dp"/>-->
+                        <!--<RelativeLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_below="@id/TV_recommend_video"-->
+                            <!--android:gravity="center_horizontal"-->
+                            <!--android:layout_marginTop="8dp"-->
+                            <!--android:layout_marginLeft="22.5dp"-->
+                            <!--android:layout_marginRight="22.5dp"-->
+                            <!--android:layout_marginBottom="15dp">-->
+                            <!--<LinearLayout-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:orientation="horizontal">-->
+                                <!--<include layout="@layout/cell_video" android:id="@+id/video_1" />-->
 
-                                <android.support.v4.widget.Space
-                                    android:layout_width="9dp"
-                                    android:layout_height="match_parent"
-                                    android:id="@+id/space" />
+                                <!--<android.support.v4.widget.Space-->
+                                    <!--android:layout_width="9dp"-->
+                                    <!--android:layout_height="match_parent"-->
+                                    <!--android:id="@+id/space" />-->
 
-                                <include layout="@layout/cell_video" android:id="@+id/video_2" />
-                            </LinearLayout>
+                                <!--<include layout="@layout/cell_video" android:id="@+id/video_2" />-->
+                            <!--</LinearLayout>-->
 
-                        </RelativeLayout>
-                </LinearLayout>
+                        <!--</RelativeLayout>-->
+                <!--</LinearLayout>-->
                 <LinearLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"

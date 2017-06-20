@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,9 @@ public class JoinActivity extends ParentActivity {
 
     @ViewById
     ImageView BT_nicknameCheck;
+
+    @ViewById
+    RelativeLayout RL_nicknameCheck;
 
     @ViewById
     TextView TV_nicknameResult;
@@ -101,7 +105,7 @@ public class JoinActivity extends ParentActivity {
     }
 
     @Click
-    void BT_nicknameCheck(){
+    void RL_nicknameCheck(){
         connectTestCall_check_nickname(ET_nickname.getText().toString());
     }
 

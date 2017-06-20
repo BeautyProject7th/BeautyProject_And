@@ -167,7 +167,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                     thumbnail(0.1f).
                     into(brandViewHolder.IV_brand);
             brandViewHolder.TV_brand.setText(mDataset_brand.get(0).name);
-            brandViewHolder.TV_product_quantity.setText("총 " + "몇" + "개 제품");//:TODO
+            brandViewHolder.TV_product_quantity.setText("총 " + fragment.brand_product_quantity + "개 제품");//:TODO
 
             brandViewHolder.cell_search_result_brand.setOnClickListener(new View.OnClickListener() {
                 @Override

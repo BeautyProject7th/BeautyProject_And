@@ -99,7 +99,7 @@
                     android:id="@+id/TV_product_review_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(246)"
+                    android:text=""
                     android:textSize="10sp"
                     android:textColor="#9b9a9b"/>
 

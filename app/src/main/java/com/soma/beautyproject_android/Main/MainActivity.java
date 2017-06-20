@@ -90,13 +90,13 @@ public class MainActivity extends ParentActivity {
     TextView TV_cosmetic_rank_1_name, TV_cosmetic_rank_2_name, TV_cosmetic_rank_3_name;
 
 
-    //1.5.화장품 추천
-    @ViewById
-    LinearLayout LL_recommend_cosmetic_1, LL_recommend_cosmetic_2, LL_recommend_cosmetic_3;
+//    //1.5.화장품 추천
+//    @ViewById
+//    LinearLayout LL_recommend_cosmetic_1, LL_recommend_cosmetic_2, LL_recommend_cosmetic_3;
 
-    //2.추천 영상
-    @ViewById
-    RelativeLayout video_1, video_2;
+//    //2.추천 영상
+//    @ViewById
+//    RelativeLayout video_1, video_2;
 
 
     //3.나와 비슷한 타입의 유저

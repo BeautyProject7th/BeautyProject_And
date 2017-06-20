@@ -279,6 +279,10 @@ public class ModifyCosmeticActivity extends ParentActivity {
 
                             using_switch.setChecked(dt.status);
                             RB_rate.setRating(Float.valueOf(dt.rate_num+""));
+
+                            purchase_date = dt.purchase_date.substring(0,4)+"-"+purchase_date.substring(5,7)+"-"+dt.purchase_date.substring(8,10);
+                            expiration_date = dt.expiration_date.substring(0,4)+"-"+dt.expiration_date.substring(5,7)+"-"+dt.expiration_date.substring(8,10);
+
                             purchase_date_picker.setYear(Integer.valueOf(dt.purchase_date.substring(0,4)));
                             purchase_date_picker.setMonth(Integer.valueOf(dt.purchase_date.substring(5,7)));
                             purchase_date_picker.setSelectedDay(Integer.valueOf(dt.purchase_date.substring(8,10)));

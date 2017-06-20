@@ -179,12 +179,19 @@ public class SkinTypeActivity extends ParentActivity {
                         if(before_flag){
                             intent = new Intent(getApplicationContext(), SkinTroubleActivity_.class);
                             intent.putExtra("before_login",true);
+                            LoadingUtil.stopLoading(indicator);
+                            startActivity(intent);
+                            finish();
                         }else{
                             intent = new Intent(getApplicationContext(), MyPageActivity_.class);
+                            startActivity(intent);
+                            setResult(Constants.ACTIVITY_CODE_MAIN_FRAGMENT_REFRESH_RESULT);
+                            //intent = new Intent(getApplicationContext(), MyPageActivity_.class);
                         }
-                        LoadingUtil.stopLoading(indicator);
-                        startActivity(intent);
                         finish();
+//                        LoadingUtil.stopLoading(indicator);
+//                        startActivity(intent);
+//                        finish();
                     }
                     @Override
                     public final void onError(Throwable e) {

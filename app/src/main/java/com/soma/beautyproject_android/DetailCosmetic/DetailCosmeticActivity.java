@@ -102,9 +102,6 @@ public class DetailCosmeticActivity extends ParentActivity {
     @ViewById
     TextView TV_add;
 
-    @ViewById
-    LinearLayout LL_delete;
-
     float sum;
 
     boolean like_flag = false;
@@ -188,6 +185,8 @@ public class DetailCosmeticActivity extends ParentActivity {
                 fields.put("user_id",user_id);
                 fields.put("cosmetic_id",cosmetic_id);
                 fields.put("cosmetic_name",cosmetic.product_name);
+
+                Log.i("ZXc", "1 : " + user_id + " 2 : " + cosmetic_id + " 3 : " + cosmetic.product_name);
 
                 if(!like_flag){
                     conn_post_like_cosmetic(fields);
@@ -329,17 +328,10 @@ public class DetailCosmeticActivity extends ParentActivity {
                                 TV_purchase_date.setText(review.purchase_date.substring(0,10));
                             else
                                 TV_purchase_date.setText("미기재");
-                            LL_delete.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                }
-                            });
 
                         } else {
                             me_flag = false;
                             about_me.setVisibility(View.GONE);
-                            LL_delete.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -347,7 +339,7 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     void conn_get_review(String cosmetic_id, final int page_num) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.get_review(cosmetic_id,page_num)
+        conn.get_review(cosmetic_id, SharedManager.getInstance().getMe().id, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Review>>() {
@@ -431,9 +423,9 @@ public class DetailCosmeticActivity extends ParentActivity {
                 });
     }
 
-    void conn_post_like_cosmetic(Map<String, Object> fields) {
+    void conn_post_like_cosmetic(Map<String, Object> tempFields) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.post_like_cosmetic(fields)
+        conn.post_like_cosmetic(tempFields)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -461,9 +453,9 @@ public class DetailCosmeticActivity extends ParentActivity {
 
 
 
-    void conn_delete_like_cosmetic(Map<String, Object> fields) {
+    void conn_delete_like_cosmetic(Map<String, Object> tempFields) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.delete_like_cosmetic(fields)
+        conn.delete_like_cosmetic(tempFields)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {

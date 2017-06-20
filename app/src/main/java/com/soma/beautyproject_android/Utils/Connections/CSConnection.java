@@ -264,8 +264,8 @@ public interface CSConnection{
     @GET("/video/video_product/{id}")
     Observable<List<Cosmetic>> video_product(@Path("id") String id);
 
-    @GET("/cosmetics/detail/dressing_table/review/{cosmetic_id}/{page_num}")
-    Observable<List<Review>> get_review(@Path("cosmetic_id") String cosmetic_id, @Path("page_num") int page_num);
+    @GET("/cosmetics/detail/dressing_table/review/{cosmetic_id}/{user_id}/{page_num}")
+    Observable<List<Review>> get_review(@Path("cosmetic_id") String cosmetic_id, @Path("user_id") String user_id, @Path("page_num") int page_num);
 
     @GET("/cosmetics/detail/dressing_table/my_review/{cosmetic_id}/{user_id}")
     Observable<List<Review>> get_my_review(@Path("cosmetic_id") String cosmetic_id, @Path("user_id") String user_id);
@@ -293,10 +293,10 @@ public interface CSConnection{
     @POST("/users/like/video")
     Observable<GlobalResponse> post_like_video(@Body Map<String, Object> fields);
 
-    @DELETE("/users/like/cosmetic")
+    @POST("/users/delete/like/cosmetic")
     Observable<GlobalResponse> delete_like_cosmetic(@Body Map<String, Object> fields);
 
-    @DELETE("/users/like/video")
+    @POST("/users/delete/like/video")
     Observable<GlobalResponse> delete_like_video(@Body Map<String, Object> fields);
 
     @GET("/users/like/cosmetic/{user_id}/{cosmetic_id}")
@@ -311,13 +311,11 @@ public interface CSConnection{
     @GET("/users/like/video/{user_id}")
     Observable<List<Video_Youtuber>> like_video_get(@Path("user_id") String user_id);
 
+    @GET("/cosmetics/get_brand_product_quantity/{brand}")
+    Observable<List<String>> get_brand_product_quantity(@Path("brand") String brand);
 
-    @GET("/users/status/cosmetic/{user_id}/{cosmetic_id}")
-    Observable<Integer> get_status_cosmetic(@Path("user_id") String user_id,@Path("cosmetic_id") String cosmetic_id);
-
-    @PUT("/users/status/cosmetic/{user_id}/{cosmetic_id}")
-    Observable<GlobalResponse> put_status_cosmetic(@Path("user_id") String user_id, @Path("cosmetic_id") String cosmetic_id);
-
+    @GET("/video/view_video/{user_id}/{id}")
+    Observable<GlobalResponse> view_video(@Path("user_id") String user_id, @Path("id") String id);
 
 
 }

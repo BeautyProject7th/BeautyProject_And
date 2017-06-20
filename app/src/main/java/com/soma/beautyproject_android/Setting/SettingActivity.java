@@ -98,12 +98,12 @@ public class SettingActivity extends ParentActivity {
 
     @Click
     void BT_agreement(){
-        //startActivity(new Intent(getApplicationContext(), SkinTypeActivity_.class));
+        startActivity(new Intent(getApplicationContext(), Agreement.class));
     }
 
     @Click
     void BT_privacy_rule(){
-        //startActivity(new Intent(getApplicationContext(), SkinTypeActivity_.class));
+        startActivity(new Intent(getApplicationContext(), PrivacyRule.class));
     }
 
     @Click

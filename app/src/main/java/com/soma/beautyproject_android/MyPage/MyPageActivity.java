@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.soma.beautyproject_android.Camera.CameraMainActivity;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
@@ -40,7 +41,7 @@ public class MyPageActivity extends ParentActivity {
     ImageView IV_user, IV_skin_type, IV_skin_trouble_1, IV_skin_trouble_2, IV_skin_trouble_3;
 
     @ViewById
-    Button BT_back, BT_setting, BT_skin_type, BT_skin_trouble, BT_like_cosmetic, BT_like_video;
+    Button BT_back, BT_setting, BT_skin_type, BT_skin_trouble, BT_like_cosmetic, BT_like_video, BT_camera;
 
     @ViewById
     TextView toolbar_title, TV_user_name, TV_user_info, TV_skin_type, TV_skin_trouble_1, TV_skin_trouble_2, TV_skin_trouble_3;
@@ -60,7 +61,7 @@ public class MyPageActivity extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-        toolbar_title.setText("정보 입력");
+        toolbar_title.setText("내 정보");
 
 
     }
@@ -77,11 +78,11 @@ public class MyPageActivity extends ParentActivity {
                         User me = SharedManager.getInstance().getMe();
                         Glide.with(activity).load(me.profile_url.replace("type=normal", "type=large")).thumbnail(0.1f).bitmapTransform(new CropCircleTransformation(activity)).into(IV_user);
                         TV_user_name.setText(me.nickname);
-                        TV_user_info.setText(me.gender + " / " + (2017 - Integer.valueOf(me.birthyear) + 1)+"세");
-                        TV_skin_type.setText(me.skin_type);
-                        TV_skin_trouble_1.setText(me.skin_trouble_1);
-                        TV_skin_trouble_2.setText(me.skin_trouble_2);
-                        TV_skin_trouble_3.setText(me.skin_trouble_3);
+                        TV_user_info.setText(me.gender + " / " + (2017 - Integer.valueOf(me.birthyear) - 1)+"세");
+
+//                        TV_skin_trouble_1.setText(me.skin_trouble_1);
+//                        TV_skin_trouble_2.setText(me.skin_trouble_2);
+//                        TV_skin_trouble_3.setText(me.skin_trouble_3);
 
 
                         int image_url_skin_type = -1;
@@ -89,131 +90,146 @@ public class MyPageActivity extends ParentActivity {
                         int image_url_skin_trouble_2 = -1;
                         int image_url_skin_trouble_3 = -1;
 
-                        switch(me.skin_type){
-                            case "건성":
-                                image_url_skin_type = R.drawable.skin_type1;
-                                break;
-                            case "중성":
-                                image_url_skin_type = R.drawable.skin_type2;
-                                break;
-                            case "지성":
-                                image_url_skin_type = R.drawable.skin_type3;
-                                break;
-                            case "수부지":
-                                image_url_skin_type = R.drawable.skin_type4;
-                                break;
+
+                        if(me.skin_type != null){
+                            TV_skin_type.setText(me.skin_type);
+                            switch(me.skin_type){
+                                case "건성":
+                                    image_url_skin_type = R.drawable.skin_type1;
+                                    break;
+                                case "중성":
+                                    image_url_skin_type = R.drawable.skin_type2;
+                                    break;
+                                case "지성":
+                                    image_url_skin_type = R.drawable.skin_type3;
+                                    break;
+                                case "수부지":
+                                    image_url_skin_type = R.drawable.skin_type4;
+                                    break;
+
+                            }
+
+                            Glide.with(activity).
+                                    load(image_url_skin_type).
+                                    thumbnail(0.1f).
+                                    into(IV_skin_type);
 
                         }
 
-                        switch(me.skin_trouble_1){
-                            case "다크서클":
-                                image_url_skin_trouble_1 = R.drawable.trouble1_darkcircle;
-                                break;
-                            case "블랙헤드":
-                                image_url_skin_trouble_1 = R.drawable.trouble2_blackhead;
-                                break;
-                            case "모공":
-                                image_url_skin_trouble_1 = R.drawable.trouble3_pore;
-                                break;
-                            case "각질":
-                                image_url_skin_trouble_1 = R.drawable.trouble4_deadskin;
-                                break;
-                            case "민감성":
-                                image_url_skin_trouble_1 = R.drawable.trouble5_sensitivity;
-                                break;
-                            case "주름":
-                                image_url_skin_trouble_1 = R.drawable.trouble6_wrinkle;
-                                break;
-                            case "여드름":
-                                image_url_skin_trouble_1 = R.drawable.trouble7_acne;
-                                break;
-                            case "안면홍조":
-                                image_url_skin_trouble_1 = R.drawable.trouble8_flush;
-                                break;
-                            case "없음":
-                                image_url_skin_trouble_1 = R.drawable.trouble9_nothing;
-                                break;
+                        if(me.skin_trouble_1 != null){
+                            TV_skin_trouble_1.setText(me.skin_trouble_1);
+                            switch(me.skin_trouble_1){
+                                case "다크서클":
+                                    image_url_skin_trouble_1 = R.drawable.trouble1_darkcircle;
+                                    break;
+                                case "블랙헤드":
+                                    image_url_skin_trouble_1 = R.drawable.trouble2_blackhead;
+                                    break;
+                                case "모공":
+                                    image_url_skin_trouble_1 = R.drawable.trouble3_pore;
+                                    break;
+                                case "각질":
+                                    image_url_skin_trouble_1 = R.drawable.trouble4_deadskin;
+                                    break;
+                                case "민감성":
+                                    image_url_skin_trouble_1 = R.drawable.trouble5_sensitivity;
+                                    break;
+                                case "주름":
+                                    image_url_skin_trouble_1 = R.drawable.trouble6_wrinkle;
+                                    break;
+                                case "여드름":
+                                    image_url_skin_trouble_1 = R.drawable.trouble7_acne;
+                                    break;
+                                case "안면홍조":
+                                    image_url_skin_trouble_1 = R.drawable.trouble8_flush;
+                                    break;
+                                case "없음":
+                                    image_url_skin_trouble_1 = R.drawable.trouble9_nothing;
+                                    break;
+                            }
+                            Glide.with(activity).
+                                    load(image_url_skin_trouble_1).
+                                    thumbnail(0.1f).
+                                    into(IV_skin_trouble_1);
+
+
+                        }
+                        if(me.skin_trouble_2 != null){
+                            TV_skin_trouble_2.setText(me.skin_trouble_2);
+                            switch(me.skin_trouble_2){
+                                case "다크서클":
+                                    image_url_skin_trouble_2 = R.drawable.trouble1_darkcircle;
+                                    break;
+                                case "블랙헤드":
+                                    image_url_skin_trouble_2 = R.drawable.trouble2_blackhead;
+                                    break;
+                                case "모공":
+                                    image_url_skin_trouble_2 = R.drawable.trouble3_pore;
+                                    break;
+                                case "각질":
+                                    image_url_skin_trouble_2 = R.drawable.trouble4_deadskin;
+                                    break;
+                                case "민감성":
+                                    image_url_skin_trouble_2 = R.drawable.trouble5_sensitivity;
+                                    break;
+                                case "주름":
+                                    image_url_skin_trouble_2 = R.drawable.trouble6_wrinkle;
+                                    break;
+                                case "여드름":
+                                    image_url_skin_trouble_2 = R.drawable.trouble7_acne;
+                                    break;
+                                case "안면홍조":
+                                    image_url_skin_trouble_2 = R.drawable.trouble8_flush;
+                                    break;
+                                case "없음":
+                                    image_url_skin_trouble_2 = R.drawable.trouble9_nothing;
+                                    break;
+                            }
+                            Glide.with(activity).
+                                    load(image_url_skin_trouble_2).
+                                    thumbnail(0.1f).
+                                    into(IV_skin_trouble_2);
+
+
+                        }
+                        if(me.skin_trouble_3 != null){
+                            TV_skin_trouble_3.setText(me.skin_trouble_3);
+                            switch(me.skin_trouble_3){
+                                case "다크서클":
+                                    image_url_skin_trouble_3 = R.drawable.trouble1_darkcircle;
+                                    break;
+                                case "블랙헤드":
+                                    image_url_skin_trouble_3 = R.drawable.trouble2_blackhead;
+                                    break;
+                                case "모공":
+                                    image_url_skin_trouble_3 = R.drawable.trouble3_pore;
+                                    break;
+                                case "각질":
+                                    image_url_skin_trouble_3 = R.drawable.trouble4_deadskin;
+                                    break;
+                                case "민감성":
+                                    image_url_skin_trouble_3 = R.drawable.trouble5_sensitivity;
+                                    break;
+                                case "주름":
+                                    image_url_skin_trouble_3 = R.drawable.trouble6_wrinkle;
+                                    break;
+                                case "여드름":
+                                    image_url_skin_trouble_3 = R.drawable.trouble7_acne;
+                                    break;
+                                case "안면홍조":
+                                    image_url_skin_trouble_3 = R.drawable.trouble8_flush;
+                                    break;
+                                case "없음":
+                                    image_url_skin_trouble_3 = R.drawable.trouble9_nothing;
+                                    break;
+                            }
+                            Glide.with(activity).
+                                    load(image_url_skin_trouble_3).
+                                    thumbnail(0.1f).
+                                    into(IV_skin_trouble_3);
 
                         }
 
-                        switch(me.skin_trouble_2){
-                            case "다크서클":
-                                image_url_skin_trouble_2 = R.drawable.trouble1_darkcircle;
-                                break;
-                            case "블랙헤드":
-                                image_url_skin_trouble_2 = R.drawable.trouble2_blackhead;
-                                break;
-                            case "모공":
-                                image_url_skin_trouble_2 = R.drawable.trouble3_pore;
-                                break;
-                            case "각질":
-                                image_url_skin_trouble_2 = R.drawable.trouble4_deadskin;
-                                break;
-                            case "민감성":
-                                image_url_skin_trouble_2 = R.drawable.trouble5_sensitivity;
-                                break;
-                            case "주름":
-                                image_url_skin_trouble_2 = R.drawable.trouble6_wrinkle;
-                                break;
-                            case "여드름":
-                                image_url_skin_trouble_2 = R.drawable.trouble7_acne;
-                                break;
-                            case "안면홍조":
-                                image_url_skin_trouble_2 = R.drawable.trouble8_flush;
-                                break;
-                            case "없음":
-                                image_url_skin_trouble_2 = R.drawable.trouble9_nothing;
-                                break;
-
-                        }
-
-                        switch(me.skin_trouble_3){
-                            case "다크서클":
-                                image_url_skin_trouble_3 = R.drawable.trouble1_darkcircle;
-                                break;
-                            case "블랙헤드":
-                                image_url_skin_trouble_3 = R.drawable.trouble2_blackhead;
-                                break;
-                            case "모공":
-                                image_url_skin_trouble_3 = R.drawable.trouble3_pore;
-                                break;
-                            case "각질":
-                                image_url_skin_trouble_3 = R.drawable.trouble4_deadskin;
-                                break;
-                            case "민감성":
-                                image_url_skin_trouble_3 = R.drawable.trouble5_sensitivity;
-                                break;
-                            case "주름":
-                                image_url_skin_trouble_3 = R.drawable.trouble6_wrinkle;
-                                break;
-                            case "여드름":
-                                image_url_skin_trouble_3 = R.drawable.trouble7_acne;
-                                break;
-                            case "안면홍조":
-                                image_url_skin_trouble_3 = R.drawable.trouble8_flush;
-                                break;
-                            case "없음":
-                                image_url_skin_trouble_3 = R.drawable.trouble9_nothing;
-                                break;
-
-                        }
-
-                        Glide.with(activity).
-                                load(image_url_skin_type).
-                                thumbnail(0.1f).
-                                into(IV_skin_type);
-                        Glide.with(activity).
-                                load(image_url_skin_trouble_1).
-                                thumbnail(0.1f).
-                                into(IV_skin_trouble_1);
-                        Glide.with(activity).
-                                load(image_url_skin_trouble_2).
-                                thumbnail(0.1f).
-                                into(IV_skin_trouble_2);
-                        Glide.with(activity).
-                                load(image_url_skin_trouble_3).
-                                thumbnail(0.1f).
-                                into(IV_skin_trouble_3);
 
                     }
                     @Override
@@ -262,5 +278,9 @@ public class MyPageActivity extends ParentActivity {
     void BT_like_video(){
         Intent intent = new Intent(this, LikeVideoListActivity_.class);
         startActivity(intent);
+    }
+    @Click
+    void BT_camera(){
+        startActivity(new Intent(getApplicationContext(), CameraMainActivity.class));
     }
 }

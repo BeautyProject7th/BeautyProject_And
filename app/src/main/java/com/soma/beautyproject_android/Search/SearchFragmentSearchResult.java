@@ -68,6 +68,8 @@ public class SearchFragmentSearchResult extends Fragment {
 
     public int page_video = 1;
     public boolean endOfPage = false;
+
+    public String brand_product_quantity = "0";
     /**
      * Create a new instance of the fragment
      */
@@ -130,7 +132,7 @@ public class SearchFragmentSearchResult extends Fragment {
         }
         recyclerView.setAdapter(adapter);
 
-        TV_product_quantity = (TextView) view.findViewById(R.id.TV_product_quantity);
+        //TV_product_quantity = (TextView) view.findViewById(R.id.TV_product_quantity);
         BT_back = (Button) view.findViewById(R.id.BT_back);
         BT_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,37 +152,6 @@ public class SearchFragmentSearchResult extends Fragment {
             }
         });
 
-        BT_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.keyword = ET_search.getText().toString();
-                Fragment fragment = new SearchFragmentSearchResult();
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.activity_search, fragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit();
-                //conn_search_cosmetic(ET_search.getText().toString());
-                //conn_search_video(ET_search.getText().toString());
-            }
-        });
-        ET_search.setOnKeyListener(new View.OnKeyListener()
-        {
-            public boolean onKey(View v, int keyCode, KeyEvent event)
-            {
-                if(keyCode ==  KeyEvent.KEYCODE_ENTER && KeyEvent.ACTION_DOWN == event.getAction())
-                {
-                    BT_search.callOnClick();
-
-                    recyclerView.invalidate();
-
-                    //ET_search.callOnClick();
-                    return true;
-                }
-                // TODO Auto-generated method stub
-                return false;
-            }
-        });
-
         ET_search.addTextChangedListener(textChecker);
 
         BT_close_circle.setOnClickListener(new View.OnClickListener() {
@@ -195,7 +166,7 @@ public class SearchFragmentSearchResult extends Fragment {
             @Override
             public void onClick(View v) {
                 activity.keyword = ET_search.getText().toString();
-                if(activity.keyword == null){
+                if(activity.keyword.equals("")){
                     Toast.makeText(activity, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -262,7 +233,7 @@ public class SearchFragmentSearchResult extends Fragment {
         adapter.clear();
         adapter.notifyDataSetChanged();
         conn_search_brand(activity.keyword);
-        conn_search_cosmetic(TV_product_quantity, activity.keyword);
+        conn_search_cosmetic(activity.keyword);
         conn_search_video_one(activity.keyword);
         //conn_search_video(activity.keyword);
     }
@@ -285,9 +256,8 @@ public class SearchFragmentSearchResult extends Fragment {
                     @Override
                     public final void onNext(List<Brand> response) {
                         if (response != null) {
-                            for(int i=0;i<response.size();i++){
-                                adapter.addData_brand(response.get(i));
-                            }
+                            adapter.addData_brand(response.get(0));
+                            conn_get_brand_product_quantity(response.get(0).name);
                             adapter.notifyDataSetChanged();
                         } else{
 
@@ -296,7 +266,7 @@ public class SearchFragmentSearchResult extends Fragment {
                 });
     }
 
-    void conn_search_cosmetic(final TextView view, String keyword) {
+    void conn_search_cosmetic(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.search_cosmetic_limit_3(keyword)
                 .subscribeOn(Schedulers.newThread())
@@ -317,7 +287,7 @@ public class SearchFragmentSearchResult extends Fragment {
                             for(int i=0;i<response.size() && i<3; i++){
                                 adapter.addData_cosmetic(response.get(i));
                             }
-                            view.setText(response.size()+"");
+                            //view.setText(response.size()+"");
                             adapter.notifyDataSetChanged();
                         } else{
 
@@ -376,6 +346,32 @@ public class SearchFragmentSearchResult extends Fragment {
                             for(int i=0;i<response.size();i++){
                                 adapter_auto_complete.addData(response.get(i));
                             }
+                        } else{
+                        }
+                    }
+                });
+    }
+
+    void conn_get_brand_product_quantity(String brand) {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.get_brand_product_quantity(brand)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "conn_get_brand_product_quantity 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<String> response) {
+                        if (response != null) {
+                            brand_product_quantity = response.get(0);
+                            adapter.notifyDataSetChanged();
                         } else{
                         }
                     }

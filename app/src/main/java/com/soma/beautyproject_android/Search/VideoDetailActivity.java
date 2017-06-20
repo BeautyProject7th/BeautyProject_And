@@ -116,7 +116,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
         //TV_video_name.setText(video.video_name);
         TV_youtuber_name.setText(video_youtuber.youtuber_name);
-        TV_view_cnt.setText(video_youtuber.view_cnt+"");
+        TV_view_cnt.setText(video_youtuber.view_cnt+1+"회");
         TV_upload_date.setText(video_youtuber.upload_date.substring(0,10));
 
         String image_url_video = Constants.IMAGE_BASE_URL_video + video_youtuber.thumbnail;
@@ -265,9 +265,10 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     }
 
     void refresh(){
+        conn_view_video(id);
         conn_get_my_like_video(id);
         conn_get_follower_number(TV_follower_number);
-        conn_video_product(video_youtuber.id);
+        //conn_video_product(video_youtuber.id);
     }
 
     void conn_get_follower_number(final TextView view) {
@@ -431,6 +432,33 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                         } else {
                             like_flag = false;
                             BT_like_video.setBackgroundResource(R.drawable.ic_heart_empty);
+                        }
+                    }
+                });
+    }
+
+    void conn_view_video(String id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.view_video(SharedManager.getInstance().getMe().id, id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) {
+                            video_youtuber.view_cnt++;
+                        } else {
+                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

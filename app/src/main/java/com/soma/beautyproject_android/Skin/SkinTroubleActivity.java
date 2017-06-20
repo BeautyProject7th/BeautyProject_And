@@ -78,11 +78,9 @@ public class SkinTroubleActivity extends ParentActivity {
             setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
             finish();
         }else{
-            activity.finish();
-            if(!before_flag){
-                Intent intent = new Intent(activity, MyPageActivity_.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(activity, MyPageActivity_.class);
+            startActivity(intent);
+            finish();
         }
     }
 

@@ -14,12 +14,15 @@ import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.soma.beautyproject_android.Login.JoinActivity_;
 import com.soma.beautyproject_android.Main.MainActivity_;
 import com.soma.beautyproject_android.Login.LoginActivity_;
 import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
+import com.soma.beautyproject_android.Skin.SkinTroubleActivity_;
+import com.soma.beautyproject_android.Skin.SkinTypeActivity_;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -160,8 +163,21 @@ public class SplashActivity extends ParentActivity {
                     @Override
                     public final void onCompleted() {
                         //startActivity(new Intent(getApplicationContext(), DressingTableActivity_.class));
-                        startActivity(new Intent(getApplicationContext(), MainActivity_.class));
-                        finish();
+                        if(SharedManager.getInstance().getMe().nickname == null){
+                            startActivity(new Intent(getApplicationContext(), JoinActivity_.class));
+                            finish();
+                        }
+                        else if(SharedManager.getInstance().getMe().skin_type == null){
+                            startActivity(new Intent(getApplicationContext(), SkinTypeActivity_.class));
+                            finish();
+                        }
+                        else if((SharedManager.getInstance().getMe().skin_trouble_1 == null) && (SharedManager.getInstance().getMe().skin_trouble_2 == null) && (SharedManager.getInstance().getMe().skin_trouble_3 == null)){
+                            startActivity(new Intent(getApplicationContext(), SkinTroubleActivity_.class));
+                            finish();
+                        }else{
+                            startActivity(new Intent(getApplicationContext(), MainActivity_.class));
+                            finish();
+                        }
                     }
                     @Override
                     public final void onError(Throwable e) {

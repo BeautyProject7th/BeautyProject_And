@@ -10,10 +10,14 @@
         android:id="@+id/RL_cosmetic"
         android:layout_width="85dp"
         android:layout_height="85dp">
-            <ImageView
-                android:id="@+id/IV_cosmetic"
-                android:layout_width="85dp"
-                android:layout_height="85dp"/>
+        <ImageView
+            android:id="@+id/IV_cosmetic"
+            android:layout_width="85dp"
+            android:layout_height="85dp" />
+        <ImageView
+            android:id="@+id/IV_cosmetic_border"
+            android:layout_width="85dp"
+            android:layout_height="85dp" />
         <RelativeLayout
             android:id="@+id/RL_expiration_date_day"
             android:layout_width="30dp"

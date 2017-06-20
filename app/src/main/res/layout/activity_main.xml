@@ -31,14 +31,14 @@
                 <LinearLayout
                     android:layout_width="350dp"
                     android:layout_height="213.5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/ic_dressing_table"
                     android:layout_gravity="center_horizontal"
                     android:orientation="vertical"
                     android:gravity="center_horizontal">
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="40dp" />
+                        android:layout_height="50dp" />
                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -66,7 +66,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="15dp"
                         android:layout_marginTop="5dp">
                         <TextView
                             android:layout_width="wrap_content"
@@ -90,7 +89,8 @@
                     <LinearLayout
                         android:id="@+id/LL_move_dressing_table"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
                         <TextView
                             android:id="@+id/TV_user_name"
                             android:layout_width="wrap_content"
@@ -109,6 +109,7 @@
 
 
                 </LinearLayout>
+
                 <RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
@@ -145,7 +146,7 @@
                             android:id="@+id/LL_cosmetic_rank_1"
                             android:orientation="vertical"
                             android:layout_width="75dp"
-                            android:layout_height="105dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginRight="32dp">
                             <RelativeLayout
@@ -184,7 +185,7 @@
                             android:id="@+id/LL_cosmetic_rank_2"
                             android:orientation="vertical"
                             android:layout_width="75dp"
-                            android:layout_height="105dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginRight="32dp">
                             <RelativeLayout
@@ -222,7 +223,7 @@
                             android:id="@+id/LL_cosmetic_rank_3"
                             android:orientation="vertical"
                             android:layout_width="75dp"
-                            android:layout_height="105dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginRight="32dp">
                             <RelativeLayout
@@ -259,184 +260,184 @@
                     </LinearLayout>
 
                 </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="344dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_card"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal">
-                    <!--<Button-->
-                        <!--android:id="@+id/BT_recommend_cosmetic_more"-->
-                        <!--android:layout_width="60dp"-->
-                        <!--android:layout_height="20dp"-->
-                        <!--android:text="더보기"-->
-                        <!--android:layout_alignParentRight="true"-->
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="344dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/ic_card"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:layout_gravity="center_horizontal">-->
+                    <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/BT_recommend_cosmetic_more"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="60dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="20dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text="더보기"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginLeft="15dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:background="@drawable/btn_circle" />&ndash;&gt;-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/TV_recommend_cosmetic"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="추천 화장품"-->
+                        <!--android:textColor="#4a494a"-->
+                        <!--android:textSize="13sp"-->
+                        <!--android:layout_marginTop="15dp"-->
                         <!--android:layout_marginLeft="15dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:background="@drawable/btn_circle" />-->
-                    <TextView
-                        android:id="@+id/TV_recommend_cosmetic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="추천 화장품"
-                        android:textColor="#4a494a"
-                        android:textSize="13sp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="15dp" />
-                    <LinearLayout
-                        android:layout_below="@id/TV_recommend_cosmetic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="7.5dp"
-                        android:layout_marginLeft="27.5dp"
-                        android:layout_marginBottom="15dp">
-                        <LinearLayout
-                            android:id="@+id/LL_recommend_cosmetic_1"
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginRight="32dp">
-                            <RelativeLayout
-                                android:layout_width="75dp"
-                                android:layout_height="80dp">
-                                <ImageView
-                                    android:layout_width="75dp"
-                                    android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
-                            </RelativeLayout>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_1_brand"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="10sp"
-                                android:textColor="#fb607d"
-                                android:layout_marginBottom="4dp"/>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_1_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="9sp"
-                                android:textColor="#4a4a4a"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/LL_recommend_cosmetic_2"
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginRight="32dp">
-                            <RelativeLayout
-                                android:layout_width="75dp"
-                                android:layout_height="80dp">
-                                <ImageView
-                                    android:layout_width="75dp"
-                                    android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
-                            </RelativeLayout>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_2_brand"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="10sp"
-                                android:textColor="#fb607d"
-                                android:layout_marginBottom="4dp"/>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_2_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="9sp"
-                                android:textColor="#4a4a4a"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/LL_recommend_cosmetic_3"
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginRight="32dp">
-                            <RelativeLayout
-                                android:layout_width="75dp"
-                                android:layout_height="80dp">
-                                <ImageView
-                                    android:layout_width="75dp"
-                                    android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
-                            </RelativeLayout>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_3_brand"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="10sp"
-                                android:textColor="#fb607d"
-                                android:layout_marginBottom="4dp"/>
-                            <TextView
-                                android:id="@+id/TV_recommend_cosmetic_rank_3_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="9sp"
-                                android:textColor="#4a4a4a"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="344dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_card"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal">
-                    <TextView
-                        android:id="@+id/TV_recommend_video"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="추천 영상"
-                        android:textColor="#4a494a"
-                        android:textSize="13sp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="15dp"/>
-                    <!--<Button-->
-                        <!--android:id="@+id/BT_recommend_video_more"-->
-                        <!--android:layout_width="60dp"-->
-                        <!--android:layout_height="20dp"-->
-                        <!--android:text="더보기"-->
-                        <!--android:layout_alignParentRight="true"-->
-                        <!--android:layout_marginLeft="15dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:background="@drawable/btn_circle" />-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/TV_recommend_video"
-                        android:gravity="center_horizontal"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="22.5dp"
-                        android:layout_marginRight="22.5dp"
-                        android:layout_marginBottom="15dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <include layout="@layout/cell_video" android:id="@+id/video_1" />
-                            <android.support.v4.widget.Space
-                                android:layout_width="9dp"
-                                android:layout_height="match_parent" />
-                            <include layout="@layout/cell_video" android:id="@+id/video_2" />
-                        </LinearLayout>
+                        <!--android:layout_alignParentTop="true"-->
+                        <!--android:layout_alignParentStart="true"-->
+                        <!--android:layout_marginStart="15dp" />-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_below="@id/TV_recommend_cosmetic"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="7.5dp"-->
+                        <!--android:layout_marginLeft="27.5dp"-->
+                        <!--android:layout_marginBottom="15dp">-->
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/LL_recommend_cosmetic_1"-->
+                            <!--android:orientation="vertical"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center"-->
+                            <!--android:layout_marginRight="32dp">-->
+                            <!--<RelativeLayout-->
+                                <!--android:layout_width="75dp"-->
+                                <!--android:layout_height="80dp">-->
+                                <!--<ImageView-->
+                                    <!--android:layout_width="75dp"-->
+                                    <!--android:layout_height="80dp"-->
+                                    <!--android:layout_alignParentTop="true"-->
+                                    <!--android:layout_alignParentStart="true" />-->
+                            <!--</RelativeLayout>-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/TV_recommend_cosmetic_rank_1_brand"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text=""-->
+                                <!--android:textSize="10sp"-->
+                                <!--android:textColor="#fb607d"-->
+                                <!--android:layout_marginBottom="4dp"/>-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/TV_recommend_cosmetic_rank_1_name"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text=""-->
+                                <!--android:textSize="9sp"-->
+                                <!--android:textColor="#4a4a4a"/>-->
+                        <!--</LinearLayout>-->
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/LL_recommend_cosmetic_2"-->
+                            <!--android:orientation="vertical"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center"-->
+                            <!--android:layout_marginRight="32dp">-->
+                            <!--<RelativeLayout-->
+                                <!--android:layout_width="75dp"-->
+                                <!--android:layout_height="80dp">-->
+                                <!--<ImageView-->
+                                    <!--android:layout_width="75dp"-->
+                                    <!--android:layout_height="80dp"-->
+                                    <!--android:layout_alignParentTop="true"-->
+                                    <!--android:layout_alignParentStart="true" />-->
+                            <!--</RelativeLayout>-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/TV_recommend_cosmetic_rank_2_brand"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text=""-->
+                                <!--android:textSize="10sp"-->
+                                <!--android:textColor="#fb607d"-->
+                                <!--android:layout_marginBottom="4dp"/>-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/TV_recommend_cosmetic_rank_2_name"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text=""-->
+                                <!--android:textSize="9sp"-->
+                                <!--android:textColor="#4a4a4a"/>-->
+                        <!--</LinearLayout>-->
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/LL_recommend_cosmetic_3"-->
+                            <!--android:orientation="vertical"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center"-->
+                            <!--android:layout_marginRight="32dp">-->
+                            <!--<RelativeLayout-->
+                                <!--android:layout_width="75dp"-->
+                                <!--android:layout_height="80dp">-->
+                                <!--<ImageView-->
+                                    <!--android:layout_width="75dp"-->
+                                    <!--android:layout_height="80dp"-->
+                                    <!--android:layout_alignParentTop="true"-->
+                                    <!--android:layout_alignParentStart="true" />-->
+                            <!--</RelativeLayout>-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/TV_recommend_cosmetic_rank_3_brand"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text=""-->
+                                <!--android:textSize="10sp"-->
+                                <!--android:textColor="#fb607d"-->
+                                <!--android:layout_marginBottom="4dp"/>-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/TV_recommend_cosmetic_rank_3_name"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text=""-->
+                                <!--android:textSize="9sp"-->
+                                <!--android:textColor="#4a4a4a"/>-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</RelativeLayout>-->
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="344dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/ic_card"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:layout_gravity="center_horizontal">-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/TV_recommend_video"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="추천 영상"-->
+                        <!--android:textColor="#4a494a"-->
+                        <!--android:textSize="13sp"-->
+                        <!--android:layout_marginTop="15dp"-->
+                        <!--android:layout_marginLeft="15dp"/>-->
+                    <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/BT_recommend_video_more"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="60dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="20dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text="더보기"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginLeft="15dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:background="@drawable/btn_circle" />&ndash;&gt;-->
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_below="@id/TV_recommend_video"-->
+                        <!--android:gravity="center_horizontal"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--android:layout_marginLeft="22.5dp"-->
+                        <!--android:layout_marginRight="22.5dp"-->
+                        <!--android:layout_marginBottom="15dp">-->
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:orientation="horizontal">-->
+                            <!--<include layout="@layout/cell_video" android:id="@+id/video_1" />-->
+                            <!--<android.support.v4.widget.Space-->
+                                <!--android:layout_width="9dp"-->
+                                <!--android:layout_height="match_parent" />-->
+                            <!--<include layout="@layout/cell_video" android:id="@+id/video_2" />-->
+                        <!--</LinearLayout>-->
 
-                    </RelativeLayout>
-                </RelativeLayout>
+                    <!--</RelativeLayout>-->
+                <!--</RelativeLayout>-->
 
                 <RelativeLayout
                     android:layout_width="344dp"
@@ -501,7 +502,7 @@
                         android:id="@+id/TV_match_creator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="나와 비슷한 타입의 크리에이터"
+                        android:text="나와 비슷한 타입의 뷰티 크리에이터"
                         android:textColor="#4a494a"
                         android:textSize="13sp"
                         android:layout_marginTop="15dp"

@@ -85,7 +85,7 @@ public class CosmeticMoreSearchAdapter extends RecyclerView.Adapter<CosmeticMore
             itemViewHolder.TV_product_name.setText(cosmetic.product_name);
             itemViewHolder.TV_product_price.setText(cosmetic.price+"원");
             itemViewHolder.TV_rate_num.setText(String.valueOf(cosmetic.rate_num));
-            itemViewHolder.TV_product_review_quantity.setText("리뷰 개수");
+            itemViewHolder.TV_product_review_quantity.setText("");
             itemViewHolder.RB_rate.setRating(cosmetic.rate_num);
 
 

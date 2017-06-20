@@ -93,10 +93,10 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
 
             itemViewHolder.TV_user_name.setText(user.name);
 
-            int image_url_skin_type = 0;
-            int image_url_skin_trouble_1 = 0;
-            int image_url_skin_trouble_2 = 0;
-            int image_url_skin_trouble_3 = 0;
+            int image_url_skin_type = -1;
+            int image_url_skin_trouble_1 = -1;
+            int image_url_skin_trouble_2 = -1;
+            int image_url_skin_trouble_3 = -1;
 
             if(user.skin_type != null) {
                 switch (user.skin_type) {
@@ -114,13 +114,14 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                         break;
                 }
 
-                Glide.with(context).
-                        load(image_url_skin_type).
-                        thumbnail(0.1f).
-                        bitmapTransform(new CropCircleTransformation(activity)).
-                        into(itemViewHolder.IV_skin_type);
+                    Glide.with(context).
+                            load(image_url_skin_type).
+                            thumbnail(0.1f).
+                            bitmapTransform(new CropCircleTransformation(activity)).
+                            into(itemViewHolder.IV_skin_type);
 
-                itemViewHolder.TV_skin_type.setText(user.skin_type);
+                    itemViewHolder.TV_skin_type.setText(user.skin_type);
+
             }
 
 
@@ -155,13 +156,14 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                         break;
                 }
 
-                Glide.with(context).
-                        load(image_url_skin_trouble_1).
-                        thumbnail(0.1f).
-                        bitmapTransform(new CropCircleTransformation(activity)).
-                        into(itemViewHolder.IV_skin_trouble_1);
+                    Glide.with(context).
+                            load(image_url_skin_trouble_1).
+                            thumbnail(0.1f).
+                            bitmapTransform(new CropCircleTransformation(activity)).
+                            into(itemViewHolder.IV_skin_trouble_1);
 
-                itemViewHolder.TV_skin_trouble_1.setText(user.skin_trouble_1);
+                    itemViewHolder.TV_skin_trouble_1.setText(user.skin_trouble_1);
+
             }
 
 
@@ -195,13 +197,13 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     case "없음":
                         break;
                 }
+                    Glide.with(context).
+                            load(image_url_skin_trouble_2).
+                            thumbnail(0.1f).
+                            bitmapTransform(new CropCircleTransformation(activity)).
+                            into(itemViewHolder.IV_skin_trouble_2);
+                    itemViewHolder.TV_skin_trouble_2.setText(user.skin_trouble_2);
 
-                Glide.with(context).
-                        load(image_url_skin_trouble_2).
-                        thumbnail(0.1f).
-                        bitmapTransform(new CropCircleTransformation(activity)).
-                        into(itemViewHolder.IV_skin_trouble_2);
-                itemViewHolder.TV_skin_trouble_2.setText(user.skin_trouble_2);
             }
             if(user.skin_trouble_3 != null) {
                 switch (user.skin_trouble_3){
@@ -232,12 +234,14 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     case "없음":
                         break;
                 }
-                Glide.with(context).
-                        load(image_url_skin_trouble_3).
-                        thumbnail(0.1f).
-                        bitmapTransform(new CropCircleTransformation(activity)).
-                        into(itemViewHolder.IV_skin_trouble_3);
-                itemViewHolder.TV_skin_trouble_3.setText(user.skin_trouble_3);
+
+                    Glide.with(context).
+                            load(image_url_skin_trouble_3).
+                            thumbnail(0.1f).
+                            bitmapTransform(new CropCircleTransformation(activity)).
+                            into(itemViewHolder.IV_skin_trouble_3);
+                    itemViewHolder.TV_skin_trouble_3.setText(user.skin_trouble_3);
+
             }
 
             itemViewHolder.LL_user.setOnClickListener(new View.OnClickListener() {
@@ -365,9 +369,13 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     @Override
                     public final void onNext(GlobalResponse response) {
                         if (response.message.equals("Conflict. Already exists")) {
+                            Log.i("aaaa", response.message.toString());
                             itemViewHolder.IV_follow.setBackgroundResource(R.drawable.btn_follow_check);
                             itemViewHolder.BT_follow.setBackgroundResource(R.drawable.ic_account_check);
                         } else if(response.message.equals("No content")){
+                            Log.i("aaaa", response.message.toString());
+                            itemViewHolder.IV_follow.setBackgroundResource(R.drawable.btn_follow);
+                            itemViewHolder.BT_follow.setBackgroundResource(R.drawable.ic_account_plus_4);
                             //Toast.makeText(activity, "", Toast.LENGTH_SHORT).show();
                         }
                     }
