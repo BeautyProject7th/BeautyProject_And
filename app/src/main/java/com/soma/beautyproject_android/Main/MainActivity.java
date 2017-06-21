@@ -291,6 +291,8 @@ public class MainActivity extends ParentActivity {
                                         load(Constants.IMAGE_BASE_URL_cosmetics+response.get(i).img_src).
                                         thumbnail(0.1f).
                                         into(IV_cosmetic_rank[i]);
+
+                                Log.i("img_video","화장품 이미지 주소 : "+Constants.IMAGE_BASE_URL_cosmetics+response.get(i).img_src);
                                 TV_cosmetic_rank_brand[i].setText(response.get(i).brand);
                                 TV_cosmetic_rank_name[i].setText(response.get(i).product_name);
                                 LL_cosmetic_rank[i].setOnClickListener(new View.OnClickListener() {

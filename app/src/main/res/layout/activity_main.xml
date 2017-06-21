@@ -436,7 +436,8 @@
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
-                <RelativeLayout
+
+                <!--<RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_card"
@@ -567,8 +568,9 @@
                                 android:textColor="#4a4a4a"/>
                         </LinearLayout>
                     </LinearLayout>
-                </RelativeLayout>
-                <RelativeLayout
+                </RelativeLayout>-->
+
+                <!--<RelativeLayout
                     android:layout_width="344dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_card"
@@ -613,7 +615,7 @@
                         </LinearLayout>
 
                     </RelativeLayout>
-                </RelativeLayout>
+                </RelativeLayout>-->
 
                 <RelativeLayout
                     android:layout_width="344dp"

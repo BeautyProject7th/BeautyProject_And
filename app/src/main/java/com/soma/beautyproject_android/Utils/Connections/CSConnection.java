@@ -312,10 +312,10 @@ public interface CSConnection{
 
     @GET("/cosmetics/get_brand_product_quantity/{brand}")
     Observable<List<String>> get_brand_product_quantity(@Path("brand") String brand);
-
+/*
     @GET("/video/view_video/{user_id}/{id}")
     Observable<GlobalResponse> view_video(@Path("user_id") String user_id, @Path("id") String id);
-
+*/
 
     //pio
     @POST("cosmetics/train/scrap")

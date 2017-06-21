@@ -599,13 +599,10 @@ public class DetailCosmeticActivity extends ParentActivity {
                                     TextView TV_creator_name = (TextView)videoList[i].findViewById(R.id.TV_creator_name);
                                     TextView TV_video_name = (TextView)videoList[i].findViewById(R.id.TV_video_name);
 
-                                    String temp = Character.toString(response.get(i).thumbnail.charAt(6));
-                                    String thumbnail_url = Constants.IMAGE_BASE_URL_video+temp+"/"+response.get(i).thumbnail;
                                     Glide.with(activity).
-                                            load(thumbnail_url).
+                                            load(Constants.IMAGE_BASE_URL_video+response.get(i).thumbnail).
                                             thumbnail(0.1f).
                                             into(IV_video_img);
-                                    Log.i("img_video","영상 썸네일 주소 : "+thumbnail_url);
                                     TV_creator_name.setText(response.get(i).youtuber_name);
                                     TV_video_name.setText(response.get(i).title);
                                     videoList[i].setOnClickListener(new View.OnClickListener() {

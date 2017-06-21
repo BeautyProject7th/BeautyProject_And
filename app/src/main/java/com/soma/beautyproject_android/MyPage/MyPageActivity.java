@@ -1,6 +1,7 @@
 package com.soma.beautyproject_android.MyPage;
 
 import android.content.Intent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -68,7 +69,7 @@ public class MyPageActivity extends ParentActivity {
     void afterBindingView() {
         this.activity = this;
         toolbar_title.setText("내 정보");
-
+        BT_camera.setVisibility(View.INVISIBLE);
 
     }
 
