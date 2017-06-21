@@ -164,7 +164,7 @@
                             <TextView
                                 android:id="@+id/TV_expiration_date_soon"
                                 android:layout_marginLeft="-8dp"
-                                android:layout_marginTop="70dp"
+                                android:layout_marginTop="65dp"
                                 android:layout_width="19dp"
                                 android:layout_height="19dp"
                                 android:text=""

@@ -3,6 +3,7 @@ package com.soma.beautyproject_android.DetailCosmetic;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -55,6 +56,7 @@ import static com.soma.beautyproject_android.R.id.TV_review_mine;
 
 @EActivity(R.layout.upload_cosmetic_activity)
 public class ModifyCosmeticActivity extends ParentActivity {
+    public String status = "0";
     public String cosmetic_id = null;
     private Cosmetic cosmetic = null;
     private String purchase_date = null, expiration_date = null;
@@ -77,6 +79,9 @@ public class ModifyCosmeticActivity extends ParentActivity {
     @ViewById
     WheelDatePicker purchase_date_picker,expiration_date_picker;
 
+    @ViewById
+    Switch using_switch;
+
     @Click
     void BT_complete(){
         float rating_num = RB_rate.getRating();
@@ -93,6 +98,8 @@ public class ModifyCosmeticActivity extends ParentActivity {
             Toast.makeText(activity, "리뷰를 입력해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
+
+
         fields.put("review",review);
         //if(purchase_date!=null)
         fields.put("purchase_date",purchase_date);
@@ -201,6 +208,17 @@ public class ModifyCosmeticActivity extends ParentActivity {
                 expiration_date = format.format(date);
             }
         });
+
+
+        using_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    status = "1";
+                else
+                    status = "0";
+            }
+        });
     }
 
     void refresh(){
@@ -215,7 +233,7 @@ public class ModifyCosmeticActivity extends ParentActivity {
 
     void connect_cosmetic_update(Map<String, Object> cosmetic) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.myOneCosmetic_post(cosmetic)
+        conn.myOneCosmetic_post(status, cosmetic)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GlobalResponse>() {
@@ -231,7 +249,7 @@ public class ModifyCosmeticActivity extends ParentActivity {
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {
-                        if (response.code == 200) {
+                        if (response.code == 200 || response.code == 201) {
                             Toast.makeText(activity, "정상적으로 수정되었습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(activity, "수정에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -260,7 +278,13 @@ public class ModifyCosmeticActivity extends ParentActivity {
                     public final void onNext(List<DressingTable> response) {
                         if (response.size() != 0) {
                             DressingTable dt = response.get(0);
+
+                            using_switch.setChecked(dt.status);
                             RB_rate.setRating(Float.valueOf(dt.rate_num+""));
+
+                            purchase_date = dt.purchase_date.substring(0,4)+"-"+purchase_date.substring(5,7)+"-"+dt.purchase_date.substring(8,10);
+                            expiration_date = dt.expiration_date.substring(0,4)+"-"+dt.expiration_date.substring(5,7)+"-"+dt.expiration_date.substring(8,10);
+
                             purchase_date_picker.setYear(Integer.valueOf(dt.purchase_date.substring(0,4)));
                             purchase_date_picker.setMonth(Integer.valueOf(dt.purchase_date.substring(5,7)));
                             purchase_date_picker.setSelectedDay(Integer.valueOf(dt.purchase_date.substring(8,10)));

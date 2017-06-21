@@ -75,8 +75,8 @@ public interface CSConnection{
                                          @Path("user_id") String user_id,
                                          @Path("cosmetic-id") String cosmetic_id);
 
-    @POST("/users/cosmetics")
-    Observable<GlobalResponse> myOneCosmetic_post(@Body Map<String, Object> fields);
+    @POST("/users/cosmetics/{stat}")
+    Observable<GlobalResponse> myOneCosmetic_post(@Path("stat") String stat, @Body Map<String, Object> fields);
 
     @DELETE("/users/{user_id}/cosmetics/{cosmetic-id}")
     Observable<GlobalResponse> myOneCosmetic_delete(@Path("user_id") String user_id,
@@ -263,8 +263,8 @@ public interface CSConnection{
     @GET("/video/video_product/{id}")
     Observable<List<Cosmetic>> video_product(@Path("id") String id);
 
-    @GET("/cosmetics/detail/dressing_table/review/{cosmetic_id}/{page_num}")
-    Observable<List<Review>> get_review(@Path("cosmetic_id") String cosmetic_id, @Path("page_num") int page_num);
+    @GET("/cosmetics/detail/dressing_table/review/{cosmetic_id}/{user_id}/{page_num}")
+    Observable<List<Review>> get_review(@Path("cosmetic_id") String cosmetic_id, @Path("user_id") String user_id, @Path("page_num") int page_num);
 
     @GET("/cosmetics/detail/dressing_table/my_review/{cosmetic_id}/{user_id}")
     Observable<List<Review>> get_my_review(@Path("cosmetic_id") String cosmetic_id, @Path("user_id") String user_id);
@@ -295,7 +295,7 @@ public interface CSConnection{
     @DELETE("/users/like/cosmetic")
     Observable<GlobalResponse> delete_like_cosmetic(@Body Map<String, Object> fields);
 
-    @DELETE("/users/like/video/{user_id}/{id}")
+    @POST("/users/delete/like/video")
     Observable<GlobalResponse> delete_like_video(@Body Map<String, Object> fields);
 
     @GET("/users/like/cosmetic/{user_id}/{cosmetic_id}")
@@ -309,6 +309,12 @@ public interface CSConnection{
 
     @GET("/users/like/video/{user_id}")
     Observable<List<Video_Youtuber>> like_video_get(@Path("user_id") String user_id);
+
+    @GET("/cosmetics/get_brand_product_quantity/{brand}")
+    Observable<List<String>> get_brand_product_quantity(@Path("brand") String brand);
+
+    @GET("/video/view_video/{user_id}/{id}")
+    Observable<GlobalResponse> view_video(@Path("user_id") String user_id, @Path("id") String id);
 
 
     //pio

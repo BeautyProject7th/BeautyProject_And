@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -103,9 +104,6 @@ public class DetailCosmeticActivity extends ParentActivity {
     RatingBar RB_rate;
 
     @ViewById
-    Switch using_switch;
-
-    @ViewById
     LinearLayout LL_adjust, LL_buy, LL_like, LL_add;
 
     @ViewById
@@ -117,9 +115,6 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     @ViewById
     TextView TV_add;
-
-    @ViewById
-    LinearLayout LL_delete;
 
     float sum;
 
@@ -215,8 +210,24 @@ public class DetailCosmeticActivity extends ParentActivity {
                 map.put("cosmetic_name",cosmetic.product_name);
                 if(!like_flag){
                     conn_post_like_cosmetic(map);
-                }else{
+                }else {
                     conn_delete_like_cosmetic(map);
+                }
+
+
+                Map<String, Object> fields = new HashMap<String, Object>();
+
+
+                fields.put("user_id",user_id);
+                fields.put("cosmetic_id",cosmetic_id);
+                fields.put("cosmetic_name",cosmetic.product_name);
+
+                Log.i("ZXc", "1 : " + user_id + " 2 : " + cosmetic_id + " 3 : " + cosmetic.product_name);
+
+                if(!like_flag){
+                    conn_post_like_cosmetic(fields);
+                }else{
+                    conn_delete_like_cosmetic(fields);
                 }
 
             }
@@ -230,6 +241,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     void refresh(){
@@ -331,10 +343,10 @@ public class DetailCosmeticActivity extends ParentActivity {
 
                             Review review = response.get(0);
 
-                            using_switch.setChecked(review.status);
-
-                            Log.i("ZXC", review.review);
                             Log.i("ZXC", "TV_review_mine : " + TV_review_mine.toString());
+                            Log.i("ZXC", "review.expiration_date.toString() " + review.expiration_date.toString());
+                            Log.i("ZXC", "review.purchase_date.toString() : " + review.purchase_date.toString());
+
 
                             if(review.review == null){
                                 TV_review_mine.setText("리뷰 없음");
@@ -352,17 +364,10 @@ public class DetailCosmeticActivity extends ParentActivity {
                                 TV_purchase_date.setText(review.purchase_date.substring(0,10));
                             else
                                 TV_purchase_date.setText("미기재");
-                            LL_delete.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                }
-                            });
 
                         } else {
                             me_flag = false;
                             about_me.setVisibility(View.GONE);
-                            LL_delete.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -370,7 +375,7 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     void conn_get_review(String cosmetic_id, final int page_num) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.get_review(cosmetic_id,page_num)
+        conn.get_review(cosmetic_id, SharedManager.getInstance().getMe().id, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Review>>() {
@@ -430,6 +435,10 @@ public class DetailCosmeticActivity extends ParentActivity {
 
                             Log.i("zxc", "sum : " + sum);
 
+                            for(int i=0;i<5;i++){
+                                TV_rate_people[i].setText("0");
+                                V_rate_people[i].setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT));
+                            }
                             for(int i=0;i<response.size();i++){
                                 rate_num = Integer.valueOf(response.get(i).rate_num);
                                 rate_people = Integer.valueOf(response.get(i).rate_people);
@@ -500,6 +509,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                         if (response.code == 200) {
                             like_flag = false;
                             BT_like.setBackgroundResource(R.drawable.heart);
+                            BT_like.setBackgroundResource(R.drawable.ic_heart_empty);
                             Toast.makeText(activity, "정상적으로 찜을 취소했습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(activity, "찜 취소에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -557,6 +567,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                             Log.i("train","success");
                         } else {
                             Log.i("train","fail");
+                            BT_like.setBackgroundResource(R.drawable.ic_heart_empty);
                         }
                     }
                 });
@@ -588,10 +599,13 @@ public class DetailCosmeticActivity extends ParentActivity {
                                     TextView TV_creator_name = (TextView)videoList[i].findViewById(R.id.TV_creator_name);
                                     TextView TV_video_name = (TextView)videoList[i].findViewById(R.id.TV_video_name);
 
+                                    String temp = Character.toString(response.get(i).thumbnail.charAt(6));
+                                    String thumbnail_url = Constants.IMAGE_BASE_URL_video+temp+"/"+response.get(i).thumbnail;
                                     Glide.with(activity).
-                                            load(Constants.IMAGE_BASE_URL_video+response.get(i).thumbnail).
+                                            load(thumbnail_url).
                                             thumbnail(0.1f).
                                             into(IV_video_img);
+                                    Log.i("img_video","영상 썸네일 주소 : "+thumbnail_url);
                                     TV_creator_name.setText(response.get(i).youtuber_name);
                                     TV_video_name.setText(response.get(i).title);
                                     videoList[i].setOnClickListener(new View.OnClickListener() {

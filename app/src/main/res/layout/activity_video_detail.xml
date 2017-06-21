@@ -65,7 +65,8 @@
                     android:orientation="horizontal"
                     android:layout_below="@id/TV_video_name"
                     android:layout_marginTop="4dp"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical">
                     <ImageView
                         android:layout_width="9dp"
                         android:layout_height="9dp"
@@ -236,27 +237,27 @@
                     </Button>
                 </LinearLayout>
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/ic_card"
-                android:padding="15dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="영상에 나온 제품"
-                    android:textSize="13sp"
-                    android:textColor="#4a494a"
-                    android:background="@null"/>
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:scrollbars="vertical"
-                    android:layout_marginTop="30dp"/>
-            </RelativeLayout>
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:background="@drawable/ic_card"-->
+                <!--android:padding="15dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="영상에 나온 제품"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:textColor="#4a494a"-->
+                    <!--android:background="@null"/>-->
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/recycler_view"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@null"-->
+                    <!--android:scrollbars="vertical"-->
+                    <!--android:layout_marginTop="30dp"/>-->
+            <!--</RelativeLayout>-->
 
         </LinearLayout>
 

@@ -200,7 +200,7 @@ public class SearchFragmentBrand extends Fragment {
             @Override
             public void onClick(View v) {
                 activity.keyword = ET_search.getText().toString();
-                if(activity.keyword == null){
+                if(activity.keyword.equals("")){
                     Toast.makeText(activity, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }

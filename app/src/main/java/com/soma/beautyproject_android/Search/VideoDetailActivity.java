@@ -258,6 +258,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     }
 
     void refresh(){
+        conn_view_video(id);
         conn_get_my_like_video(id);
         conn_get_follower_number(TV_follower_number);
         //conn_video_product(video_youtuber.id);
@@ -296,17 +297,28 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     }
 
     @Click
-    void BT_like_video(){
-        Map<String,Object> map = new HashMap<>();
-        map.put("user_id",SharedManager.getInstance().getMe().id);
-        map.put("id",video.id);
-        map.put("titld",video.title);
-        if(like_flag){
+    void BT_like_video() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("user_id", SharedManager.getInstance().getMe().id);
+        map.put("id", video.id);
+        map.put("titld", video.title);
+        if (like_flag) {
             conn_delete_like_video(map);
-        }else{
+        } else {
             conn_post_like_video(map);
-        }
+            Map<String, Object> fields = new HashMap<String, Object>();
 
+
+            fields.put("user_id", SharedManager.getInstance().getMe().id);
+            fields.put("id", id);
+            fields.put("title", video.title);
+
+            if (like_flag) {
+                conn_delete_like_video(fields);
+            } else {
+                conn_post_like_video(fields);
+            }
+        }
     }
 
 
@@ -387,6 +399,8 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                         if (response.code == 200) {
                             like_flag = false;
                             BT_like_video.setBackgroundResource(R.drawable.heart);
+                            BT_like_video.setBackgroundResource(R.drawable.ic_heart_empty);
+
                             Toast.makeText(activity, "정상적으로 찜을 취소했습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(activity, "찜 취소에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -411,7 +425,11 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                         e.printStackTrace();;
                         Log.i("ZXC", "conn_get_my_like_video error");
                         like_flag = false;
+
                         BT_like_video.setBackgroundResource(R.drawable.heart);
+
+                        BT_like_video.setBackgroundResource(R.drawable.ic_heart_empty);
+
                     }
                     @Override
                     public final void onNext(GlobalResponse response) {
@@ -420,7 +438,37 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                             BT_like_video.setBackgroundResource(R.drawable.ic_heart);
                         } else {
                             like_flag = false;
+
                             BT_like_video.setBackgroundResource(R.drawable.heart);
+
+                            BT_like_video.setBackgroundResource(R.drawable.ic_heart_empty);
+                        }
+                    }
+                });
+    }
+
+    void conn_view_video(String id) {
+        CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
+        conn.view_video(SharedManager.getInstance().getMe().id, id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response.code == 200) {
+                            video.view_cnt++;
+                        } else {
+                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -469,6 +517,10 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                                     thumbnail(0.1f).
                                     bitmapTransform(new CropCircleTransformation(activity)).
                                     into(IV_youtuber);
+                            //TV_video_name.setText(video.video_name);
+                            TV_youtuber_name.setText(youtuber.name);
+                            TV_view_cnt.setText(video.view_cnt+1+"회");
+                            TV_upload_date.setText(video.upload_date.substring(0,10));
 
                             set_skin_type();
                             //String image_url_video = Constants.IMAGE_BASE_URL_video + youtuber.thumbnail;

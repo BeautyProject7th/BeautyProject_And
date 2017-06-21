@@ -31,6 +31,7 @@ import com.soma.beautyproject_android.DressingTable.YourDressingTable.FollowerLi
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.FollowingListActivity;
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.FollowingListActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
+import com.soma.beautyproject_android.MyPage.MyPageActivity;
 import com.soma.beautyproject_android.Setting.SettingActivity_;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
@@ -208,10 +209,9 @@ public class DressingTableActivity extends ParentActivity {
 
     @Click
     void IV_user() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, 1);
+        Intent intent = new Intent(this, com.soma.beautyproject_android.MyPage.MyPageActivity_.class);
+        startActivity(intent);
+        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
     }
 
 

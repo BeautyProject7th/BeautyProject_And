@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.soma.beautyproject_android.Utils.TimeFormatter.TimeFormmater;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.ParseException;
 
@@ -94,6 +96,53 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
             itemViewHolder.TV_brand_name.setText(expirationCosmetic.brand);
             itemViewHolder.TV_cosmetic_name.setText(expirationCosmetic.product_name);
 
+
+            Date now = new Date();
+            final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar now_calendar = Calendar.getInstance();
+            String now_date = format.format(now);
+            try {
+                now_calendar.setTime(format.parse(now_date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+            Calendar expiration_calendar = Calendar.getInstance();
+            String expiration_date = expirationCosmetic.expiration_date;
+            try {
+                expiration_calendar.setTime(format.parse(expiration_date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+
+            long time = (long)(expiration_calendar.getTimeInMillis() - now_calendar.getTimeInMillis());
+            Log.i("xzc", "now_calendar.compareTo(expiration_calendar) : " + time);
+            //expiration_calendar.setTimeInMillis((long(expiration_calendar.getTimeInMillis() - now_calendar.getTimeInMillis()));
+            Log.i("xzc", "now_calendar.compareTo(expiration_calendar)3 : " + time / (1000*60*60*24));
+
+            int dday = (int)(time / (1000*60*60*24));
+
+            if(dday >= 0){
+                itemViewHolder.TV_expiration_date_day.setText("D-"+dday);
+            }else{
+                dday*=-1;
+                itemViewHolder.IV_cosmetic_border.setBackgroundResource(R.drawable.ic_rectangle_empty);
+                itemViewHolder.TV_expiration_date_day.setText("D+"+dday);
+            }
+
+
+//
+//            Date resultdate = new Date(c.getTimeInMillis());
+//            expirationCosmetic.expiration_date
+//
+//                    2017-06-19 (현재)
+//                    2017-06-21 (유통기한)
+//                    D-2(D-day)
+            //itemViewHolder.TV_expiration_date_day.setText();
+
 //            int dday = doDiffOfDate(cosmetic.expiration_date);
 //            if(dday == 100){
 //                Toast.makeText(activity,"디데이 계산 문제 있음",Toast.LENGTH_SHORT).show();
@@ -146,6 +195,7 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
     public class ItemViewHolder extends ViewHolder {
         public ImageView IV_cosmetic;
         public TextView TV_expiration_date_day,TV_brand_name,TV_cosmetic_name;
+        public ImageView IV_cosmetic_border;
 
         public ItemViewHolder(View v) {
             super(v);
@@ -153,6 +203,8 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
             TV_expiration_date_day = (TextView) v.findViewById(R.id.TV_expiration_date_day);
             TV_brand_name = (TextView) v.findViewById(R.id.TV_brand_name);
             TV_cosmetic_name = (TextView) v.findViewById(R.id.TV_cosmetic_name);
+            IV_cosmetic_border = (ImageView) v.findViewById(R.id.IV_cosmetic_border);
+
         }
     }
 
