@@ -114,7 +114,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
         video_id = video_youtuber.video_id;
         toolbar_title.setText("영상 상세정보");
 
-        //TV_video_name.setText(video.video_name);
+        TV_video_name.setText(video_youtuber.title);
         TV_youtuber_name.setText(video_youtuber.youtuber_name);
         TV_view_cnt.setText(video_youtuber.view_cnt+1+"회");
         TV_upload_date.setText(video_youtuber.upload_date.substring(0,10));
