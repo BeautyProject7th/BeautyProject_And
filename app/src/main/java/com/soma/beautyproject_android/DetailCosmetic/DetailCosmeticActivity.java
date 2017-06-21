@@ -214,22 +214,6 @@ public class DetailCosmeticActivity extends ParentActivity {
                     conn_delete_like_cosmetic(map);
                 }
 
-
-                Map<String, Object> fields = new HashMap<String, Object>();
-
-
-                fields.put("user_id",user_id);
-                fields.put("cosmetic_id",cosmetic_id);
-                fields.put("cosmetic_name",cosmetic.product_name);
-
-                Log.i("ZXc", "1 : " + user_id + " 2 : " + cosmetic_id + " 3 : " + cosmetic.product_name);
-
-                if(!like_flag){
-                    conn_post_like_cosmetic(fields);
-                }else{
-                    conn_delete_like_cosmetic(fields);
-                }
-
             }
         });
 
@@ -290,7 +274,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                                 load(image_url).
                                 thumbnail(0.1f).
                                 into(IV_product);
-                        TV_product_name.setText(cosmetic.product_name);
+                        TV_product_name.setText(cosmetic.product_name.replaceAll(cosmetic.brand,""));
                         TV_main_category.setText(cosmetic.main_category);
                         TV_sub_category.setText(cosmetic.sub_category);
                         TV_brand.setText(cosmetic.brand);

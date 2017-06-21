@@ -199,7 +199,7 @@ public class MainActivity extends ParentActivity {
         LL_recommend_cosmetic[1] = LL_recommend_cosmetic_2;
         LL_recommend_cosmetic[2] = LL_recommend_cosmetic_3;
 
-        TV_user_name.setText(SharedManager.getInstance().getMe().nickname+"님의\n화장대로 이동");
+        //TV_user_name.setText(SharedManager.getInstance().getMe().nickname+"님의\n화장대로 이동");
     }
 
 

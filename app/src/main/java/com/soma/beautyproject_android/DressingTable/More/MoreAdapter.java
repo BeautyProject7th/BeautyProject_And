@@ -73,7 +73,7 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
             Cosmetic cosmetic = mDataset.get(position);
 
             itemViewHolder.TV_brand_name.setText(cosmetic.brand);
-            itemViewHolder.TV_cosmetic_name.setText(cosmetic.product_name);
+            itemViewHolder.TV_cosmetic_name.setText(cosmetic.product_name.replaceAll(cosmetic.brand,""));
             //itemViewHolder.TV_sub_category.setText(cosmetic.sub_category);
             //itemViewHolder.RB_rate.setRating(cosmetic.rate_num);
 

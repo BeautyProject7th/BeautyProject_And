@@ -3,7 +3,12 @@ package com.soma.beautyproject_android.Search;
 
 import org.androidannotations.annotations.EActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +17,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
+import com.soma.beautyproject_android.DressingTable.More.MoreAdapter;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.Video;
@@ -23,6 +30,8 @@ import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 import com.soma.beautyproject_android.Video.Video.DeveloperKey;
 import com.soma.beautyproject_android.Video.Video.YouTubeFailureRecoveryActivity;
+import com.tsengvn.typekit.Typekit;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -37,6 +46,9 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.flurry.sdk.bh.L;
+import static com.soma.beautyproject_android.R.id.BT_like;
 
 @EActivity(R.layout.activity_video_detail)
 public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
@@ -57,6 +69,8 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     @ViewById
     Button BT_back, BT_like_video;
 
+    RecyclerView recycler_view;
+
     public String id;
 
     private Video video;
@@ -64,13 +78,23 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
     public boolean like_flag = false;
 
+    public VideoDetailAdapter adapter;
+
     @Override
     protected void onResume() {
         super.onResume();
         // just as usual
+        //폰트 설정
+        Typekit.getInstance()
+                .addNormal(Typekit.createFromAsset(this, "NanumSquareOTFRegular.otf"))
+                .addBold(Typekit.createFromAsset(this, "NanumSquareOTFBold.otf"));
 
         refresh();
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 
     @AfterViews
@@ -94,6 +118,27 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
         TV_youtuber_name.setText(video.youtuber_name);
         TV_view_cnt.setText(video.view_cnt + 1 + "회");
         TV_upload_date.setText(video.upload_date.substring(0, 10));
+
+        if (recycler_view == null) {
+            recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
+            recycler_view.setHasFixedSize(true);
+            recycler_view.setLayoutManager(new GridLayoutManager(activity, 2));
+
+        }
+        if (adapter == null) {
+            adapter = new VideoDetailAdapter(new VideoDetailAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
+                    intent.putExtra("cosmetic_id", adapter.mDataset.get(position).id);
+                    intent.putExtra("cosmetic_name", adapter.mDataset.get(position).product_name);
+                    intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
+                    startActivity(intent);
+                    activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                }
+            }, activity, this);
+        }
+        recycler_view.setAdapter(adapter);
     }
 
     private void set_skin_type(Youtuber youtuber) {
@@ -232,6 +277,8 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
         //conn_view_video(id);
         conn_get_my_like_video(id);
         conn_get_follower_number(TV_follower_number);
+        conn_video_product(video.video_id);
+        adapter.clear();
         //conn_video_product(video_youtuber.id);
     }
 
@@ -298,16 +345,17 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                     @Override
                     public final void onNext(List<Cosmetic> response) {
                         if (response != null) {
-//                            TV_following.setText(response.get(0));
-//                            TV_follower.setText(response.get(1));
+                            for (Cosmetic cosmetic : response) {
+                                adapter.addData(cosmetic);
+                                Log.i("asdf","pp:"+cosmetic.product_name);
+                            }
+                            adapter.notifyDataSetChanged();
                         } else{
 
                         }
                     }
                 });
     }
-
-
 
 
     void conn_post_like_video(Map<String,Object> map) {

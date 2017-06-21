@@ -260,8 +260,8 @@ public interface CSConnection{
     @GET("/youtuber/{youtuber_name}")
     Observable<Youtuber> get_youtuber(@Path("youtuber_name") String youtuber_name);
 
-    @GET("/video/video_product/{id}")
-    Observable<List<Cosmetic>> video_product(@Path("id") String id);
+    @GET("/video/cosmetics/{video_id}")
+    Observable<List<Cosmetic>> video_product(@Path("video_id") String id);
 
     @GET("/cosmetics/detail/dressing_table/review/{cosmetic_id}/{user_id}/{page_num}")
     Observable<List<Review>> get_review(@Path("cosmetic_id") String cosmetic_id, @Path("user_id") String user_id, @Path("page_num") int page_num);
@@ -353,6 +353,7 @@ public interface CSConnection{
 
     @GET("video/recommend/{user_id}")
     Observable<List<Video>> recommend_video_get(@Path("user_id") String user_id);
+
 }
 
 

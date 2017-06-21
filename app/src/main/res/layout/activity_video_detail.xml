@@ -115,6 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/TV_youtuber_name"
                             android:layout_width="wrap_content"
@@ -122,6 +123,7 @@
                             android:text="youtuber_name"
                             android:textSize="12sp"
                             android:textColor="#fc627f"/>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -151,20 +153,23 @@
                             <Space
                                 android:layout_width="5dp"
                                 android:layout_height="match_parent" />
+
                             <ImageView
                                 android:id="@+id/IV_youtuber_skin_trouble_3"
                                 android:layout_width="23dp"
                                 android:layout_height="23dp"
                                 android:background="@null"/>
+
                             <Space
                                 android:layout_width="5dp"
                                 android:layout_height="match_parent" />
                         </LinearLayout>
                     </LinearLayout>
-                    <Space
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent" />
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="7dp"
+                        android:background="@color/colorGrayBackGround"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -194,6 +199,8 @@
                                 android:id="@+id/TV_follower_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textColor="@color/colorBlackText"
                                 android:text="123,123"/>
                         </LinearLayout>
                         <Space
@@ -224,40 +231,59 @@
                                 android:id="@+id/TV_dressing_table_have"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textColor="@color/colorBlackText"
                                 android:text="화장대 보유"/>
                     </LinearLayout>
                     </LinearLayout>
-                    <Button
-                        android:id="@+id/BT_like_video"
-                        android:layout_width="36dp"
-                        android:layout_height="30dp"
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="7dp"
+                        android:background="@color/colorGrayBackGround"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="5dp"
-                        android:background="@drawable/ic_heart">
-                    </Button>
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="찜하기"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/colorBlackText"/>
+                        <Button
+                            android:id="@+id/BT_like_video"
+                            android:layout_width="30dp"
+                            android:layout_height="26dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/ic_heart"/>
+                    </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
-            <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical"-->
-                <!--android:background="@drawable/ic_card"-->
-                <!--android:padding="15dp">-->
-                <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="영상에 나온 제품"-->
-                    <!--android:textSize="13sp"-->
-                    <!--android:textColor="#4a494a"-->
-                    <!--android:background="@null"/>-->
-                <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:id="@+id/recycler_view"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:background="@null"-->
-                    <!--android:scrollbars="vertical"-->
-                    <!--android:layout_marginTop="30dp"/>-->
-            <!--</RelativeLayout>-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/ic_card"
+                android:padding="15dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="영상에 나온 제품"
+                    android:textSize="13sp"
+                    android:textColor="#4a494a"
+                    android:background="@null"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:scrollbars="vertical"
+                    android:layout_marginTop="30dp"/>
+            </RelativeLayout>
 
         </LinearLayout>
 

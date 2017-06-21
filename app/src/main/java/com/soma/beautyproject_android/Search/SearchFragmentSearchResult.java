@@ -3,30 +3,23 @@ package com.soma.beautyproject_android.Search;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.Video;
@@ -37,12 +30,7 @@ import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
-import org.androidannotations.annotations.ViewById;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -251,7 +239,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        Toast.makeText(activity, "conn_search_brand 에러", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(activity, "conn_search_brand 에러", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(List<Brand> response) {
@@ -265,7 +253,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                 });
     }
-
+/*
     void conn_search_cosmetic(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.search_cosmetic_limit_3(keyword)
@@ -294,8 +282,37 @@ public class SearchFragmentSearchResult extends Fragment {
                         }
                     }
                 });
-    }
+    }*/
+    void conn_search_cosmetic(String keyword) {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.search_cosmetic_get(SharedManager.getInstance().getMe().id,keyword)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Cosmetic>>() {
+                    @Override
+                    public final void onCompleted() {
 
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(activity, "conn_search_cosmetic 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<Cosmetic> response) {
+                        if (response != null) {
+                            for(int i=0;i<response.size() && i<3; i++){
+                                adapter.addData_cosmetic(response.get(i));
+                            }
+                            //view.setText(response.size()+"");
+                            adapter.notifyDataSetChanged();
+                        } else{
+
+                        }
+                    }
+                });
+    }
+    /*
     void conn_search_video_one(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.search_video_one(keyword)
@@ -315,6 +332,35 @@ public class SearchFragmentSearchResult extends Fragment {
                     public final void onNext(List<Video_Youtuber> response) {
                         if (response != null) {
                             for(int i=0;i<response.size();i++){
+                                adapter.addData_video(response.get(i));
+                            }
+                            adapter.notifyDataSetChanged();
+                        } else{
+                        }
+                    }
+                });
+    }
+    */
+
+    void conn_search_video_one(String keyword) {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.search_video_one(keyword)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Video_Youtuber>>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(activity, "conn_search_video 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<Video_Youtuber> response) {
+                        if (response != null) {
+                            for(int i=0;i<response.size();i++){
                                 adapter.addData_video_youtuber(response.get(i));
                             }
                             adapter.notifyDataSetChanged();
@@ -323,6 +369,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                 });
     }
+
 
     void conn_auto_complete_search(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
@@ -337,7 +384,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        Toast.makeText(activity, "conn_auto_complete_search 에러", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(activity, "conn_auto_complete_search 에러", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(List<String> response) {
@@ -365,7 +412,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        Toast.makeText(activity, "conn_get_brand_product_quantity 에러", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(activity, "conn_get_brand_product_quantity 에러", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(List<String> response) {

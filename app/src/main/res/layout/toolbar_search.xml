@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/BT_close_circle"
-                    android:hint="영상이나 화장품을 검색해보세요"
+                    android:hint="화장품을 검색해보세요"
                     android:singleLine="true"
                     android:textSize="13sp"
                     android:textColorHint="#FFFFFF"
