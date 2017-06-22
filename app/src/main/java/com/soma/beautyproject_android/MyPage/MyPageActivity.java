@@ -69,7 +69,7 @@ public class MyPageActivity extends ParentActivity {
     void afterBindingView() {
         this.activity = this;
         toolbar_title.setText("내 정보");
-        BT_camera.setVisibility(View.INVISIBLE);
+        BT_camera.setVisibility(View.VISIBLE);
 
     }
 

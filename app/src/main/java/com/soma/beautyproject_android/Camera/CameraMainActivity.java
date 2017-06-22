@@ -47,9 +47,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.soma.beautyproject_android.Model.GlobalResponse;
+import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.MyPage.MyPageActivity_;
 import com.soma.beautyproject_android.R;
+import com.soma.beautyproject_android.Utils.Connections.CSConnection;
+import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
+import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -59,6 +64,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class CameraMainActivity extends AppCompatActivity {
@@ -185,6 +196,10 @@ public class CameraMainActivity extends AppCompatActivity {
         ctx = this;
         mActivity = this;
 
+        User tempUser = new User();
+        tempUser.id = "1309598975776444";
+        SharedManager.getInstance().setMe(tempUser);
+
         //상태바 없애기
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -238,11 +253,13 @@ public class CameraMainActivity extends AppCompatActivity {
         IV_grid = (ImageView) findViewById(R.id.IV_grid);
         TV_guide = (TextView) findViewById(R.id.TV_guide);
 
+        BT_tip.setVisibility(View.INVISIBLE);
+
         BT_capture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 camera.takePicture(shutterCallback, rawCallback, jpegCallback);
-//                Intent intent = new Intent(getApplicationContext(), ResultActivity_.class);
+//                Intent intent = new Intent(getApplicationContext(), CameraResultActivity_.class);
 //                startActivity(intent);
             }
         });
@@ -276,9 +293,11 @@ public class CameraMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 flag_guide_off = !flag_guide_off;
                 if(flag_guide_off){
+                    BT_guide_off.setText("가이드 ON");
                     IV_grid.setVisibility(View.INVISIBLE);
                     TV_guide.setVisibility(View.INVISIBLE);
                 }else{
+                    BT_guide_off.setText("가이드 OFF");
                     IV_grid.setVisibility(View.VISIBLE);
                     TV_guide.setVisibility(View.VISIBLE);
                 }
@@ -346,7 +365,7 @@ public class CameraMainActivity extends AppCompatActivity {
 ////                //imagepath = selectedImageUri.getPath();
 ////
 ////                setResult(Constants.ACTIVITY_CODE_RESULT_ACTIVITY_REFRESH_RESULT);
-////                Intent intent = new Intent(this, ResultActivity_.class);
+////                Intent intent = new Intent(this, CameraResultActivity_.class);
 ////                intent.putExtra("gallery_flag", true);
 ////                intent.putExtra("imagepath", imagepath);
 ////                Log.i("zxc", "imagepath : " + imagepath);
@@ -416,8 +435,8 @@ public class CameraMainActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
 
             //이미지의 너비와 높이 결정
-            int w = camera.getParameters().getPictureSize().width;
-            int h = camera.getParameters().getPictureSize().height;
+//            int w = camera.getParameters().getPictureSize().width;
+//            int h = camera.getParameters().getPictureSize().height;
 
 //            int orientation = setCameraDisplayOrientation(CameraMainActivity.this,
 //                    CAMERA_FACING, camera);
@@ -427,12 +446,13 @@ public class CameraMainActivity extends AppCompatActivity {
 
             //byte array를 bitmap으로 변환
             BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 4;
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
 
             Bitmap bitmap = BitmapFactory.decodeByteArray( data, 0, data.length, options);
-            //int w = bitmap.getWidth();
-            //int h = bitmap.getHeight();
+            int w = bitmap.getWidth();
+            int h = bitmap.getHeight();
 
             //이미지를 디바이스 방향으로 회전
             Matrix matrix = new Matrix();
@@ -447,26 +467,39 @@ public class CameraMainActivity extends AppCompatActivity {
             bitmap =  Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
 
             //bitmap을 byte array로 변환
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            //ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
-            byte [] imagepath_byte = stream.toByteArray();
+            //byte [] imagepath_byte = stream.toByteArray();
             //java.util.Collections.reverse(Arrays.asList(imagepath_byte));
 
             //파일로 저장
-            new SaveImageTask().execute(imagepath_byte);
+            //new SaveImageTask().execute(imagepath_byte);
 
             //resetCam();
             Log.d(TAG, "onPictureTaken - jpeg");
 
-            setResult(Constants.ACTIVITY_CODE_RESULT_ACTIVITY_REFRESH_RESULT);
-            Intent intent = new Intent(getApplicationContext(), ResultActivity_.class);
-            intent.putExtra("gallery_flag", false);
-            startActivity(intent);
+
+            String imagepath = getPath(getImageUri(getApplicationContext(), bitmap));
+
+            Log.i("camera", "uploadfile : " + imagepath);
+            uploadFile1(imagepath);
+
+//            setResult(Constants.ACTIVITY_CODE_RESULT_ACTIVITY_REFRESH_RESULT);
+//            Intent intent = new Intent(getApplicationContext(), CameraLoadingActivity_.class);
+//            intent.putExtra("gallery_flag", false);
+//            startActivity(intent);
 
         }
     };
 
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
 
     private class SaveImageTask extends AsyncTask<byte[], Void, Void> {
 
@@ -651,5 +684,35 @@ public class CameraMainActivity extends AppCompatActivity {
     }
 
 
+    private void uploadFile1(String imagepath) {
+        File file = new File(imagepath);
+        RequestBody ubody = RequestBody.create(MediaType.parse("image/*"), file);
+        CSConnection conn = ServiceGenerator.createService(getApplicationContext(), CSConnection.class);
+        conn.fileUpload_Camera(SharedManager.getInstance().getMe().id, ubody)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalResponse>() {
+                    @Override
+                    public final void onCompleted() {
+                        setResult(Constants.ACTIVITY_CODE_RESULT_ACTIVITY_REFRESH_RESULT);
+                        Intent intent = new Intent(getApplicationContext(), CameraLoadingActivity_.class);
+                        intent.putExtra("gallery_flag", false);
+                        startActivity(intent);
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(GlobalResponse response) {
+                        if (response != null) {
+                            Log.i("camera", "response : " + response + " response.code : " + response.code);
+                        } else {
+                            //Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 
 }

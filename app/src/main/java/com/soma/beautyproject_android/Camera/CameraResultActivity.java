@@ -1,81 +1,31 @@
 package com.soma.beautyproject_android.Camera;
 
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.hardware.Camera;
-import android.hardware.Camera.PictureCallback;
-import android.hardware.Camera.ShutterCallback;
-import android.net.Uri;
-import android.opengl.GLES20;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Surface;
-import android.view.SurfaceView;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.soma.beautyproject_android.MyPage.LikeCosmeticListActivity;
-import com.soma.beautyproject_android.MyPage.LikeVideoListActivity_;
-import com.soma.beautyproject_android.R;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import android.content.Intent;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.Model.User;
-import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
-import com.soma.beautyproject_android.Splash.SplashActivity_;
+
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
+import com.soma.beautyproject_android.Utils.Loadings.LoadingUtil;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
@@ -86,9 +36,9 @@ import rx.schedulers.Schedulers;
  * Created by mijeong on 2017. 6. 18..
  */
 
-@EActivity(R.layout.activity_result)
-public class ResultActivity extends ParentActivity {
-    ResultActivity activity;
+@EActivity(R.layout.activity_camera_result)
+public class CameraResultActivity extends ParentActivity {
+    CameraResultActivity activity;
 
 
     @ViewById
@@ -102,6 +52,9 @@ public class ResultActivity extends ParentActivity {
 
     boolean gallery_flag;
 
+    String imagepath = null;
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -112,6 +65,7 @@ public class ResultActivity extends ParentActivity {
 
     void refresh(){
        //conn_get_my_info();
+        conn_camera_image();
     }
 
     @AfterViews
@@ -152,8 +106,8 @@ public class ResultActivity extends ParentActivity {
         }else{
             //Log.i("ZXC", "imagepath : " + getIntent().getByteArrayExtra("imagepath_byte"));
             //IV_user.setImageBitmap(byteArrayToBitmap(CameraMainActivity.imagepath_byte));
-            Bitmap myBitmap = BitmapFactory.decodeFile(CameraMainActivity.outFile.getAbsolutePath());
-            IV_user.setImageBitmap(myBitmap);
+//            Bitmap myBitmap = BitmapFactory.decodeFile(CameraMainActivity.outFile.getAbsolutePath());
+//            IV_user.setImageBitmap(myBitmap);
         }
 
     }
@@ -232,5 +186,38 @@ public class ResultActivity extends ParentActivity {
     public void onBackPressed() {
         super.onBackPressed();
         BT_re_capture.callOnClick();
+    }
+
+
+    void conn_camera_image() {
+//        LoadingUtil.startLoading(indicator);
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.camera_image(SharedManager.getInstance().getMe().id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+//                        LoadingUtil.stopLoading(indicator);
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        //LoadingUtil.stopLoading(indicator);
+                        e.printStackTrace();
+                        //Toast.makeText(getApplicationContext(), "이미 등록한 화장품입니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<String> response) {
+                        if (response != null) {
+                            imagepath = response.get(0);
+                            String url = Constants.IMAGE_BASE_URL_camera+imagepath;
+                            Log.i("url", "url : " + url);
+                            Glide.with(getApplicationContext()).load(Constants.IMAGE_BASE_URL_camera+imagepath).thumbnail(0.1f).bitmapTransform(new CropCircleTransformation(getApplicationContext())).into(IV_user);
+                            //Toast.makeText(getApplicationContext(), "정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

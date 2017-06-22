@@ -143,7 +143,8 @@
         <activity android:name=".Setting.Agreement" />
         <activity android:name=".Setting.PrivacyRule" />
         <activity android:name=".Camera.CameraMainActivity"></activity>
-        <activity android:name=".Camera.ResultActivity_"></activity>
+        <activity android:name=".Camera.CameraResultActivity_"></activity>
+        <activity android:name=".Camera.CameraLoadingActivity_"></activity>
         <activity android:name=".DetailCosmetic.WebViewActivity"></activity>
     </application>
 
