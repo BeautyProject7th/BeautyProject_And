@@ -191,18 +191,30 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             }
             cosmeticPerfectViewHolder.cell_search_result_cosmetic_perfect.setVisibility(View.VISIBLE);
 
-            Cosmetic cosmetic_perfect = mDataset_cosmetic.get(0);
+            final Cosmetic cosmetic_perfect = mDataset_cosmetic.get(0);
             String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic_perfect.img_src;
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
                     into(cosmeticPerfectViewHolder.IV_cosmetic);
             cosmeticPerfectViewHolder.TV_brand.setText(mDataset_cosmetic.get(0).brand);
-            cosmeticPerfectViewHolder.TV_product_name.setText(mDataset_cosmetic.get(0).product_name);
+            cosmeticPerfectViewHolder.TV_product_name.setText(mDataset_cosmetic.get(0).product_name.replaceAll(mDataset_cosmetic.get(0).brand,""));
             cosmeticPerfectViewHolder.TV_product_price.setText(mDataset_cosmetic.get(0).price+"원");
             cosmeticPerfectViewHolder.RB_rate.setRating(mDataset_cosmetic.get(0).rate_num);
             cosmeticPerfectViewHolder.TV_rate_num.setText(String.valueOf(mDataset_cosmetic.get(0).rate_num));
             cosmeticPerfectViewHolder.TV_product_review_quantity.setText("(" + "리뷰 개수" +")"); //:TODO
+
+            cosmeticPerfectViewHolder.cell_search_result_cosmetic_perfect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(fragment.activity, DetailCosmeticActivity_.class);
+                    intent.putExtra("cosmetic_id", cosmetic_perfect.id);
+                    intent.putExtra("cosmetic_name", cosmetic_perfect.product_name.replaceAll(cosmetic_perfect.brand,""));
+                    intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
+                    fragment.activity.startActivity(intent);
+                    fragment.activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                }
+            });
         }else if (holder instanceof CosmeticViewHolder){
             CosmeticViewHolder cosmeticViewHolder = (CosmeticViewHolder) holder;
             holder.container.setOnClickListener(new View.OnClickListener() {
@@ -311,10 +323,10 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                 case "중성":
                     image_url_skin_type = R.drawable.skin_type2;
                     break;
-                case "지성":
+                case "지성(수부지)":
                     image_url_skin_type = R.drawable.skin_type3;
                     break;
-                case "수부지":
+                case "지성(일반)":
                     image_url_skin_type = R.drawable.skin_type4;
                     break;
 

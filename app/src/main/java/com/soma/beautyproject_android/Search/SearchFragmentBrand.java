@@ -49,6 +49,7 @@ import rx.schedulers.Schedulers;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.soma.beautyproject_android.R.id.people_search;
+import static com.soma.beautyproject_android.R.id.recycler_view;
 
 /**
  * Created by kksd0900 on 16. 10. 11..
@@ -74,6 +75,7 @@ public class SearchFragmentBrand extends Fragment {
     Button BT_category, BT_back;
 
     private static List<String> auto_complete_keyword_list = new ArrayList<>();
+    private ArrayList<Brand> brandList = null;
 
     Toolbar cs_toolbar;
 
@@ -140,12 +142,13 @@ public class SearchFragmentBrand extends Fragment {
         BT_category = (Button) view.findViewById(R.id.BT_category);
 
         if (recyclerView == null) {
-            recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+            recyclerView = (RecyclerView) view.findViewById(recycler_view);
             recyclerView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(activity);
             recyclerView.setLayoutManager(layoutManager);
         }
 
+        brandList = SharedManager.getInstance().getBrand();
         if (adapter == null) {
             adapter = new SearchAdapterBrand(new SearchAdapterBrand.OnItemClickListener() {
                 @Override
@@ -165,7 +168,11 @@ public class SearchFragmentBrand extends Fragment {
                 }
             }, activity, this);
         }
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+
+        adapter.addData(brandList);
+        adapter.notifyDataSetChanged();
 
         indicator = (LinearLayout)view.findViewById(R.id.indicator);
 
@@ -242,39 +249,8 @@ public class SearchFragmentBrand extends Fragment {
         adapter.clear();
         adapter.notifyDataSetChanged();
 
-        connectTestCall();
     }
 
-
-    void connectTestCall() {
-        LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.brand()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Brand>>() {
-                    @Override
-                    public final void onCompleted() {
-                        LoadingUtil.stopLoading(indicator);
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public final void onNext(List<Brand> response) {
-                        if (response != null) {
-                            for (Brand brand : response) {
-                                adapter.addData(brand);
-                            }
-                            adapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
 
     final TextWatcher textChecker = new TextWatcher() {
         public void afterTextChanged(Editable s) {}
@@ -299,7 +275,7 @@ public class SearchFragmentBrand extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        refresh();
+        //refresh();
     }
 
 

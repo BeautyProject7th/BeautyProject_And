@@ -1,8 +1,10 @@
 package com.soma.beautyproject_android.Utils.SharedManager;
 
+import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,7 @@ public class SharedManager {
     private User me;
     private User you;
     private Map<String, List<String>> category = new HashMap<String, List<String>>();
+    private ArrayList<Brand> brands = new ArrayList<Brand>();
     public static SharedManager getInstance() {
 
         if (single == null) {
@@ -90,6 +93,20 @@ public class SharedManager {
     public boolean setCategory(Map<String, List<String>> category) {
         try {
             this.category = category;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public ArrayList<Brand> getBrand() {
+        return this.brands;
+    }
+
+    public boolean setBrand(ArrayList<Brand> brands) {
+        try {
+            this.brands = brands;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

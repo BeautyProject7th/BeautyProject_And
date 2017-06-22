@@ -15,6 +15,7 @@ import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -26,7 +27,7 @@ public class CosmeticUploadAdapter_1 extends RecyclerView.Adapter<CosmeticUpload
     public Context context;
     public CosmeticUploadActivity_1 activity;
     private OnItemClickListener mOnItemClickListener;
-    public ArrayList<Brand> mDataset = new ArrayList<>();
+    public ArrayList<Brand> mDataset = null;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -36,11 +37,13 @@ public class CosmeticUploadAdapter_1 extends RecyclerView.Adapter<CosmeticUpload
         mOnItemClickListener = onItemClickListener;
         context = mContext;
         activity = mActivity;
-        mDataset.clear();
+        //mDataset.clear();
     }
 
-    public void addData(Brand brand) {
-        mDataset.add(brand);
+    public void addData(ArrayList<Brand> brandlist) {
+       // mDataset.add(brand);
+
+        this.mDataset = brandlist;
     }
 
     public Brand getItem(int position) {
@@ -71,6 +74,7 @@ public class CosmeticUploadAdapter_1 extends RecyclerView.Adapter<CosmeticUpload
             });
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             Brand brand = mDataset.get(position);
+            Log.i("brand","브랜드 가져옴 "+brand.name);
 
             String image_url = Constants.IMAGE_BASE_URL_brand + brand.logo;
 
