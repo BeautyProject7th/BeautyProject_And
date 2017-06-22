@@ -95,8 +95,6 @@ public class SplashActivity extends ParentActivity {
             }
         }, 1500);
 
-        Log.i("push",PreferenceManager.getInstance(getApplicationContext()).getPushToken());
-
         Log.i("ZXc", "Utility.getMetadataApplicationId(getApplicationContext() : "+Utility.getMetadataApplicationId(getApplicationContext()));
 
 
