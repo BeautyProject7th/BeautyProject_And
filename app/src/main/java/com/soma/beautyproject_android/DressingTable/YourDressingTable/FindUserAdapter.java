@@ -91,7 +91,7 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     bitmapTransform(new CropCircleTransformation(activity)).
                     into(itemViewHolder.IV_user);
 
-            itemViewHolder.TV_user_name.setText(user.name);
+            itemViewHolder.TV_user_name.setText(user.nickname);
 
             int image_url_skin_type = -1;
             int image_url_skin_trouble_1 = -1;

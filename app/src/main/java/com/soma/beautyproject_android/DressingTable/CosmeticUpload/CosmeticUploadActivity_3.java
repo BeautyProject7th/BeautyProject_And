@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.RegistrationRequestActivity_;
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
+import com.soma.beautyproject_android.Main.MainActivity;
+import com.soma.beautyproject_android.Main.MainActivity_;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
@@ -235,9 +237,9 @@ public class CosmeticUploadActivity_3 extends ParentActivity {
                     @Override
                     public final void onCompleted() {
                         LoadingUtil.stopLoading(indicator);
-//                        Intent intent = new Intent(getApplicationContext(), DressingTableActivity_.class);
-//                        startActivity(intent);
-                        setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
+                        startActivity(intent);
+                        //setResult(Constants.ACTIVITY_CODE_DRESSING_TABLE_FRAGMENT_REFRESH_RESULT);
                         finish();
                     }
                     @Override

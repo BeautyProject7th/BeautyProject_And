@@ -199,7 +199,7 @@ public class MainActivity extends ParentActivity {
         LL_recommend_cosmetic[1] = LL_recommend_cosmetic_2;
         LL_recommend_cosmetic[2] = LL_recommend_cosmetic_3;
 
-        //TV_user_name.setText(SharedManager.getInstance().getMe().nickname+"님의\n화장대로 이동");
+        TV_user_name.setText(SharedManager.getInstance().getMe().nickname+"님의\n화장대로 이동");
     }
 
 
@@ -441,7 +441,7 @@ public class MainActivity extends ParentActivity {
                                         thumbnail(0.1f).
                                         bitmapTransform(new CropCircleTransformation(activity)).into((ImageView) user_1.findViewById(R.id.IV_user_img));
                                 t = (TextView) user_1.findViewById(R.id.TV_user_name);
-                                t.setText(response.get(0).name);
+                                t.setText(response.get(0).nickname);
                                 connectTestCall_get_follower_number_1(response.get(0).id, user_1);
                                 connectTestCall_get_cosmetic_number_1(response.get(0).id, user_1);
                             }
@@ -463,7 +463,7 @@ public class MainActivity extends ParentActivity {
                                         thumbnail(0.1f).
                                         bitmapTransform(new CropCircleTransformation(activity)).into((ImageView) user_2.findViewById(R.id.IV_user_img));
                                 t = (TextView) user_2.findViewById(R.id.TV_user_name);
-                                t.setText(response.get(1).name);
+                                t.setText(response.get(1).nickname);
                                 connectTestCall_get_follower_number_2(response.get(1).id, user_2);
                                 connectTestCall_get_cosmetic_number_2(response.get(1).id, user_2);
                             }
@@ -485,7 +485,7 @@ public class MainActivity extends ParentActivity {
                                         thumbnail(0.1f).
                                         bitmapTransform(new CropCircleTransformation(activity)).into((ImageView) user_3.findViewById(R.id.IV_user_img));
                                 t = (TextView) user_3.findViewById(R.id.TV_user_name);
-                                t.setText(response.get(2).name);
+                                t.setText(response.get(2).nickname);
                                 connectTestCall_get_follower_number_3(response.get(2).id, user_3);
                                 connectTestCall_get_cosmetic_number_3(response.get(2).id, user_3);
                             }
@@ -811,7 +811,7 @@ public class MainActivity extends ParentActivity {
                                     thumbnail(0.1f).
                                     bitmapTransform(new CropCircleTransformation(activity)).into((ImageView)ranker_1.findViewById(R.id.IV_user_img));
                             TextView t = (TextView)ranker_1.findViewById(R.id.TV_user_name);
-                            t.setText(response.get(0).name);
+                            t.setText(response.get(0).nickname);
 
                             ranker_2.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -826,7 +826,7 @@ public class MainActivity extends ParentActivity {
                                     thumbnail(0.1f).
                                     bitmapTransform(new CropCircleTransformation(activity)).into((ImageView)ranker_2.findViewById(R.id.IV_user_img));
                             t = (TextView)ranker_2.findViewById(R.id.TV_user_name);
-                            t.setText(response.get(1).name);
+                            t.setText(response.get(1).nickname);
 
                             ranker_3.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -841,7 +841,7 @@ public class MainActivity extends ParentActivity {
                                     thumbnail(0.1f).
                                     bitmapTransform(new CropCircleTransformation(activity)).into((ImageView)ranker_3.findViewById(R.id.IV_user_img));
                             t = (TextView)ranker_3.findViewById(R.id.TV_user_name);
-                            t.setText(response.get(2).name);
+                            t.setText(response.get(2).nickname);
 
                             // 팔로워 수 불러오기
                             connectTestCall_get_follower_number_1(response.get(0).id, ranker_1);
