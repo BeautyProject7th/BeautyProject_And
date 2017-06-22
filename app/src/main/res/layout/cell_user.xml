@@ -31,7 +31,7 @@
         <ImageView
             android:layout_width="9.5dp"
             android:layout_height="11dp"
-            android:background="@drawable/ic_group_number"
+            android:src="@drawable/ic_group_number"
             android:layout_marginRight="1.5dp"/>
         <TextView
             android:id="@+id/TV_group_number"
@@ -45,11 +45,11 @@
             android:layout_marginRight="4dp"
             android:layout_width="1.5dp"
             android:layout_height="7dp"
-            android:background="@drawable/ic_line"/>
+            android:src="@drawable/ic_line"/>
         <ImageView
             android:layout_width="9.5dp"
             android:layout_height="11dp"
-            android:background="@drawable/ic_cosmetic_number"
+            android:src="@drawable/ic_cosmetic_number"
             android:layout_marginRight="1.5dp"/>
         <TextView
             android:id="@+id/TV_cosmetic_number"

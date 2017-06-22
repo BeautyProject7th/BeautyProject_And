@@ -23,6 +23,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import static com.flurry.sdk.me.m;
+
 /**
  * Created by mijeong on 2017. 6. 18..
  */
@@ -31,12 +33,11 @@ import org.androidannotations.annotations.ViewById;
 public class CameraLoadingActivity extends ParentActivity {
     CameraLoadingActivity activity;
 
-
     @ViewById
     ImageView IV_user;
 
     @ViewById
-    Button BT_back, BT_re_capture, BT_complete;
+    Button BT_back;
 
     @ViewById
     TextView toolbar_title;
@@ -67,41 +68,26 @@ public class CameraLoadingActivity extends ParentActivity {
         this.activity = this;
         toolbar_title.setText("메이크업 진단");
 
+        final Boolean flag = getIntent().getBooleanExtra("gallery_flag",false);
 
         //V_line
         Glide.with(getApplicationContext()).
                 load(R.drawable.line).
                 thumbnail(0.1f).
-                //animate(R.anim.slide_in_5).
-                    //    animate(R.anim.slide_in_down).
                 into(IV_line);
 
         anim_slide_down = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_down2);
         anim_slide_up = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_up);
 
-//        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
-//            @Override
-//            public void run() {
-//                uithread_down();
-//            }
-//        }, 3000);
-
-
         uithread_down();
         uithread_up();
-
-//        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
-//            @Override
-//            public void run() {
-//                uithread_up();
-//            }
-//        }, 3000);
-
 
         new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
                 @Override
                 public void run() {
-                    startActivity(new Intent(getApplicationContext(), CameraResultActivity_.class));
+                    Intent intent = new Intent(getApplicationContext(), CameraResultActivity_.class);
+                    intent.putExtra("gallery_flag", flag);
+                    startActivity(intent);
 
                 }
             }, 5000);
@@ -130,9 +116,10 @@ public class CameraLoadingActivity extends ParentActivity {
 
 
     }
+    /*
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        BT_re_capture.callOnClick();
     }
+    */
 }

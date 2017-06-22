@@ -685,7 +685,7 @@ public class CameraMainActivity extends AppCompatActivity {
 
 
     private void uploadFile1(String imagepath) {
-        File file = new File(imagepath);
+        final File file = new File(imagepath);
         RequestBody ubody = RequestBody.create(MediaType.parse("image/*"), file);
         CSConnection conn = ServiceGenerator.createService(getApplicationContext(), CSConnection.class);
         conn.fileUpload_Camera(SharedManager.getInstance().getMe().id, ubody)
@@ -698,6 +698,7 @@ public class CameraMainActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), CameraLoadingActivity_.class);
                         intent.putExtra("gallery_flag", false);
                         startActivity(intent);
+                        finish();
                     }
                     @Override
                     public final void onError(Throwable e) {
