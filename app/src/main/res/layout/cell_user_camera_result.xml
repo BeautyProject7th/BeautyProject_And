@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="97dp"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:layout_margin="9dp">
+
+    <RelativeLayout
+        android:id="@+id/RL_user"
+        android:layout_width="67dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+        <ImageView
+            android:id="@+id/IV_user_img"
+            android:layout_width="67dp"
+            android:layout_height="67dp"/>
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/IV_creator_medal"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"/>
+    <TextView
+        android:id="@+id/TV_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="11dp"
+        android:text=""
+        android:textColor="#fb607d"
+        android:textSize="10sp"
+        android:layout_below="@id/RL_user"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp" />
+    <LinearLayout
+        android:id="@+id/LL_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TV_user_name"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/TV_match_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""/>
+    </LinearLayout>
+</RelativeLayout>

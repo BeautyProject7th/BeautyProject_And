@@ -352,6 +352,11 @@ public interface CSConnection{
     Observable<List<String>> camera_image(@Path("user_id") String user_id);
 
 
+    @GET("users/get_creator_camera/{user_id}")
+    Observable<List<Youtuber>> get_creator_camera(@Path("user_id") String user_id);
+
+
+
 }
 
 

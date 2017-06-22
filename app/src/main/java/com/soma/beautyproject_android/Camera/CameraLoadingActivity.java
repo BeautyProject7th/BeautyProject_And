@@ -90,7 +90,7 @@ public class CameraLoadingActivity extends ParentActivity {
                     startActivity(intent);
 
                 }
-            }, 5000);
+            }, 3000);
     }
 
 
