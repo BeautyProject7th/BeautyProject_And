@@ -354,6 +354,16 @@ public interface CSConnection{
     @GET("video/recommend/{user_id}")
     Observable<List<Video>> recommend_video_get(@Path("user_id") String user_id);
 
+
+    @Multipart
+    @POST("users/{user_id}/image/upload")
+    Observable<GlobalResponse> fileUpload_Camera(@Path("user_id") String user_id,
+                                          @Part("post_image\"; filename=\"android_post_image_file") RequestBody file);
+
+    @GET("users/camera/image/{user_id}")
+    Observable<List<String>> camera_image(@Path("user_id") String user_id);
+
+
 }
 
 
