@@ -45,7 +45,7 @@ public class CameraResultActivity extends ParentActivity {
     ImageView IV_user;
 
     @ViewById
-    Button BT_back, BT_re_capture, BT_complete;
+    Button BT_back;
 
     @ViewById
     TextView toolbar_title;
@@ -185,7 +185,6 @@ public class CameraResultActivity extends ParentActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        BT_re_capture.callOnClick();
     }
 
 
