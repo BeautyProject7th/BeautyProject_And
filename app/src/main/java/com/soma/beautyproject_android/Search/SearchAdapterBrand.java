@@ -27,7 +27,7 @@ public class SearchAdapterBrand extends RecyclerView.Adapter<SearchAdapterBrand.
     public Context context;
     public SearchFragmentBrand fragment;
     private OnItemClickListener mOnItemClickListener;
-    public ArrayList<Brand> mDataset = new ArrayList<>();
+    public ArrayList<Brand> mDataset = null;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -37,11 +37,10 @@ public class SearchAdapterBrand extends RecyclerView.Adapter<SearchAdapterBrand.
         mOnItemClickListener = onItemClickListener;
         context = mContext;
         fragment = mFragment;
-        mDataset.clear();
     }
 
-    public void addData(Brand brand) {
-        mDataset.add(brand);
+    public void addData(ArrayList<Brand> brand) {
+        mDataset = brand;
     }
 
     public Brand getItem(int position) {

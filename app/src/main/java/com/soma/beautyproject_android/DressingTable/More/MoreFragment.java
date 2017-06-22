@@ -175,7 +175,6 @@ public class MoreFragment extends ParentFragment {
                         e.printStackTrace();
                         endOfPage = true;
                         adapter.notifyDataSetChanged();
-                        TV_product_quantity.setText(0+"");
                     }
                     @Override
                     public final void onNext(List<Cosmetic> response) {

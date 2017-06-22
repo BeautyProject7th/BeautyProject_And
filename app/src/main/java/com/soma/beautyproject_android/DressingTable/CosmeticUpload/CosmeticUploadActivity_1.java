@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,7 +20,9 @@ import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.Loadings.LoadingUtil;
+import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscriber;
@@ -30,6 +33,8 @@ public class CosmeticUploadActivity_1 extends ParentActivity {
     public static CosmeticUploadActivity_1 activity;
 
     public CosmeticUploadAdapter_1 adapter;
+
+    private ArrayList<Brand> brandList = new ArrayList<Brand>();
 
     private RecyclerView recycler_view;
 
@@ -70,6 +75,8 @@ public class CosmeticUploadActivity_1 extends ParentActivity {
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
+        brandList = SharedManager.getInstance().getBrand();
+
         if (recycler_view == null) {
             recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
             recycler_view.addItemDecoration(new DividerItemDecoration(activity,1));
@@ -77,6 +84,7 @@ public class CosmeticUploadActivity_1 extends ParentActivity {
             recycler_view.setLayoutManager(new GridLayoutManager(activity, 1));
         }
         if (adapter == null) {
+
             adapter = new CosmeticUploadAdapter_1(new CosmeticUploadAdapter_1.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
@@ -88,7 +96,11 @@ public class CosmeticUploadActivity_1 extends ParentActivity {
                 }
             }, activity, this);
         }
+        adapter.notifyDataSetChanged();
         recycler_view.setAdapter(adapter);
+
+        adapter.addData(brandList);
+        adapter.notifyDataSetChanged();
 
         indicator = (LinearLayout) findViewById(R.id.indicator);
 
@@ -98,44 +110,13 @@ public class CosmeticUploadActivity_1 extends ParentActivity {
         adapter.clear();
         adapter.notifyDataSetChanged();
 
-        connectTestCall();
-    }
-
-
-    void connectTestCall() {
-        LoadingUtil.startLoading(indicator);
-        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.brand()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Brand>>() {
-                    @Override
-                    public final void onCompleted() {
-                        LoadingUtil.stopLoading(indicator);
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public final void onNext(List<Brand> response) {
-                        if (response != null) {
-                            for (Brand brand : response) {
-                                adapter.addData(brand);
-                            }
-                            adapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        //connectTestCall();
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        refresh();
+        //refresh();
     }
 }

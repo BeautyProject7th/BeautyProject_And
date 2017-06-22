@@ -102,8 +102,6 @@ public class SearchFragmentSearchResult extends Fragment {
         }
         recyclerView_auto_complete.setAdapter(adapter_auto_complete);
 
-
-
         if (recyclerView == null) {
             recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
             recyclerView.setHasFixedSize(true);
@@ -169,6 +167,7 @@ public class SearchFragmentSearchResult extends Fragment {
 
                 InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(ET_search.getWindowToken(), 0);
+
                 //conn_search_cosmetic(ET_search.getText().toString());
                 //conn_search_video(ET_search.getText().toString());
             }
@@ -314,7 +313,7 @@ public class SearchFragmentSearchResult extends Fragment {
                 });
     }
 
-
+/*
     void conn_search_video_one(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.search_video_one(keyword)
@@ -342,8 +341,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                 });
     }
-
-    /*
+    */
     void conn_search_video_one(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.search_video_get(SharedManager.getInstance().getMe().id, keyword)
@@ -371,7 +369,6 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                 });
     }
-*/
 
     void conn_auto_complete_search(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);

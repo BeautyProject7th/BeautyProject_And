@@ -17,6 +17,7 @@ import com.google.android.gms.analytics.Tracker;
 import com.soma.beautyproject_android.Login.JoinActivity_;
 import com.soma.beautyproject_android.Main.MainActivity_;
 import com.soma.beautyproject_android.Login.LoginActivity_;
+import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.ParentActivity;
@@ -26,6 +27,7 @@ import com.soma.beautyproject_android.Skin.SkinTypeActivity_;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
+import com.soma.beautyproject_android.Utils.Loadings.LoadingUtil;
 import com.soma.beautyproject_android.Utils.SharedManager.PreferenceManager;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 import com.facebook.internal.Utility;
@@ -36,6 +38,8 @@ import org.androidannotations.annotations.UiThread;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +51,9 @@ import io.userhabit.service.Userhabit;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.flurry.sdk.mt.i;
+import static com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_2.adapter;
 
 @EActivity(R.layout.activity_splash)
 public class SplashActivity extends ParentActivity {
@@ -237,7 +244,7 @@ public class SplashActivity extends ParentActivity {
                 .subscribe(new Subscriber<List<Category>>() {
                     @Override
                     public final void onCompleted() {
-                        moveActivity();
+                        connectGetBrandCall();
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -259,6 +266,33 @@ public class SplashActivity extends ParentActivity {
                     }
                 });
     }
+
+    void connectGetBrandCall() {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.brand()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Brand>>() {
+                    @Override
+                    public final void onCompleted() {
+                        moveActivity();
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<Brand> response) {
+                        if (response != null) {
+                            SharedManager.getInstance().setBrand((ArrayList<Brand>)response);
+                        } else {
+                            Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 
     @Override
     protected void onResume() {

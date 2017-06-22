@@ -33,6 +33,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
                 <TextView
+                    android:id="@+id/TV_all_cosmetics"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="제품 "
@@ -44,6 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:text="0"
                     android:textSize="12.5sp"
                     android:textColor="#fc617e"
                     android:layout_gravity="center"/>
