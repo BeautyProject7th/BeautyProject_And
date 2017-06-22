@@ -5,6 +5,7 @@ package com.soma.beautyproject_android.Main;
  */
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Parcelable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -130,6 +131,9 @@ public class MainActivity extends ParentActivity {
     @ViewById
     LinearLayout LL_move_dressing_table;
 
+    @ViewById
+    ImageView IV_dressing_table;
+
     //화장품 랭킹
     TextView[] TV_cosmetic_rank_brand = new TextView[3];
     TextView[] TV_cosmetic_rank_name = new TextView[3];
@@ -166,6 +170,11 @@ public class MainActivity extends ParentActivity {
         this.activity = this;
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
+
+        Glide.with(getApplicationContext()).
+                load(R.drawable.ic_dressing_table).
+                thumbnail(0.1f).
+                into(IV_dressing_table);
 
         TV_user_name.setText(SharedManager.getInstance().getMe().nickname+"님의\n화장대로 이동");
 

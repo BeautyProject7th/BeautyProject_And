@@ -353,7 +353,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
-                        Toast.makeText(activity, "conn_video_product 에러", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(activity, "conn_video_product 에러", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public final void onNext(List<Cosmetic> response) {

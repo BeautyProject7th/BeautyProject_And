@@ -253,6 +253,7 @@ public class CameraMainActivity extends AppCompatActivity {
         IV_grid = (ImageView) findViewById(R.id.IV_grid);
         TV_guide = (TextView) findViewById(R.id.TV_guide);
 
+        BT_gallery.setVisibility(View.INVISIBLE);
         BT_tip.setVisibility(View.INVISIBLE);
 
         BT_capture.setOnClickListener(new View.OnClickListener() {

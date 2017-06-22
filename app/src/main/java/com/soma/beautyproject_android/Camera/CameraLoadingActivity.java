@@ -45,11 +45,14 @@ public class CameraLoadingActivity extends ParentActivity {
     @ViewById
     ImageView IV_line,IV_line_2;
 
-    boolean gallery_flag;
+    @ViewById
+    ImageView IV_background;
 
     Animation anim_slide_down;
     Animation anim_slide_up;
 
+    @ViewById
+    ImageView IV_pentagon, IV_makeup_example;
 
     @Override
     protected void onResume() {
@@ -66,9 +69,21 @@ public class CameraLoadingActivity extends ParentActivity {
     @AfterViews
     void afterBindingView() {
         this.activity = this;
-        toolbar_title.setText("메이크업 진단");
+        toolbar_title.setText("화장법 찾기 결과");
+
+        Glide.with(getApplicationContext()).load(R.drawable.ic_background).thumbnail(0.1f).into(IV_background);
 
         final Boolean flag = getIntent().getBooleanExtra("gallery_flag",false);
+
+        Glide.with(getApplicationContext()).
+                load(R.drawable.ic_pentagon).
+                thumbnail(0.1f).
+                into(IV_pentagon);
+
+        Glide.with(getApplicationContext()).
+                load(R.drawable.ic_woman).
+                thumbnail(0.1f).
+                into(IV_makeup_example);
 
         //V_line
         Glide.with(getApplicationContext()).
@@ -88,9 +103,10 @@ public class CameraLoadingActivity extends ParentActivity {
                     Intent intent = new Intent(getApplicationContext(), CameraResultActivity_.class);
                     intent.putExtra("gallery_flag", flag);
                     startActivity(intent);
+                    finish();
 
                 }
-            }, 5000);
+            }, 4000);
     }
 
 
