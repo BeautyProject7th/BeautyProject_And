@@ -59,6 +59,8 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
 //    private static final int TYPE_TAIL_SIMILAR = 4;
 //    private static final int TYPE_COMMENT = 5;
 
+    private int index = 0;
+
     public Context context;
     public SearchFragmentSearchResult fragment;
     private OnItemClickListener mOnItemClickListener;
@@ -129,7 +131,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             return new CosmeticViewHolder(v);
         } else if (viewType == TYPE_SEARCH_RESULT_VIDEO) {
             //View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_video, parent, false);
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_video, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_video2, parent, false);
             return new VideoViewHolder(v);
         }
 //        } else if (viewType == TYPE_TAIL_SIMILAR) {
@@ -250,7 +252,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                         thumbnail(0.1f).
                         into(IV_cosmetic);
                 TV_brand.setText(mDataset_cosmetic.get(i).brand);
-                TV_cosmetic_name.setText(mDataset_cosmetic.get(i).product_name);
+                TV_cosmetic_name.setText(mDataset_cosmetic.get(i).product_name.replaceAll(mDataset_cosmetic.get(i).brand,""));
 
                 LL_cosmetic.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -277,9 +279,15 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
         }else if (holder instanceof VideoViewHolder){
             VideoViewHolder videoViewHolder = (VideoViewHolder) holder;
 
-            videoViewHolder.LL_video_top.setVisibility(View.VISIBLE);
+            if(position==3){
+                videoViewHolder.LL_video_top.setVisibility(View.VISIBLE);
+            }else
+                videoViewHolder.LL_video_top.setVisibility(View.GONE);
 
-            final Video_Youtuber video_youtuber = mDataset_video_youtuber.get(0);
+
+            Log.i("qwer","postirion : " + position);
+            final Video_Youtuber video_youtuber = mDataset_video_youtuber.get(position-3);
+
             videoViewHolder.LL_video_total.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -410,6 +418,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             videoViewHolder.TV_view_cnt.setText(String.valueOf(video_youtuber.view_cnt)+"회");
             videoViewHolder.TV_upload_date.setText(video_youtuber.upload_date.toString().substring(0,10));
             videoViewHolder.TV_youtuber_name.setText(video_youtuber.youtuber_name);
+            /*
             videoViewHolder.BT_video_more.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -418,7 +427,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                     fragment.startActivity(intent);
                 }
             });
-
+*/
 
             String image_url_video = Constants.IMAGE_BASE_URL_video + video_youtuber.thumbnail;
 
@@ -532,7 +541,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             IV_skin_trouble_2 = (ImageView) v.findViewById(R.id.IV_skin_trouble_2);
             IV_skin_trouble_3 = (ImageView) v.findViewById(R.id.IV_skin_trouble_3);
 
-            BT_video_more = (Button) v.findViewById(R.id.BT_video_more);
+            //BT_video_more = (Button) v.findViewById(R.id.BT_video_more);
 
             LL_video_top = (LinearLayout) v.findViewById(R.id.LL_video_top);
             LL_video_total = (LinearLayout) v.findViewById(R.id.LL_video_total);
@@ -551,7 +560,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             return TYPE_SEARCH_RESULT_COSMETIC_PERFECT;
         else if (position == 2 && mDataset_cosmetic.size() != 1)
             return TYPE_SEARCH_RESULT_COSMETIC;
-        else if (position == 3 && mDataset_video_youtuber.size() != 0)
+        else if (position >= 3 && mDataset_video_youtuber.size() != 0)
             return TYPE_SEARCH_RESULT_VIDEO;
 //        else if (position == 4)
 //            return TYPE_TAIL_SIMILAR;
@@ -560,7 +569,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
     }
     @Override
     public int getItemCount() {
-        return 4;
+        return mDataset_video_youtuber.size()+3;
     }
 
 

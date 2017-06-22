@@ -149,21 +149,23 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginRight="32dp">
+
                             <RelativeLayout
                                 android:layout_width="75dp"
                                 android:layout_height="80dp">
                                 <ImageView
                                     android:id="@+id/IV_cosmetic_rank_1"
-                                    android:layout_width="75dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_centerHorizontal="true"
                                     android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
+                                    android:layout_alignParentTop="true"/>
                                 <ImageView
                                     android:id="@+id/IV_cosmetic_rank_1_medal"
                                     android:layout_width="23dp"
                                     android:layout_height="23dp"
                                     android:background="@drawable/medal_1"/>
                             </RelativeLayout>
+
                             <TextView
                                 android:id="@+id/TV_cosmetic_rank_1_brand"
                                 android:layout_width="wrap_content"
@@ -193,10 +195,10 @@
                                 android:layout_height="80dp">
                                 <ImageView
                                     android:id="@+id/IV_cosmetic_rank_2"
-                                    android:layout_width="75dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_centerHorizontal="true"
                                     android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
+                                    android:layout_alignParentTop="true"/>
                                 <ImageView
                                     android:id="@+id/IV_cosmetic_rank_2_medal"
                                     android:layout_width="23dp"
@@ -231,8 +233,10 @@
                                 android:layout_height="80dp">
                                 <ImageView
                                     android:id="@+id/IV_cosmetic_rank_3"
-                                    android:layout_width="75dp"
-                                    android:layout_height="80dp" />
+                                    android:layout_width="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_height="80dp"
+                                    android:layout_alignParentTop="true"/>
                                 <ImageView
                                     android:id="@+id/IV_cosmetic_rank_3_medal"
                                     android:layout_width="23dp"
@@ -344,11 +348,10 @@
 
                                 <ImageView
                                     android:id="@+id/IV_recommend_cosmetic_rank_1"
-                                    android:layout_width="75dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_centerHorizontal="true"
                                     android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_alignParentBottom="true" />
+                                    android:layout_alignParentTop="true"/>
                             </RelativeLayout>
                             <TextView
                                 android:id="@+id/TV_recommend_cosmetic_rank_1_brand"
@@ -379,10 +382,10 @@
                                 android:layout_height="80dp">
                                 <ImageView
                                     android:id="@+id/IV_recommend_cosmetic_rank_2"
-                                    android:layout_width="75dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_centerHorizontal="true"
                                     android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
+                                    android:layout_alignParentTop="true"/>
                             </RelativeLayout>
                             <TextView
                                 android:id="@+id/TV_recommend_cosmetic_rank_2_brand"
@@ -413,10 +416,10 @@
                                 android:layout_height="80dp">
                                 <ImageView
                                     android:id="@+id/IV_recommend_cosmetic_rank_3"
-                                    android:layout_width="75dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_centerHorizontal="true"
                                     android:layout_height="80dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true" />
+                                    android:layout_alignParentTop="true"/>
                             </RelativeLayout>
                             <TextView
                                 android:id="@+id/TV_recommend_cosmetic_rank_3_brand"

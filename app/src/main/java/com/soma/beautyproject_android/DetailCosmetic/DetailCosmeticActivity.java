@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -25,6 +27,7 @@ import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.RatingEach;
 import com.soma.beautyproject_android.Model.Review;
 import com.soma.beautyproject_android.Model.Video;
+import com.soma.beautyproject_android.Model.Video_Youtuber;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Search.SearchAdapterAutoComplete;
@@ -120,7 +123,7 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     boolean like_flag = false;
 
-    List<Video> relative_content;
+    List<Video_Youtuber> relative_content;
 
     @ViewById
     Button BT_like;
@@ -192,9 +195,9 @@ public class DetailCosmeticActivity extends ParentActivity {
         LL_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), CosmeticReport_.class);
-//                intent.putExtra("cosmetic", cosmetic);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra("url", cosmetic.link);
+                startActivity(intent);
             }
         });
 
@@ -562,7 +565,7 @@ public class DetailCosmeticActivity extends ParentActivity {
         conn.relative_video_get(user_id,cosmetic_name)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber <List<Video>>() {
+                .subscribe(new Subscriber <List<Video_Youtuber>>() {
                     @Override
                     public final void onCompleted() {
                         Log.i("train","success");
@@ -573,7 +576,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                         Log.i("train","fail to server error");
                     }
                     @Override
-                    public final void onNext(final List<Video> response) {
+                    public final void onNext(final List<Video_Youtuber> response) {
                         if (response != null) { // isLike
                             relative_content = response;
 

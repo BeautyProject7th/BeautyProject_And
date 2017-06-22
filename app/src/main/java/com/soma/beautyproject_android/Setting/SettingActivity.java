@@ -112,6 +112,7 @@ public class SettingActivity extends ParentActivity {
         CookieSharedPreferences cookieSharedPreferences;
         cookieSharedPreferences = CookieSharedPreferences.getInstanceOf(activity);
         cookieSharedPreferences.deleteHashSet(CookieSharedPreferences.COOKIE_SHARED_PREFERENCES_KEY);
+
     }
 
     @Override

@@ -36,9 +36,9 @@ public class MyInstanceIDListenerService extends FirebaseInstanceIdService {
 
         PreferenceManager.getInstance(getApplicationContext()).setPushToken(refreshedToken);
 
-        /*
         Log.i("push","token값 : "+refreshedToken);
 
+        /*
         Map user = new HashMap();
         user.put("user_id", SharedManager.getInstance().getMe().id);
         user.put("push_token", refreshedToken);

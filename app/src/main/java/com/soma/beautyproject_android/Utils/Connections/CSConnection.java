@@ -346,13 +346,13 @@ public interface CSConnection{
     Observable<List<Cosmetic>> recommend_cosmetic_get(@Path("user_id") String user_id);
 
     @GET("video/search2/{user_id}/{query}")
-    Observable<List<Video>> search_video_get(@Path("user_id") String user_id,@Path("query") String query);
+    Observable<List<Video_Youtuber>> search_video_get(@Path("user_id") String user_id,@Path("query") String query);
 
     @GET("video/recommend/cosmetic/{cosmetic}/{user_id}")
-    Observable<List<Video>> relative_video_get(@Path("user_id") String user_id,@Path("cosmetic") String cosmetic);
+    Observable<List<Video_Youtuber>> relative_video_get(@Path("user_id") String user_id,@Path("cosmetic") String cosmetic);
 
     @GET("video/recommend/{user_id}")
-    Observable<List<Video>> recommend_video_get(@Path("user_id") String user_id);
+    Observable<List<Video_Youtuber>> recommend_video_get(@Path("user_id") String user_id);
 
 }
 

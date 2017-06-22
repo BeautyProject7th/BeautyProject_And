@@ -83,7 +83,7 @@ public class SearchAdapterSearchResultBrand extends RecyclerView.Adapter<SearchA
                     thumbnail(0.1f).
                     into(itemViewHolder.IV_cosmetic);
             itemViewHolder.TV_brand.setText(cosmetic.brand);
-            itemViewHolder.TV_product_name.setText(cosmetic.product_name);
+            itemViewHolder.TV_product_name.setText(cosmetic.product_name.replaceAll(cosmetic.brand,""));
             itemViewHolder.TV_product_price.setText(cosmetic.price+"원");
             itemViewHolder.TV_rate_num.setText(String.valueOf(cosmetic.rate_num));
             itemViewHolder.TV_product_review_quantity.setText("리뷰 개수");

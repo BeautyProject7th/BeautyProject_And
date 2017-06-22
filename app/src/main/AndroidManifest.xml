@@ -94,7 +94,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity android:name=".DressingTable.YourDressingTable.YourDressingTableActivity_" />
-        <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity" />
+        <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity" >
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".DetailCosmetic.ModifyCosmeticActivity_" />
         <activity android:name=".Login.JoinActivity_" />
         <activity android:name=".DressingTable.YourDressingTable.FollowingListActivity_" />
@@ -139,6 +144,7 @@
         <activity android:name=".Setting.PrivacyRule" />
         <activity android:name=".Camera.CameraMainActivity"></activity>
         <activity android:name=".Camera.ResultActivity_"></activity>
+        <activity android:name=".DetailCosmetic.WebViewActivity"></activity>
     </application>
 
 </manifest>

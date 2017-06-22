@@ -64,7 +64,7 @@ public class SplashActivity extends ParentActivity {
         Userhabit.start(application);
 
 
-        Userhabit.setSessionEndTime(10);
+        Userhabit.setSessionEndTime(5);
 
         new FlurryAgent.Builder()
                 .withLogEnabled(true)
@@ -94,6 +94,8 @@ public class SplashActivity extends ParentActivity {
 
             }
         }, 1500);
+
+        Log.i("push",PreferenceManager.getInstance(getApplicationContext()).getPushToken());
 
         Log.i("ZXc", "Utility.getMetadataApplicationId(getApplicationContext() : "+Utility.getMetadataApplicationId(getApplicationContext()));
 
