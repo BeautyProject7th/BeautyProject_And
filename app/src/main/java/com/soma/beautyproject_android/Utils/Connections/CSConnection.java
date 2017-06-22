@@ -317,21 +317,9 @@ public interface CSConnection{
     Observable<GlobalResponse> view_video(@Path("user_id") String user_id, @Path("id") String id);
 */
 
-    //pio
-    @POST("cosmetics/train/scrap")
-    Observable<GlobalResponse> train_cosmetic_scrap(@Body Map<String, Object> fields);
-
-    @POST("cosmetics/train/rate")
-    Observable<GlobalResponse> train_cosmetic_rate(@Body Map<String, Object> fields);
-
-    @POST("cosmetics/train/own")
-    Observable<GlobalResponse> train_cosmetic_own(@Body Map<String, Object> fields);
-
     @POST("cosmetics/train/view")
     Observable<GlobalResponse> train_cosmetic_view(@Body Map<String, Object> fields);
 
-    @POST("video/train/scrap")
-    Observable<GlobalResponse> train_video_rate(@Body Map<String, Object> fields);
 
     @POST("video/train/view")
     Observable<GlobalResponse> train_video_view(@Body Map<String, Object> fields);

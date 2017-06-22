@@ -137,7 +137,9 @@ public class SettingActivity extends ParentActivity {
 
                         if(SharedManager.getInstance().getMe().social_type.equals("페이스북")) {
                             LoginManager.getInstance().logOut();
-                            startActivity(new Intent(activity, LoginActivity_.class));
+                            Intent intent = new Intent(activity, LoginActivity_.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
                             activity.finish();
                         }
                         else if(SharedManager.getInstance().getMe().social_type.equals("카카오톡")){
