@@ -20,6 +20,7 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport_;
 import com.soma.beautyproject_android.Model.Cosmetic;
@@ -276,6 +277,8 @@ public class DetailCosmeticActivity extends ParentActivity {
                         Glide.with(activity).
                                 load(image_url).
                                 thumbnail(0.1f).
+                                dontTransform().
+                                diskCacheStrategy(DiskCacheStrategy.SOURCE).
                                 into(IV_product);
                         TV_product_name.setText(cosmetic.product_name.replaceAll(cosmetic.brand,""));
                         TV_main_category.setText(cosmetic.main_category);

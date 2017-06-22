@@ -51,8 +51,8 @@
                 android:layout_marginTop="5dp">
                 <ImageView
                     android:id="@+id/IV_product"
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
                     android:layout_marginRight="7.5dp"/>
                 <LinearLayout
                     android:id="@+id/category_area"

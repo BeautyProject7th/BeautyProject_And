@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.DressingTable;
 import com.soma.beautyproject_android.Model.GlobalResponse;
@@ -130,6 +131,8 @@ public class ModifyCosmeticActivity extends ParentActivity {
         Glide.with(activity).
                 load(image_url).
                 thumbnail(0.1f).
+                dontTransform().
+                diskCacheStrategy(DiskCacheStrategy.SOURCE).
                 into(IV_product);
         TV_cosmetic.setText(cosmetic.product_name);
         TV_main_category.setText(cosmetic.main_category);
