@@ -7,14 +7,13 @@
     android:gravity="center">
     <RelativeLayout
         android:id="@+id/RR_cosmetic"
-        android:layout_width="75dp"
-        android:layout_height="80dp">
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:gravity="center">
         <ImageView
             android:id="@+id/IV_cosmetic"
-            android:layout_width="75dp"
-            android:layout_height="80dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            android:layout_width="wrap_content"
+            android:layout_height="90dp" />
         <TextView
             android:id="@+id/TV_cosmetic_have"
             android:layout_alignParentRight="true"

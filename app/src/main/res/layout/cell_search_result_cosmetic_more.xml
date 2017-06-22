@@ -21,8 +21,8 @@
             android:layout_marginRight="15dp">
             <ImageView
                 android:id="@+id/IV_cosmetic"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center_vertical"/>
             <TextView
                 android:id="@+id/TV_cosmetic_have"

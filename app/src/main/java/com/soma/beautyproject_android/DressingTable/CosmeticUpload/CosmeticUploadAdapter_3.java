@@ -102,7 +102,7 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
 
                     Log.i("asdf","a 개수 : "+checkedList.size()+"개");
                     if(checkedList.size()==0){
-                        activity.BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_circle_empty);
+                        activity.BT_cosmetic_upload.setBackgroundResource(android.R.color.transparent);
                     }else{
                         activity.BT_cosmetic_upload.setBackgroundResource(R.drawable.btn_circle);
                     }

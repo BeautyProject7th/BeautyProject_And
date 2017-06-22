@@ -113,7 +113,6 @@ public class VideoDetailAdapter extends RecyclerView.Adapter<VideoDetailAdapter.
             Glide.with(context).
                     load(Constants.IMAGE_BASE_URL_cosmetics+cosmetic.img_src).
                     thumbnail(0.1f).
-                    bitmapTransform(new CropCircleTransformation(activity)).
                     into(itemViewHolder.IV_cosmetic);
             itemViewHolder.TV_price.setText(cosmetic.price+"원");
 

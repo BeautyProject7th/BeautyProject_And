@@ -4,12 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGrayBackGround">
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appBarLayout2">
-        <include layout="@layout/toolbar_only_back" android:id="@+id/cs_toolbar" />
-    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,7 +20,7 @@
             <ImageView
                 android:id="@+id/IV_product"
                 android:layout_width="wrap_content"
-                android:layout_height="109dp"
+                android:layout_height="110dp"
                 android:layout_marginTop="20dp"/>
             <TextView
                 android:id="@+id/TV_brand"
@@ -653,5 +647,12 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBarLayout2">
+        <include layout="@layout/toolbar_only_back" android:id="@+id/cs_toolbar" />
+    </android.support.design.widget.AppBarLayout>
 
 </LinearLayout>

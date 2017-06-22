@@ -27,17 +27,15 @@
             android:layout_marginRight="40dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/settings_copy"/>
-        <Button
-            android:id="@+id/BT_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카메라"/>
+
         <LinearLayout
             android:id="@+id/activity_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:layout_alignParentTop="true">
 
             <ImageView
                 android:id="@+id/IV_user"
@@ -252,6 +250,16 @@
                         android:background="@drawable/rectangle_purchase"/>
                 </LinearLayout>
             </LinearLayout>
+            <Button
+                android:id="@+id/BT_camera"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:text="나에게 맞는 화장법 찾기"
+                android:textSize="13.5sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/rectangle_18_copy_2"/>
         </LinearLayout>
     </RelativeLayout>
 

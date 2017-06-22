@@ -40,9 +40,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static android.R.attr.fragment;
 
 @EActivity(R.layout.activity_video_detail)
 public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
@@ -136,7 +139,9 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
         Glide.with(activity).
                 load(video_youtuber.profile_url).
                 thumbnail(0.1f).
+                bitmapTransform(new CropCircleTransformation(activity)).
                 into(IV_youtuber);
+
         //TV_video_name.setText(video_youtuber.video_name);
         Log.i("youtuber","1");
         TV_youtuber_name.setText(video_youtuber.youtuber_name);

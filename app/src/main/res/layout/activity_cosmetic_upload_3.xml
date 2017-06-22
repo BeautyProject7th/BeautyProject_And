@@ -94,7 +94,7 @@
                             android:id="@+id/BT_cosmetic_upload"
                             android:layout_width="70dp"
                             android:layout_height="30dp"
-                            android:background="@drawable/btn_circle_empty"
+                            android:background="@null"
                             android:text="등록"
                             android:textColor="#FFFFFF"/>
                     </LinearLayout>

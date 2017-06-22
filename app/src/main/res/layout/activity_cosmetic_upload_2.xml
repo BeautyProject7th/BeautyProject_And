@@ -36,7 +36,7 @@
                 android:id="@+id/IV_brand"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:padding="10dp"/>
         </LinearLayout>
 
