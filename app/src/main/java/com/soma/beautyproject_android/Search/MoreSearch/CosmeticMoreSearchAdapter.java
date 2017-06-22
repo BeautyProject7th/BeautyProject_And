@@ -10,6 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -80,6 +81,8 @@ public class CosmeticMoreSearchAdapter extends RecyclerView.Adapter<CosmeticMore
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
+                    dontTransform().
+                    diskCacheStrategy(DiskCacheStrategy.SOURCE).
                     into(itemViewHolder.IV_cosmetic);
             itemViewHolder.TV_brand.setText(cosmetic.brand);
             itemViewHolder.TV_product_name.setText(cosmetic.product_name.replaceAll(cosmetic.brand,""));

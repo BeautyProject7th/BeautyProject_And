@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -81,6 +82,7 @@ public class CosmeticUploadAdapter_1 extends RecyclerView.Adapter<CosmeticUpload
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
+                    diskCacheStrategy(DiskCacheStrategy.SOURCE).
                     into(itemViewHolder.IV_brand);
             itemViewHolder.TV_brand.setText(mDataset.get(position).name);
 

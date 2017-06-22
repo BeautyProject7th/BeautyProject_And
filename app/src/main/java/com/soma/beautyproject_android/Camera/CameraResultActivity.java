@@ -30,6 +30,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
+import java.util.Random;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
@@ -273,7 +274,9 @@ public class CameraResultActivity extends ParentActivity {
 //                                TextView tv2 = (TextView) creator[i].findViewById(R.id.TV_group_number);
 //                                TextView tv3 = (TextView) creator[i].findViewById(R.id.TV_cosmetic_number);
                             }
-
+                            Random r = new Random();
+                            int i1 = r.nextInt(100-60)+60;
+                            TV_score.setText(i1+"");
 
                             //Toast.makeText(getApplicationContext(), "정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
                         } else {

@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -115,6 +116,7 @@ public class CosmeticUploadAdapter_3 extends RecyclerView.Adapter<CosmeticUpload
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
+                    diskCacheStrategy(DiskCacheStrategy.SOURCE).
                     into(itemViewHolder.IV_product);
 
             itemViewHolder.TV_product.setText(cosmetic.product_name);

@@ -41,7 +41,7 @@
                         android:id="@+id/TV_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="61"
+                        android:text=""
                         android:textSize="50sp"
                         android:textColor="#fc617e"/>
                     <TextView
@@ -87,12 +87,17 @@
             android:layout_marginTop="10dp"
             android:background="#CCCCCC"/>
         <LinearLayout
-            android:layout_marginTop="50dp"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="나와 비슷한 뷰티 크리에이터"
+                android:layout_marginBottom="25dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

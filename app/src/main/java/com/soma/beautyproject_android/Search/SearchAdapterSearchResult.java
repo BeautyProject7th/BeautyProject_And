@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.soma.beautyproject_android.Model.Brand;
@@ -168,6 +169,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
+                    diskCacheStrategy(DiskCacheStrategy.SOURCE).
                     into(brandViewHolder.IV_brand);
             brandViewHolder.TV_brand.setText(mDataset_brand.get(0).name);
             brandViewHolder.TV_product_quantity.setText("총 " + fragment.brand_product_quantity + "개 제품");//:TODO
@@ -196,6 +198,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
+                    diskCacheStrategy(DiskCacheStrategy.SOURCE).
                     into(cosmeticPerfectViewHolder.IV_cosmetic);
             cosmeticPerfectViewHolder.TV_brand.setText(mDataset_cosmetic.get(0).brand);
             cosmeticPerfectViewHolder.TV_product_name.setText(mDataset_cosmetic.get(0).product_name.replaceAll(mDataset_cosmetic.get(0).brand,""));
@@ -262,6 +265,8 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                 Glide.with(context).
                         load(image_url).
                         thumbnail(0.1f).
+                        dontTransform().
+                        diskCacheStrategy(DiskCacheStrategy.SOURCE).
                         into(IV_cosmetic);
                 TV_brand.setText(mDataset_cosmetic.get(i).brand);
                 TV_cosmetic_name.setText(mDataset_cosmetic.get(i).product_name.replaceAll(mDataset_cosmetic.get(i).brand,""));
@@ -443,11 +448,6 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
 
             String image_url_video = Constants.IMAGE_BASE_URL_video + video_youtuber.thumbnail;
 
-            Glide.with(context).
-                    load(image_url_youtuber).
-                    thumbnail(0.1f).
-                    bitmapTransform(new CropCircleTransformation(fragment.activity)).
-                    into(videoViewHolder.IV_youtuber);
             Glide.with(context).
                     load(image_url_skin_type).
                     thumbnail(0.1f).

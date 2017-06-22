@@ -5,6 +5,7 @@ package com.soma.beautyproject_android.Main;
  */
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Parcelable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.YourDressingTableActivity_;
@@ -129,6 +131,9 @@ public class MainActivity extends ParentActivity {
     @ViewById
     LinearLayout LL_move_dressing_table;
 
+    @ViewById
+    ImageView IV_dressing_table;
+
     //화장품 랭킹
     TextView[] TV_cosmetic_rank_brand = new TextView[3];
     TextView[] TV_cosmetic_rank_name = new TextView[3];
@@ -165,6 +170,11 @@ public class MainActivity extends ParentActivity {
         this.activity = this;
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
+
+        Glide.with(getApplicationContext()).
+                load(R.drawable.ic_dressing_table).
+                thumbnail(0.1f).
+                into(IV_dressing_table);
 
         TV_user_name.setText(SharedManager.getInstance().getMe().nickname+"님의\n화장대로 이동");
 
@@ -293,6 +303,8 @@ public class MainActivity extends ParentActivity {
                                 Glide.with(activity).
                                         load(Constants.IMAGE_BASE_URL_cosmetics+response.get(i).img_src).
                                         thumbnail(0.1f).
+                                        dontTransform()
+                                        .diskCacheStrategy(DiskCacheStrategy.SOURCE).
                                         into(IV_cosmetic_rank[i]);
 
                                 Log.i("img_video","화장품 이미지 주소 : "+Constants.IMAGE_BASE_URL_cosmetics+response.get(i).img_src);
@@ -339,6 +351,7 @@ public class MainActivity extends ParentActivity {
                                 Glide.with(activity).
                                         load(Constants.IMAGE_BASE_URL_cosmetics+response.get(i).img_src).
                                         thumbnail(0.1f).
+                                        diskCacheStrategy(DiskCacheStrategy.SOURCE).
                                         into(IV_recommend_cosmetic_rank[i]);
                                 TV_recommend_cosmetic_rank_brand[i].setText(response.get(i).brand);
                                 TV_recommend_cosmetic_rank_name[i].setText(response.get(i).product_name);
