@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.RegistrationRequestActivity_;
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Main.MainActivity;
@@ -129,6 +130,8 @@ public class CosmeticUploadActivity_3 extends ParentActivity {
         Glide.with(getApplicationContext()).
                 load(image_url).
                 thumbnail(0.1f).
+                dontTransform().
+                diskCacheStrategy(DiskCacheStrategy.SOURCE).
                 into(IV_brand);
 
         if (recyclerView== null) {

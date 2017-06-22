@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
@@ -91,6 +92,7 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
+                    diskCacheStrategy(DiskCacheStrategy.SOURCE).
                     into(itemViewHolder.IV_cosmetic);
 
             itemViewHolder.TV_brand_name.setText(expirationCosmetic.brand);

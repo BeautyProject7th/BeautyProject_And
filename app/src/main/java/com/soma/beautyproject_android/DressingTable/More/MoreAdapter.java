@@ -10,6 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -81,6 +82,7 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
             Glide.with(context).
                     load(image_url).
                     thumbnail(0.1f).
+                    diskCacheStrategy(DiskCacheStrategy.SOURCE).
                     into(itemViewHolder.IV_cosmetic);
 
             if (position == mDataset.size()-1 && !fragment.endOfPage) {
