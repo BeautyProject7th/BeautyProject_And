@@ -23,6 +23,7 @@ import com.soma.beautyproject_android.DressingTable.YourDressingTable.YourDressi
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.User;
 import com.soma.beautyproject_android.Model.Video;
+import com.soma.beautyproject_android.Model.Video_Youtuber;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Search.SearchActivity_;
@@ -165,6 +166,8 @@ public class MainActivity extends ParentActivity {
         activity.setSupportActionBar(cs_toolbar);
         activity.getSupportActionBar().setTitle("");
 
+        TV_user_name.setText(SharedManager.getInstance().getMe().nickname+"님의\n화장대로 이동");
+
         TV_cosmetic_rank_brand[0] = TV_cosmetic_rank_1_brand;
         TV_cosmetic_rank_brand[1] = TV_cosmetic_rank_2_brand;
         TV_cosmetic_rank_brand[2] = TV_cosmetic_rank_3_brand;
@@ -300,7 +303,7 @@ public class MainActivity extends ParentActivity {
                                     public void onClick(View v) {
                                         Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                                         intent.putExtra("cosmetic_id", response.get(i).id);
-                                        intent.putExtra("cosmetic_name", response.get(i).product_name);
+                                        intent.putExtra("cosmetic_name", response.get(i).product_name.replaceAll(response.get(i).brand,""));
                                         intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
                                         startActivity(intent);
                                         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
@@ -344,7 +347,7 @@ public class MainActivity extends ParentActivity {
                                     public void onClick(View v) {
                                         Intent intent = new Intent(activity, DetailCosmeticActivity_.class);
                                         intent.putExtra("cosmetic_id", response.get(i).id);
-                                        intent.putExtra("cosmetic_name", response.get(i).product_name);
+                                        intent.putExtra("cosmetic_name", response.get(i).product_name.replaceAll(response.get(i).brand,""));
                                         intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
                                         startActivity(intent);
                                         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
@@ -363,7 +366,7 @@ public class MainActivity extends ParentActivity {
         conn.recommend_video_get(SharedManager.getInstance().getMe().id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Video>>() {
+                .subscribe(new Subscriber<List<Video_Youtuber>>() {
                     @Override
                     public final void onCompleted() {
                     }
@@ -373,7 +376,7 @@ public class MainActivity extends ParentActivity {
                         Toast.makeText(activity, "connectTestCall_cosmetic_rank error", Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public final void onNext(final List<Video> response) {
+                    public final void onNext(final List<Video_Youtuber> response) {
                         if (response != null) {
                             for (int index=0;index<response.size();index++){
                                 final int i = index;
@@ -391,7 +394,7 @@ public class MainActivity extends ParentActivity {
                                     @Override
                                     public void onClick(View v) {
                                         Intent intent = new Intent(activity, VideoDetailActivity_.class);
-                                        intent.putExtra("video", (Serializable) response.get(i));
+                                        intent.putExtra("video_youtuber", (Serializable) response.get(i));
                                         startActivity(intent);
                                         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
                                     }

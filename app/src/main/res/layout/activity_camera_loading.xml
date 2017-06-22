@@ -52,17 +52,30 @@
                     android:layout_centerHorizontal="true">
                     <ImageView
                         android:id="@+id/IV_line"
-                        android:visibility="gone"
-                        android:layout_width="50dp"
-                        android:layout_height="1dp"
-                        android:background="@drawable/ic_line"/>
+                        android:visibility="visible"
+                        android:layout_width="55dp"
+                        android:layout_height="2dp"
+                        android:background="@drawable/ic_line_camera"/>
                     <ImageView
                         android:id="@+id/IV_line_2"
-                        android:visibility="gone"
-                        android:layout_width="50dp"
-                        android:layout_height="1dp"
-                        android:background="@drawable/ic_line"
+                        android:visibility="visible"
+                        android:layout_width="55dp"
+                        android:layout_height="2dp"
+                        android:background="@drawable/ic_line_camera"
                         android:layout_alignParentBottom="true"/>
+                    <!--<ImageView-->
+                        <!--android:id="@+id/IV_line"-->
+                        <!--android:visibility="gone"-->
+                        <!--android:layout_width="50dp"-->
+                        <!--android:layout_height="1dp"-->
+                        <!--android:background="@drawable/ic_line"/>-->
+                    <!--<ImageView-->
+                        <!--android:id="@+id/IV_line_2"-->
+                        <!--android:visibility="gone"-->
+                        <!--android:layout_width="50dp"-->
+                        <!--android:layout_height="1dp"-->
+                        <!--android:background="@drawable/ic_line"-->
+                        <!--android:layout_alignParentBottom="true"/>-->
                 </RelativeLayout>
             </RelativeLayout>
 

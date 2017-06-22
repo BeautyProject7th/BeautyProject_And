@@ -283,6 +283,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                 });
     }*/
+
     void conn_search_cosmetic(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.search_cosmetic_get(SharedManager.getInstance().getMe().id,keyword)
@@ -312,7 +313,8 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                 });
     }
-    /*
+
+
     void conn_search_video_one(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.search_video_one(keyword)
@@ -332,7 +334,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     public final void onNext(List<Video_Youtuber> response) {
                         if (response != null) {
                             for(int i=0;i<response.size();i++){
-                                adapter.addData_video(response.get(i));
+                                adapter.addData_video_youtuber(response.get(i));
                             }
                             adapter.notifyDataSetChanged();
                         } else{
@@ -340,11 +342,11 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                 });
     }
-    */
 
+    /*
     void conn_search_video_one(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.search_video_one(keyword)
+        conn.search_video_get(SharedManager.getInstance().getMe().id, keyword)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Video_Youtuber>>() {
@@ -369,7 +371,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                 });
     }
-
+*/
 
     void conn_auto_complete_search(String keyword) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);

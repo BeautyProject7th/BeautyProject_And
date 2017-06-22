@@ -18,15 +18,14 @@ import com.bumptech.glide.Glide;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
-import com.soma.beautyproject_android.DressingTable.More.MoreAdapter;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
 import com.soma.beautyproject_android.Model.Video;
+import com.soma.beautyproject_android.Model.Video_Youtuber;
 import com.soma.beautyproject_android.Model.Youtuber;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
 import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
-import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 import com.soma.beautyproject_android.Video.Video.DeveloperKey;
 import com.soma.beautyproject_android.Video.Video.YouTubeFailureRecoveryActivity;
@@ -35,20 +34,15 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static com.flurry.sdk.bh.L;
-import static com.soma.beautyproject_android.R.id.BT_like;
 
 @EActivity(R.layout.activity_video_detail)
 public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
@@ -73,8 +67,8 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
     public String id;
 
-    private Video video;
-    private Youtuber youtuber;
+    private Video_Youtuber video_youtuber;
+    //private Youtuber youtuber;
 
     public boolean like_flag = false;
 
@@ -101,23 +95,22 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     void afterBindingView() {
         this.activity = this;
 
-        video = (Video) getIntent().getSerializableExtra("video");
+        video_youtuber = (Video_Youtuber) getIntent().getSerializableExtra("video_youtuber");
         YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, activity);
 
 
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", SharedManager.getInstance().getMe().id);
-        map.put("content", video.title);
+        map.put("content", video_youtuber.title);
         conn_train_view_cosmetic(map);
-        connectTestCall_creater();
 
         toolbar_title.setText("영상 상세정보");
 
-        TV_video_name.setText(video.title);
-        TV_youtuber_name.setText(video.youtuber_name);
-        TV_view_cnt.setText(video.view_cnt + 1 + "회");
-        TV_upload_date.setText(video.upload_date.substring(0, 10));
+        TV_video_name.setText(video_youtuber.title);
+        TV_youtuber_name.setText(video_youtuber.youtuber_name);
+        TV_view_cnt.setText(video_youtuber.view_cnt + 1 + "회");
+        TV_upload_date.setText(video_youtuber.upload_date.substring(0, 10));
 
         if (recycler_view == null) {
             recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
@@ -139,16 +132,31 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
             }, activity, this);
         }
         recycler_view.setAdapter(adapter);
+
+        Glide.with(activity).
+                load(video_youtuber.profile_url).
+                thumbnail(0.1f).
+                into(IV_youtuber);
+        //TV_video_name.setText(video_youtuber.video_name);
+        Log.i("youtuber","1");
+        TV_youtuber_name.setText(video_youtuber.youtuber_name);
+        Log.i("youtuber","2");
+        TV_view_cnt.setText(video_youtuber.view_cnt+1+"회");
+        Log.i("youtuber","3");
+        TV_upload_date.setText(video_youtuber.upload_date.substring(0,10));
+        Log.i("youtuber","4");
+
+        set_skin_type();
     }
 
-    private void set_skin_type(Youtuber youtuber) {
+    private void set_skin_type() {
         int image_url_skin_type = -1;
         int image_url_skin_trouble_1 = -1;
         int image_url_skin_trouble_2 = -1;
         int image_url_skin_trouble_3 = -1;
-        Log.i("youtuber","skintype2 : "+youtuber.skin_type);
+        Log.i("youtuber","skintype2 : "+video_youtuber.skin_type);
 
-        switch(youtuber.skin_type){
+        switch(video_youtuber.skin_type){
             case "건성":
                 image_url_skin_type = R.drawable.skin_type1;
                 break;
@@ -164,7 +172,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
         }
 
-        switch(youtuber.skin_trouble_1){
+        switch(video_youtuber.skin_trouble_1){
             case "다크서클":
                 image_url_skin_trouble_1 = R.drawable.trouble1_darkcircle;
                 break;
@@ -195,7 +203,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
         }
 
-        switch(youtuber.skin_trouble_2){
+        switch(video_youtuber.skin_trouble_2){
             case "다크서클":
                 image_url_skin_trouble_2 = R.drawable.trouble1_darkcircle;
                 break;
@@ -226,7 +234,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
 
         }
 
-        switch(youtuber.skin_trouble_3){
+        switch(video_youtuber.skin_trouble_3){
             case "다크서클":
                 image_url_skin_trouble_3 = R.drawable.trouble1_darkcircle;
                 break;
@@ -277,7 +285,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
         //conn_view_video(id);
         conn_get_my_like_video(id);
         conn_get_follower_number(TV_follower_number);
-        conn_video_product(video.video_id);
+        conn_video_product(video_youtuber.video_id);
         adapter.clear();
         //conn_video_product(video_youtuber.id);
     }
@@ -318,8 +326,8 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     void BT_like_video() {
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", SharedManager.getInstance().getMe().id);
-        map.put("id", video.id);
-        map.put("title", video.title);
+        map.put("id", video_youtuber.id);
+        map.put("title", video_youtuber.title);
         if (like_flag) {
             conn_delete_like_video(map);
         } else {
@@ -474,7 +482,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                     @Override
                     public final void onNext(GlobalResponse response) {
                         if (response.code == 200) {
-                            video.view_cnt++;
+                            video_youtuber.view_cnt++;
                         } else {
                             Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }
@@ -486,7 +494,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
                                         boolean wasRestored) {
         if (!wasRestored) {
-            player.cueVideo(video.video_id);
+            player.cueVideo(video_youtuber.video_id);
         }
     }
 
@@ -495,44 +503,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
         return (YouTubePlayerView) findViewById(R.id.youtube_view);
     }
 
-    void connectTestCall_creater() {
-        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
-        conn.get_youtuber(video.youtuber_name)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Youtuber>() {
-                    @Override
-                    public final void onCompleted() {
-                    }
-                    @Override
-                    public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        Toast.makeText(activity, "크리에이터 정보를 불러오는 도중 문제가 발생했습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public final void onNext(final Youtuber response) {
-                        if (response != null) {
-                            youtuber = response;
-                            Glide.with(activity).
-                                    load(response.profile_url).
-                                    thumbnail(0.1f).
-                                    into(IV_youtuber);
-                            //TV_video_name.setText(video.video_name);
-                            Log.i("youtuber","1");
-                            TV_youtuber_name.setText(youtuber.name);
-                            Log.i("youtuber","2");
-                            TV_view_cnt.setText(video.view_cnt+1+"회");
-                            Log.i("youtuber","3");
-                            TV_upload_date.setText(video.upload_date.substring(0,10));
-                            Log.i("youtuber","4");
-                            set_skin_type(youtuber);
-                            //String image_url_video = Constants.IMAGE_BASE_URL_video + youtuber.thumbnail;
-                        } else{
-                            Toast.makeText(activity,"크리에이터 서버 오류",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
+
 
     void conn_train_view_cosmetic(Map<String,Object> map) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
@@ -553,7 +524,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
                     public final void onNext(GlobalResponse response) {
                         if (response.code == 200) { // isLike
                             Log.i("train","success");
-                            video.view_cnt++;
+                            video_youtuber.view_cnt++;
                         } else {
                             Log.i("train","fail");
                         }

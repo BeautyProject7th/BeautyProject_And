@@ -22,7 +22,7 @@
         android:launchMode="singleTask"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Camera.CameraMainActivity">
+        <activity android:name=".Splash.SplashActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -94,7 +94,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity android:name=".DressingTable.YourDressingTable.YourDressingTableActivity_" />
-        <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity" />
+        <activity android:name=".DressingTable.CosmeticExpirationDate.CosmeticExpirationDateActivity" >
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".DetailCosmetic.ModifyCosmeticActivity_" />
         <activity android:name=".Login.JoinActivity_" />
         <activity android:name=".DressingTable.YourDressingTable.FollowingListActivity_" />
@@ -137,10 +142,10 @@
         <activity android:name=".Search.VideoDetailActivity_" />
         <activity android:name=".Setting.Agreement" />
         <activity android:name=".Setting.PrivacyRule" />
-        <activity android:name=".Splash.SplashActivity_"></activity>
+        <activity android:name=".Camera.CameraMainActivity"></activity>
         <activity android:name=".Camera.CameraResultActivity_"></activity>
         <activity android:name=".Camera.CameraLoadingActivity_"></activity>
-
+        <activity android:name=".DetailCosmetic.WebViewActivity"></activity>
     </application>
 
 </manifest>
