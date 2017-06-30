@@ -143,6 +143,11 @@
                                     android:textColor="#9b9a9b"/>
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </LinearLayout>
                             <ImageView
                                 android:id="@+id/BT_expiration_date"
                                 android:layout_marginTop="72dp"
@@ -152,6 +157,7 @@
                                 android:textSize="12sp"
                                 android:background="@drawable/rectangle_purchase" />
                             <TextView
+                                android:id="@+id/TV_expiration_date"
                                 android:layout_alignTop="@id/BT_expiration_date"
                                 android:layout_alignLeft="@id/BT_expiration_date"
                                 android:layout_width="102.5dp"
@@ -168,7 +174,7 @@
                                 android:layout_width="19dp"
                                 android:layout_height="19dp"
                                 android:text=""
-                                android:background="@drawable/ic_oval_purple"
+                                android:background="@drawable/ic_oval_yellow"
                                 android:gravity="center"
                                 android:textColor="#FFFFFF"
                                 android:textSize="13sp"/>

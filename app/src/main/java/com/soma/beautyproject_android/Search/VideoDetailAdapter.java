@@ -130,6 +130,9 @@ public class VideoDetailAdapter extends RecyclerView.Adapter<VideoDetailAdapter.
                 public void onClick(View v) {
                 }
             });
+
+            itemViewHolder.TV_cosmetic_have.setVisibility(View.GONE);
+
         }
     }
 
@@ -159,6 +162,7 @@ public class VideoDetailAdapter extends RecyclerView.Adapter<VideoDetailAdapter.
         public ImageView IV_cosmetic,IV_heart;
         public Button BT_purchase;
         public LinearLayout LL_like;
+        public TextView TV_cosmetic_have;
 
         public ItemViewHolder(View v) {
             super(v);
@@ -169,6 +173,8 @@ public class VideoDetailAdapter extends RecyclerView.Adapter<VideoDetailAdapter.
             TV_brand = (TextView)v.findViewById(R.id.TV_brand);
             BT_purchase = (Button)v.findViewById(R.id.BT_purchase);
             LL_like = (LinearLayout)v.findViewById(R.id.LL_like);
+            TV_cosmetic_have = (TextView) v.findViewById(R.id.TV_cosmetic_have);
+
         }
     }
 }

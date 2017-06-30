@@ -345,7 +345,7 @@ public interface CSConnection{
 
     @Multipart
     @POST("users/{user_id}/image/upload")
-    Observable<GlobalResponse> fileUpload_Camera(@Path("user_id") String user_id,
+    Observable<List<String>> fileUpload_Camera(@Path("user_id") String user_id,
                                           @Part("post_image\"; filename=\"android_post_image_file") RequestBody file);
 
     @GET("users/camera/image/{user_id}")
@@ -355,7 +355,11 @@ public interface CSConnection{
     @GET("users/get_creator_camera/{user_id}")
     Observable<List<Youtuber>> get_creator_camera(@Path("user_id") String user_id);
 
+    @GET("images/call_ml_server/{file_name}")
+    Observable<List<String>> get_call_ml_server(@Path("file_name") String file_name);
 
+    @GET("users/get_face_feature/{type}")
+    Observable<List<String>> get_face_feature(@Path("type") String type);
 
 }
 

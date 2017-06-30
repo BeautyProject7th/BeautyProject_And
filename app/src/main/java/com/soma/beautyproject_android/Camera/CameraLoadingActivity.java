@@ -11,17 +11,28 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
+import com.soma.beautyproject_android.Utils.Connections.CSConnection;
+import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
+import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator_ML;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
+import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.flurry.sdk.me.m;
 
@@ -54,6 +65,8 @@ public class CameraLoadingActivity extends ParentActivity {
     @ViewById
     ImageView IV_pentagon, IV_makeup_example;
 
+    String filename;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -64,6 +77,7 @@ public class CameraLoadingActivity extends ParentActivity {
 
     void refresh(){
        //conn_get_my_info();
+        conn_get_call_ml_server(filename);
     }
 
     @AfterViews
@@ -74,6 +88,8 @@ public class CameraLoadingActivity extends ParentActivity {
         Glide.with(getApplicationContext()).load(R.drawable.ic_background).thumbnail(0.1f).into(IV_background);
 
         final Boolean flag = getIntent().getBooleanExtra("gallery_flag",false);
+        filename = getIntent().getStringExtra("filename");
+
 
         Glide.with(getApplicationContext()).
                 load(R.drawable.ic_pentagon).
@@ -138,4 +154,30 @@ public class CameraLoadingActivity extends ParentActivity {
         super.onBackPressed();
     }
     */
+
+
+    void conn_get_call_ml_server(String filename) {
+        CSConnection conn = ServiceGenerator_ML.createService(activity,CSConnection.class);
+        conn.get_call_ml_server(filename)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, "conn_get_call_ml_server error", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(final List<String> response) {
+                        if (response != null) {
+                            //Toast.makeText(activity, ""+response.get(0).toString(), Toast.LENGTH_SHORT).show();
+                        } else{
+
+                        }
+                    }
+                });
+    }
 }

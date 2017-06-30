@@ -56,8 +56,16 @@ public class YourDressingTableActivity extends ParentActivity {
     TextView TV_user_name,TV_user_info,TV_skin_type,TV_skin_trouble1,TV_skin_trouble2,TV_skin_trouble3;
 
     @ViewById
-    TextView TV_cosmetic_have_number, TV_following, TV_follower, TV_expiration_date_soon;
+    TextView TV_cosmetic_have_number, TV_following, TV_follower;
 
+    @ViewById
+    ImageView BT_expiration_date;
+
+    @ViewById
+    Button BT_cosmetic_upload;
+
+    @ViewById
+    TextView TV_expiration_date_soon, TV_expiration_date;
 
     @ViewById
     TextView toolbar_title;
@@ -88,6 +96,12 @@ public class YourDressingTableActivity extends ParentActivity {
         this.activity = this;
 
         you = SharedManager.getInstance().getYou();
+
+        BT_expiration_date.setVisibility(View.INVISIBLE);
+        BT_cosmetic_upload.setVisibility(View.INVISIBLE);
+        TV_expiration_date_soon.setVisibility(View.INVISIBLE);
+        TV_expiration_date.setVisibility(View.INVISIBLE);
+
 
         TV_user_name.setText(you.nickname);
         Log.i("zxc", "you.id : " + you.id + " you.gender" + you.gender + "you.birthyear : " + you.birthyear);

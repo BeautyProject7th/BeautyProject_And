@@ -20,6 +20,7 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport;
 import com.soma.beautyproject_android.DressingTable.CosmeticInfoRequest.CosmeticReport_;
 import com.soma.beautyproject_android.Model.Cosmetic;
@@ -81,7 +82,7 @@ public class DetailCosmeticActivity extends ParentActivity {
     ImageView IV_product;
 
     @ViewById
-    TextView TV_product_name,TV_brand,TV_main_category, TV_sub_category,toolbar_title;
+    TextView TV_product_name,TV_brand,TV_main_category, TV_sub_category,toolbar_title,TV_my_review;
 
     @ViewById
     TextView TV_expiration_date,TV_purchase_date,TV_rating,TV_review, TV_product_price, TV_rating_circle, TV_rating_circle_people;
@@ -136,7 +137,9 @@ public class DetailCosmeticActivity extends ParentActivity {
         cosmetic_id = getIntent().getStringExtra("cosmetic_id");
         cosmetic_name = getIntent().getStringExtra("cosmetic_name");
         user_id = getIntent().getStringExtra("user_id");
-        //me_flag = getIntent().getBooleanExtra("me",false);
+        me_flag = getIntent().getBooleanExtra("me",false);
+
+        if(me_flag == false) TV_my_review.setText("등록된 리뷰");
 
         TV_rate_people = new TextView[5];
 
@@ -276,6 +279,8 @@ public class DetailCosmeticActivity extends ParentActivity {
                         Glide.with(activity).
                                 load(image_url).
                                 thumbnail(0.1f).
+                                dontTransform().
+                                diskCacheStrategy(DiskCacheStrategy.SOURCE).
                                 into(IV_product);
                         TV_product_name.setText(cosmetic.product_name.replaceAll(cosmetic.brand,""));
                         TV_main_category.setText(cosmetic.main_category);
@@ -308,7 +313,7 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     void conn_get_my_review(String cosmetic_id) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.get_my_review(cosmetic_id, SharedManager.getInstance().getMe().id)
+        conn.get_my_review(cosmetic_id, user_id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Review>>() {
@@ -325,7 +330,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                     @Override
                     public final void onNext(List<Review> response) {
                         if (response.size() != 0) {
-                            me_flag = true;
+                            //me_flag = true;
                             TV_add.setText("변경하기");
 
                             Review review = response.get(0);
@@ -353,7 +358,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                                 TV_purchase_date.setText("미기재");
 
                         } else {
-                            me_flag = false;
+                            //me_flag = false;
                             about_me.setVisibility(View.GONE);
                         }
                     }
@@ -362,7 +367,7 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     void conn_get_review(String cosmetic_id, final int page_num) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.get_review(cosmetic_id, SharedManager.getInstance().getMe().id, page_num)
+        conn.get_review(cosmetic_id, user_id, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Review>>() {
@@ -580,28 +585,28 @@ public class DetailCosmeticActivity extends ParentActivity {
                         if (response != null) { // isLike
                             relative_content = response;
 
-                                for (int index=0;index<2;index++){
-                                    final int i = index;
-                                    ImageView IV_video_img = (ImageView)videoList[i].findViewById(R.id.IV_video_img);
-                                    TextView TV_creator_name = (TextView)videoList[i].findViewById(R.id.TV_creator_name);
-                                    TextView TV_video_name = (TextView)videoList[i].findViewById(R.id.TV_video_name);
+                            for (int index=0;index<2;index++){
+                                final int i = index;
+                                ImageView IV_video_img = (ImageView)videoList[i].findViewById(R.id.IV_video_img);
+                                TextView TV_creator_name = (TextView)videoList[i].findViewById(R.id.TV_creator_name);
+                                TextView TV_video_name = (TextView)videoList[i].findViewById(R.id.TV_video_name);
 
-                                    Glide.with(activity).
-                                            load(Constants.IMAGE_BASE_URL_video+response.get(i).thumbnail).
-                                            thumbnail(0.1f).
-                                            into(IV_video_img);
-                                    TV_creator_name.setText(response.get(i).youtuber_name);
-                                    TV_video_name.setText(response.get(i).title);
-                                    videoList[i].setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Intent intent = new Intent(activity, VideoDetailActivity_.class);
-                                            intent.putExtra("video", (Serializable) response.get(i));
-                                            startActivity(intent);
-                                            activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-                                        }
-                                    });
-                                }
+                                Glide.with(activity).
+                                        load(Constants.IMAGE_BASE_URL_video+response.get(i).thumbnail).
+                                        thumbnail(0.1f).
+                                        into(IV_video_img);
+                                TV_creator_name.setText(response.get(i).youtuber_name);
+                                TV_video_name.setText(response.get(i).title);
+                                videoList[i].setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(activity, VideoDetailActivity_.class);
+                                        intent.putExtra("video", (Serializable) response.get(i));
+                                        startActivity(intent);
+                                        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                                    }
+                                });
+                            }
 
 
 
@@ -612,5 +617,3 @@ public class DetailCosmeticActivity extends ParentActivity {
                 });
     }
 }
-
-

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import com.bumptech.glide.Glide;
@@ -50,13 +51,24 @@ public class CameraResultActivity extends ParentActivity {
     ImageView IV_user;
 
     @ViewById
-    Button BT_back, BT_re_capture, BT_complete;
+    Button BT_back, BT_re_capture;
 
     @ViewById
     TextView toolbar_title;
 
     @ViewById
-    TextView TV_score;
+    TextView TV_user_name;
+
+    @ViewById
+    ImageView IV_background;
+
+    @ViewById
+    TextView TV_face_evaluation;
+
+    @ViewById
+    ImageView IV_face_feature_1,IV_face_feature_2,IV_face_feature_3,IV_face_feature_4,IV_face_feature_5;
+
+    LinearLayout [] LL_face_feature;
 
     boolean gallery_flag;
 
@@ -64,6 +76,8 @@ public class CameraResultActivity extends ParentActivity {
 
     RelativeLayout[] creator;
     int medal_url[];
+
+    String face_feature [];
 
     @Override
     protected void onResume() {
@@ -77,6 +91,7 @@ public class CameraResultActivity extends ParentActivity {
        //conn_get_my_info();
         conn_camera_image();
         conn_get_creator_camera();
+        conn_get_face_feature();
     }
 
     @AfterViews
@@ -94,6 +109,95 @@ public class CameraResultActivity extends ParentActivity {
         medal_url[0] = R.drawable.medal_1;
         medal_url[1] = R.drawable.medal_2;
         medal_url[2] = R.drawable.medal_3;
+
+
+        LL_face_feature = new LinearLayout[5];
+        LL_face_feature[0] = (LinearLayout)findViewById(R.id.LL_face_feature_1);
+        LL_face_feature[1] = (LinearLayout)findViewById(R.id.LL_face_feature_2);
+        LL_face_feature[2] = (LinearLayout)findViewById(R.id.LL_face_feature_3);
+        LL_face_feature[3] = (LinearLayout)findViewById(R.id.LL_face_feature_4);
+        LL_face_feature[4] = (LinearLayout)findViewById(R.id.LL_face_feature_5);
+
+        face_feature = new String[5];
+
+        LL_face_feature[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LL_face_feature[0].setBackgroundResource(R.drawable.rectangle_18_copy_2);
+                LL_face_feature[1].setBackgroundResource(0);
+                LL_face_feature[2].setBackgroundResource(0);
+                LL_face_feature[3].setBackgroundResource(0);
+                LL_face_feature[4].setBackgroundResource(0);
+
+                TV_face_evaluation.setText(face_feature[0]);
+            }
+        });
+
+        LL_face_feature[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LL_face_feature[1].setBackgroundResource(R.drawable.rectangle_18_copy_2);
+                LL_face_feature[0].setBackgroundResource(0);
+                LL_face_feature[2].setBackgroundResource(0);
+                LL_face_feature[3].setBackgroundResource(0);
+                LL_face_feature[4].setBackgroundResource(0);
+
+                TV_face_evaluation.setText(face_feature[1]);
+            }
+        });
+
+        LL_face_feature[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LL_face_feature[2].setBackgroundResource(R.drawable.rectangle_18_copy_2);
+                LL_face_feature[0].setBackgroundResource(0);
+                LL_face_feature[1].setBackgroundResource(0);
+                LL_face_feature[3].setBackgroundResource(0);
+                LL_face_feature[4].setBackgroundResource(0);
+
+                TV_face_evaluation.setText(face_feature[2]);
+            }
+        });
+
+        LL_face_feature[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LL_face_feature[3].setBackgroundResource(R.drawable.rectangle_18_copy_2);
+                LL_face_feature[0].setBackgroundResource(0);
+                LL_face_feature[1].setBackgroundResource(0);
+                LL_face_feature[2].setBackgroundResource(0);
+                LL_face_feature[4].setBackgroundResource(0);
+
+                TV_face_evaluation.setText(face_feature[3]);
+            }
+        });
+
+        LL_face_feature[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LL_face_feature[4].setBackgroundResource(R.drawable.rectangle_18_copy_2);
+                LL_face_feature[1].setBackgroundResource(0);
+                LL_face_feature[2].setBackgroundResource(0);
+                LL_face_feature[3].setBackgroundResource(0);
+                LL_face_feature[0].setBackgroundResource(0);
+
+                TV_face_evaluation.setText(face_feature[4]);
+            }
+        });
+
+        Log.i("asdasd", "SharedManager.getInstance().getMe().name : " + SharedManager.getInstance().getMe().name);
+        TV_user_name.setText(SharedManager.getInstance().getMe().nickname);
+        Glide.with(getApplicationContext()).load(R.drawable.ic_background).thumbnail(0.1f).into(IV_background);
+
+
+
+
+        Glide.with(getApplicationContext()).load(R.drawable.ic_face2).thumbnail(0.1f).into(IV_face_feature_1);
+        Glide.with(getApplicationContext()).load(R.drawable.ic_eye2).thumbnail(0.1f).into(IV_face_feature_2);
+        Glide.with(getApplicationContext()).load(R.drawable.ic_eyebrow2).thumbnail(0.1f).into(IV_face_feature_3);
+        Glide.with(getApplicationContext()).load(R.drawable.ic_nose2).thumbnail(0.1f).into(IV_face_feature_4);
+        Glide.with(getApplicationContext()).load(R.drawable.ic_lip2).thumbnail(0.1f).into(IV_face_feature_5);
+
 
 //        gallery_flag = getIntent().getBooleanExtra("gallery_flag", false);
 //        Log.i("ZXC", "gallery_flag : " + gallery_flag);
@@ -274,11 +378,52 @@ public class CameraResultActivity extends ParentActivity {
 //                                TextView tv2 = (TextView) creator[i].findViewById(R.id.TV_group_number);
 //                                TextView tv3 = (TextView) creator[i].findViewById(R.id.TV_cosmetic_number);
                             }
-                            Random r = new Random();
-                            int i1 = r.nextInt(100-60)+60;
-                            TV_score.setText(i1+"");
 
                             //Toast.makeText(getApplicationContext(), "정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    //get face_feature
+    void conn_get_face_feature(){
+        int temp = Integer.valueOf(SharedManager.getInstance().getMe().id.substring(0,3)) % 3; // 0, 1, 2
+        String type = null;
+        switch (temp){
+            case 0 : //cold
+                type = "cold";
+                break;
+            case 1 : //medium
+                type = "medium";
+                break;
+            case 2 : //warm
+                type = "warm";
+                break;
+        }
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.get_face_feature(type)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+//                        LoadingUtil.stopLoading(indicator);
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        //LoadingUtil.stopLoading(indicator);
+                        e.printStackTrace();
+                        //Toast.makeText(getApplicationContext(), "이미 등록한 화장품입니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<String> response) {
+                        if (response != null) {
+                            for(int i=0;i<response.size();i++){
+                               face_feature[i] = response.get(i);
+                            }
+                            TV_face_evaluation.setText(face_feature[0]);
                         } else {
                             //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         }

@@ -2,6 +2,7 @@ package com.soma.beautyproject_android.DressingTable.More;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,7 +29,14 @@ import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.Loadings.LoadingUtil;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -62,6 +70,7 @@ public class MoreFragment extends ParentFragment {
     private User user = null;
 
     public boolean check = false;
+    Set<String> list_string = new HashSet<>();
 
     @Nullable
     @Override
@@ -179,10 +188,30 @@ public class MoreFragment extends ParentFragment {
                     @Override
                     public final void onNext(List<Cosmetic> response) {
                         if(response.size() != 0){
+                            Log.i("Asd", "size : " + response.size());
+                            int count = 0;
+
                             for (Cosmetic cosmetic : response) {
+//                                HashMap<String, String> map = new HashMap<String, String>();
+//                                if(map.containsValue(cosmetic.product_name)){
+//                                    continue;
+//                                }
+//                                map.put("name", cosmetic.product_name);
+
+                                if(list_string.contains(cosmetic.product_name))
+                                    continue;
+
+                                list_string.add(cosmetic.product_name);
+
+                                Log.i("bool",count+" : " +  cosmetic.product_name);
+
+
+                                //Log.i("bool","set.add(cosmetic.product_name) : " + set.add(cosmetic.product_name));
+                                Log.i("bool","adapter.isContain(cosmetic) : " +  adapter.isContain(cosmetic));
                                 adapter.addData(cosmetic);
+                                adapter.notifyDataSetChanged();
+                                count++;
                             }
-                            adapter.notifyDataSetChanged();
                             TV_product_quantity.setText(response.size()+"");
                         } else {
                             endOfPage = true;
