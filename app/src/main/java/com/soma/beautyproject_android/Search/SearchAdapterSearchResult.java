@@ -258,6 +258,8 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                 TextView TV_cosmetic_have = (TextView) LL_cosmetic.findViewById(R.id.TV_cosmetic_have);
                 TV_cosmetic_have.setVisibility(View.GONE);
 
+
+
                 ImageView IV_cosmetic = (ImageView) LL_cosmetic.findViewById(R.id.RR_cosmetic).findViewById(R.id.IV_cosmetic);
                 TextView TV_brand = (TextView) LL_cosmetic.findViewById(R.id.TV_cosmetic_brand);
                 TextView TV_cosmetic_name = (TextView) LL_cosmetic.findViewById(R.id.TV_cosmetic_name);

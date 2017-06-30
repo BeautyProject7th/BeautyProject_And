@@ -64,6 +64,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -91,6 +92,7 @@ public class CameraMainActivity extends AppCompatActivity {
     private Button BT_capture;
     private ImageView IV_grid;
     private TextView TV_guide;
+    private String filename;
 
     private boolean flag_guide_off = false;
 
@@ -196,9 +198,9 @@ public class CameraMainActivity extends AppCompatActivity {
         ctx = this;
         mActivity = this;
 
-        User tempUser = new User();
-        tempUser.id = "1309598975776444";
-        SharedManager.getInstance().setMe(tempUser);
+//        User tempUser = new User();
+//        tempUser.id = "1309598975776444";
+//        SharedManager.getInstance().setMe(tempUser);
 
         //상태바 없애기
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -252,6 +254,9 @@ public class CameraMainActivity extends AppCompatActivity {
         BT_back = (Button) findViewById(R.id.BT_back);
         IV_grid = (ImageView) findViewById(R.id.IV_grid);
         TV_guide = (TextView) findViewById(R.id.TV_guide);
+
+        //Glide.with(getApplicationContext()).load(R.drawable.ic_camera_guideline).thumbnail(0.1f).into(IV_grid);
+
 
         BT_gallery.setVisibility(View.INVISIBLE);
         BT_tip.setVisibility(View.INVISIBLE);
@@ -309,6 +314,7 @@ public class CameraMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MyPageActivity_.class));
+                finish();
             }
         });
 
@@ -692,12 +698,13 @@ public class CameraMainActivity extends AppCompatActivity {
         conn.fileUpload_Camera(SharedManager.getInstance().getMe().id, ubody)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GlobalResponse>() {
+                .subscribe(new Subscriber<List<String>>() {
                     @Override
                     public final void onCompleted() {
                         setResult(Constants.ACTIVITY_CODE_RESULT_ACTIVITY_REFRESH_RESULT);
                         Intent intent = new Intent(getApplicationContext(), CameraLoadingActivity_.class);
                         intent.putExtra("gallery_flag", false);
+                        intent.putExtra("filename", filename);
                         startActivity(intent);
                         finish();
                     }
@@ -707,9 +714,10 @@ public class CameraMainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public final void onNext(GlobalResponse response) {
+                    public final void onNext(List<String> response) {
                         if (response != null) {
-                            Log.i("camera", "response : " + response + " response.code : " + response.code);
+                            //Log.i("camera", "response : " + response + " response.code : " + response.code);
+                            filename = response.get(0);
                         } else {
                             //Toast.makeText(getApplicationContext(), Constants.ERROR_MSG, Toast.LENGTH_SHORT).show();
                         }

@@ -40,6 +40,10 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder> {
         mDataset.clear();
     }
 
+    public boolean isContain(Cosmetic cosmetic) {
+        return mDataset.contains(cosmetic);
+    }
+
     public void addData(Cosmetic cosmetic) {
         mDataset.add(cosmetic);
     }

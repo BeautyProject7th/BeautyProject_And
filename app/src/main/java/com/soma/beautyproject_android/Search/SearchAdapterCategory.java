@@ -76,7 +76,7 @@ public class SearchAdapterCategory extends BaseExpandableListAdapter {
 
         // 그룹을 펼칠때와 닫을때 아이콘을 변경해 준다.
         if(isExpanded){
-            Drawable drawable = context.getResources().getDrawable(R.drawable.btn_category_select);
+            Drawable drawable = context.getResources().getDrawable(R.drawable.btn_category_select2);
             viewHolder.iv_image.setImageDrawable(drawable);
             viewHolder.tv_groupName.setTextColor(context.getResources().getColor(R.color.colorAccent));
         }else{

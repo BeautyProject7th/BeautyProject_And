@@ -585,28 +585,28 @@ public class DetailCosmeticActivity extends ParentActivity {
                         if (response != null) { // isLike
                             relative_content = response;
 
-                                for (int index=0;index<2;index++){
-                                    final int i = index;
-                                    ImageView IV_video_img = (ImageView)videoList[i].findViewById(R.id.IV_video_img);
-                                    TextView TV_creator_name = (TextView)videoList[i].findViewById(R.id.TV_creator_name);
-                                    TextView TV_video_name = (TextView)videoList[i].findViewById(R.id.TV_video_name);
+                            for (int index=0;index<2;index++){
+                                final int i = index;
+                                ImageView IV_video_img = (ImageView)videoList[i].findViewById(R.id.IV_video_img);
+                                TextView TV_creator_name = (TextView)videoList[i].findViewById(R.id.TV_creator_name);
+                                TextView TV_video_name = (TextView)videoList[i].findViewById(R.id.TV_video_name);
 
-                                    Glide.with(activity).
-                                            load(Constants.IMAGE_BASE_URL_video+response.get(i).thumbnail).
-                                            thumbnail(0.1f).
-                                            into(IV_video_img);
-                                    TV_creator_name.setText(response.get(i).youtuber_name);
-                                    TV_video_name.setText(response.get(i).title);
-                                    videoList[i].setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Intent intent = new Intent(activity, VideoDetailActivity_.class);
-                                            intent.putExtra("video", (Serializable) response.get(i));
-                                            startActivity(intent);
-                                            activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-                                        }
-                                    });
-                                }
+                                Glide.with(activity).
+                                        load(Constants.IMAGE_BASE_URL_video+response.get(i).thumbnail).
+                                        thumbnail(0.1f).
+                                        into(IV_video_img);
+                                TV_creator_name.setText(response.get(i).youtuber_name);
+                                TV_video_name.setText(response.get(i).title);
+                                videoList[i].setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(activity, VideoDetailActivity_.class);
+                                        intent.putExtra("video", (Serializable) response.get(i));
+                                        startActivity(intent);
+                                        activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
+                                    }
+                                });
+                            }
 
 
 
@@ -617,5 +617,3 @@ public class DetailCosmeticActivity extends ParentActivity {
                 });
     }
 }
-
-

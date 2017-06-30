@@ -6,12 +6,27 @@
     android:layout_height="110dp"
     android:gravity="center"
     android:padding="4dp">
-    <ImageView
-        android:id="@+id/IV_cosmetic"
+    <RelativeLayout
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:id="@+id/IV_cosmetic"
+            android:layout_width="75dp"
+            android:layout_height="75dp" />
+        <TextView
+            android:id="@+id/TV_cosmetic_have"
+            android:layout_alignParentRight="true"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:text="보유"
+            android:textSize="8sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:background="@drawable/ic_have"/>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="76.5dp"
         android:layout_height="wrap_content"
