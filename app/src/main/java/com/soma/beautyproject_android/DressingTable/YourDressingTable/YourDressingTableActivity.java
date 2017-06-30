@@ -105,7 +105,7 @@ public class YourDressingTableActivity extends ParentActivity {
         categorylist.put(R.id.cleansing,"클렌징");
         categorylist.put(R.id.mask_pack,"마스크/팩");
         categorylist.put(R.id.suncare,"선케어");
-        categorylist.put(R.id.base_makeup,"베이스메이크업");
+        categorylist.put(R.id.base_makeup,"베이스 메이크업");
         categorylist.put(R.id.eye_makeup,"아이 메이크업");
         categorylist.put(R.id.lip_makeup,"립 메이크업");
         categorylist.put(R.id.body,"바디");

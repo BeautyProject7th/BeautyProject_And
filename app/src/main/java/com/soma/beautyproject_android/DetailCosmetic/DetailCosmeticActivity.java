@@ -82,7 +82,7 @@ public class DetailCosmeticActivity extends ParentActivity {
     ImageView IV_product;
 
     @ViewById
-    TextView TV_product_name,TV_brand,TV_main_category, TV_sub_category,toolbar_title;
+    TextView TV_product_name,TV_brand,TV_main_category, TV_sub_category,toolbar_title,TV_my_review;
 
     @ViewById
     TextView TV_expiration_date,TV_purchase_date,TV_rating,TV_review, TV_product_price, TV_rating_circle, TV_rating_circle_people;
@@ -137,7 +137,9 @@ public class DetailCosmeticActivity extends ParentActivity {
         cosmetic_id = getIntent().getStringExtra("cosmetic_id");
         cosmetic_name = getIntent().getStringExtra("cosmetic_name");
         user_id = getIntent().getStringExtra("user_id");
-        //me_flag = getIntent().getBooleanExtra("me",false);
+        me_flag = getIntent().getBooleanExtra("me",false);
+
+        if(me_flag == false) TV_my_review.setText("등록된 리뷰");
 
         TV_rate_people = new TextView[5];
 
@@ -311,7 +313,7 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     void conn_get_my_review(String cosmetic_id) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.get_my_review(cosmetic_id, SharedManager.getInstance().getMe().id)
+        conn.get_my_review(cosmetic_id, user_id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Review>>() {
@@ -328,7 +330,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                     @Override
                     public final void onNext(List<Review> response) {
                         if (response.size() != 0) {
-                            me_flag = true;
+                            //me_flag = true;
                             TV_add.setText("변경하기");
 
                             Review review = response.get(0);
@@ -356,7 +358,7 @@ public class DetailCosmeticActivity extends ParentActivity {
                                 TV_purchase_date.setText("미기재");
 
                         } else {
-                            me_flag = false;
+                            //me_flag = false;
                             about_me.setVisibility(View.GONE);
                         }
                     }
@@ -365,7 +367,7 @@ public class DetailCosmeticActivity extends ParentActivity {
 
     void conn_get_review(String cosmetic_id, final int page_num) {
         CSConnection conn = ServiceGenerator.createService(activity, CSConnection.class);
-        conn.get_review(cosmetic_id, SharedManager.getInstance().getMe().id, page_num)
+        conn.get_review(cosmetic_id, user_id, page_num)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Review>>() {
