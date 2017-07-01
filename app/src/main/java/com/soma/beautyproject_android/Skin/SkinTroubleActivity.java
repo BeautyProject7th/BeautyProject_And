@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Main.MainActivity_;
 import com.soma.beautyproject_android.MyPage.MyPageActivity_;
 import com.soma.beautyproject_android.Model.GlobalResponse;
@@ -130,7 +129,7 @@ public class SkinTroubleActivity extends ParentActivity {
         skin_trouble_image.put(R.id.LL_skin_trouble_5, setImageList(R.drawable.trouble5_sensitivity,R.drawable.trouble5_select));
         skin_trouble_image.put(R.id.LL_skin_trouble_6, setImageList(R.drawable.trouble6_wrinkle,R.drawable.trouble6_select));
         skin_trouble_image.put(R.id.LL_skin_trouble_7, setImageList(R.drawable.trouble7_acne,R.drawable.trouble7_select));
-        skin_trouble_image.put(R.id.LL_skin_trouble_8, setImageList(R.drawable.trouble8_flush,R.drawable.trouble8_selec));
+        skin_trouble_image.put(R.id.LL_skin_trouble_8, setImageList(R.drawable.trouble8_flush,R.drawable.trouble8_select));
         skin_trouble_image.put(LL_skin_trouble_9, setImageList(R.drawable.trouble9_nothing,R.drawable.trouble9_select));
     }
 
