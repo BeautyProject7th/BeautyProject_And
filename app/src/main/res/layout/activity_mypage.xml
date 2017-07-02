@@ -43,7 +43,7 @@
                 android:layout_marginBottom="17dp"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/group_6"/>
+                android:src="@drawable/user_default"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                     <!--android:layout_width="20dp"-->
                     <!--android:layout_height="20dp"-->
                     <!--android:layout_marginLeft="3dp"-->
-                    <!--android:background="@drawable/group_7"/>-->
+                    <!--android:background="@drawable/dressing_ranking3"/>-->
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -57,7 +57,7 @@ public class LikeVideoListAdapter extends RecyclerView.Adapter<LikeVideoListAdap
     @Override
      public LikeVideoListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_video, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_like_video, parent, false);
             return new ItemViewHolder(v);
         }
         return null;

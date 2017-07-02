@@ -8,11 +8,11 @@
     <RelativeLayout
         android:id="@+id/RR_cosmetic"
         android:layout_width="wrap_content"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
         android:gravity="center">
         <ImageView
             android:id="@+id/IV_cosmetic"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="90dp" />
         <TextView
             android:id="@+id/TV_cosmetic_have"
@@ -31,13 +31,18 @@
         android:layout_height="wrap_content"
         android:text="브랜드명"
         android:textSize="10sp"
+        android:textStyle="bold"
         android:textColor="#fb607d"
         android:layout_marginBottom="4dp"/>
     <TextView
         android:id="@+id/TV_cosmetic_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:gravity="center"
         android:text="화장품명"
         android:textSize="9sp"
+        android:textStyle="bold"
         android:textColor="#4a4a4a"/>
 </LinearLayout>

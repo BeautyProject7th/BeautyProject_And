@@ -34,13 +34,13 @@
             android:gravity="center">
         <RelativeLayout
             android:id="@+id/RR_search"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
-            android:layout_marginRight="13dp">
+            android:layout_marginRight="10dp">
                 <EditText
                     android:id="@+id/ET_search"
                     android:layout_width="match_parent"
@@ -55,20 +55,6 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:textCursorDrawable="@null"/>
-                <!--<AutoCompleteTextView-->
-                    <!--android:id="@+id/ET_search"-->
-                    <!--android:layout_width="215dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:ems="10"-->
-                    <!--android:imeOptions="actionSearch"-->
-                    <!--android:inputType="textAutoComplete|textAutoCorrect"-->
-                    <!--android:hint="영상이나 화장품을 검색해보세요"-->
-                    <!--android:textColorHint="#FFFFFF"-->
-                    <!--android:textSize="15sp"-->
-                    <!--android:textColor="#FFFFFF"-->
-                    <!--android:background="@null">-->
-                        <!--<requestFocus />-->
-                <!--</AutoCompleteTextView>-->
                 <Button
                     android:id="@+id/BT_close_circle"
                     android:layout_toLeftOf="@id/BT_search"

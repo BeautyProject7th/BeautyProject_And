@@ -293,7 +293,6 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
         public ItemViewHolder(View v) {
             super(v);
-            BT_follow = (Button) v.findViewById(R.id.BT_follow);
             IV_user = (ImageView) v.findViewById(R.id.IV_user);
             IV_skin_type = (ImageView) v.findViewById(R.id.IV_skin_type);
             IV_skin_trouble_1 = (ImageView) v.findViewById(R.id.IV_skin_trouble_1);

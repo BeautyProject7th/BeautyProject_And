@@ -614,9 +614,9 @@
                                 android:layout_height="wrap_content">
                                 <include layout="@layout/cell_user" android:id="@+id/ranker_1" />
                                 <ImageView
-                                    android:layout_width="23dp"
-                                    android:layout_height="23dp"
-                                    android:background="@drawable/medal_1"/>
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/dressing_ranking1"/>
                             </RelativeLayout>
 
                             <android.support.v4.widget.Space
@@ -627,9 +627,9 @@
                                 android:layout_height="wrap_content">
                                 <include layout="@layout/cell_user" android:id="@+id/ranker_2" />
                                 <ImageView
-                                    android:layout_width="23dp"
-                                    android:layout_height="23dp"
-                                    android:background="@drawable/medal_2"/>
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/dressing_ranking2"/>
                             </RelativeLayout>
 
                             <android.support.v4.widget.Space
@@ -640,9 +640,9 @@
                                 android:layout_height="wrap_content">
                                 <include layout="@layout/cell_user" android:id="@+id/ranker_3" />
                                 <ImageView
-                                    android:layout_width="23dp"
-                                    android:layout_height="23dp"
-                                    android:background="@drawable/medal_3"/>
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/dressing_ranking3"/>
                             </RelativeLayout>
 
                         </LinearLayout>
