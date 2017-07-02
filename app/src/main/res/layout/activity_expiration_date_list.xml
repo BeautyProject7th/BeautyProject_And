@@ -22,7 +22,7 @@
         android:background="@color/colorGrayBackGround">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:orientation="horizontal"
             android:background="#FFFFFF"
             android:gravity="center_vertical">
@@ -122,7 +122,7 @@
             android:paddingRight="8dp">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="23dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="5dp"
@@ -135,7 +135,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="사용 해제 된 상품 보지 않기"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
                     android:textColor="#fa6e8a" />
                 <RelativeLayout
                     android:id="@+id/RL_check"

@@ -30,6 +30,7 @@ import java.text.ParseException;
 
 
 import static com.soma.beautyproject_android.R.id.IV_brand;
+import static com.soma.beautyproject_android.R.id.RL_expiration_date_day;
 import static com.soma.beautyproject_android.R.id.TV_brand;
 
 
@@ -129,6 +130,8 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
 
             if(dday >= 0){
                 itemViewHolder.TV_expiration_date_day.setText("D-"+dday);
+                itemViewHolder.TV_expiration_date_day.setTextColor(activity.getResources().getColor(R.color.colorAccent));
+                itemViewHolder.RL_expiration_date_day.setBackgroundResource(R.drawable.btn_circle_empty);
             }else{
                 dday*=-1;
                 itemViewHolder.IV_cosmetic_border.setBackgroundResource(R.drawable.ic_rectangle_empty);
@@ -198,6 +201,7 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
         public ImageView IV_cosmetic;
         public TextView TV_expiration_date_day,TV_brand_name,TV_cosmetic_name;
         public ImageView IV_cosmetic_border;
+        public RelativeLayout RL_expiration_date_day;
 
         public ItemViewHolder(View v) {
             super(v);
@@ -206,6 +210,7 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
             TV_brand_name = (TextView) v.findViewById(R.id.TV_brand_name);
             TV_cosmetic_name = (TextView) v.findViewById(R.id.TV_cosmetic_name);
             IV_cosmetic_border = (ImageView) v.findViewById(R.id.IV_cosmetic_border);
+            RL_expiration_date_day = (RelativeLayout) v.findViewById(R.id.RL_expiration_date_day);
 
         }
     }

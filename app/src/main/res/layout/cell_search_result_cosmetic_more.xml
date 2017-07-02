@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cell_search_result_cosmetic_more"
     android:orientation="vertical"
-    android:layout_width="344dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/ic_card"
     android:layout_gravity="center_horizontal"
@@ -21,8 +21,8 @@
             android:layout_marginRight="15dp">
             <ImageView
                 android:id="@+id/IV_cosmetic"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center_vertical"/>
             <TextView
                 android:id="@+id/TV_cosmetic_have"
@@ -38,7 +38,7 @@
         </RelativeLayout>
         <LinearLayout
             android:layout_width="220dp"
-            android:layout_height="75dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
             android:orientation="vertical">
@@ -81,7 +81,7 @@
                     android:numStars="5"
                     android:rating="4"
                     android:isIndicator="true"
-                    style="@style/RatingBar"/>
+                    style="@style/RatingBar_small"/>
                 <Space
                     android:layout_width="3dp"
                     android:layout_height="match_parent" />
@@ -96,6 +96,7 @@
                     android:layout_width="3dp"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/TV_product_review_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

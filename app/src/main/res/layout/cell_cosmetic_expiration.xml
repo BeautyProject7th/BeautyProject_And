@@ -2,9 +2,10 @@
 <LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="90dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@null"
+    android:gravity="center"
     android:layout_marginBottom="10dp">
     <RelativeLayout
         android:id="@+id/RL_cosmetic"
@@ -24,8 +25,8 @@
             android:layout_height="15dp"
             android:background="@drawable/btn_circle"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="4dp">
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="2dp">
             <TextView
                 android:id="@+id/TV_expiration_date_day"
                 android:layout_width="wrap_content"
@@ -48,6 +49,7 @@
         android:gravity="center"
         android:text="브랜드명"
         android:textSize="10sp"
+        android:textStyle="bold"
         android:textColor="#fa6e8a"/>
     <TextView
         android:id="@+id/TV_cosmetic_name"
@@ -55,10 +57,12 @@
         android:maxWidth="85dp"
         android:layout_width="85dp"
         android:layout_height="wrap_content"
-        android:maxLines="3"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:layout_below="@id/IV_cosmetic"
         android:gravity="center"
         android:text="화장품명"
-        android:textSize="11sp"
+        android:textSize="9sp"
+        android:textStyle="bold"
         android:textColor="@color/colorBlackText"/>
 </LinearLayout>
