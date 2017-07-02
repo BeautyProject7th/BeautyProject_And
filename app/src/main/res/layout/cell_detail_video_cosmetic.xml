@@ -3,9 +3,12 @@
     android:id="@+id/LL_cosmetic_rank_1" xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="wrap_content"
-    android:layout_height="110dp"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:padding="4dp">
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp">
     <RelativeLayout
         android:layout_width="75dp"
         android:layout_height="75dp"
@@ -43,6 +46,7 @@
             android:textColor="@color/colorAccent"
             android:textSize="10sp"
             android:textStyle="bold"
+            android:layout_marginBottom="2dp"
             />
         <TextView
             android:id="@+id/TV_cosmetic"
@@ -61,8 +65,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ㅇㅇㅇ"
-            android:textColor="@color/colorBlackText"
+            android:textColor="#4a4a4a"
             android:textSize="9sp"
+            android:layout_marginBottom="3dp"
             />
         <LinearLayout
             android:visibility="gone"
