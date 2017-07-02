@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingRight="15dp"
+        android:layout_marginBottom="8dp">
         <LinearLayout
             android:layout_width="100dp"
             android:layout_height="92dp"
@@ -77,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="12.5dp"
                     android:numStars="5"
-                    style="@style/RatingBar_yellow"/>
+                    style="@style/RatingBar_small"/>
                 <Space
                     android:layout_width="2dp"
                     android:layout_height="match_parent" />
@@ -126,6 +127,7 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="10sp"/>
             </LinearLayout>
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="4dp" />
@@ -133,7 +135,7 @@
             <TextView
                 android:id="@+id/TV_review"
                 android:layout_width="match_parent"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content"
                 android:text="리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰" />
@@ -141,10 +143,10 @@
 
     </LinearLayout>
     <View
+        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e0e0e0"
-        android:layout_marginTop="7.5dp"
         android:layout_marginLeft="7.5dp"
         android:layout_marginRight="7.5dp"/>
 </LinearLayout>

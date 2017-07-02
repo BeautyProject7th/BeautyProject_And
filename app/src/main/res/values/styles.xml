@@ -61,8 +61,8 @@
 
     <style name="RatingBar_yellow" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingstars_yellow</item>
-        <item name="android:minHeight">12dip</item>
-        <item name="android:maxHeight">12dip</item>
+        <item name="android:minHeight">22.5dip</item>
+        <item name="android:maxHeight">22.5dip</item>
     </style>
 
     <style name="RatingBar_small" parent="@android:style/Widget.RatingBar">

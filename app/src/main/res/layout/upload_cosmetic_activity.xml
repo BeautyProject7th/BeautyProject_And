@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:id="@+id/appBarLayout2">
-        <include layout="@layout/toolbar_cosmetic_upload" android:id="@+id/cs_toolbar" />
+        <include layout="@layout/toolbar_only_back" android:id="@+id/cs_toolbar" />
     </android.support.design.widget.AppBarLayout>
 
     <Button
@@ -30,14 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_alignParentStart="true">
         <LinearLayout
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="?attr/actionBarSize">
             <include layout="@layout/detail_about_user_cell" android:id="@+id/about_user_cell" />
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -109,86 +109,128 @@
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="1.5dp"
-                    android:orientation="horizontal"
-                    android:background="@color/colorWhite"
-                    android:paddingLeft="16dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="3"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorBlack"
-                        android:text="별점"/>
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="7"
-                        android:layout_height="wrap_content">
-                        <RatingBar
-                            android:id="@+id/RB_rate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="22.5dp"
-                            android:numStars="5"
-                            android:stepSize="1"
-                            style="@style/largeRatingBar"
-                            android:progressDrawable="@drawable/ratingstars_large"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentStart="true" />
-                    </RelativeLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="120.5dp"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:background="@color/colorWhite"
                     android:layout_marginBottom="1.5dp"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
+                    android:paddingTop="12.5dp"
+                    android:paddingBottom="12.5dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="2"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:textSize="14sp"
                         android:textColor="@color/colorBlack"
                         android:text="구매일"/>
-                    <com.aigestudio.wheelpicker.widgets.WheelDatePicker
-                        android:id="@+id/purchase_date_picker"
+                    <FrameLayout
                         android:layout_width="0dp"
                         android:layout_weight="9"
                         android:layout_height="wrap_content"
                         android:background="@color/colorWhite">
-                    </com.aigestudio.wheelpicker.widgets.WheelDatePicker>
+                        <com.aigestudio.wheelpicker.widgets.WheelDatePicker
+                            android:id="@+id/purchase_date_picker"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite">
+                        </com.aigestudio.wheelpicker.widgets.WheelDatePicker>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center_horizontal">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="3"
+                                android:background="@null"/>
+                            <View
+                                android:layout_width="200dp"
+                                android:layout_height="0.7dp"
+                                android:background="#dcdcdc"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="4"
+                                android:layout_marginTop="2dp"
+                                android:background="@null"/>
+                            <View
+                                android:layout_width="200dp"
+                                android:layout_height="0.7dp"
+                                android:background="#dcdcdc"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="3"
+                                android:background="@null"/>
+                        </LinearLayout>
+                    </FrameLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120.5dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:background="@color/colorWhite"
                     android:layout_marginBottom="1.5dp"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
+                    android:paddingTop="12.5dp"
+                    android:paddingBottom="12.5dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="2"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:textSize="14sp"
                         android:textColor="@color/colorBlack"
                         android:text="유통기한"/>
-                    <com.aigestudio.wheelpicker.widgets.WheelDatePicker
-                        android:id="@+id/expiration_date_picker"
+
+                    <FrameLayout
                         android:layout_width="0dp"
                         android:layout_weight="9"
                         android:layout_height="wrap_content"
                         android:background="@color/colorWhite">
-                    </com.aigestudio.wheelpicker.widgets.WheelDatePicker>
+                        <com.aigestudio.wheelpicker.widgets.WheelDatePicker
+                            android:id="@+id/expiration_date_picker"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite">
+                        </com.aigestudio.wheelpicker.widgets.WheelDatePicker>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center_horizontal">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="3"
+                                android:background="@null"/>
+                            <View
+                                android:layout_width="200dp"
+                                android:layout_height="0.7dp"
+                                android:background="#dcdcdc"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="4"
+                                android:layout_marginTop="2dp"
+                                android:background="@null"/>
+                            <View
+                                android:layout_width="200dp"
+                                android:layout_height="0.7dp"
+                                android:background="#dcdcdc"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="3"
+                                android:background="@null"/>
+                        </LinearLayout>
+                    </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -201,13 +243,29 @@
                     android:paddingBottom="80dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="18.5dp"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorBlack"
-                        android:text="화장품 리뷰"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="18.5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorBlack"
+                            android:text="화장품 리뷰"/>
+                        <RatingBar
+                            android:id="@+id/RB_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            style="@style/RatingBar_yellow"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true" />
+                    </LinearLayout>
                     <EditText
                         android:id="@+id/ET_review"
                         android:layout_width="match_parent"

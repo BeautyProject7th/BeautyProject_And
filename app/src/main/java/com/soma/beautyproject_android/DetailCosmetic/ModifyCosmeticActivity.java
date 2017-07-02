@@ -179,6 +179,8 @@ public class ModifyCosmeticActivity extends ParentActivity {
         purchase_date_picker.setVisibleItemCount(3);
         //purchase_date_picker.setItemTextSize(55);
         purchase_date_picker.setTypeface(Typeface.createFromAsset(getAssets(), "NanumSquareOTFRegular.otf"));
+        purchase_date_picker.setItemTextSize(70);
+        purchase_date_picker.setItemTextColor(getResources().getColor(R.color.colorGrayText));
         purchase_date_picker.setSelectedItemTextColor(getResources().getColor(R.color.colorPrimary));
         purchase_date_picker.setCurved(true);
         //purchase_date_picker.setItemSpace(70);
@@ -202,6 +204,8 @@ public class ModifyCosmeticActivity extends ParentActivity {
         expiration_date_picker.setVisibleItemCount(3);
         //expiration_date_picker.setItemTextSize(55);
         expiration_date_picker.setTypeface(Typeface.createFromAsset(getAssets(), "NanumSquareOTFRegular.otf"));
+        expiration_date_picker.setItemTextSize(70);
+        expiration_date_picker.setItemTextColor(getResources().getColor(R.color.colorGrayText));
         expiration_date_picker.setSelectedItemTextColor(getResources().getColor(R.color.colorPrimary));
         expiration_date_picker.setCurved(true);
         //expiration_date_picker.setItemSpace(70);
