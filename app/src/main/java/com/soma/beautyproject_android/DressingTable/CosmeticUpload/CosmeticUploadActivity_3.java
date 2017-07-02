@@ -183,6 +183,14 @@ public class CosmeticUploadActivity_3 extends ParentActivity {
                 startActivity(requestintent);
             }
         });
+        BT_registration_request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent requestintent = new Intent(getApplicationContext(), RegistrationRequestActivity_.class);
+                requestintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(requestintent);
+            }
+        });
 
         connectTestCall(brand.name, main_category, sub_category, page_num);
 
