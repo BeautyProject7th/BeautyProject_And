@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_3;
+import com.soma.beautyproject_android.DressingTable.CosmeticUpload.DividerItemDecoration;
 import com.soma.beautyproject_android.DressingTable.YourDressingTable.FindUserActivity_;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.R;
@@ -143,9 +145,11 @@ public class SearchFragmentBrand extends Fragment {
 
         if (recyclerView == null) {
             recyclerView = (RecyclerView) view.findViewById(recycler_view);
+
+
+            recyclerView.addItemDecoration(new DividerItemDecoration(activity,1));
             recyclerView.setHasFixedSize(true);
-            layoutManager = new LinearLayoutManager(activity);
-            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setLayoutManager(new GridLayoutManager(activity, 1));
         }
 
         brandList = SharedManager.getInstance().getBrand();

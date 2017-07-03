@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.DressingTable;
 import com.soma.beautyproject_android.Model.Review;
+import com.soma.beautyproject_android.Model.Video;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Search.MoreSearch.CosmeticMoreSearchActivity;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -21,6 +22,8 @@ import com.soma.beautyproject_android.Utils.Constants.Constants;
 import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
+import static com.flurry.sdk.bh.V;
 
 
 /**
@@ -78,6 +81,8 @@ public class DetailCosmeticReviewAdapter extends RecyclerView.Adapter<DetailCosm
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
             Review review = mDataset.get(position);
+
+            if(position==getItemCount()-1) itemViewHolder.line.setVisibility(View.GONE);
 
             int image_url_skin_type = -1;
             int image_url_skin_trouble_1 = -1;
@@ -268,6 +273,7 @@ public class DetailCosmeticReviewAdapter extends RecyclerView.Adapter<DetailCosm
         public ImageView IV_user, IV_skin_type, IV_skin_trouble_1, IV_skin_trouble_2, IV_skin_trouble_3;
         public TextView TV_expiration_date,TV_purchase_date,TV_rating,TV_review,TV_user_name;
         public RatingBar RB_rate;
+        public View line;
         public ItemViewHolder(View v) {
             super(v);
             IV_user = (ImageView) v.findViewById(R.id.IV_user);
@@ -282,6 +288,7 @@ public class DetailCosmeticReviewAdapter extends RecyclerView.Adapter<DetailCosm
             TV_rating = (TextView) v.findViewById(R.id.TV_rating);
             TV_review = (TextView) v.findViewById(R.id.TV_review);
             RB_rate = (RatingBar) v.findViewById(R.id.RB_rate);
+            line = (View) v.findViewById(R.id.line);
         }
     }
 

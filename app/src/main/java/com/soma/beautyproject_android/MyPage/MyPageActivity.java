@@ -31,10 +31,6 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static com.soma.beautyproject_android.R.id.TV_skin_type;
-import static com.soma.beautyproject_android.R.id.TV_user_info;
-
 /**
  * Created by mijeong on 2017. 6. 18..
  */

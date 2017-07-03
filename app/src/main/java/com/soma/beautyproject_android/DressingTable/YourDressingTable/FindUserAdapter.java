@@ -288,7 +288,6 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
     }
 
     public class ItemViewHolder extends FindUserAdapter.ViewHolder {
-        public Button BT_follow;
         public ImageView IV_user, IV_skin_type, IV_skin_trouble_1, IV_skin_trouble_2, IV_skin_trouble_3;
         public TextView TV_user_name;
         public TextView TV_skin_type;
@@ -300,7 +299,6 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
 
         public ItemViewHolder(View v) {
             super(v);
-            BT_follow = (Button) v.findViewById(R.id.BT_follow);
             IV_user = (ImageView) v.findViewById(R.id.IV_user);
             IV_skin_type = (ImageView) v.findViewById(R.id.IV_skin_type);
             IV_skin_trouble_1 = (ImageView) v.findViewById(R.id.IV_skin_trouble_1);
@@ -340,12 +338,10 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     public final void onNext(GlobalResponse response) {
                         if (response.message.equals("Created")) {
                             Toast.makeText(activity, "팔로우 완료", Toast.LENGTH_SHORT).show();
-                            itemViewHolder.IV_follow.setBackgroundResource(R.drawable.btn_follow_check);
-                            itemViewHolder.BT_follow.setBackgroundResource(R.drawable.ic_account_check);
+                            itemViewHolder.IV_follow.setBackgroundResource(R.drawable.find_user_btn);
                         } else if(response.message.equals("Deleted")){
                             Toast.makeText(activity, "팔로우 취소 완료", Toast.LENGTH_SHORT).show();
-                            itemViewHolder.IV_follow.setBackgroundResource(R.drawable.btn_follow);
-                            itemViewHolder.BT_follow.setBackgroundResource(R.drawable.ic_account_plus_4);
+                            itemViewHolder.IV_follow.setBackgroundResource(R.drawable.find_user_btn_blank);
                         }
                     }
                 });
@@ -370,12 +366,10 @@ public class FindUserAdapter extends RecyclerView.Adapter<FindUserAdapter.ViewHo
                     public final void onNext(GlobalResponse response) {
                         if (response.message.equals("Conflict. Already exists")) {
                             Log.i("aaaa", response.message.toString());
-                            itemViewHolder.IV_follow.setBackgroundResource(R.drawable.btn_follow_check);
-                            itemViewHolder.BT_follow.setBackgroundResource(R.drawable.ic_account_check);
+                            itemViewHolder.IV_follow.setBackgroundResource(R.drawable.find_user_btn);
                         } else if(response.message.equals("No content")){
                             Log.i("aaaa", response.message.toString());
-                            itemViewHolder.IV_follow.setBackgroundResource(R.drawable.btn_follow);
-                            itemViewHolder.BT_follow.setBackgroundResource(R.drawable.ic_account_plus_4);
+                            itemViewHolder.IV_follow.setBackgroundResource(R.drawable.find_user_btn_blank);
                             //Toast.makeText(activity, "", Toast.LENGTH_SHORT).show();
                         }
                     }

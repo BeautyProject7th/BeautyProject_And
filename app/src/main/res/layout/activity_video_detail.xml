@@ -28,8 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <RelativeLayout
-                android:layout_width="344dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/ic_card"
@@ -40,23 +41,20 @@
                 android:paddingBottom="15dp">
                 <com.google.android.youtube.player.YouTubePlayerView
                     android:id="@+id/youtube_view"
-                    android:layout_width="320dp"
-                    android:layout_height="180dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"/>
-                <!--<ImageView-->
-                    <!--android:id="@+id/IV_video"-->
-                    <!--android:layout_width="320dp"-->
-                    <!--android:layout_height="180dp"-->
-                    <!--android:background="@null"-->
-                    <!--android:layout_marginBottom="5dp"/>-->
                 <TextView
                     android:id="@+id/TV_video_name"
                     android:layout_below="@id/youtube_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:text="[ENG] 빈티지 플라워 아트메이크업(Vintage Flower Art Makeup) | 이사배"
                     android:textSize="13sp"
-                    android:textColor="#4a4a4a"
+                    android:textStyle="bold"
+                    android:textColor="#4a494a"
                     android:lineSpacingExtra="3.5sp"/>
                 <LinearLayout
                     android:id="@+id/LL_video_info"
@@ -64,9 +62,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_below="@id/TV_video_name"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp">
                     <ImageView
                         android:layout_width="9dp"
                         android:layout_height="9dp"
@@ -98,19 +98,21 @@
                         android:textSize="9sp"
                         android:layout_marginLeft="2dp"/>
                 </LinearLayout>
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_height="43dp"
                     android:layout_below="@+id/LL_video_info">
+                    <LinearLayout
+                        android:id="@+id/creator_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                     <ImageView
                         android:id="@+id/IV_youtuber"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@null"/>
-                    <Space
-                        android:layout_width="7dp"
-                        android:layout_height="match_parent" />
+                        android:background="@null"
+                        android:layout_marginRight="7dp"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -121,6 +123,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="youtuber_name"
+                            android:textStyle="bold"
                             android:textSize="12sp"
                             android:textColor="#fc627f"/>
 
@@ -165,13 +168,16 @@
                                 android:layout_height="match_parent" />
                         </LinearLayout>
                     </LinearLayout>
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="7dp"
-                        android:background="@color/colorGrayBackGround"/>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="7dp"
+                            android:background="@color/colorGrayBackGround"/>
+                    </LinearLayout>
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_toLeftOf="@+id/right_area"
+                        android:layout_toRightOf="@+id/creator_area"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <LinearLayout
@@ -199,7 +205,7 @@
                                 android:id="@+id/TV_follower_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12sp"
+                                android:textSize="11sp"
                                 android:textColor="@color/colorBlackText"
                                 android:text="123,123"/>
                         </LinearLayout>
@@ -231,17 +237,21 @@
                                 android:id="@+id/TV_dressing_table_have"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12sp"
+                                android:textSize="11sp"
                                 android:textColor="@color/colorBlackText"
                                 android:text="화장대 보유"/>
                     </LinearLayout>
                     </LinearLayout>
                     <View
+                        android:id="@+id/right_area"
+                        android:layout_toLeftOf="@+id/like_area"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_margin="7dp"
                         android:background="@color/colorGrayBackGround"/>
                     <LinearLayout
+                        android:id="@+id/like_area"
+                        android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -256,14 +266,15 @@
                             android:textColor="@color/colorBlackText"/>
                         <Button
                             android:id="@+id/BT_like_video"
-                            android:layout_width="30dp"
-                            android:layout_height="26dp"
+                            android:layout_width="26dp"
+                            android:layout_height="20dp"
                             android:orientation="vertical"
                             android:background="@drawable/ic_heart"/>
                     </LinearLayout>
-                </LinearLayout>
+                </RelativeLayout>
             </RelativeLayout>
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -274,6 +285,7 @@
                     android:layout_height="wrap_content"
                     android:text="영상에 나온 제품"
                     android:textSize="13sp"
+                    android:textStyle="bold"
                     android:textColor="#4a494a"
                     android:background="@null"/>
                 <android.support.v7.widget.RecyclerView
@@ -281,9 +293,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:scrollbars="vertical"
-                    android:layout_marginTop="30dp"/>
-            </RelativeLayout>
+                    android:scrollbars="vertical"/>
+            </LinearLayout>
 
         </LinearLayout>
 

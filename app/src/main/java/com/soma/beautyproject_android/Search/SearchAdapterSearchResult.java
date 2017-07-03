@@ -4,8 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,37 +14,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
-import com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_1;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
-import com.soma.beautyproject_android.Model.Video;
 import com.soma.beautyproject_android.Model.Video_Youtuber;
-import com.soma.beautyproject_android.Model.Youtuber;
 import com.soma.beautyproject_android.R;
-import com.soma.beautyproject_android.Model.Trouble;
-import com.soma.beautyproject_android.Search.MoreSearch.*;
-import com.soma.beautyproject_android.Utils.Connections.CSConnection;
-import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
 import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
-import static com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_2.adapter;
-import static com.soma.beautyproject_android.R.id.LL_skin_trouble_9;
 
 
 /**
@@ -132,7 +111,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             return new CosmeticViewHolder(v);
         } else if (viewType == TYPE_SEARCH_RESULT_VIDEO) {
             //View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_video, parent, false);
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_video2, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_search_result_video, parent, false);
             return new VideoViewHolder(v);
         }
 //        } else if (viewType == TYPE_TAIL_SIMILAR) {
@@ -201,7 +180,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                     diskCacheStrategy(DiskCacheStrategy.SOURCE).
                     into(cosmeticPerfectViewHolder.IV_cosmetic);
             cosmeticPerfectViewHolder.TV_brand.setText(mDataset_cosmetic.get(0).brand);
-            cosmeticPerfectViewHolder.TV_product_name.setText(mDataset_cosmetic.get(0).product_name.replaceAll(mDataset_cosmetic.get(0).brand,""));
+            cosmeticPerfectViewHolder.TV_product_name.setText(mDataset_cosmetic.get(0).product_name.replaceAll(mDataset_cosmetic.get(0).brand+" ",""));
             cosmeticPerfectViewHolder.TV_product_price.setText(mDataset_cosmetic.get(0).price+"원");
             cosmeticPerfectViewHolder.RB_rate.setRating(mDataset_cosmetic.get(0).rate_num);
             cosmeticPerfectViewHolder.TV_rate_num.setText(String.valueOf(mDataset_cosmetic.get(0).rate_num));
@@ -212,7 +191,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                 public void onClick(View v) {
                     Intent intent = new Intent(fragment.activity, DetailCosmeticActivity_.class);
                     intent.putExtra("cosmetic_id", cosmetic_perfect.id);
-                    intent.putExtra("cosmetic_name", cosmetic_perfect.product_name.replaceAll(cosmetic_perfect.brand,""));
+                    intent.putExtra("cosmetic_name", cosmetic_perfect.product_name.replaceAll(cosmetic_perfect.brand+" ",""));
                     intent.putExtra("user_id",SharedManager.getInstance().getMe().id);
                     fragment.activity.startActivity(intent);
                     fragment.activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
@@ -271,7 +250,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                         diskCacheStrategy(DiskCacheStrategy.SOURCE).
                         into(IV_cosmetic);
                 TV_brand.setText(mDataset_cosmetic.get(i).brand);
-                TV_cosmetic_name.setText(mDataset_cosmetic.get(i).product_name.replaceAll(mDataset_cosmetic.get(i).brand,""));
+                TV_cosmetic_name.setText(mDataset_cosmetic.get(i).product_name.replaceAll(mDataset_cosmetic.get(i).brand+" ",""));
 
                 LL_cosmetic.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -330,10 +309,10 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
                 case "중성":
                     image_url_skin_type = R.drawable.skin_type2;
                     break;
-                case "지성(수부지)":
+                case "지성":
                     image_url_skin_type = R.drawable.skin_type3;
                     break;
-                case "지성(일반)":
+                case "수부지":
                     image_url_skin_type = R.drawable.skin_type4;
                     break;
 

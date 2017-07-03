@@ -67,6 +67,7 @@ import rx.schedulers.Schedulers;
 
 import static com.soma.beautyproject_android.R.id.BT_find_user;
 import static com.soma.beautyproject_android.R.id.TV_expiration_date;
+import static com.soma.beautyproject_android.R.id.troublecheck;
 
 @EActivity(R.layout.activity_dressing_table)
 public class DressingTableActivity extends ParentActivity {
@@ -203,6 +204,7 @@ public class DressingTableActivity extends ParentActivity {
     @Click
     void BT_expiration_date(){
         Intent intent = new Intent(activity, CosmeticExpirationDateActivity.class);
+        intent.putExtra("before_dressing",true);
         startActivity(intent);
         activity.overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
     }

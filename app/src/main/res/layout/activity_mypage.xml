@@ -43,7 +43,7 @@
                 android:layout_marginBottom="17dp"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/group_6"/>
+                android:src="@drawable/user_default"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                     <!--android:layout_width="20dp"-->
                     <!--android:layout_height="20dp"-->
                     <!--android:layout_marginLeft="3dp"-->
-                    <!--android:background="@drawable/group_7"/>-->
+                    <!--android:background="@drawable/dressing_ranking3"/>-->
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -213,6 +213,7 @@
                         android:layout_width="157.5dp"
                         android:layout_height="40dp"
                         android:text="피부 타입 수정"
+                        android:textStyle="bold"
                         android:textSize="13.5sp"
                         android:textColor="#FFFFFF"
                         android:background="@drawable/rectangle_purchase"/>
@@ -222,6 +223,7 @@
                         android:layout_width="157.5dp"
                         android:layout_height="40dp"
                         android:text="피부 고민 수정"
+                        android:textStyle="bold"
                         android:textSize="13.5sp"
                         android:textColor="#FFFFFF"
                         android:background="@drawable/rectangle_purchase"/>
@@ -237,6 +239,7 @@
                         android:layout_height="40dp"
                         android:text="찜한 화장품 보기"
                         android:textSize="13.5sp"
+                        android:textStyle="bold"
                         android:textColor="#FFFFFF"
                         android:background="@drawable/rectangle_purchase"/>
                     <Button
@@ -246,6 +249,7 @@
                         android:layout_height="40dp"
                         android:text="찜한 영상 보기"
                         android:textSize="13.5sp"
+                        android:textStyle="bold"
                         android:textColor="#FFFFFF"
                         android:background="@drawable/rectangle_purchase"/>
                 </LinearLayout>

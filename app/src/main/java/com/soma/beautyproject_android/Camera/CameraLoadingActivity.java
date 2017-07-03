@@ -17,10 +17,7 @@ import com.bumptech.glide.Glide;
 import com.soma.beautyproject_android.ParentActivity;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Connections.CSConnection;
-import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator;
-import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator_ML;
-import com.soma.beautyproject_android.Utils.Constants.Constants;
-import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
+import com.soma.beautyproject_android.Utils.Connections.ServiceGenerator_ml;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -156,7 +153,7 @@ public class CameraLoadingActivity extends ParentActivity {
 
 
     void conn_get_call_ml_server(String filename) {
-        CSConnection conn = ServiceGenerator_ML.createService(activity,CSConnection.class);
+        CSConnection conn = ServiceGenerator_ml.createService(activity,CSConnection.class);
         conn.get_call_ml_server(filename)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

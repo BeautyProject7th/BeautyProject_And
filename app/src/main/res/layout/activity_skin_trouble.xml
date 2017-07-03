@@ -44,7 +44,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/colorWhite"
-            android:gravity="center">
+            android:paddingTop="40dp"
+            android:gravity="center_horizontal">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,13 +56,18 @@
                     android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
-                    <ImageView
-                        android:id="@+id/IV_skin_trouble_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/trouble1_darkcircle"
-                        android:layout_marginBottom="8dp"/>
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp">
+                        <ImageView
+                            android:id="@+id/IV_skin_trouble_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/trouble1_darkcircle"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/TV_skin_trouble_1"
                         android:layout_alignParentBottom="true"
@@ -79,13 +85,18 @@
                     android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp">
                     <ImageView
                         android:id="@+id/IV_skin_trouble_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/trouble2_blackhead"
-                        android:layout_marginBottom="8dp"/>
+                        android:src="@drawable/trouble2_blackhead"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/TV_skin_trouble_2"
                         android:layout_alignParentBottom="true"
@@ -102,13 +113,18 @@
                     android:layout_width="84dp"
                     android:layout_height="104dp"
                     android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp">
                     <ImageView
                         android:id="@+id/IV_skin_trouble_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/trouble3_pore"
-                        android:layout_marginBottom="8dp"/>
+                        android:src="@drawable/trouble3_pore"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/TV_skin_trouble_3"
                         android:layout_alignParentBottom="true"
@@ -132,13 +148,19 @@
                     android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
+
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp">
                     <ImageView
                         android:id="@+id/IV_skin_trouble_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/trouble4_deadskin"
-                        android:layout_marginBottom="8dp"/>
+                        android:src="@drawable/trouble4_deadskin"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/TV_skin_trouble_4"
                         android:layout_alignParentBottom="true"
@@ -156,13 +178,19 @@
                     android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
+
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp">
                     <ImageView
                         android:id="@+id/IV_skin_trouble_5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/trouble5_sensitivity"
-                        android:layout_marginBottom="8dp"/>
+                        android:src="@drawable/trouble5_sensitivity"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/TV_skin_trouble_5"
                         android:layout_alignParentBottom="true"
@@ -179,13 +207,19 @@
                     android:layout_width="84dp"
                     android:layout_height="104dp"
                     android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp">
                     <ImageView
                         android:id="@+id/IV_skin_trouble_6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/trouble6_wrinkle"
-                        android:layout_marginBottom="8dp"/>
+                        android:src="@drawable/trouble6_wrinkle"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/TV_skin_trouble_6"
                         android:layout_width="wrap_content"
@@ -209,13 +243,19 @@
                     android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
+
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp">
                     <ImageView
                         android:id="@+id/IV_skin_trouble_7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/trouble7_acne"
-                        android:layout_marginBottom="8dp"/>
+                        android:src="@drawable/trouble7_acne"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/TV_skin_trouble_7"
                         android:layout_alignParentBottom="true"
@@ -233,13 +273,19 @@
                     android:layout_height="104dp"
                     android:orientation="vertical"
                     android:layout_marginRight="33.5dp">
+
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp">
                     <ImageView
                         android:id="@+id/IV_skin_trouble_8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/trouble8_flush"
-                        android:layout_marginBottom="8dp"/>
+                        android:src="@drawable/trouble8_flush"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/TV_skin_trouble_8"
                         android:layout_alignParentBottom="true"
@@ -256,13 +302,19 @@
                     android:layout_width="84dp"
                     android:layout_height="104dp"
                     android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="8dp">
                     <ImageView
                         android:id="@+id/IV_skin_trouble_9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/trouble9_nothing"
-                        android:layout_marginBottom="8dp"/>
+                        android:src="@drawable/trouble9_nothing"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/TV_skin_trouble_9"
                         android:layout_alignParentBottom="true"

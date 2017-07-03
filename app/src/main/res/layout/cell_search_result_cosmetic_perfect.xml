@@ -28,7 +28,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
         <ImageView
             android:id="@+id/IV_cosmetic"
             android:layout_width="75dp"
@@ -57,6 +58,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="#4a494a"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:lineSpacingExtra="6sp"
                 android:text="에코세이프티 노세범 썬크림"
                 android:layout_marginBottom="3dp"/>
@@ -81,7 +84,7 @@
                     android:numStars="5"
                     android:rating="4"
                     android:isIndicator="true"
-                    style="@style/RatingBar"/>
+                    style="@style/RatingBar_small"/>
                 <Space
                     android:layout_width="3dp"
                     android:layout_height="match_parent" />

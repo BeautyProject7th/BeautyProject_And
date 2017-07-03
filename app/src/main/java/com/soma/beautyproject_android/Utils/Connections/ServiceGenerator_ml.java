@@ -18,7 +18,7 @@ import retrofit2.RxJavaCallAdapterFactory;
 /**
  * Created by kksd0900 on 16. 9. 29..
  */
-public class ServiceGenerator_ML {
+public class ServiceGenerator_ml {
     public static <S> S createService(Context context, Class<S> serviceClass) {
 
         /**

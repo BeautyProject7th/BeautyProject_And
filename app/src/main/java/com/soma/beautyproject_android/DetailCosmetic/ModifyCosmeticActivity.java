@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.DressingTable;
 import com.soma.beautyproject_android.Model.GlobalResponse;
@@ -130,6 +131,8 @@ public class ModifyCosmeticActivity extends ParentActivity {
         Glide.with(activity).
                 load(image_url).
                 thumbnail(0.1f).
+                dontTransform().
+                diskCacheStrategy(DiskCacheStrategy.SOURCE).
                 into(IV_product);
         TV_cosmetic.setText(cosmetic.product_name);
         TV_main_category.setText(cosmetic.main_category);
@@ -176,6 +179,8 @@ public class ModifyCosmeticActivity extends ParentActivity {
         purchase_date_picker.setVisibleItemCount(3);
         //purchase_date_picker.setItemTextSize(55);
         purchase_date_picker.setTypeface(Typeface.createFromAsset(getAssets(), "NanumSquareOTFRegular.otf"));
+        purchase_date_picker.setItemTextSize(70);
+        purchase_date_picker.setItemTextColor(getResources().getColor(R.color.colorGrayText));
         purchase_date_picker.setSelectedItemTextColor(getResources().getColor(R.color.colorPrimary));
         purchase_date_picker.setCurved(true);
         //purchase_date_picker.setItemSpace(70);
@@ -199,6 +204,8 @@ public class ModifyCosmeticActivity extends ParentActivity {
         expiration_date_picker.setVisibleItemCount(3);
         //expiration_date_picker.setItemTextSize(55);
         expiration_date_picker.setTypeface(Typeface.createFromAsset(getAssets(), "NanumSquareOTFRegular.otf"));
+        expiration_date_picker.setItemTextSize(70);
+        expiration_date_picker.setItemTextColor(getResources().getColor(R.color.colorGrayText));
         expiration_date_picker.setSelectedItemTextColor(getResources().getColor(R.color.colorPrimary));
         expiration_date_picker.setCurved(true);
         //expiration_date_picker.setItemSpace(70);

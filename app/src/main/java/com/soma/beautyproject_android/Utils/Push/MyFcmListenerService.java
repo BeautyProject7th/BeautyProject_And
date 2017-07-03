@@ -15,6 +15,7 @@ import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Splash.SplashActivity;
 import com.soma.beautyproject_android.Splash.SplashActivity_;
 import com.soma.beautyproject_android.Utils.SharedManager.PreferenceManager;
+import com.soma.beautyproject_android.Utils.SharedManager.SharedManager;
 
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;

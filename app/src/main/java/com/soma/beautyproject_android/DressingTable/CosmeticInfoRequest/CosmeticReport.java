@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.DressingTable.DressingTableActivity_;
 import com.soma.beautyproject_android.Model.Cosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
@@ -113,6 +114,8 @@ public class CosmeticReport extends ParentActivity {
         Glide.with(activity).
                 load(image_url).
                 thumbnail(0.1f).
+                dontTransform()
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE).
                 into(IV_product);
     }
 

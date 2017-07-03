@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="145dp"
-    android:layout_height="114dp"
+    android:layout_height="wrap_content"
     android:background="@null">
     <ImageView
         android:id="@+id/IV_video_img"
@@ -15,16 +15,20 @@
         android:text=""
         android:textColor="#fb607d"
         android:textSize="10sp"
+        android:textStyle="bold"
         android:layout_below="@id/IV_video_img"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true" />
     <TextView
         android:id="@+id/TV_video_name"
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text=""
         android:textColor="#4a4a4a"
         android:textSize="9sp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:layout_below="@id/TV_creator_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"/>

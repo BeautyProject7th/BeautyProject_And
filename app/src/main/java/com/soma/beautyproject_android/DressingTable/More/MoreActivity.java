@@ -16,6 +16,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import static android.R.attr.fragment;
+import static com.soma.beautyproject_android.DressingTable.CosmeticUpload.CosmeticUploadActivity_2.adapter;
 
 @EActivity(R.layout.activity_more)
 public class MoreActivity extends ParentActivity {
@@ -42,6 +43,7 @@ public class MoreActivity extends ParentActivity {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
+
 }
 
 
