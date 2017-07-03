@@ -113,16 +113,15 @@ public class CameraLoadingActivity extends ParentActivity {
         uithread_down();
         uithread_up();
 
-        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
-                @Override
-                public void run() {
-                    Intent intent = new Intent(getApplicationContext(), CameraResultActivity_.class);
-                    intent.putExtra("gallery_flag", flag);
-                    startActivity(intent);
-                    finish();
-
-                }
-            }, 4000);
+//        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+//                @Override
+//                public void run() {
+//                    Intent intent = new Intent(getApplicationContext(), CameraResultActivity_.class);
+//                    intent.putExtra("gallery_flag", flag);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//        }, 40000);
     }
 
 
@@ -164,6 +163,7 @@ public class CameraLoadingActivity extends ParentActivity {
                 .subscribe(new Subscriber<List<String>>() {
                     @Override
                     public final void onCompleted() {
+
                     }
                     @Override
                     public final void onError(Throwable e) {
@@ -173,6 +173,19 @@ public class CameraLoadingActivity extends ParentActivity {
                     @Override
                     public final void onNext(final List<String> response) {
                         if (response != null) {
+
+                            String isFace = response.get(0);
+                            Log.i("isFace", "isFace : " + isFace);
+                            if(isFace.equals("48")){ // 얼굴 아님 48 => '0'의 아스키코드 값
+                                Toast.makeText(getApplicationContext(), "재촬영 해주세요.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), CameraMainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Intent intent = new Intent(getApplicationContext(), CameraResultActivity_.class);
+                                startActivity(intent);
+                                finish();
+                            }
                             //Toast.makeText(activity, ""+response.get(0).toString(), Toast.LENGTH_SHORT).show();
                         } else{
 

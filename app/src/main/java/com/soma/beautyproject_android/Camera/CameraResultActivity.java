@@ -99,6 +99,7 @@ public class CameraResultActivity extends ParentActivity {
         this.activity = this;
         toolbar_title.setText("화장법 찾기 결과");
 
+
         creator = new RelativeLayout[3];
 
         creator[0] = (RelativeLayout)findViewById(R.id.creator_1);

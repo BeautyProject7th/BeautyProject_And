@@ -8,6 +8,8 @@ import com.soma.beautyproject_android.Utils.Connections.Intercepter.AddCookiesIn
 import com.soma.beautyproject_android.Utils.Connections.Intercepter.ReceivedCookiesInterceptor;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
@@ -32,6 +34,7 @@ public class ServiceGenerator_ML {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new ReceivedCookiesInterceptor(context))
                 .addNetworkInterceptor(new AddCookiesInterceptor(context))
+                .readTimeout(60, TimeUnit.SECONDS).connectTimeout(60, TimeUnit.SECONDS)
                 .build();
 
         Retrofit.Builder builder = new Retrofit.Builder()
