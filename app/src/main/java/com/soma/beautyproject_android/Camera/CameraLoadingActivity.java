@@ -74,7 +74,7 @@ public class CameraLoadingActivity extends ParentActivity {
 
     void refresh(){
        //conn_get_my_info();
-        conn_get_call_ml_server(filename);
+        //conn_get_call_ml_server(filename);
     }
 
     @AfterViews
@@ -110,15 +110,15 @@ public class CameraLoadingActivity extends ParentActivity {
         uithread_down();
         uithread_up();
 
-//        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
-//                @Override
-//                public void run() {
-//                    Intent intent = new Intent(getApplicationContext(), CameraResultActivity_.class);
-//                    intent.putExtra("gallery_flag", flag);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//        }, 40000);
+        new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getApplicationContext(), CameraResultActivity_.class);
+                    intent.putExtra("gallery_flag", flag);
+                    startActivity(intent);
+                    finish();
+                }
+        }, 4000);
     }
 
 

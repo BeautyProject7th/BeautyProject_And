@@ -351,6 +351,7 @@ public class MainActivity extends ParentActivity {
                                 Glide.with(activity).
                                         load(Constants.IMAGE_BASE_URL_cosmetics+response.get(i).img_src).
                                         thumbnail(0.1f).
+                                        dontTransform().
                                         diskCacheStrategy(DiskCacheStrategy.SOURCE).
                                         into(IV_recommend_cosmetic_rank[i]);
                                 TV_recommend_cosmetic_rank_brand[i].setText(response.get(i).brand);
