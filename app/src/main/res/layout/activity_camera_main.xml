@@ -9,13 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageView
-        android:id="@+id/IV_grid"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:background="@drawable/ic_camera_guideline"/>
-
     <TextView
         android:id="@+id/TV_guide"
         android:layout_marginTop="150dp"
@@ -88,4 +81,11 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="25dp"
         android:background="@drawable/ic_exchange" />
+
+    <ImageView
+        android:id="@+id/IV_grid"
+        android:layout_width="156dp"
+        android:layout_height="219dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_camera_guideline"/>
 </FrameLayout>
