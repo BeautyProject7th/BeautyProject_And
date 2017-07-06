@@ -119,8 +119,6 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
                 e.printStackTrace();
             }
 
-
-
             long time = (long)(expiration_calendar.getTimeInMillis() - now_calendar.getTimeInMillis());
             Log.i("xzc", "now_calendar.compareTo(expiration_calendar) : " + time);
             //expiration_calendar.setTimeInMillis((long(expiration_calendar.getTimeInMillis() - now_calendar.getTimeInMillis()));
@@ -141,7 +139,6 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
                 itemViewHolder.TV_expiration_date_day.setText("D+"+dday);
             }
 
-//
 //            Date resultdate = new Date(c.getTimeInMillis());
 //            expirationCosmetic.expiration_date
 //
