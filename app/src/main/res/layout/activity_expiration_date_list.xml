@@ -64,20 +64,20 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
-                <!--<ImageView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:background="@drawable/ic_sort" />-->
-                <!--<Space-->
-                    <!--android:layout_width="5dp"-->
-                    <!--android:layout_height="match_parent" />-->
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:text="필터"-->
-                    <!--android:textColor="#9b9b9b"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_gravity="center"/>-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_sort" />
+                <Space
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="필터"
+                    android:textColor="#9b9b9b"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout

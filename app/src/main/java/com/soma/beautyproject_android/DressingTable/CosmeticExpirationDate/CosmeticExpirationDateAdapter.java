@@ -132,12 +132,14 @@ public class CosmeticExpirationDateAdapter extends RecyclerView.Adapter<Cosmetic
                 itemViewHolder.TV_expiration_date_day.setText("D-"+dday);
                 itemViewHolder.TV_expiration_date_day.setTextColor(activity.getResources().getColor(R.color.colorAccent));
                 itemViewHolder.RL_expiration_date_day.setBackgroundResource(R.drawable.btn_circle_empty);
+                itemViewHolder.IV_cosmetic_border.setBackgroundResource(0);
             }else{
                 dday*=-1;
                 itemViewHolder.IV_cosmetic_border.setBackgroundResource(R.drawable.ic_rectangle_empty);
+                itemViewHolder.RL_expiration_date_day.setBackgroundResource(R.drawable.btn_circle);
+                itemViewHolder.TV_expiration_date_day.setTextColor(activity.getResources().getColor(R.color.colorWhite));
                 itemViewHolder.TV_expiration_date_day.setText("D+"+dday);
             }
-
 
 //
 //            Date resultdate = new Date(c.getTimeInMillis());
