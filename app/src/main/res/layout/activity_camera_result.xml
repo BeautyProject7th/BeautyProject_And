@@ -17,11 +17,18 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/IV_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
                 <LinearLayout
                     android:id="@+id/LL_background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
+                    android:background="@null"
                     android:layout_marginTop="?attr/actionBarSize">
                     <Space
                         android:layout_width="match_parent"
@@ -44,7 +51,7 @@
                         android:textColor="#000000"/>
                     <RelativeLayout
                         android:layout_width="344dp"
-                        android:layout_height="200dp"
+                        android:layout_height="180dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="8dp"
                         android:paddingBottom="15dp"
@@ -243,12 +250,12 @@
                         android:background="@drawable/rectangle_18_copy_2" />
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/IV_background"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/IV_background"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_alignParentStart="true" />-->
             </RelativeLayout>
 
         </LinearLayout>
