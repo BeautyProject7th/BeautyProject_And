@@ -82,6 +82,10 @@ public class SearchFragmentBrand extends Fragment {
     Toolbar cs_toolbar;
 
     ArrayAdapter<String> autoCompleteAdapter;
+
+    private RecyclerView recyclerView_recommand;
+    public SearchAdapterRecommand adapter_recommand;
+
     /**
      * Create a new instance of the fragment
      */
@@ -124,6 +128,26 @@ public class SearchFragmentBrand extends Fragment {
             }, activity, activity);
         }
         recyclerView_auto_complete.setAdapter(adapter_auto_complete);
+
+
+        if (recyclerView_recommand == null) {
+            recyclerView_recommand = (RecyclerView) view.findViewById(R.id.RV_search_recommand);
+            recyclerView_recommand.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(activity);
+            recyclerView_recommand.setLayoutManager(layoutManager);
+        }
+
+        if (adapter_recommand == null) {
+            adapter_recommand = new SearchAdapterRecommand(new SearchAdapterRecommand.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    ET_search.setText(adapter_recommand.getItem(position).toString());
+                    BT_search.callOnClick();
+                }
+            }, activity, activity);
+        }
+        recyclerView_recommand.setAdapter(adapter_recommand);
+
 
         people_search = (LinearLayout) view.findViewById(R.id.people_search);
 
@@ -246,6 +270,19 @@ public class SearchFragmentBrand extends Fragment {
             }
         });
 
+        ET_search.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    if(ET_search.getText().toString().equals("")){
+                        LL_non_search_auto_complete.setVisibility(View.INVISIBLE);
+                        recyclerView_recommand.setVisibility(View.VISIBLE);
+                        conn_recommand_search("a");
+                    }
+                }
+            }
+        });
+
     }
 
 
@@ -263,13 +300,17 @@ public class SearchFragmentBrand extends Fragment {
 
         public void onTextChanged(CharSequence s, int start, int before, int count)
         {
+            activity.curKeyword = s.toString();
             if(s.toString().equals("")){
                 adapter_auto_complete.clear();
-                LL_non_search_auto_complete.setVisibility(View.VISIBLE);
+                //LL_non_search_auto_complete.setVisibility(View.VISIBLE);
                 recyclerView_auto_complete.setVisibility(View.INVISIBLE);
+                recyclerView_recommand.setVisibility(View.VISIBLE);
+                conn_recommand_search("a");
             }else{
-                LL_non_search_auto_complete.setVisibility(View.INVISIBLE);
+                //LL_non_search_auto_complete.setVisibility(View.INVISIBLE);
                 recyclerView_auto_complete.setVisibility(View.VISIBLE);
+                recyclerView_recommand.setVisibility(View.GONE);
                 conn_auto_complete_search(s.toString());
             }
 
@@ -304,6 +345,35 @@ public class SearchFragmentBrand extends Fragment {
                             adapter_auto_complete.clear();
                             for(int i=0;i<response.size();i++){
                                 adapter_auto_complete.addData(response.get(i));
+                            }
+                        } else{
+                        }
+                    }
+                });
+    }
+
+
+    void conn_recommand_search(String keyword) {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.recommand_search(keyword)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+                        adapter_recommand.notifyDataSetChanged();
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(activity, "conn_auto_complete_search 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<String> response) {
+                        if (response != null) {
+                            adapter_recommand.clear();
+                            for(int i=0;i<response.size();i++){
+                                adapter_recommand.addData(response.get(i));
                             }
                         } else{
                         }

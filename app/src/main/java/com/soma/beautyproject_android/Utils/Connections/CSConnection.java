@@ -5,6 +5,7 @@ import com.soma.beautyproject_android.Main.MainActivity;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Category;
 import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.CosmeticStatus;
 import com.soma.beautyproject_android.Model.DressingTable;
 import com.soma.beautyproject_android.Model.ExpirationCosmetic;
 import com.soma.beautyproject_android.Model.GlobalResponse;
@@ -44,7 +45,6 @@ public interface CSConnection{
 
     @GET("/users/{user_id}")
     Observable<User> oneUser_get(@Path("user_id") String user_id);
-
 
 
 
@@ -227,6 +227,9 @@ public interface CSConnection{
     @GET("/cosmetics/search/auto_complete/{keyword}")
     Observable<List<String>> auto_complete_search(@Path("keyword") String keyword);
 
+    @GET("/cosmetics/search/recommand/{keyword}")
+    Observable<List<String>> recommand_search(@Path("keyword") String keyword);
+
     @GET("/brand/search/{keyword}")
     Observable<List<Brand>> search_brand(@Path("keyword") String keyword);
 
@@ -325,7 +328,10 @@ public interface CSConnection{
     Observable<GlobalResponse> train_video_view(@Body Map<String, Object> fields);
 
     @GET("cosmetics/search2/{user_id}/{query}")
-    Observable<List<Cosmetic>> search_cosmetic_get(@Path("user_id") String user_id,@Path("query") String query);
+    Observable<List<CosmeticStatus>> search_cosmetic_get(@Path("user_id") String user_id, @Path("query") String query);
+
+    @GET("cosmetics/stat/{user_id}/{cosmetic_id}")
+    Observable<List<String>> search_cosmetic_get_stat(@Path("user_id") String user_id, @Path("cosmetic_id") String cosmetic_id);
 
     @GET("cosmetics/recommend/{user_id}")
     Observable<List<Cosmetic>> ranking_cosmetic_get(@Path("user_id") String user_id);

@@ -46,7 +46,6 @@ import rx.schedulers.Schedulers;
 public class CameraResultActivity extends ParentActivity {
     CameraResultActivity activity;
 
-
     @ViewById
     ImageView IV_user;
 
@@ -98,6 +97,7 @@ public class CameraResultActivity extends ParentActivity {
     void afterBindingView() {
         this.activity = this;
         toolbar_title.setText("화장법 찾기 결과");
+
 
         creator = new RelativeLayout[3];
 

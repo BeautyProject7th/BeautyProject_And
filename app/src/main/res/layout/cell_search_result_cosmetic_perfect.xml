@@ -30,13 +30,33 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="15dp">
-        <ImageView
-            android:id="@+id/IV_cosmetic"
+        <LinearLayout
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_gravity="center_vertical"
             android:layout_marginLeft="25dp"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp">
+            <RelativeLayout
+                android:id="@+id/RR_cosmetic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/IV_cosmetic"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/TV_cosmetic_have"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:text="보유"
+                    android:textSize="8sp"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/ic_have"/>
+            </RelativeLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="220dp"
             android:layout_height="wrap_content"

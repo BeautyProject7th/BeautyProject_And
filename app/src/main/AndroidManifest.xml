@@ -145,6 +145,7 @@
         <activity android:name=".Camera.CameraMainActivity"></activity>
         <activity android:name=".Camera.CameraResultActivity_"></activity>
         <activity android:name=".Camera.CameraLoadingActivity_"></activity>
+        <activity android:name=".Camera.CameraNotFoundActivity_"></activity>
         <activity android:name=".DetailCosmetic.WebViewActivity"></activity>
     </application>
 

@@ -41,6 +41,11 @@
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
             android:layout_marginRight="10dp">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
                 <EditText
                     android:id="@+id/ET_search"
                     android:layout_width="match_parent"
@@ -52,8 +57,6 @@
                     android:textColorHint="#FFFFFF"
                     android:textColor="#FFFFFF"
                     android:background="@null"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:textCursorDrawable="@null"/>
                 <Button
                     android:id="@+id/BT_close_circle"

@@ -1,6 +1,8 @@
 package com.soma.beautyproject_android.Search;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,6 +65,7 @@ public class VideoDetailAdapter extends RecyclerView.Adapter<VideoDetailAdapter.
     private OnItemClickListener mOnItemClickListener;
     public ArrayList<Boolean> like_flag = new ArrayList<>();
     public ArrayList<Cosmetic> mDataset = new ArrayList<>();
+    boolean like_flag2 = false;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -111,6 +114,7 @@ public class VideoDetailAdapter extends RecyclerView.Adapter<VideoDetailAdapter.
 
             final Cosmetic cosmetic = mDataset.get(position);
 
+
             Glide.with(context).
                     load(Constants.IMAGE_BASE_URL_cosmetics+cosmetic.img_src).
                     thumbnail(0.1f).
@@ -125,13 +129,23 @@ public class VideoDetailAdapter extends RecyclerView.Adapter<VideoDetailAdapter.
             itemViewHolder.BT_purchase.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(cosmetic.link));
+                    activity.startActivity(browserIntent);
                 }
             });
             itemViewHolder.LL_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(like_flag2){
+                        like_flag2 = false;
+                        itemViewHolder.IV_heart.setBackgroundResource(R.drawable.ic_heart_empty);
+                    }else{
+                        like_flag2 = true;
+                        itemViewHolder.IV_heart.setBackgroundResource(R.drawable.ic_heart);
+                    }
+
                 }
+
             });
 
             itemViewHolder.TV_cosmetic_have.setVisibility(View.GONE);

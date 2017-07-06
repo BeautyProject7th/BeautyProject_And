@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.soma.beautyproject_android.DetailCosmetic.DetailCosmeticActivity_;
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.CosmeticStatus;
 import com.soma.beautyproject_android.Model.Video_Youtuber;
 import com.soma.beautyproject_android.R;
 import com.soma.beautyproject_android.Utils.Constants.Constants;
@@ -45,7 +46,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
     public SearchFragmentSearchResult fragment;
     private OnItemClickListener mOnItemClickListener;
     public ArrayList<Brand> mDataset_brand = new ArrayList<>();
-    public ArrayList<Cosmetic> mDataset_cosmetic = new ArrayList<>();
+    public ArrayList<CosmeticStatus> mDataset_cosmetic = new ArrayList<>();
     public ArrayList<Video_Youtuber> mDataset_video_youtuber = new ArrayList<>();
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -77,10 +78,10 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
 
 
     //cosmetic
-    public void addData_cosmetic(Cosmetic cosmetic) {
+    public void addData_cosmetic(CosmeticStatus cosmetic) {
         mDataset_cosmetic.add(cosmetic);
     }
-    public Cosmetic getItem_cosmetic(int position) {
+    public CosmeticStatus getItem_cosmetic(int position) {
         return mDataset_cosmetic.get(position);
     }
     public void clear_cosmetic() {
@@ -172,7 +173,15 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             }
             cosmeticPerfectViewHolder.cell_search_result_cosmetic_perfect.setVisibility(View.VISIBLE);
 
-            final Cosmetic cosmetic_perfect = mDataset_cosmetic.get(0);
+            final CosmeticStatus cosmetic_perfect = mDataset_cosmetic.get(0);
+
+            if(cosmetic_perfect.stat){
+                cosmeticPerfectViewHolder.TV_cosmetic_have.setVisibility(View.VISIBLE);
+            }else{
+                cosmeticPerfectViewHolder.TV_cosmetic_have.setVisibility(View.GONE);
+            }
+
+
             String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic_perfect.img_src;
             Glide.with(context).
                     load(image_url).
@@ -231,11 +240,17 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             for(int i=0;i<mDataset_cosmetic.size();i++){
                 LinearLayout LL_cosmetic = cosmeticViewHolder.LL_cosmetic[i];
 
-                final Cosmetic cosmetic = mDataset_cosmetic.get(i);
+                final CosmeticStatus cosmetic = mDataset_cosmetic.get(i);
                 String image_url = Constants.IMAGE_BASE_URL_cosmetics + cosmetic.img_src;
 
                 TextView TV_cosmetic_have = (TextView) LL_cosmetic.findViewById(R.id.TV_cosmetic_have);
-                TV_cosmetic_have.setVisibility(View.GONE);
+
+                if(cosmetic.stat){
+                    TV_cosmetic_have.setVisibility(View.VISIBLE);
+                }else{
+                    TV_cosmetic_have.setVisibility(View.GONE);
+                }
+
 
 
 
@@ -479,7 +494,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
 
     public class CosmeticPerfectViewHolder extends ViewHolder {
         public ImageView IV_cosmetic;
-        public TextView TV_brand, TV_product_name, TV_product_price, TV_rate_num, TV_product_review_quantity;
+        public TextView TV_brand, TV_product_name, TV_product_price, TV_rate_num, TV_product_review_quantity, TV_cosmetic_have;
         public RatingBar RB_rate;
         public LinearLayout cell_search_result_cosmetic_perfect;
         public CosmeticPerfectViewHolder(View v) {
@@ -492,6 +507,7 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             TV_product_review_quantity = (TextView) v.findViewById(R.id.TV_product_review_quantity);
             RB_rate = (RatingBar) v.findViewById(R.id.RB_rate);
             cell_search_result_cosmetic_perfect = (LinearLayout) v.findViewById(R.id.cell_search_result_cosmetic_perfect);
+            TV_cosmetic_have = (TextView) v.findViewById(R.id.TV_cosmetic_have);
         }
     }
 
@@ -525,7 +541,6 @@ public class SearchAdapterSearchResult extends RecyclerView.Adapter<SearchAdapte
             TV_view_cnt = (TextView) v.findViewById(R.id.cell_search_result_video).findViewById(R.id.LL_video_info).findViewById(R.id.TV_view_cnt);
             TV_upload_date = (TextView) v.findViewById(R.id.TV_upload_date);
             TV_youtuber_name = (TextView) v.findViewById(R.id.TV_youtuber_name);
-
 
             IV_youtuber = (ImageView) v.findViewById(R.id.IV_youtuber);
             IV_video = (ImageView) v.findViewById(R.id.IV_video);

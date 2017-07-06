@@ -21,8 +21,8 @@ android {
         applicationId "com.soma.beautyproject_android"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 8
-        versionName "8.0"
+        versionCode 11
+        versionName "11.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

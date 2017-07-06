@@ -9,8 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 
 import com.soma.beautyproject_android.Model.Brand;
 import com.soma.beautyproject_android.Model.Cosmetic;
+import com.soma.beautyproject_android.Model.CosmeticStatus;
 import com.soma.beautyproject_android.Model.Video;
 import com.soma.beautyproject_android.Model.Video_Youtuber;
 import com.soma.beautyproject_android.Model.Youtuber;
@@ -58,6 +61,9 @@ public class SearchFragmentSearchResult extends Fragment {
     public boolean endOfPage = false;
 
     public String brand_product_quantity = "0";
+
+    private RecyclerView recyclerView_recommand;
+    public SearchAdapterRecommand adapter_recommand;
     /**
      * Create a new instance of the fragment
      */
@@ -101,6 +107,24 @@ public class SearchFragmentSearchResult extends Fragment {
             }, activity, activity);
         }
         recyclerView_auto_complete.setAdapter(adapter_auto_complete);
+
+        if (recyclerView_recommand == null) {
+            recyclerView_recommand = (RecyclerView) view.findViewById(R.id.RV_search_recommand);
+            recyclerView_recommand.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(activity);
+            recyclerView_recommand.setLayoutManager(layoutManager);
+        }
+
+        if (adapter_recommand == null) {
+            adapter_recommand = new SearchAdapterRecommand(new SearchAdapterRecommand.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    ET_search.setText(adapter_recommand.getItem(position).toString());
+                    BT_search.callOnClick();
+                }
+            }, activity, activity);
+        }
+        recyclerView_recommand.setAdapter(adapter_recommand);
 
         if (recyclerView == null) {
             recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -147,12 +171,37 @@ public class SearchFragmentSearchResult extends Fragment {
             }
         });
 
+        ET_search.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    if(ET_search.getText().toString().equals("")){
+                        recyclerView_auto_complete.setVisibility(View.INVISIBLE);
+                        recyclerView_recommand.setVisibility(View.VISIBLE);
+                        conn_recommand_search("a");
+                    }
+                }
+            }
+        });
+
+
+//                new View.OnClickListener() {
+//             @Override
+//             public void onClick(View v) {
+//                 if(ET_search.getText().toString().equals("")){
+//                     Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
+//                 }else{
+//                     Toast.makeText(getActivity(), "2", Toast.LENGTH_SHORT).show();
+//                 }
+//             }
+//         });
+
 
         BT_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity.keyword = ET_search.getText().toString();
-                if(activity.keyword.equals("")){
+                if (activity.keyword.equals("")) {
                     Toast.makeText(activity, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -198,13 +247,17 @@ public class SearchFragmentSearchResult extends Fragment {
 
         public void onTextChanged(CharSequence s, int start, int before, int count)
         {
+            activity.curKeyword = s.toString();
             if(s.toString().equals("")){
                 adapter_auto_complete.clear();
-                LL_non_search_auto_complete.setVisibility(View.VISIBLE);
+                //LL_non_search_auto_complete.setVisibility(View.VISIBLE);
                 recyclerView_auto_complete.setVisibility(View.INVISIBLE);
+                recyclerView_recommand.setVisibility(View.VISIBLE);
+                conn_recommand_search("a");
             }else{
-                LL_non_search_auto_complete.setVisibility(View.INVISIBLE);
+                //LL_non_search_auto_complete.setVisibility(View.INVISIBLE);
                 recyclerView_auto_complete.setVisibility(View.VISIBLE);
+                recyclerView_recommand.setVisibility(View.INVISIBLE);
                 conn_auto_complete_search(s.toString());
             }
 
@@ -242,7 +295,7 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                     @Override
                     public final void onNext(List<Brand> response) {
-                        if (response != null) {
+                        if (response.size() != 0) {
                             adapter.addData_brand(response.get(0));
                             conn_get_brand_product_quantity(response.get(0).name);
                             adapter.notifyDataSetChanged();
@@ -288,7 +341,7 @@ public class SearchFragmentSearchResult extends Fragment {
         conn.search_cosmetic_get(SharedManager.getInstance().getMe().id,keyword)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Cosmetic>>() {
+                .subscribe(new Subscriber<List<CosmeticStatus>>() {
                     @Override
                     public final void onCompleted() {
 
@@ -299,10 +352,45 @@ public class SearchFragmentSearchResult extends Fragment {
                         //Toast.makeText(activity, "conn_search_cosmetic 에러", Toast.LENGTH_SHORT).show();
                     }
                     @Override
-                    public final void onNext(List<Cosmetic> response) {
-                        if (response != null) {
+                    public final void onNext(List<CosmeticStatus> response) {
+                        if (response.size() != 0) {
                             for(int i=0;i<response.size() && i<3; i++){
                                 adapter.addData_cosmetic(response.get(i));
+                                conn_search_cosmetic_stat(response.get(i).id);
+                            }
+                            //view.setText(response.size()+"");
+                            adapter.notifyDataSetChanged();
+                        } else{
+
+                        }
+                    }
+                });
+    }
+
+    void conn_search_cosmetic_stat(String cosmetic_id) {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.search_cosmetic_get_stat(SharedManager.getInstance().getMe().id,cosmetic_id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(activity, "conn_search_cosmetic 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<String> response) {
+                        if (response != null) {
+                            for(int i=0;i<response.size() && i<3; i++){
+                                if(response.get(i).equals("1")){
+                                    adapter.getItem_cosmetic(i).stat = true;
+                                }else{
+                                    adapter.getItem_cosmetic(i).stat = false;
+                                }
                             }
                             //view.setText(response.size()+"");
                             adapter.notifyDataSetChanged();
@@ -398,6 +486,34 @@ public class SearchFragmentSearchResult extends Fragment {
                 });
     }
 
+    void conn_recommand_search(String keyword) {
+        CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
+        conn.recommand_search(keyword)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public final void onCompleted() {
+                        adapter_recommand.notifyDataSetChanged();
+                    }
+                    @Override
+                    public final void onError(Throwable e) {
+                        e.printStackTrace();
+                        //Toast.makeText(activity, "conn_auto_complete_search 에러", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public final void onNext(List<String> response) {
+                        if (response != null) {
+                            adapter_recommand.clear();
+                            for(int i=0;i<response.size();i++){
+                                adapter_recommand.addData(response.get(i));
+                            }
+                        } else{
+                        }
+                    }
+                });
+    }
+
     void conn_get_brand_product_quantity(String brand) {
         CSConnection conn = ServiceGenerator.createService(activity,CSConnection.class);
         conn.get_brand_product_quantity(brand)
@@ -423,4 +539,6 @@ public class SearchFragmentSearchResult extends Fragment {
                     }
                 });
     }
+
+
 }
