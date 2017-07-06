@@ -336,7 +336,8 @@ public class CameraResultActivity extends ParentActivity {
                             imagepath = response.get(0);
                             String url = Constants.IMAGE_BASE_URL_camera+imagepath;
                             Log.i("url", "url : " + url);
-                            Glide.with(getApplicationContext()).load(Constants.IMAGE_BASE_URL_camera+imagepath).thumbnail(0.1f).bitmapTransform(new CropCircleTransformation(getApplicationContext())).into(IV_user);
+                            IV_user.setImageDrawable(getResources().getDrawable(R.drawable.selfi));
+                            //Glide.with(getApplicationContext()).load(Constants.IMAGE_BASE_URL_camera+imagepath).thumbnail(0.1f).bitmapTransform(new CropCircleTransformation(getApplicationContext())).into(IV_user);
                             //Toast.makeText(getApplicationContext(), "정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
                         } else {
                             //Toast.makeText(getApplicationContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
