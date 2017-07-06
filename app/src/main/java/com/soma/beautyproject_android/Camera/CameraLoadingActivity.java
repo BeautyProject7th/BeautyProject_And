@@ -174,10 +174,13 @@ public class CameraLoadingActivity extends ParentActivity {
                             String isFace = response.get(0);
                             Log.i("isFace", "isFace : " + isFace);
                             if(isFace.equals("48")){ // 얼굴 아님 48 => '0'의 아스키코드 값
-                                Toast.makeText(getApplicationContext(), "재촬영 해주세요.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), CameraMainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), CameraNotFoundActivity_.class);
                                 startActivity(intent);
                                 finish();
+//                                Toast.makeText(getApplicationContext(), "재촬영 해주세요.", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(getApplicationContext(), CameraMainActivity.class);
+//                                startActivity(intent);
+//                                finish();
                             }else{
                                 Intent intent = new Intent(getApplicationContext(), CameraResultActivity_.class);
                                 startActivity(intent);

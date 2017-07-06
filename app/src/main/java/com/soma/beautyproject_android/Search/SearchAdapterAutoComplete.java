@@ -3,7 +3,11 @@ package com.soma.beautyproject_android.Search;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +33,7 @@ public class SearchAdapterAutoComplete extends RecyclerView.Adapter<SearchAdapte
     public Context context;
     public Fragment fragment;
     public Activity activity;
+
     private OnItemClickListener mOnItemClickListener;
     public ArrayList<String> mDataset = new ArrayList<>();
 
@@ -54,7 +59,6 @@ public class SearchAdapterAutoComplete extends RecyclerView.Adapter<SearchAdapte
         activity = mActivity;
         mDataset.clear();
     }
-
     public void addData(String keyword) {
         mDataset.add(keyword);
     }
@@ -88,7 +92,20 @@ public class SearchAdapterAutoComplete extends RecyclerView.Adapter<SearchAdapte
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             String keyword = mDataset.get(position);
 
-            itemViewHolder.TV_auto_complete_keyword.setText(keyword);
+
+            SpannableStringBuilder ssb = new SpannableStringBuilder(keyword);
+            int start = keyword.indexOf(SearchActivity.curKeyword);
+            int finish = SearchActivity.curKeyword.length()+Integer.valueOf(keyword.indexOf(SearchActivity.curKeyword));
+
+            if(start == -1){
+                return;
+            }
+
+            Log.i("ZXC", "start : " + start + " / " + finish);
+            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#fb607d")), start, finish, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            itemViewHolder.TV_auto_complete_keyword.setText(ssb);
+
+            //itemViewHolder.TV_auto_complete_keyword.setText(keyword);
         }
     }
 

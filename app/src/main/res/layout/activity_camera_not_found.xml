@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_nothing" android:id="@+id/cs_toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/IV_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="?attr/actionBarSize">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="81dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/IV_pentagon"
+                        android:layout_width="130dp"
+                        android:layout_height="124dp" />
+                    <ImageView
+                        android:id="@+id/IV_not_found"
+                        android:layout_width="130dp"
+                        android:layout_height="77dp"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="얼굴 인식에 실패했어요ㅠㅠ"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:textColor="#4a494a"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="인공지능이 얼굴을 잘 인식할 수 있도록"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="#4a494a"
+                    android:layout_marginTop="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="정면을 바라보고 머리를 정리한"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#4a494a"
+                    android:gravity="center_horizontal"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="다른 사진으로 다시 시도해주세요!"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#4a494a"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+            <Space
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <Button
+                android:id="@+id/BT_re_capture"
+                android:background="@drawable/rectangle_18_copy_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다시 촬영하러가기"
+                android:textColor="#FFFFFF"
+                android:textSize="14.5sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -21,6 +21,12 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/RV_search_recommand"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+        </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/RV_search_auto_complete"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

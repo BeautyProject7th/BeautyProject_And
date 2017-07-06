@@ -46,7 +46,6 @@ import rx.schedulers.Schedulers;
 public class CameraResultActivity extends ParentActivity {
     CameraResultActivity activity;
 
-
     @ViewById
     ImageView IV_user;
 

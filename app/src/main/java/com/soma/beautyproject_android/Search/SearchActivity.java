@@ -63,6 +63,7 @@ public class SearchActivity extends ParentActivity {
     public Brand brand;
     public String main_category;
     public String sub_category;
+    public static String curKeyword;
 
 
     @Override
@@ -98,7 +99,9 @@ public class SearchActivity extends ParentActivity {
 //        beforeintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //        beforeintent.putExtra("brand", brand);
 //        startActivity(beforeintent);
+
         activity.finish();
+
     }
 }
 
