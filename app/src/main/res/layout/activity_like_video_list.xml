@@ -32,7 +32,7 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:orientation="horizontal"
                 android:background="#FFFFFF"
                 android:gravity="center_vertical">
@@ -74,38 +74,98 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center">
-                    <!--<ImageView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@drawable/ic_sort" />-->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/group_2" />
                     <Space
                         android:layout_width="5dp"
                         android:layout_height="match_parent" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text=""
+                        android:text="필터"
                         android:textColor="#9b9b9b"
                         android:gravity="center"
                         android:layout_gravity="center"/>
                 </LinearLayout>
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/ic_line_vertical"/>
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
-                    <!--<Spinner-->
-                        <!--android:id="@+id/SP_sort"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@null"></Spinner>-->
-                </RelativeLayout>
-
             </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:background="#FFFFFF"-->
+                <!--android:gravity="center_vertical">-->
+                <!--<LinearLayout-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center">-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:text="영상 "-->
+                        <!--android:gravity="center"-->
+                        <!--android:textSize="13.5sp"-->
+                        <!--android:layout_gravity="center"/>-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/TV_product_quantity"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:gravity="center"-->
+                        <!--android:textSize="12.5sp"-->
+                        <!--android:textColor="#fc617e"-->
+                        <!--android:layout_gravity="center"/>-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:text="개"-->
+                        <!--android:gravity="center"-->
+                        <!--android:textSize="13.5sp"-->
+                        <!--android:layout_gravity="center"/>-->
+
+                <!--</LinearLayout>-->
+                <!--<View-->
+                    <!--android:layout_width="1dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:background="@drawable/ic_line_vertical"/>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center">-->
+                    <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:background="@drawable/ic_sort" />&ndash;&gt;-->
+                    <!--<Space-->
+                        <!--android:layout_width="5dp"-->
+                        <!--android:layout_height="match_parent" />-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:text=""-->
+                        <!--android:textColor="#9b9b9b"-->
+                        <!--android:gravity="center"-->
+                        <!--android:layout_gravity="center"/>-->
+                <!--</LinearLayout>-->
+                <!--<View-->
+                    <!--android:layout_width="1dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:background="@drawable/ic_line_vertical"/>-->
+                <!--<RelativeLayout-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center">-->
+                    <!--&lt;!&ndash;<Spinner&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/SP_sort"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:background="@null"></Spinner>&ndash;&gt;-->
+                <!--</RelativeLayout>-->
+
+            <!--</LinearLayout>-->
 
             <include layout="@layout/view_loading_indicator" android:id="@+id/indicator" />
 

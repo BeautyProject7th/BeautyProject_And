@@ -171,7 +171,7 @@ public class VideoDetailActivity extends YouTubeFailureRecoveryActivity {
             case "지성":
                 image_url_skin_type = R.drawable.skin_type3;
                 break;
-            case "지성(수부지)":
+            case "수부지":
                 image_url_skin_type = R.drawable.skin_type4;
                 break;
 
